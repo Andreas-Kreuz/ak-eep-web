@@ -1,0 +1,42 @@
+<h1>
+  Signale
+</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Position</th>
+        <th scope="col"># wartende Fahrzeuge</th>
+        <th scope="col">EEP-Modell</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let signal of sortedSignals">
+      <tr>
+        <th scope="row">
+          <a routerLink="/signals/{{ signal.id }}">
+            {{ signal.id }}
+          </a>
+        </th>
+        <td ngSwitch="signal.position">
+          {{ positionTextOf(signal) }}
+        </td>
+        <td>
+          <span *ngIf="signal.waitingVehiclesCount > 0; else noWait">
+            <ngb-rating [(rate)]="signal.waitingVehiclesCount" [readonly]="true">
+              <ng-template let-fill="fill">
+                <span class="star" [class.filled]="fill === 100">🚗</span>
+              </ng-template>
+            </ngb-rating>
+          </span>
+          <ng-template #noWait>
+            -
+          </ng-template>
+        </td>
+        <td class="text-muted">{{ modelTextOf(signal) }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

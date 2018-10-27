@@ -1,0 +1,50 @@
+<div *ngIf="signal ; else error">
+  <h1>
+    Signal {{ signal.id }}
+  </h1>
+  <div class="media">
+    <span class="mr-3" style="font-size: 4em;">{{ unicodeFor(signal) }}</span>
+    <div class="media-body">
+      <h5 class="mt-0">{{ modelTypeOf(signal) }}</h5>
+      <!--<p *ngIf="signal !== null; else error">-->
+      <!--Signal-ID: {{ signal.id }}<br>-->
+      <!--Signal-Stellung: {{ signal.position }}<br>-->
+      <!--Modell: {{ signal.model }}<br>-->
+      <!--Wartend: {{ signal.waitingVehiclesCount }}-->
+      <!--</p>-->
+      Weitere Informationen zum ausgewählten Signal:<br><br>
+      <table class="table" style="width: auto;">
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Wert</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Signal-ID</td>
+          <td>{{ signal.id }}</td>
+        </tr>
+        <tr>
+          <td>Signal-Stellung</td>
+          <td>{{ signal.position }}</td>
+        </tr>
+        <tr>
+          <td>Modell</td>
+          <td>{{ signal.model.name }}</td>
+        </tr>
+        <tr>
+
+          <td>Wartende Fahrzeuge</td>
+          <td>{{ signal.waitingVehiclesCount }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #error>
+  <p class="alert alert-warning">
+    Signal {{ signalId }} existiert nicht.
+  </p>
+</ng-template>
