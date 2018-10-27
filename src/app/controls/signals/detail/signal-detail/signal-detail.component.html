@@ -1,0 +1,13 @@
+<p>
+  signal-detail-component works!
+</p>
+<p *ngIf="signal !== null; else error">
+  Signal-ID: {{ signal.id }}<br>
+  Signal-Stellung: {{ signal.position }}<br>
+  Modell: {{ signal.modelId }}<br>
+</p>
+<ng-template #error>
+  <p class="alert alert-warning">
+    Signal {{ signalId }} existiert nicht.
+  </p>
+</ng-template>

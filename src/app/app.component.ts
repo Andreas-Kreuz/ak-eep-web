@@ -1,10 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Menu} from './menu.enum';
+import {DataStorageService} from './data-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'ak-angular-eep-app';
+export class AppComponent implements OnInit {
+  title = 'EEP-Web';
+  loadedFeature: string = Menu.Home.valueOf();
+  hostLocation = window.location.protocol +  '//' + window.location.hostname;
+
+
+  constructor(private dataStorageService: DataStorageService) {
+    dataStorageService.hostLocation = this.hostLocation;
+  }
+
+  ngOnInit() {
+    this.dataStorageService.loadData();
+  }
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+  }
 }
