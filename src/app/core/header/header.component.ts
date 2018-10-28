@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Menu} from '../../../model/app/menu.enum';
-import {AppComponent} from '../../../app.component';
+import {Menu} from './menu.enum';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-header',

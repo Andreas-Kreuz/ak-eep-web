@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {SignalsService} from '../../../../model/eep/signals.service';
-import {Signal} from '../../../../model/eep/signal.model';
+import {SignalsService} from '../store/signals.service';
+import {Signal} from '../signal.model';
 
 @Component({
   selector: 'app-signal-detail-component',

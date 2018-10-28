@@ -1,15 +1,15 @@
 import {Injectable, Input} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {SignalsService} from '../eep/signals.service';
-import {SwitchesService} from '../eep/switches.service';
-import {Signal} from '../eep/signal.model';
+import {SignalsService} from '../eep/signals/store/signals.service';
+import {SwitchesService} from '../eep/switches/switch-list/switches.service';
+import {Signal} from '../eep/signals/signal.model';
 import {Observable, Subject, throwError} from 'rxjs';
-import {Alert} from './alert.model';
-import {RoadSignalModel} from '../shared/road-signal-model.model';
-import {RoadSignalModelsService} from '../shared/road-signal-models.service';
-import {RoadTrafficLight} from '../road/road-traffic-light.model';
-import {Intersection} from '../road/intersection.model';
-import {IntersectionsService} from '../road/intersections.service';
+import {Alert} from './error/alert.model';
+import {RoadSignalModel} from '../eep/signals/road-signal-model.model';
+import {RoadSignalModelsService} from '../eep/signals/store/road-signal-models.service';
+import {RoadTrafficLight} from '../eep/signals/road-traffic-light.model';
+import {Intersection} from '../eep/intersection/intersection.model';
+import {IntersectionsService} from '../eep/intersection/store/intersections.service';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -33,10 +33,6 @@ export class DataStorageService {
   private updateTrafficLightModels() {
     const url = this.hostLocation + ':3000/traffic_light_models';
     this.httpClient.get<RoadSignalModel[]>(url)
-      .pipe(catchError(error => {
-        console.log(error.message);
-        return throwError('URL: ' + url + ' kann nicht erreicht werden.');
-      }))
       .subscribe(
         (trafficLightModels: RoadSignalModel[]) => {
           for (const t of trafficLightModels) {
@@ -47,8 +43,8 @@ export class DataStorageService {
           this.updateSignals();
           this.updateIntersections();
         },
-        (errorMessage: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', errorMessage));
+        (error: HttpErrorResponse) => {
+          this.errorSubscription.next(new Alert('danger', error.message));
         }
       );
   }

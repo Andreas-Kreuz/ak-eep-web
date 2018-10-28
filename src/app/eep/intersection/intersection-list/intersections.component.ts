@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Intersection} from '../../../model/road/intersection.model';
-import {IntersectionsService} from '../../../model/road/intersections.service';
+import {Intersection} from '../intersection.model';
+import {IntersectionsService} from '../store/intersections.service';
 import {Subscription} from 'rxjs';
 
 @Component({

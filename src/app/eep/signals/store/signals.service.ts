@@ -1,9 +1,9 @@
 import {Injectable, Output} from '@angular/core';
-import {Signal} from './signal.model';
+import {Signal} from '../signal.model';
 import {Subject} from 'rxjs';
-import {RoadTrafficLight} from '../road/road-traffic-light.model';
-import {SignalModel} from '../shared/signal-model.model';
-import {RoadSignalModelsService} from '../shared/road-signal-models.service';
+import {RoadTrafficLight} from '../road-traffic-light.model';
+import {SignalModel} from '../signal-model.model';
+import {RoadSignalModelsService} from './road-signal-models.service';
 
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Switch} from './switch.model';
+import {Switch} from '../switch.model';
 
 @Injectable({
   providedIn: 'root'

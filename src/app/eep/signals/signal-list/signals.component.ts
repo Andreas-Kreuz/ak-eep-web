@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SignalsService} from '../../../model/eep/signals.service';
-import {Signal} from '../../../model/eep/signal.model';
+import {SignalsService} from '../store/signals.service';
+import {Signal} from '../signal.model';
 import {Subscription} from 'rxjs';
-import {RoadSignalModel} from '../../../model/shared/road-signal-model.model';
+import {RoadSignalModel} from '../road-signal-model.model';
 
 @Component({
   selector: 'app-signals',

@@ -1,4 +1,4 @@
-import {SignalModel} from '../shared/signal-model.model';
+import {SignalModel} from './signal-model.model';
 
 export class Signal {
   id: number;

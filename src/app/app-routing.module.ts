@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './gui/app/home/home.component';
-import {IntersectionComponent} from './gui/road/crossroad/detail/intersection.component';
-import {IntersectionsComponent} from './gui/road/crossroad/intersections.component';
-import {SignalsComponent} from './gui/eep/signals/signals.component';
-import {SignalDetailComponent} from './gui/eep/signals/detail/signal-detail.component';
-import {SwitchesComponent} from './gui/eep/switches/switches.component';
+import {HomeComponent} from './core/home/home.component';
+import {IntersectionComponent} from './eep/intersection/intersection-detail/intersection.component';
+import {IntersectionsComponent} from './eep/intersection/intersection-list/intersections.component';
+import {SignalsComponent} from './eep/signals/signal-list/signals.component';
+import {SignalDetailComponent} from './eep/signals/signal-detail/signal-detail.component';
+import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},

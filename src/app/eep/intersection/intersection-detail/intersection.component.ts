@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Intersection} from '../../../../model/road/intersection.model';
-import {Signal} from '../../../../model/eep/signal.model';
+import {Intersection} from '../intersection.model';
+import {Signal} from '../../signals/signal.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
-import {SignalsService} from '../../../../model/eep/signals.service';
-import {IntersectionsService} from '../../../../model/road/intersections.service';
+import {SignalsService} from '../../signals/store/signals.service';
+import {IntersectionsService} from '../store/intersections.service';
 
 @Component({
   selector: 'app-crossing',

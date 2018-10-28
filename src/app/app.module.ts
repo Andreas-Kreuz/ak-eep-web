@@ -3,17 +3,17 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {IntersectionComponent} from './gui/road/crossroad/detail/intersection.component';
-import {IntersectionSwitchingComponent} from './gui/road/crossroad/switching/intersection-switching.component';
-import {IntersectionsComponent} from './gui/road/crossroad/intersections.component';
-import {SignalsComponent} from './gui/eep/signals/signals.component';
-import {SwitchesComponent} from './gui/eep/switches/switches.component';
-import {HeaderComponent} from './gui/app/header/header.component';
+import {IntersectionComponent} from './eep/intersection/intersection-detail/intersection.component';
+import {IntersectionSwitchingComponent} from './eep/intersection/intersection-switching/intersection-switching.component';
+import {IntersectionsComponent} from './eep/intersection/intersection-list/intersections.component';
+import {SignalsComponent} from './eep/signals/signal-list/signals.component';
+import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
+import {HeaderComponent} from './core/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {HomeComponent} from './gui/app/home/home.component';
-import {SignalDetailComponent} from './gui/eep/signals/detail/signal-detail.component';
+import {HomeComponent} from './core/home/home.component';
+import {SignalDetailComponent} from './eep/signals/signal-detail/signal-detail.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ErrorComponent } from './gui/error/error.component';
+import { ErrorComponent } from './core/error/error.component';
 
 
 @NgModule({

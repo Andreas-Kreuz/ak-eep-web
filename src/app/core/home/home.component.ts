@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {SignalsService} from '../../../model/eep/signals.service';
-import {SwitchesService} from '../../../model/eep/switches.service';
+import {SignalsService} from '../../eep/signals/store/signals.service';
+import {SwitchesService} from '../../eep/switches/switch-list/switches.service';
 import {Subscription} from 'rxjs';
 
 @Component({

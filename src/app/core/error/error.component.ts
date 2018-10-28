@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataStorageService} from '../../model/app/data-storage.service';
+import {DataStorageService} from '../data-storage.service';
 import {Subscription} from 'rxjs';
-import {Alert} from '../../model/app/alert.model';
+import {Alert} from './alert.model';
 
 @Component({
   selector: 'app-error',

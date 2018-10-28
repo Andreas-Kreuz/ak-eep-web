@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Menu} from './model/app/menu.enum';
-import {DataStorageService} from './model/app/data-storage.service';
+import {Menu} from './core/header/menu.enum';
+import {DataStorageService} from './core/data-storage.service';
 
 @Component({
   selector: 'app-root',
