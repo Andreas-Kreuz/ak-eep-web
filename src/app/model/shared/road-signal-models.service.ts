@@ -22,7 +22,7 @@ export class RoadSignalModelsService {
   setSignalModels(signalModels: RoadSignalModel[]) {
     this.signalModels = [];
     for (const signalModel of signalModels) {
-      this.signalModels.push(new RoadSignalModel(signalModel));
+      this.signalModels.push(signalModel);
     }
 
     this.signalModels = signalModels;

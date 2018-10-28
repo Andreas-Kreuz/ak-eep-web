@@ -1,13 +1,16 @@
 import {Injectable, Input} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SignalsService} from '../eep/signals.service';
 import {SwitchesService} from '../eep/switches.service';
 import {Signal} from '../eep/signal.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {Alert} from './alert.model';
 import {RoadSignalModel} from '../shared/road-signal-model.model';
 import {RoadSignalModelsService} from '../shared/road-signal-models.service';
-import {CrossroadTrafficLight} from '../road/crossroad-traffic-light.model';
+import {RoadTrafficLight} from '../road/road-traffic-light.model';
+import {Intersection} from '../road/intersection.model';
+import {IntersectionsService} from '../road/intersections.service';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,8 @@ export class DataStorageService {
   constructor(private httpClient: HttpClient,
               private signalsService: SignalsService,
               private switchesService: SwitchesService,
-              private roadSignalModelsService: RoadSignalModelsService) {
+              private roadSignalModelsService: RoadSignalModelsService,
+              private intersectionsService: IntersectionsService) {
   }
 
   loadData() {
@@ -27,7 +31,12 @@ export class DataStorageService {
   }
 
   private updateTrafficLightModels() {
-    this.httpClient.get<RoadSignalModel[]>(this.hostLocation + ':3000/traffic_light_models')
+    const url = this.hostLocation + ':3000/traffic_light_models';
+    this.httpClient.get<RoadSignalModel[]>(url)
+      .pipe(catchError(error => {
+        console.log(error.message);
+        return throwError('URL: ' + url + ' kann nicht erreicht werden.');
+      }))
       .subscribe(
         (trafficLightModels: RoadSignalModel[]) => {
           for (const t of trafficLightModels) {
@@ -36,9 +45,10 @@ export class DataStorageService {
           this.errorSubscription.next(null);
           this.roadSignalModelsService.setSignalModels(trafficLightModels);
           this.updateSignals();
+          this.updateIntersections();
         },
-        (error: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', error.message));
+        (errorMessage: HttpErrorResponse) => {
+          this.errorSubscription.next(new Alert('danger', errorMessage));
         }
       );
   }
@@ -47,9 +57,8 @@ export class DataStorageService {
     this.httpClient.get<Signal[]>(this.hostLocation + ':3000/signals')
       .subscribe(
         (signals: Signal[]) => {
-          this.errorSubscription.next(null);
           this.signalsService.setSignals(signals);
-          this.updateCrossroadTrafficLights();
+          this.updateIntersectionTrafficLights();
         },
         (error: HttpErrorResponse) => {
           this.errorSubscription.next(new Alert('danger', error.message));
@@ -57,11 +66,22 @@ export class DataStorageService {
       );
   }
 
-  private updateCrossroadTrafficLights() {
-    this.httpClient.get<CrossroadTrafficLight[]>(this.hostLocation + ':3000/crossroad_traffic_lights')
+  private updateIntersections() {
+    this.httpClient.get<Intersection[]>(this.hostLocation + ':3000/intersections')
       .subscribe(
-        (trafficLights: CrossroadTrafficLight[]) => {
-          this.errorSubscription.next(null);
+        (intersections: Intersection[]) => {
+          this.intersectionsService.setIntersections(intersections);
+        },
+        (error: HttpErrorResponse) => {
+          this.errorSubscription.next(new Alert('danger', error.message));
+        }
+      );
+  }
+
+  private updateIntersectionTrafficLights() {
+    this.httpClient.get<RoadTrafficLight[]>(this.hostLocation + ':3000/intersection_traffic_lights')
+      .subscribe(
+        (trafficLights: RoadTrafficLight[]) => {
           this.signalsService.updateSignals(trafficLights);
         },
         (error: HttpErrorResponse) => {
@@ -72,5 +92,27 @@ export class DataStorageService {
 
   switchSignal() {
     return this.httpClient.post('localhost:3000/', 5);
+  }
+
+  storeDataPut(list: any[]) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.httpClient.put('http://localhost:3199/data.json',
+      list,
+      {headers: headers})
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+  }
+
+  storeDataPost(list: any[]) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.httpClient.post('http://localhost:3199/data.json',
+      list,
+      {headers: headers})
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
   }
 }

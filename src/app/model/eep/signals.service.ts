@@ -1,7 +1,7 @@
 import {Injectable, Output} from '@angular/core';
 import {Signal} from './signal.model';
 import {Subject} from 'rxjs';
-import {CrossroadTrafficLight} from '../road/crossroad-traffic-light.model';
+import {RoadTrafficLight} from '../road/road-traffic-light.model';
 import {SignalModel} from '../shared/signal-model.model';
 import {RoadSignalModelsService} from '../shared/road-signal-models.service';
 
@@ -11,8 +11,7 @@ import {RoadSignalModelsService} from '../shared/road-signal-models.service';
 })
 export class SignalsService {
   @Output() signalsUpdated: Subject<Signal[]> = new Subject();
-
-  signals: Signal[];
+  private signals: Signal[];
   private signalModelsService: RoadSignalModelsService;
 
   constructor(signalModelsService: RoadSignalModelsService) {
@@ -30,32 +29,24 @@ export class SignalsService {
   }
 
   public getSignal(id: number) {
-    const signal = this.signals.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
+    const signal = this.signals.find((s) => {
+      return s.id === id;
+    });
     return signal;
   }
 
   public updateSignal(id: number, model: SignalModel) {
-    const signal = this.signals.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
+    const signal = this.getSignal(id);
     if (signal) {
       signal.model = model;
     }
   }
 
-  updateSignals(trafficLights: CrossroadTrafficLight[]) {
+  updateSignals(trafficLights: RoadTrafficLight[]) {
     for (const trafficLight of trafficLights) {
       const model = this.signalModelsService.getSignalModel(trafficLight.modelId);
       if (model) {
-        this.updateSignal(
-          trafficLight.signalId,
-          model);
+        this.updateSignal(trafficLight.signalId, model);
       }
     }
     this.signalsUpdated.next(this.signals.slice());

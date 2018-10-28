@@ -1,0 +1,35 @@
+<h1>
+  Kreuzungen
+</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Richtungen</th>
+        <th scope="col">Schaltungen</th>
+        <th scope="col">Ampeln</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let intersection of intersections">
+      <tr>
+        <th scope="row">
+          <a routerLink="/intersections/{{ intersection.id }}">
+            {{ intersection.name }}
+          </a>
+        </th>
+        <td>
+          TODO
+        </td>
+        <td>
+          TODO
+        </td>
+        <td class="text-muted">
+          TODO
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
