@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Menu} from './core/header/menu.enum';
 import {DataStorageService} from './core/data-storage.service';
 
 @Component({
@@ -9,8 +8,7 @@ import {DataStorageService} from './core/data-storage.service';
 })
 export class AppComponent implements OnInit {
   title = 'EEP-Web';
-  loadedFeature: string = Menu.Home.valueOf();
-  hostLocation = window.location.protocol +  '//' + window.location.hostname;
+  hostLocation = window.location.protocol + '//' + window.location.hostname;
 
 
   constructor(private dataStorageService: DataStorageService) {
@@ -19,9 +17,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.dataStorageService.loadData();
-  }
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
   }
 }

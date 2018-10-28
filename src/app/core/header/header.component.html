@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-expand-sm bg-light">
+<nav class="navbar navbar-dark navbar-expand-sm bg-success">
   <a routerLink="/" class="navbar-brand">
     <img src="assets/andreas-kreuz.jfif" width="30" height="30" class="d-inline-block align-top" alt="">
     {{ title }}
@@ -24,9 +24,10 @@
     <ul class="nav navbar-nav navbar-right">
       <li ngbDropdown>
         <span class="nav-link"
+              style="cursor: pointer;"
            ngbDropdownToggle
            href="#">EEP-Werte</span>
-        <ul ngbDropdownMenu>
+        <ul ngbDropdownMenu class="bg-success">
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/signals">Signale</a></li>
           <li class="nav-item" routerLinkActive="active">
