@@ -11,8 +11,8 @@ import {SharedModule} from '../../shared/shared.module';
     SignalDetailComponent,
   ],
   imports: [
-    CommonModule,
     SignalsRoutingModule,
+    CommonModule,
     SharedModule,
   ]
 })

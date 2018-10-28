@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStorageService} from './core/data-storage.service';
+import {Store} from '@ngrx/store';
+import * as fromSignals from './eep/signals/store/signals.reducers';
+import * as SignalActions from './eep/signals/store/signals.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +14,13 @@ export class AppComponent implements OnInit {
   hostLocation = window.location.protocol + '//' + window.location.hostname;
 
 
-  constructor(private dataStorageService: DataStorageService) {
+  constructor(private dataStorageService: DataStorageService,
+              private signalStore: Store<fromSignals.State>) {
     dataStorageService.hostLocation = this.hostLocation;
   }
 
   ngOnInit() {
+    this.signalStore.dispatch(new SignalActions.FetchSignals());
     this.dataStorageService.loadData();
   }
 }

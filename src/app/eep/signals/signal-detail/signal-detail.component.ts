@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {SignalsService} from '../store/signals.service';
+import {Observable, Subscription} from 'rxjs';
+
 import {Signal} from '../signal.model';
+import {select, Store} from '@ngrx/store';
+import * as fromSignals from '../../../store/app.reducers';
 
 @Component({
   selector: 'app-signal-detail-component',
@@ -11,29 +13,34 @@ import {Signal} from '../signal.model';
 })
 export class SignalDetailComponent implements OnInit, OnDestroy {
   signalId: number;
-  signal: Signal;
-  paramsSubscription: Subscription;
+  signalState: Observable<Signal>;
+  private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
-              private signalsService: SignalsService) {
+  constructor(private store: Store<fromSignals.AppState>,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.signalId = +this.route.snapshot.params['id'];
-    console.log('signalId: ' + this.signalId);
-    this.signal = this.signalsService.getSignal(this.signalId);
-    console.log('signal: ' + this.signal);
-    this.paramsSubscription = this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.signalId = +params['id'];
-          this.signal = this.signalsService.getSignal(this.signalId);
-        }
-      );
+    this.subscription = this.route.params
+      .subscribe((params: Params) => {
+        this.signalId = +this.route.snapshot.params['id'];
+        this.signalState = this.store.pipe(
+          select((state: fromSignals.AppState) => {
+            if (state.signalList.signals) {
+              return state.signalList.signals.find(signal => {
+                return signal.id === this.signalId;
+              });
+            } else {
+              return null;
+            }
+          })
+        );
+      });
   }
 
   ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
+    this.subscription.unsubscribe();
+    // this.store.dispatch(new SignalAction.Deselect());
   }
 
   unicodeFor(signal: Signal) {
@@ -50,5 +57,13 @@ export class SignalDetailComponent implements OnInit, OnDestroy {
     }
 
     return 'Unbekanntes Modell';
+  }
+
+  positionOf(signal: Signal) {
+    return signal.position ? signal.position : '-';
+  }
+
+  waitingVehiclesCountOf(signal: Signal) {
+    return signal.waitingVehiclesCount ? signal.waitingVehiclesCount: '-';
   }
 }

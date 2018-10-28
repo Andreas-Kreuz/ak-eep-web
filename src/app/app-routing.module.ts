@@ -5,12 +5,23 @@ import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
+  {
+    path: 'signals',
+    loadChildren: './eep/signals/signals.module#SignalsModule'
+  },
+  {
+    path: 'intersections',
+    loadChildren: './eep/intersection/intersection.module#IntersectionModule'
+  },
   {path: 'switches', component: SwitchesComponent},
+  // {path: '', redirectTo: '/', pathMatch: 'full'},
   // {path: '**', redirectTo: '/'} // Must be the last route!
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

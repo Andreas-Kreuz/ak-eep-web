@@ -1,14 +1,19 @@
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {HttpClientModule} from '@angular/common/http';
-import {SignalsModule} from './eep/signals/signals.module';
 import {SharedModule} from './shared/shared.module';
-import {IntersectionModule} from './eep/intersection/intersection.module';
 import {CoreModule} from './core/core.module';
+import {SignalEffects} from './eep/signals/store/signal.effects';
+import {reducers} from './store/app.reducers';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -21,9 +26,11 @@ import {CoreModule} from './core/core.module';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    SignalsModule,
-    IntersectionModule,
     CoreModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([SignalEffects]),
+    StoreRouterConnectingModule,
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]

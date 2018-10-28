@@ -23,13 +23,13 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.intersectionId = +this.route.snapshot.params['id'];
     console.log('signalId: ' + this.intersectionId);
-    this.intersection = this.intersectionService.find(this.intersectionId);
-    console.log('signal: ' + this.intersection);
+    // this.intersection = this.intersectionService.find(this.intersectionId);
+    // console.log('signal: ' + this.intersection);
     this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
-          this.intersectionId = +params['id'];
-          this.intersection = this.intersectionService.find(this.intersectionId);
+          // this.intersectionId = +params['id'];
+          // this.intersection = this.intersectionService.find(this.intersectionId);
         }
       );
   }

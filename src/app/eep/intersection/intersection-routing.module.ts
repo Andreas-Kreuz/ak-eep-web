@@ -5,8 +5,8 @@ import {IntersectionsComponent} from './intersection-list/intersections.componen
 import {IntersectionComponent} from './intersection-detail/intersection.component';
 
 const intersectionRoutes: Routes = [
-  {path: 'intersections', component: IntersectionsComponent},
-  {path: 'intersections/:id', component: IntersectionComponent},
+  {path: '', component: IntersectionsComponent},
+  {path: ':id', component: IntersectionComponent},
 ];
 
 @NgModule({

@@ -12,10 +12,10 @@
         <th scope="col">EEP-Modell</th>
       </tr>
       </thead>
-      <tbody *ngFor="let signal of sortedSignals">
+      <tbody *ngFor="let signal of (signalListState | async)">
       <tr>
         <th scope="row">
-          <a routerLink="/signals/{{ signal.id }}">
+          <a [routerLink]="signal.id">
             {{ signal.id }}
           </a>
         </th>
@@ -31,7 +31,7 @@
             </ngb-rating>
           </span>
           <ng-template #noWait>
-            -
+             -
           </ng-template>
         </td>
         <td class="text-muted">{{ modelTextOf(signal) }}</td>
