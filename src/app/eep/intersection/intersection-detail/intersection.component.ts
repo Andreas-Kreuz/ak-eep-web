@@ -40,10 +40,10 @@ export class IntersectionComponent implements OnInit, OnDestroy {
 
   // unicodeFor(signal: Signal) {
   //   if (signal.model && signal.model.type === 'road') {
-  //     return '🚦';
+  //     return trafficLight + ' ';
   //   }
   //
-  //   return '❔';
+  //   return unknown + ' ';
   // }
   //
   // modelTypeOf(signal: Signal) {

@@ -12,7 +12,7 @@
         <th scope="col">EEP-Modell</th>
       </tr>
       </thead>
-      <tbody *ngFor="let signal of (signalListState | async)">
+      <tbody *ngFor="let signal of (signals$ | async)">
       <tr>
         <th scope="row">
           <a [routerLink]="signal.id">
@@ -24,11 +24,7 @@
         </td>
         <td>
           <span *ngIf="signal.waitingVehiclesCount > 0; else noWait">
-            <ngb-rating [(rate)]="signal.waitingVehiclesCount" [readonly]="true">
-              <ng-template let-fill="fill">
-                <span class="star" [class.filled]="fill === 100">🚗</span>
-              </ng-template>
-            </ngb-rating>
+            {{ waitingCarsOf(signal) }}
           </span>
           <ng-template #noWait>
              -

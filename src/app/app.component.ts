@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(private dataStorageService: DataStorageService,
-              private signalStore: Store<fromSignals.State>) {
+              private signalStore: Store<fromSignals.SignalsState>) {
     dataStorageService.hostLocation = this.hostLocation;
   }
 

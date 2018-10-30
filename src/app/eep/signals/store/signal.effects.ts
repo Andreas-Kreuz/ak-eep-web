@@ -51,7 +51,6 @@ export class SignalEffects {
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,
-              private router: Router,
-              private store: Store<fromSignals.State>) {
+              private router: Router) {
   }
 }

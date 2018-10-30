@@ -1,11 +1,11 @@
-<div *ngIf="(signalState | async)? true : false ; else error">
+<div *ngIf="(signal$ | async)? true : false ; else error">
   <h1>
-    Signal {{ (signalState | async).id }}
+    Signal {{ (signal$ | async).id }}
   </h1>
   <div class="media">
-    <span class="mr-3" style="font-size: 4em;">{{ unicodeFor((signalState | async)) }}</span>
+    <span class="mr-3" style="font-size: 4em;">{{ unicodeFor((signal$ | async)) }}</span>
     <div class="media-body">
-      <h5 class="mt-0">{{ modelTypeOf(signalState | async) }}</h5>
+      <h5 class="mt-0">{{ modelTypeOf(signal$ | async) }}</h5>
       <!--<p *ngIf="signal !== null; else error">-->
       <!--Signal-ID: {{ signal.id }}<br>-->
       <!--Signal-Stellung: {{ signal.position }}<br>-->
@@ -23,20 +23,20 @@
         <tbody>
         <tr>
           <td>Signal-ID</td>
-          <td>{{ (signalState | async).id }}</td>
+          <td>{{ (signal$ | async).id }}</td>
         </tr>
         <tr>
           <td>Signal-Stellung</td>
-          <td>{{ positionOf(signalState | async) }}</td>
+          <td>{{ positionOf(signal$ | async) }}</td>
         </tr>
         <tr>
           <td>Modell</td>
-          <td>{{ modelTypeOf(signalState | async) }}</td>
+          <td>{{ modelTypeOf(signal$ | async) }}</td>
         </tr>
         <tr>
 
           <td>Wartende Fahrzeuge</td>
-          <td>{{ waitingVehiclesCountOf(signalState | async) }}</td>
+          <td>{{ waitingVehiclesCountOf(signal$ | async) }}</td>
         </tr>
         </tbody>
       </table>

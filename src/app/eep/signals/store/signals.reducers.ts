@@ -1,20 +1,20 @@
 import * as SignalActions from './signals.actions';
 import {Signal} from '../signal.model';
 
-export interface State {
+export interface SignalsState {
   signals: Signal[];
   selectedSignalIndex: number;
 }
 
-const initialState: State = {
+const initialState: SignalsState = {
   signals: [],
   selectedSignalIndex: -1,
 };
 
-export function signalsReducer(state: State = initialState, action: SignalActions.SignalActions) {
+export function signalsReducer(state: SignalsState = initialState, action: SignalActions.SignalActions) {
   switch (action.type) {
     case SignalActions.SET_SIGNALS:
-      const newState: State = {
+      const newState: SignalsState = {
         ...state,
         signals: [...action.payload],
       };

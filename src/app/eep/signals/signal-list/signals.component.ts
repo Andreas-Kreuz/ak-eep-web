@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {RoadSignalModel} from '../road-signal-model.model';
 import {select, Store} from '@ngrx/store';
 import * as fromSignals from '../../../store/app.reducers';
+import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 
 @Component({
   selector: 'app-signals',
@@ -11,22 +12,20 @@ import * as fromSignals from '../../../store/app.reducers';
   styleUrls: ['./signals.component.css']
 })
 export class SignalsComponent implements OnInit {
-  signalListState: Observable<Signal[]>;
+  signals$: Observable<Signal[]>;
 
   constructor(private store: Store<fromSignals.AppState>) {
   }
 
   ngOnInit() {
-    this.signalListState = this.store.pipe(
-      select((state: fromSignals.AppState) => state.signalList.signals)
-    );
+    this.signals$ = this.store.pipe(select(fromSignals.getSignals));
   }
 
   positionTextOf(signal: Signal): string {
     let text: string = '' + signal.position;
     if (signal.model) {
       if (signal.model.type === 'road') {
-        text = '🚦 ' + RoadSignalModel.signalPositionName(<RoadSignalModel> signal.model, signal.position);
+        text = trafficLight + ' ' + RoadSignalModel.signalPositionName(<RoadSignalModel> signal.model, signal.position);
       }
     }
     return text;
@@ -36,12 +35,16 @@ export class SignalsComponent implements OnInit {
     if (signal.model) {
       let text = '';
       if (signal.model.type === 'road') {
-        text = text + '🚦 ';
+        text = text + trafficLight + ' ';
       }
       text = text + signal.model.name;
       return text;
     } else {
       return '-';
     }
+  }
+
+  waitingCarsOf(signal: Signal) {
+    return new Array(signal.waitingVehiclesCount).join( car );
   }
 }
