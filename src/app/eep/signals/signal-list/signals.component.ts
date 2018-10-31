@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Signal} from '../signal.model';
 import {Observable} from 'rxjs';
-import {RoadSignalModel} from '../road-signal-model.model';
-import {select, Store} from '@ngrx/store';
-import * as fromSignals from '../../../store/app.reducers';
+import {Store} from '@ngrx/store';
+
+import {Signal} from '../signal.model';
+import * as fromRoot from '../../../store/app.reducers';
+import * as fromSignals from '../../store/signals.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
+import {SignalTypeDefinition} from '../signal-type-definition.model';
 
 @Component({
   selector: 'app-signals',
@@ -14,18 +16,19 @@ import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 export class SignalsComponent implements OnInit {
   signals$: Observable<Signal[]>;
 
-  constructor(private signalStore: Store<fromSignals.AppState>) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.signals$ = this.signalStore.pipe(select(fromSignals.getSignals));
+    this.signals$ = fromSignals.filledSignals$(this.store);
+    this.signals$.subscribe(value => console.log(value));
   }
 
   positionTextOf(signal: Signal): string {
     let text: string = '' + signal.position;
     if (signal.model) {
       if (signal.model.type === 'road') {
-        text = trafficLight + ' ' + RoadSignalModel.signalPositionName(<RoadSignalModel> signal.model, signal.position);
+        text = trafficLight + ' ' + SignalTypeDefinition.signalPositionName(signal.model, signal.position);
       }
     }
     return text;

@@ -3,7 +3,7 @@ import {Menu} from './menu.enum';
 import {AppComponent} from '../../app.component';
 import {select, Store} from '@ngrx/store';
 import * as fromErrors from '../store/core.reducers';
-import * as app from '../../store/app.reducers';
+import * as fromRoot from '../../store/app.reducers';
 import {Observable} from 'rxjs';
 import {Alert} from '../error/alert.model';
 
@@ -24,12 +24,12 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(appComponent: AppComponent,
-              private errorStore: Store<app.AppState>) {
+              private store: Store<fromRoot.State>) {
     this.title = appComponent.title;
   }
 
   ngOnInit() {
-    this.lastAlert$ = this.errorStore.pipe(select(fromErrors.getLastAlert));
+    this.lastAlert$ = this.store.pipe(select(fromErrors.getLastAlert));
     this.lastAlert$.subscribe((value: Alert) =>
       this.bgClass = 'bg-' + value.type);
   }

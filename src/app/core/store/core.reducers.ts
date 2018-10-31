@@ -1,13 +1,13 @@
 import * as CoreAction from './core.actions';
 import {Alert} from '../error/alert.model';
 import {createSelector} from '@ngrx/store';
-import {AppState} from '../../store/app.reducers';
+import {State} from '../../store/app.reducers';
 
-export const appState = (state: AppState) => state.core;
+export const appState = (state: State) => state.core;
 
 export const getAlerts = createSelector(
   appState,
-  (state: CoreState) => state.alerts
+  (globalState: CoreState) => globalState.alerts
 );
 
 export const getPollingUrl = createSelector(
@@ -28,9 +28,9 @@ export interface CoreState {
 }
 
 const initialState: CoreState = {
-  lastAlert: new Alert('info', 'App started'),
+  lastAlert: new Alert('info', 'Die Anwendung wurde gestartet'),
   alerts: [
-    new Alert('info', 'App started')
+    new Alert('info', 'Die Anwendung wurde gestartet')
   ],
   pollingEnabled: false,
   pollingUrl: 'http://localhost:3000',
@@ -41,7 +41,7 @@ export function coreReducer(state: CoreState = initialState, action: CoreAction.
     case CoreAction.SHOW_ERROR:
       const newState: CoreState = {
         ...state,
-        alerts: [...state.alerts.slice(Math.max(state.alerts.length - 9, 0)), action.payload],
+        alerts: [action.payload, ...state.alerts.slice(0, Math.max(state.alerts.length, 9))],
         lastAlert: action.payload,
       };
       return newState;

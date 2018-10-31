@@ -9,36 +9,37 @@ import {Signal} from '../signals/signal.model';
 import * as ErrorActions from '../../core/store/core.actions';
 import {Alert} from '../../core/error/alert.model';
 import {Store} from '@ngrx/store';
-import * as fromSignals from '../../store/app.reducers';
+import * as fromRoot from '../../store/app.reducers';
 import {of} from 'rxjs';
+import {SignalType} from '../signals/signal-type.model';
+import {SignalTypeDefinition} from '../signals/signal-type-definition.model';
 
 
 @Injectable()
 export class SignalEffects {
-  // hostLocation = 'http://localhost:3000';
-  // url = this.hostLocation + '/signals';
-
-  @Effect( { dispatch: false } )
+  @Effect({dispatch: false})
   showErrorSignals = this.actions$
     .pipe(
       ofType(SignalActions.ERROR),
-      tap((error: SignalActions.Error) =>
+      tap((error: SignalActions.Error) => {
+        console.log(error);
         this.store.dispatch(new Alert(
           'danger',
           'Kann den Server nicht kontaktieren: ' +
           ` - Backend returned code ${error.payload.status}, ` +
-          `body was: ${error.payload.error}`))));
+          `body was: ${error.payload.error}`));
+      }));
 
   @Effect()
-  refreshSignals = this.actions$
+  fetchSignals = this.actions$
     .pipe(
       ofType(SignalActions.FETCH_SIGNALS),
-      switchMap((ignored: SignalActions.FetchSignals) => {
-        const url = ignored.payload + '/signals';
+      switchMap((action: SignalActions.FetchSignals) => {
+        const url = action.payload + '/signals';
         return this.httpClient.get<Signal[]>(url)
           .pipe(
-            map((signals: Signal[]) => {
-              for (const signal of signals) {
+            map((list: Signal[]) => {
+              for (const signal of list) {
                 if (!signal.model) {
                   signal.model = null;
                 }
@@ -47,7 +48,61 @@ export class SignalEffects {
                 new Alert('success', 'Signale geladen von: ' + url)));
               return {
                 type: SignalActions.SET_SIGNALS,
-                payload: signals
+                payload: list
+              };
+            }),
+            catchError((error) => {
+              return of(new ErrorActions.ShowError(new Alert(
+                'danger',
+                'Kann den Server nicht kontaktieren: ' + url +
+                ` - Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`)));
+            })
+          );
+      })
+    );
+
+  @Effect()
+  fetchSignalTypes = this.actions$
+    .pipe(
+      ofType(SignalActions.FETCH_SIGNAL_TYPES),
+      switchMap((action: SignalActions.FetchSignalTypes) => {
+        const url = action.payload + '/signal_types';
+        return this.httpClient.get<SignalType[]>(url)
+          .pipe(
+            map((list: SignalType[]) => {
+              this.store.dispatch(new ErrorActions.ShowError(
+                new Alert('success', 'Signal-Typ-Zuordnung geladen von: ' + url)));
+              return {
+                type: SignalActions.SET_SIGNAL_TYPES,
+                payload: list
+              };
+            }),
+            catchError((error) => {
+              return of(new ErrorActions.ShowError(new Alert(
+                'danger',
+                'Kann den Server nicht kontaktieren: ' + url +
+                ` - Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`)));
+            })
+          );
+      })
+    );
+
+  @Effect()
+  fetchIntersections = this.actions$
+    .pipe(
+      ofType(SignalActions.FETCH_SIGNAL_TYPE_DEFINITIONS),
+      switchMap((action: SignalActions.FetchSignalTypeDefinitions) => {
+        const url = action.payload + '/signal_type_definitions';
+        return this.httpClient.get<SignalTypeDefinition[]>(url)
+          .pipe(
+            map((list: SignalTypeDefinition[]) => {
+              this.store.dispatch(new ErrorActions.ShowError(
+                new Alert('success', 'Signal-Modelle geladen von: ' + url)));
+              return {
+                type: SignalActions.SET_SIGNAL_TYPE_DEFINITIONS,
+                payload: list
               };
             }),
             catchError((error) => {
@@ -64,6 +119,6 @@ export class SignalEffects {
   constructor(private actions$: Actions,
               private httpClient: HttpClient,
               private router: Router,
-              private store: Store<fromSignals.AppState>) {
+              private store: Store<fromRoot.State>) {
   }
 }

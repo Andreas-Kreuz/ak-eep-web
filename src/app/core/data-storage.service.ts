@@ -1,98 +1,86 @@
 import {Store} from '@ngrx/store';
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {SignalsService} from '../eep/store/signals.service';
-import {SwitchesService} from '../eep/switches/switch-list/switches.service';
-import {Signal} from '../eep/signals/signal.model';
-import {Subject} from 'rxjs';
-import {Alert} from './error/alert.model';
-import {RoadSignalModel} from '../eep/signals/road-signal-model.model';
-import {RoadSignalModelsService} from '../eep/store/road-signal-models.service';
-import {RoadTrafficLight} from '../eep/signals/road-traffic-light.model';
-import {Intersection} from '../eep/intersection/intersection.model';
-import {IntersectionsService} from '../eep/intersection/store/intersections.service';
+import {Injectable, OnInit} from '@angular/core';
+
+import * as fromRoot from '../store/app.reducers';
 import * as SignalActions from '../eep/store/signals.actions';
-import * as fromSignals from '../eep/store/signals.reducers';
-import * as app from '../store/app.reducers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataStorageService {
-  errorSubscription: Subject<Alert> = new Subject<Alert>();
-  hostLocation: string;
+export class DataStorageService implements OnInit {
 
-  constructor(private store: Store<app.AppState>,
-              private signalStore: Store<fromSignals.SignalsState>,
-              private httpClient: HttpClient,
-              private signalsService: SignalsService,
-              private switchesService: SwitchesService,
-              private roadSignalModelsService: RoadSignalModelsService,
-              private intersectionsService: IntersectionsService) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
-  fetchData(hostLocation) {
-    this.signalStore.dispatch(new SignalActions.FetchSignals(hostLocation));
-    // this.updateTrafficLightModels();
+  ngOnInit() {
   }
 
-  private updateTrafficLightModels() {
-    const url = this.hostLocation + ':3000/traffic_light_models';
-    this.httpClient.get<RoadSignalModel[]>(url)
-      .subscribe(
-        (trafficLightModels: RoadSignalModel[]) => {
-          for (const t of trafficLightModels) {
-            t.type = 'road';
-          }
-          this.errorSubscription.next(null);
-          this.roadSignalModelsService.setSignalModels(trafficLightModels);
-          this.updateSignals();
-          this.updateIntersections();
-        },
-        (error: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', error.message));
-        }
-      );
+  fetchStaticData(hostLocation) {
+    this.store.dispatch(new SignalActions.FetchSignalTypeDefinitions(hostLocation));
+    this.store.dispatch(new SignalActions.FetchSignalTypes(hostLocation));
   }
 
-  private updateSignals() {
-    this.httpClient.get<Signal[]>(this.hostLocation + ':3000/signals')
-      .subscribe(
-        (signals: Signal[]) => {
-          this.signalsService.setSignals(signals);
-          this.updateIntersectionTrafficLights();
-        },
-        (error: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', error.message));
-        }
-      );
+  fetchRuntimeData(hostLocation) {
+    this.store.dispatch(new SignalActions.FetchSignals(hostLocation));
   }
 
-  private updateIntersections() {
-    this.httpClient.get<Intersection[]>(this.hostLocation + ':3000/intersections')
-      .subscribe(
-        (intersections: Intersection[]) => {
-          this.intersectionsService.setIntersections(intersections);
-        },
-        (error: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', error.message));
-        }
-      );
-  }
+  // private updateTrafficLightModels() {
+  //   const url = this.hostLocation + ':3000/traffic_light_models';
+  //   this.httpClient.get<RoadSignalType[]>(url)
+  //     .subscribe(
+  //       (trafficLightModels: RoadSignalType[]) => {
+  //         for (const t of trafficLightModels) {
+  //           t.type = 'road';
+  //         }
+  //         this.errorSubscription.next(null);
+  //         this.roadSignalModelsService.setSignalModels(trafficLightModels);
+  //         this.updateSignals();
+  //         this.updateIntersections();
+  //       },
+  //       (error: HttpErrorResponse) => {
+  //         this.errorSubscription.next(new Alert('danger', error.message));
+  //       }
+  //     );
+  // }
 
-  private updateIntersectionTrafficLights() {
-    this.httpClient.get<RoadTrafficLight[]>(this.hostLocation + ':3000/intersection_traffic_lights')
-      .subscribe(
-        (trafficLights: RoadTrafficLight[]) => {
-          this.signalsService.updateSignals(trafficLights);
-        },
-        (error: HttpErrorResponse) => {
-          this.errorSubscription.next(new Alert('danger', error.message));
-        }
-      );
-  }
-
-  switchSignal() {
-    return this.httpClient.post('localhost:3000/', 5);
-  }
+  // private updateSignals() {
+  //   this.httpClient.get<Signal[]>(this.hostLocation + ':3000/signals')
+  //     .subscribe(
+  //       (signals: Signal[]) => {
+  //         this.signalsService.setSignals(signals);
+  //         this.updateIntersectionTrafficLights();
+  //       },
+  //       (error: HttpErrorResponse) => {
+  //         this.errorSubscription.next(new Alert('danger', error.message));
+  //       }
+  //     );
+  // }
+  //
+  // private updateIntersections() {
+  //   this.httpClient.get<Intersection[]>(this.hostLocation + ':3000/intersections')
+  //     .subscribe(
+  //       (intersections: Intersection[]) => {
+  //         this.intersectionsService.setIntersections(intersections);
+  //       },
+  //       (error: HttpErrorResponse) => {
+  //         this.errorSubscription.next(new Alert('danger', error.message));
+  //       }
+  //     );
+  // }
+  //
+  // private updateIntersectionTrafficLights() {
+  //   this.httpClient.get<RoadTrafficLight[]>(this.hostLocation + ':3000/intersection_traffic_lights')
+  //     .subscribe(
+  //       (trafficLights: RoadTrafficLight[]) => {
+  //         this.signalsService.updateSignals(trafficLights);
+  //       },
+  //       (error: HttpErrorResponse) => {
+  //         this.errorSubscription.next(new Alert('danger', error.message));
+  //       }
+  //     );
+  // }
+  //
+  // switchSignal() {
+  //   return this.httpClient.post('localhost:3000/', 5);
+  // }
 }

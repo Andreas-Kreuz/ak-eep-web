@@ -4,8 +4,9 @@ import {Observable, Subscription} from 'rxjs';
 
 import {Signal} from '../signal.model';
 import {select, Store} from '@ngrx/store';
-import * as fromSignals from '../../../store/app.reducers';
+import * as fromSignals from '../../store/signals.reducers';
 import {trafficLight, unknown} from '../../../shared/unicode-symbol.model';
+import {State} from '../../../store/app.reducers';
 
 @Component({
   selector: 'app-signal-detail-component',
@@ -17,7 +18,7 @@ export class SignalDetailComponent implements OnInit, OnDestroy {
   private signal$: Observable<Signal>;
   private routeParams$: Subscription;
 
-  constructor(private store: Store<fromSignals.AppState>,
+  constructor(private store: Store<State>,
               private route: ActivatedRoute) {
   }
 
