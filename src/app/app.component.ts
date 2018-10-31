@@ -14,13 +14,11 @@ export class AppComponent implements OnInit {
   hostLocation = window.location.protocol + '//' + window.location.hostname;
 
 
-  constructor(private dataStorageService: DataStorageService,
-              private signalStore: Store<fromSignals.SignalsState>) {
+  constructor(private dataStorageService: DataStorageService) {
     dataStorageService.hostLocation = this.hostLocation;
   }
 
   ngOnInit() {
-    this.signalStore.dispatch(new SignalActions.FetchSignals());
-    this.dataStorageService.loadData();
+    this.dataStorageService.fetchData();
   }
 }

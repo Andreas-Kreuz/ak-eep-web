@@ -1,16 +1,18 @@
+import {Store} from '@ngrx/store';
 import {Injectable, Input} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SignalsService} from '../eep/signals/store/signals.service';
 import {SwitchesService} from '../eep/switches/switch-list/switches.service';
 import {Signal} from '../eep/signals/signal.model';
-import {Observable, Subject, throwError} from 'rxjs';
+import {Subject} from 'rxjs';
 import {Alert} from './error/alert.model';
 import {RoadSignalModel} from '../eep/signals/road-signal-model.model';
 import {RoadSignalModelsService} from '../eep/signals/store/road-signal-models.service';
 import {RoadTrafficLight} from '../eep/signals/road-traffic-light.model';
 import {Intersection} from '../eep/intersection/intersection.model';
 import {IntersectionsService} from '../eep/intersection/store/intersections.service';
-import {catchError} from 'rxjs/operators';
+import * as SignalActions from '../eep/signals/store/signals.actions';
+import * as fromSignals from '../eep/signals/store/signals.reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +21,17 @@ export class DataStorageService {
   errorSubscription: Subject<Alert> = new Subject<Alert>();
   @Input() hostLocation: string;
 
-  constructor(private httpClient: HttpClient,
+  constructor(private signalStore: Store<fromSignals.SignalsState>,
+              private httpClient: HttpClient,
               private signalsService: SignalsService,
               private switchesService: SwitchesService,
               private roadSignalModelsService: RoadSignalModelsService,
               private intersectionsService: IntersectionsService) {
   }
 
-  loadData() {
+  fetchData() {
+    console.log('Dispatching new SignalActions.FetchSignals() to signalstore');
+    this.signalStore.dispatch(new SignalActions.FetchSignals());
     this.updateTrafficLightModels();
   }
 

@@ -1,7 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataStorageService} from '../data-storage.service';
-import {Subscription} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+
 import {Alert} from './alert.model';
+import * as fromErrors from './store/error.reducers';
+import * as ErrorActions from './store/error.actions';
+import * as fromSignals from '../../store/app.reducers';
 
 @Component({
   selector: 'app-error',
@@ -9,33 +13,19 @@ import {Alert} from './alert.model';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-  private errorSubscription: Subscription;
-  private alerts: Alert[] = [];
-  private readonly initAlert: Alert;
+  private alerts$: Observable<Alert[]>;
 
-  constructor(private dataStorageService: DataStorageService) {
-    this.initAlert = new Alert('warning', 'Kontaktiere Server ' + dataStorageService.hostLocation + ':3000/');
-    this.alerts.push(this.initAlert);
+  constructor(private store: Store<fromSignals.AppState>) {
   }
 
   ngOnInit() {
-    this.errorSubscription = this.dataStorageService.errorSubscription
-      .subscribe(
-        (alert: Alert) => {
-          if (alert != null) {
-            this.alerts.push(alert);
-          } else {
-            this.alerts.splice(this.alerts.indexOf(this.initAlert), 1);
-          }
-        }
-      );
+    this.alerts$ = this.store.pipe(select(fromErrors.getAlerts));
   }
 
   ngOnDestroy() {
-    this.errorSubscription.unsubscribe();
   }
 
   close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
+    this.store.dispatch(new ErrorActions.HideError((alert)));
   }
 }

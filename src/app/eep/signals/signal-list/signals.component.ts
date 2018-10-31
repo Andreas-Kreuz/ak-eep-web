@@ -18,7 +18,7 @@ export class SignalsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signals$ = this.store.pipe(select(fromSignals.getSignals));
+    this.signals$ = this.store.pipe(select(fromSignals.getSortedSignals));
   }
 
   positionTextOf(signal: Signal): string {

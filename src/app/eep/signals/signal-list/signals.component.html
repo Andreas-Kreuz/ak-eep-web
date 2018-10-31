@@ -3,36 +3,41 @@
 </h1>
 <div class="row">
   <div class="col-sm-12">
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Position</th>
-        <th scope="col"># wartende Fahrzeuge</th>
-        <th scope="col">EEP-Modell</th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let signal of (signals$ | async)">
-      <tr>
-        <th scope="row">
-          <a [routerLink]="signal.id">
-            {{ signal.id }}
-          </a>
-        </th>
-        <td ngSwitch="signal.position">
-          {{ positionTextOf(signal) }}
-        </td>
-        <td>
+    <div *ngIf="(signals$ | async) as signals; else error">
+      <div *ngIf="signals.length > 0; else error">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Position</th>
+            <th scope="col"># wartende Fahrzeuge</th>
+            <th scope="col">EEP-Modell</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let signal of signals">
+          <tr>
+            <th scope="row">
+              <a [routerLink]="signal.id">
+                {{ signal.id }}
+              </a>
+            </th>
+            <td ngSwitch="signal.position">
+              {{ positionTextOf(signal) }}
+            </td>
+            <td>
           <span *ngIf="signal.waitingVehiclesCount > 0; else noWait">
             {{ waitingCarsOf(signal) }}
           </span>
-          <ng-template #noWait>
-             -
-          </ng-template>
-        </td>
-        <td class="text-muted">{{ modelTextOf(signal) }}</td>
-      </tr>
-      </tbody>
-    </table>
+              <ng-template #noWait>
+                -
+              </ng-template>
+            </td>
+            <td class="text-muted">{{ modelTextOf(signal) }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <ng-template #error>Es sind keine Signale vorhanden.</ng-template>
   </div>
 </div>
