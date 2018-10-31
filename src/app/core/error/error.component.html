@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row-12">
-    <p *ngFor="let alert of (alerts$ | async); let alertIndex = index">
+    <p *ngFor="let alert of (alerts$ | async)">
       <ngb-alert [type]="[alert.type]" (close)="(close(alert))">{{ alert.message }}</ngb-alert>
     </p>
   </div>

@@ -1,10 +1,10 @@
 import {Action} from '@ngrx/store';
 import {Signal} from '../signal.model';
 
-export const FETCH_SIGNALS = 'FETCH_SIGNALS';
-export const SET_SIGNALS = 'SET_SIGNALS';
-export const SELECT = 'SELECT';
-export const DESELECT = 'DESELECT';
+export const FETCH_SIGNALS = '[Signals] FETCH_SIGNALS';
+export const SET_SIGNALS = '[Signals] SET_SIGNALS';
+export const SELECT = '[Signals] SELECT';
+export const DESELECT = '[Signals] DESELECT';
 export const ROUTER_NAVIGATION = 'ROUTER_NAVIGATION';
 
 export class FetchSignals implements Action {

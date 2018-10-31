@@ -1,8 +1,8 @@
 import {Action} from '@ngrx/store';
 import {Alert} from '../alert.model';
 
-export const SHOW = 'SHOW';
-export const HIDE = 'HIDE';
+export const SHOW = '[Errors] SHOW';
+export const HIDE = '[Errors] HIDE';
 
 
 export class ShowError implements Action {

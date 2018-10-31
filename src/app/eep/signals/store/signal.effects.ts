@@ -14,7 +14,7 @@ import * as fromSignals from '../../../store/app.reducers';
 @Injectable()
 export class SignalEffects {
   hostLocation = 'http://localhost';
-  private alert = new Alert('warning', this.hostLocation + ':3000/signals');
+  private alert: Alert = new Alert('warning', this.hostLocation + ':3000/signals');
 
   @Effect()
   refreshSignals = this.actions$
@@ -35,24 +35,25 @@ export class SignalEffects {
           type: SignalActions.SET_SIGNALS,
           payload: signals
         };
-      })
+      },
+        (error) => console.log(error))
     );
 
-  @Effect()
-  selectSignal = this.actions$
-    .pipe(
-      ofType(SignalActions.SELECT),
-      tap((action: SignalActions.Select) => {
-        // this.router.navigate(['/signals/' + action.payload]);
-      }));
-
-  @Effect()
-  deselectSignal = this.actions$
-    .pipe(
-      ofType(SignalActions.DESELECT),
-      tap((action: SignalActions.Deselect) => {
-        // this.router.navigate(['/signals']);
-      }));
+  // @Effect()
+  // selectSignal = this.actions$
+  //   .pipe(
+  //     ofType(SignalActions.SELECT),
+  //     tap((action: SignalActions.Select) => {
+  //       // this.router.navigate(['/signals/' + action.payload]);
+  //     }));
+  //
+  // @Effect()
+  // deselectSignal = this.actions$
+  //   .pipe(
+  //     ofType(SignalActions.DESELECT),
+  //     tap((action: SignalActions.Deselect) => {
+  //       // this.router.navigate(['/signals']);
+  //     }));
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,
