@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class ErrorEffects {
+export class CoreEffects {
 }
 

@@ -45,6 +45,6 @@ export class SignalsComponent implements OnInit {
   }
 
   waitingCarsOf(signal: Signal) {
-    return new Array(signal.waitingVehiclesCount).join( car );
+    return new Array(signal.waitingVehiclesCount + 1).join(car);
   }
 }

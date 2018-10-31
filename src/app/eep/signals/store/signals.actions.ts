@@ -11,7 +11,7 @@ export const ERROR = '[Signals] ERROR';
 export class FetchSignals implements Action {
   readonly type = FETCH_SIGNALS;
 
-  constructor() {
+  constructor(public payload: string) {
   }
 }
 

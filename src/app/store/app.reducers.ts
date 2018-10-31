@@ -1,19 +1,17 @@
 import {ActionReducerMap, createSelector} from '@ngrx/store';
 
 import * as fromSignals from '../eep/signals/store/signals.reducers';
-import {SignalsState} from '../eep/signals/store/signals.reducers';
-import * as fromErrors from '../core/error/store/error.reducers';
-import {ErrorState} from '../core/error/store/error.reducers';
+import * as fromCore from '../core/store/core.reducers';
 
 
 export interface AppState {
   signals: fromSignals.SignalsState;
-  errors: fromErrors.ErrorState;
+  core: fromCore.CoreState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   signals: fromSignals.signalsReducer,
-  errors: fromErrors.errorReducer,
+  core: fromCore.coreReducer,
 };
 
 
@@ -21,12 +19,12 @@ export const signalState = (state: AppState) => state.signals;
 
 export const getSignals = createSelector(
   signalState,
-  (state: SignalsState) => state.signals
+  (state: fromSignals.SignalsState) => state.signals
 );
 
 export const signalCount = createSelector(
   signalState,
-  (state: SignalsState) => state.signals.length
+  (state: fromSignals.SignalsState) => state.signals.length
 );
 
 export const getSortedSignals = createSelector(

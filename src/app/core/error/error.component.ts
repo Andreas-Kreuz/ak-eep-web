@@ -3,8 +3,8 @@ import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 
 import {Alert} from './alert.model';
-import * as fromErrors from './store/error.reducers';
-import * as ErrorActions from './store/error.actions';
+import * as fromErrors from '../store/core.reducers';
+import * as ErrorActions from '../store/core.actions';
 import * as app from '../../store/app.reducers';
 import {DataStorageService} from '../data-storage.service';
 

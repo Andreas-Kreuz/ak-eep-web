@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStorageService} from './core/data-storage.service';
+import {interval} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import * as fromSignals from './eep/signals/store/signals.reducers';
-import * as SignalActions from './eep/signals/store/signals.actions';
+import * as fromCore from './core/store/core.reducers';
+import * as CoreActions from './core/store/core.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +13,20 @@ import * as SignalActions from './eep/signals/store/signals.actions';
 })
 export class AppComponent implements OnInit {
   title = 'EEP-Web';
-  hostLocation = window.location.protocol + '//' + window.location.hostname;
+  hostLocation = 'http://localhost:3000';
 
-
-  constructor(private dataStorageService: DataStorageService) {
-    dataStorageService.hostLocation = this.hostLocation;
+  constructor(private store: Store<fromCore.CoreState>,
+              private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
-    this.dataStorageService.fetchData();
+    // this.store.subscribe(fromCore.getPollingUrl => this.hostLocation);
+    this.hostLocation = window.location.protocol + '//' + window.location.hostname + ':3000';
+    this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
+    this.dataStorageService.fetchData(this.hostLocation);
+    interval(1000).subscribe(() => {
+        this.dataStorageService.fetchData(this.hostLocation);
+      }
+    );
   }
 }

@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Menu} from './menu.enum';
 import {AppComponent} from '../../app.component';
 import {select, Store} from '@ngrx/store';
-import * as fromErrors from '../error/store/error.reducers';
+import * as fromErrors from '../store/core.reducers';
 import * as app from '../../store/app.reducers';
 import {Observable} from 'rxjs';
 import {Alert} from '../error/alert.model';

@@ -1,6 +1,6 @@
 import {Store} from '@ngrx/store';
-import {Injectable, Input} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {SignalsService} from '../eep/signals/store/signals.service';
 import {SwitchesService} from '../eep/switches/switch-list/switches.service';
 import {Signal} from '../eep/signals/signal.model';
@@ -13,15 +13,17 @@ import {Intersection} from '../eep/intersection/intersection.model';
 import {IntersectionsService} from '../eep/intersection/store/intersections.service';
 import * as SignalActions from '../eep/signals/store/signals.actions';
 import * as fromSignals from '../eep/signals/store/signals.reducers';
+import * as app from '../store/app.reducers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
   errorSubscription: Subject<Alert> = new Subject<Alert>();
-  @Input() hostLocation: string;
+  hostLocation: string;
 
-  constructor(private signalStore: Store<fromSignals.SignalsState>,
+  constructor(private store: Store<app.AppState>,
+              private signalStore: Store<fromSignals.SignalsState>,
               private httpClient: HttpClient,
               private signalsService: SignalsService,
               private switchesService: SwitchesService,
@@ -29,8 +31,8 @@ export class DataStorageService {
               private intersectionsService: IntersectionsService) {
   }
 
-  fetchData() {
-    this.signalStore.dispatch(new SignalActions.FetchSignals());
+  fetchData(hostLocation) {
+    this.signalStore.dispatch(new SignalActions.FetchSignals(hostLocation));
     // this.updateTrafficLightModels();
   }
 
