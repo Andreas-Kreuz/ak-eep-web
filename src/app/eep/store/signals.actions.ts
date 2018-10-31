@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {Signal} from '../signal.model';
+import {Signal} from '../signals/signal.model';
 import {HttpErrorResponse} from '@angular/common/http';
 
 export const FETCH_SIGNALS = '[Signals] FETCH_SIGNALS';

@@ -1,7 +1,7 @@
 import {Injectable, Output} from '@angular/core';
 import {Subject} from 'rxjs';
-import {RoadSignalModel} from '../road-signal-model.model';
-import {SignalModel} from '../signal-model.model';
+import {RoadSignalModel} from '../signals/road-signal-model.model';
+import {SignalModel} from '../signals/signal-model.model';
 
 @Injectable({
   providedIn: 'root'

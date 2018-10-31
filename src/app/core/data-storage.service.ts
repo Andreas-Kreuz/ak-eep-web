@@ -1,18 +1,18 @@
 import {Store} from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {SignalsService} from '../eep/signals/store/signals.service';
+import {SignalsService} from '../eep/store/signals.service';
 import {SwitchesService} from '../eep/switches/switch-list/switches.service';
 import {Signal} from '../eep/signals/signal.model';
 import {Subject} from 'rxjs';
 import {Alert} from './error/alert.model';
 import {RoadSignalModel} from '../eep/signals/road-signal-model.model';
-import {RoadSignalModelsService} from '../eep/signals/store/road-signal-models.service';
+import {RoadSignalModelsService} from '../eep/store/road-signal-models.service';
 import {RoadTrafficLight} from '../eep/signals/road-traffic-light.model';
 import {Intersection} from '../eep/intersection/intersection.model';
 import {IntersectionsService} from '../eep/intersection/store/intersections.service';
-import * as SignalActions from '../eep/signals/store/signals.actions';
-import * as fromSignals from '../eep/signals/store/signals.reducers';
+import * as SignalActions from '../eep/store/signals.actions';
+import * as fromSignals from '../eep/store/signals.reducers';
 import * as app from '../store/app.reducers';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import * as SignalActions from './signals.actions';
-import {Signal} from '../signal.model';
+import {Signal} from '../signals/signal.model';
 
 export interface SignalsState {
   signals: Signal[];

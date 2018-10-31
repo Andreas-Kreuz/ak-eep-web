@@ -1,6 +1,6 @@
 import {ActionReducerMap, createSelector} from '@ngrx/store';
 
-import * as fromSignals from '../eep/signals/store/signals.reducers';
+import * as fromSignals from '../eep/store/signals.reducers';
 import * as fromCore from '../core/store/core.reducers';
 
 

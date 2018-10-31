@@ -2,7 +2,7 @@ import {Injectable, Output} from '@angular/core';
 import {Intersection} from '../intersection.model';
 import {Subject} from 'rxjs';
 import {Signal} from '../../signals/signal.model';
-import {RoadSignalModelsService} from '../../signals/store/road-signal-models.service';
+import {RoadSignalModelsService} from '../../store/road-signal-models.service';
 
 @Injectable({
   providedIn: 'root'

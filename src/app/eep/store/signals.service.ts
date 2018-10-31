@@ -1,8 +1,8 @@
 import {Injectable, Output} from '@angular/core';
-import {Signal} from '../signal.model';
+import {Signal} from '../signals/signal.model';
 import {Subject} from 'rxjs';
-import {RoadTrafficLight} from '../road-traffic-light.model';
-import {SignalModel} from '../signal-model.model';
+import {RoadTrafficLight} from '../signals/road-traffic-light.model';
+import {SignalModel} from '../signals/signal-model.model';
 import {RoadSignalModelsService} from './road-signal-models.service';
 
 

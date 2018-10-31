@@ -3,7 +3,7 @@ import {Intersection} from '../intersection.model';
 import {Signal} from '../../signals/signal.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
-import {SignalsService} from '../../signals/store/signals.service';
+import {SignalsService} from '../../store/signals.service';
 import {IntersectionsService} from '../store/intersections.service';
 
 @Component({
