@@ -30,9 +30,8 @@ export class DataStorageService {
   }
 
   fetchData() {
-    console.log('Dispatching new SignalActions.FetchSignals() to signalstore');
     this.signalStore.dispatch(new SignalActions.FetchSignals());
-    this.updateTrafficLightModels();
+    // this.updateTrafficLightModels();
   }
 
   private updateTrafficLightModels() {
@@ -93,27 +92,5 @@ export class DataStorageService {
 
   switchSignal() {
     return this.httpClient.post('localhost:3000/', 5);
-  }
-
-  storeDataPut(list: any[]) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.httpClient.put('http://localhost:3199/data.json',
-      list,
-      {headers: headers})
-      .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
-  }
-
-  storeDataPost(list: any[]) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.httpClient.post('http://localhost:3199/data.json',
-      list,
-      {headers: headers})
-      .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
   }
 }

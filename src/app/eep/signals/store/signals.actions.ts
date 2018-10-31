@@ -1,11 +1,12 @@
 import {Action} from '@ngrx/store';
 import {Signal} from '../signal.model';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const FETCH_SIGNALS = '[Signals] FETCH_SIGNALS';
 export const SET_SIGNALS = '[Signals] SET_SIGNALS';
 export const SELECT = '[Signals] SELECT';
 export const DESELECT = '[Signals] DESELECT';
-export const ROUTER_NAVIGATION = 'ROUTER_NAVIGATION';
+export const ERROR = '[Signals] ERROR';
 
 export class FetchSignals implements Action {
   readonly type = FETCH_SIGNALS;
@@ -28,6 +29,13 @@ export class Select implements Action {
   }
 }
 
+export class Error implements Action {
+  readonly type = ERROR;
+
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
 export class Deselect implements Action {
   readonly type = DESELECT;
 }
@@ -36,4 +44,5 @@ export type SignalActions =
   FetchSignals
   | SetSignals
   | Select
-  | Deselect;
+  | Deselect
+  | Error;

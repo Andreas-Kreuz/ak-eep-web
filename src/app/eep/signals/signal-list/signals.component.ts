@@ -14,11 +14,11 @@ import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 export class SignalsComponent implements OnInit {
   signals$: Observable<Signal[]>;
 
-  constructor(private store: Store<fromSignals.AppState>) {
+  constructor(private signalStore: Store<fromSignals.AppState>) {
   }
 
   ngOnInit() {
-    this.signals$ = this.store.pipe(select(fromSignals.getSortedSignals));
+    this.signals$ = this.signalStore.pipe(select(fromSignals.getSignals));
   }
 
   positionTextOf(signal: Signal): string {

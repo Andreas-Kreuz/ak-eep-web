@@ -3,6 +3,7 @@ import {ActionReducerMap, createSelector} from '@ngrx/store';
 import * as fromSignals from '../eep/signals/store/signals.reducers';
 import {SignalsState} from '../eep/signals/store/signals.reducers';
 import * as fromErrors from '../core/error/store/error.reducers';
+import {ErrorState} from '../core/error/store/error.reducers';
 
 
 export interface AppState {
@@ -23,6 +24,11 @@ export const getSignals = createSelector(
   (state: SignalsState) => state.signals
 );
 
+export const signalCount = createSelector(
+  signalState,
+  (state: SignalsState) => state.signals.length
+);
+
 export const getSortedSignals = createSelector(
   getSignals,
   (signals) => {
@@ -33,7 +39,7 @@ export const getSortedSignals = createSelector(
       }
       return a.id - b.id;
     });
-    console.log('return sorted signals');
+    console.log('return sorted signals (' + signals.length + ')');
     return signals;
   }
 );

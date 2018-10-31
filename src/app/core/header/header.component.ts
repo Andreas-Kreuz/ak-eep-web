@@ -1,7 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Menu} from './menu.enum';
 import {AppComponent} from '../../app.component';
-import {DataStorageService} from '../data-storage.service';
+import {select, Store} from '@ngrx/store';
+import * as fromErrors from '../error/store/error.reducers';
+import * as app from '../../store/app.reducers';
+import {Observable} from 'rxjs';
+import {Alert} from '../error/alert.model';
 
 @Component({
   selector: 'app-header',
@@ -9,24 +13,25 @@ import {DataStorageService} from '../data-storage.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private bgClass: string;
+  private lastAlert$: Observable<Alert>;
+
   @Output() featureSelected = new EventEmitter<string>();
   title: string;
-
-  onFetchData() {
-    console.log('Fetching data from dataStorageService');
-    this.dataStorageService.fetchData();
-  }
 
   onSelect(feature: string) {
     this.featureSelected.emit(feature);
   }
 
   constructor(appComponent: AppComponent,
-              private dataStorageService: DataStorageService) {
+              private errorStore: Store<app.AppState>) {
     this.title = appComponent.title;
   }
 
   ngOnInit() {
+    this.lastAlert$ = this.errorStore.pipe(select(fromErrors.getLastAlert));
+    this.lastAlert$.subscribe((value: Alert) =>
+      this.bgClass = 'bg-' + value.type);
   }
 
   menu() {

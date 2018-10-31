@@ -2,6 +2,6 @@
   home works!
 </p>
 <ul>
-  <li><a routerLink="/signals">{{ signalCount }} Signale</a></li>
+  <li><a routerLink="/signals">{{ (signalCount$ | async) }} Signale</a></li>
   <li><a routerLink="/switches">{{ switchesCount }} Weichen</a></li>
 </ul>

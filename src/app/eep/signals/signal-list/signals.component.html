@@ -3,8 +3,8 @@
 </h1>
 <div class="row">
   <div class="col-sm-12">
-    <div *ngIf="(signals$ | async) as signals; else error">
-      <div *ngIf="signals.length > 0; else error">
+    <div *ngIf="(signals$ | async) as signals; else error1">
+      <div *ngIf="signals.length > 0; else error2">
         <table class="table">
           <thead>
           <tr>
@@ -37,7 +37,8 @@
           </tbody>
         </table>
       </div>
+    <ng-template #error2>Es sind keine Signale vorhanden.</ng-template>
     </div>
-    <ng-template #error>Es sind keine Signale vorhanden.</ng-template>
+    <ng-template #error1>Signale wurden nicht geladen.</ng-template>
   </div>
 </div>

@@ -10,13 +10,21 @@ export const getAlerts = createSelector(
   (state: ErrorState) => state.errors
 );
 
+export const getLastAlert = createSelector(
+  errorState,
+  (state: ErrorState) => state.lastError
+);
 
 export interface ErrorState {
+  lastError: Alert;
   errors: Alert[];
 }
 
 const initialState: ErrorState = {
-  errors: [],
+  lastError: new Alert('info', 'App started'),
+  errors: [
+    new Alert('info', 'App started')
+  ],
 };
 
 export function errorReducer(state: ErrorState = initialState, action: ErrorActions.ErrorActions) {
@@ -24,7 +32,8 @@ export function errorReducer(state: ErrorState = initialState, action: ErrorActi
     case ErrorActions.SHOW:
       const newState: ErrorState = {
         ...state,
-        errors: [...state.errors, action.payload],
+        errors: [...state.errors.slice(Math.max(state.errors.length - 9, 0)), action.payload],
+        lastError: action.payload,
       };
       return newState;
     case ErrorActions.HIDE:

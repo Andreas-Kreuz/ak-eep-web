@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 import {Alert} from './alert.model';
 import * as fromErrors from './store/error.reducers';
 import * as ErrorActions from './store/error.actions';
-import * as fromSignals from '../../store/app.reducers';
+import * as app from '../../store/app.reducers';
+import {DataStorageService} from '../data-storage.service';
 
 @Component({
   selector: 'app-error',
@@ -15,7 +16,8 @@ import * as fromSignals from '../../store/app.reducers';
 export class ErrorComponent implements OnInit, OnDestroy {
   private alerts$: Observable<Alert[]>;
 
-  constructor(private store: Store<fromSignals.AppState>) {
+  constructor(private store: Store<app.AppState>,
+              private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
@@ -27,5 +29,9 @@ export class ErrorComponent implements OnInit, OnDestroy {
 
   close(alert: Alert) {
     this.store.dispatch(new ErrorActions.HideError((alert)));
+  }
+
+  onFetchData() {
+    this.dataStorageService.fetchData();
   }
 }
