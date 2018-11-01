@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import * as fromRoot from '../../store/app.reducers';
-import * as fromSignals from '../../eep/store/signals.reducers';
+import * as fromEep from '../../eep/store/eep.reducers';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signalCount$ = this.store.pipe(select(fromSignals.signalCount));
+    this.signalCount$ = this.store.pipe(select(fromEep.selectSignalCount));
   }
 }

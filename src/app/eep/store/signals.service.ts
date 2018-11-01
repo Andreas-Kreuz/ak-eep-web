@@ -17,25 +17,25 @@ export class SignalsService {
 
 
   // @Output() signalsUpdated: Subject<Signal[]> = new Subject();
-  // private signals: Signal[];
+  // private eep: Signal[];
   // private signalModelsService: RoadSignalModelsService;
   //
   // constructor(signalModelsService: RoadSignalModelsService) {
-  //   this.signals = [];
+  //   this.eep = [];
   //   this.signalModelsService = signalModelsService;
   // }
   //
   // getSignals() {
-  //   return this.signals.slice();
+  //   return this.eep.slice();
   // }
   //
-  // setSignals(signals: Signal[]) {
-  //   this.signals = signals;
-  //   this.signalsUpdated.next(this.signals.slice());
+  // setSignals(eep: Signal[]) {
+  //   this.eep = eep;
+  //   this.signalsUpdated.next(this.eep.slice());
   // }
   //
   // public getSignal(id: number) {
-  //   const signal = this.signals.find((s) => {
+  //   const signal = this.eep.find((s) => {
   //     return s.id === id;
   //   });
   //   return signal;
@@ -55,6 +55,6 @@ export class SignalsService {
   //       this.updateSignal(trafficLight.signalId, model);
   //     }
   //   }
-  //   this.signalsUpdated.next(this.signals.slice());
+  //   this.signalsUpdated.next(this.eep.slice());
   // }
 }

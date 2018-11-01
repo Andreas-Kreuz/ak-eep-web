@@ -11,7 +11,7 @@ import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
-import {SignalEffects} from './eep/store/signal.effects';
+import {EepEffects} from './eep/store/eep.effects';
 import {reducers} from './store/app.reducers';
 import {environment} from '../environments/environment';
 
@@ -28,7 +28,7 @@ import {environment} from '../environments/environment';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([SignalEffects]),
+    EffectsModule.forRoot([EepEffects]),
     StoreRouterConnectingModule,
     environment.production ? [] : StoreDevtoolsModule.instrument(),
   ],

@@ -4,7 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 
 import {Signal} from '../signal.model';
 import {select, Store} from '@ngrx/store';
-import * as fromSignals from '../../store/signals.reducers';
+import * as fromEep from '../../store/eep.reducers';
 import {trafficLight, unknown} from '../../../shared/unicode-symbol.model';
 import {State} from '../../../store/app.reducers';
 
@@ -27,17 +27,7 @@ export class SignalDetailComponent implements OnInit, OnDestroy {
       .subscribe((params: Params) => {
         this.signalId = +this.route.snapshot.params['id'];
         this.signal$ = this.store.pipe(
-          select(fromSignals.bySignalId, this.signalId));
-        // select((state: fromSignals.AppState) => {
-        //   if (state.signalList.signals) {
-        //     return state.signalList.signals.find(signal => {
-        //       return signal.id === this.signalId;
-        //     });
-        //   } else {
-        //     return null;
-        //   }
-        // })
-
+          select(fromEep.selectSignalById(this.signalId)));
       });
   }
 

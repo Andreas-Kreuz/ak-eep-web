@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
-import * as SignalActions from './signals.actions';
+import * as SignalActions from './eep.actions';
 import {Signal} from '../signals/signal.model';
 import * as ErrorActions from '../../core/store/core.actions';
 import {Alert} from '../../core/error/alert.model';
@@ -16,7 +16,7 @@ import {SignalTypeDefinition} from '../signals/signal-type-definition.model';
 
 
 @Injectable()
-export class SignalEffects {
+export class EepEffects {
   @Effect({dispatch: false})
   showErrorSignals = this.actions$
     .pipe(

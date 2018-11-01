@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
 
 import {Signal} from '../signal.model';
 import * as fromRoot from '../../../store/app.reducers';
-import * as fromSignals from '../../store/signals.reducers';
+import * as fromEep from '../../store/eep.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 import {SignalTypeDefinition} from '../signal-type-definition.model';
 
@@ -13,15 +13,17 @@ import {SignalTypeDefinition} from '../signal-type-definition.model';
   templateUrl: './signals.component.html',
   styleUrls: ['./signals.component.css']
 })
-export class SignalsComponent implements OnInit {
+export class SignalsComponent implements OnInit, OnDestroy {
   signals$: Observable<Signal[]>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.signals$ = fromSignals.filledSignals$(this.store);
-    this.signals$.subscribe(value => console.log(value));
+    this.signals$ = fromEep.filledSignals$(this.store);
+  }
+
+  ngOnDestroy() {
   }
 
   positionTextOf(signal: Signal): string {

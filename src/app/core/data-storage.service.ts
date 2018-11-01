@@ -2,7 +2,7 @@ import {Store} from '@ngrx/store';
 import {Injectable, OnInit} from '@angular/core';
 
 import * as fromRoot from '../store/app.reducers';
-import * as SignalActions from '../eep/store/signals.actions';
+import * as SignalActions from '../eep/store/eep.actions';
 
 @Injectable({
   providedIn: 'root'

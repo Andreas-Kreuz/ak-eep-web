@@ -1,6 +1,6 @@
-import {createSelector, select, Store} from '@ngrx/store';
+import {createFeatureSelector, createSelector, select, Store} from '@ngrx/store';
 
-import * as SignalActions from './signals.actions';
+import * as SignalActions from './eep.actions';
 import {Signal} from '../signals/signal.model';
 import {SignalTypeDefinition} from '../signals/signal-type-definition.model';
 import {SignalType} from '../signals/signal-type.model';
@@ -58,33 +58,33 @@ export function signalsReducer(state: SignalState = initialState, action: Signal
 }
 
 
-export const signalState = (globalState: State) => globalState.signals;
+export const signalState = createFeatureSelector('eep');
 
-export const getSignals = createSelector(
+export const selectSignals = createSelector(
   signalState,
   (state: SignalState) => {
-    // console.log(state.signals);
+    // console.log(state.eep);
     return state.signals;
   }
 );
 
-export const getSignalTypes = createSelector(
+export const selectSignalTypes = createSelector(
   signalState,
   (state: SignalState) => state.signalTypes
 );
 
-export const getSignalTypeDefinitions = createSelector(
+export const selectSignalTypeDefinitions = createSelector(
   signalState,
   (state: SignalState) => state.signalTypeDefinitions
 );
 
-export const signalCount = createSelector(
+export const selectSignalCount = createSelector(
   signalState,
   (state: SignalState) => state.signals.length
 );
 
 export const getSortedSignals = createSelector(
-  getSignals,
+  selectSignals,
   (signalList: Signal[]) => {
     signalList.sort((a, b) => {
       const vehicles = b.waitingVehiclesCount - a.waitingVehiclesCount;
@@ -98,23 +98,16 @@ export const getSortedSignals = createSelector(
   }
 );
 
-export const bySignalId = createSelector(
-  getSignals,
-  (signals, signalId) => {
-    if (signals) {
-      return signals.find(signal => {
-        return signal.id === signalId;
-      });
-    } else {
-      return null;
-    }
-  });
+export const selectSignalById = (signalId) => createSelector(
+  selectSignals,
+  signals => signals.find(s => s.id === signalId)
+);
 
 
 export const filledSignals$ = (store: Store<State>) => combineLatest([
-  store.pipe(select(getSignalTypes)),
-  store.pipe(select(getSignalTypeDefinitions)),
-  store.pipe(select(getSignals))
+  store.pipe(select(selectSignalTypes)),
+  store.pipe(select(selectSignalTypeDefinitions)),
+  store.pipe(select(selectSignals))
   ]).pipe(
   debounceTime(0),
   map(([
