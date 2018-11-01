@@ -41,7 +41,7 @@ export function coreReducer(state: CoreState = initialState, action: CoreAction.
     case CoreAction.SHOW_ERROR:
       const newState: CoreState = {
         ...state,
-        alerts: [action.payload, ...state.alerts.slice(0, Math.max(state.alerts.length, 9))],
+        alerts: [action.payload, ...state.alerts.slice(0, Math.min(state.alerts.length, 20))],
         lastAlert: action.payload,
       };
       return newState;
