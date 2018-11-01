@@ -15,6 +15,7 @@ import {Alert} from '../error/alert.model';
 export class HeaderComponent implements OnInit {
   private bgClass: string;
   private lastAlert$: Observable<Alert>;
+  isNavbarCollapsed = true;
 
   @Output() featureSelected = new EventEmitter<string>();
   title: string;
