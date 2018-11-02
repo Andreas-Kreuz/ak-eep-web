@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
 
 import {Signal} from '../signal.model';
 import * as fromRoot from '../../../store/app.reducers';
@@ -20,7 +20,8 @@ export class SignalsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.signals$ = fromEep.filledSignals$(this.store);
+    this.signals$ = this.store.pipe(select(fromEep.signalsWithModel$));
+    // this.signals$ = fromEep.filledSignals$(this.store);
   }
 
   ngOnDestroy() {

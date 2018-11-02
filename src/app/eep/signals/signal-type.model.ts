@@ -1,4 +1,4 @@
 export class SignalType {
-    signalId: string;
-    typeId: string;
+    signalId: number;
+    modelId: string;
 }

@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signalCount$ = this.store.pipe(select(fromEep.selectSignalCount));
+    this.signalCount$ = this.store.pipe(select(fromEep.signalCount$));
   }
 }

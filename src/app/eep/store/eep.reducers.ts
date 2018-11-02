@@ -1,12 +1,9 @@
-import {createFeatureSelector, createSelector, select, Store} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as SignalActions from './eep.actions';
 import {Signal} from '../signals/signal.model';
 import {SignalTypeDefinition} from '../signals/signal-type-definition.model';
 import {SignalType} from '../signals/signal-type.model';
-import {State} from '../../store/app.reducers';
-import {combineLatest} from 'rxjs';
-import {debounceTime, map} from 'rxjs/operators';
 
 export interface SignalState {
   signals: Signal[];
@@ -58,84 +55,80 @@ export function signalsReducer(state: SignalState = initialState, action: Signal
 }
 
 
-export const signalState = createFeatureSelector('eep');
+export const signalState$ = createFeatureSelector('eep');
 
-export const selectSignals = createSelector(
-  signalState,
-  (state: SignalState) => {
-    // console.log(state.eep);
-    return state.signals;
-  }
+export const signals$ = createSelector(
+  signalState$,
+  (state: SignalState) => state.signals
 );
 
-export const selectSignalTypes = createSelector(
-  signalState,
+export const signalTypes$ = createSelector(
+  signalState$,
   (state: SignalState) => state.signalTypes
 );
 
-export const selectSignalTypeDefinitions = createSelector(
-  signalState,
+export const signalTypeDefinitions$ = createSelector(
+  signalState$,
   (state: SignalState) => state.signalTypeDefinitions
 );
 
-export const selectSignalCount = createSelector(
-  signalState,
+
+export const signalCount$ = createSelector(
+  signalState$,
   (state: SignalState) => state.signals.length
 );
 
-export const getSortedSignals = createSelector(
-  selectSignals,
-  (signalList: Signal[]) => {
-    signalList.sort((a, b) => {
-      const vehicles = b.waitingVehiclesCount - a.waitingVehiclesCount;
-      if (vehicles !== 0) {
-        return vehicles;
-      }
-      return a.id - b.id;
-    });
-    console.log('return sorted signals (' + signalList.length + ')');
-    return signalList;
-  }
+const sortedSignal = (signalList: Signal[]) => {
+  signalList.sort((a, b) => {
+    const vehicles = b.waitingVehiclesCount - a.waitingVehiclesCount;
+    if (vehicles !== 0) {
+      return vehicles;
+    }
+    return a.id - b.id;
+  });
+  console.log('return sorted signals (' + signalList.length + ')');
+  return signalList;
+};
+export const getSortedSignals$ = createSelector(
+  signals$,
+  sortedSignal
 );
 
-export const selectSignalById = (signalId) => createSelector(
-  selectSignals,
+export const selectSignalById$ = (signalId) => createSelector(
+  signals$,
   signals => signals.find(s => s.id === signalId)
 );
 
 
-export const filledSignals$ = (store: Store<State>) => combineLatest([
-  store.pipe(select(selectSignalTypes)),
-  store.pipe(select(selectSignalTypeDefinitions)),
-  store.pipe(select(selectSignals))
-  ]).pipe(
-  debounceTime(0),
-  map(([
-         signalTypes$,
-         signalTypeDefinitions$,
-         signals$
-       ]) => {
-    const signalMap: { [id: number]: Signal; } = {};
-    for (const signal of signals$) {
-      signalMap[signal.id] = signal;
-    }
-    const signalTypeDefMap: { [id: string]: SignalTypeDefinition; } = {};
-    for (const signalTypeDefinition of signalTypeDefinitions$) {
+const signalIdToModels$ = createSelector(
+  signalTypes$,
+  signalTypeDefinitions$,
+  (signalTypes, signalTypeDefinitions) => {
+    const signalTypeDefMap: Map<string, SignalTypeDefinition> = new Map();
+    for (const signalTypeDefinition of signalTypeDefinitions) {
       signalTypeDefMap[signalTypeDefinition.id] = signalTypeDefinition;
     }
 
-    console.log('----------------------------');
-    console.log(signalTypeDefMap);
-    console.log(signalTypes$);
-    console.log(signalMap);
-
-    for (const signalType of signalTypes$) {
-      const signal = signalMap[signalType.signalId];
+    // Fill signal type definition map
+    const signalTypeDefinitionMap = new Map<number, SignalTypeDefinition>();
+    for (const signalType of signalTypes) {
       const model = signalTypeDefMap[signalType.modelId];
-      if (signal) {
-        signal.model = model;
+      signalTypeDefinitionMap.set(signalType.signalId, model);
+    }
+    return signalTypeDefinitionMap;
+  }
+);
+
+export const signalsWithModel$ = createSelector(
+  signals$,
+  signalIdToModels$,
+  (signals: Signal[], signalTypeDefinitionMap: Map<number, SignalTypeDefinition>) => {
+    for (const signal of signals) {
+      const type = signalTypeDefinitionMap.get(signal.id);
+      if (type) {
+        signal.model = type;
       }
     }
-
-    return signals$;
-  }));
+    return signals;
+  }
+);
