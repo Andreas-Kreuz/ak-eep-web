@@ -14,6 +14,7 @@ import {CoreModule} from './core/core.module';
 import {EepEffects} from './eep/store/eep.effects';
 import {reducers} from './store/app.reducers';
 import {environment} from '../environments/environment';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {environment} from '../environments/environment';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     SharedModule,
     CoreModule,
