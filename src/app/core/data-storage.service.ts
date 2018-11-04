@@ -2,7 +2,7 @@ import {Store} from '@ngrx/store';
 import {Injectable, OnInit} from '@angular/core';
 
 import * as fromRoot from '../store/app.reducers';
-import * as SignalActions from '../eep/store/eep.actions';
+import * as EepActions from '../eep/store/eep.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,15 @@ export class DataStorageService implements OnInit {
   }
 
   fetchStaticData(hostLocation) {
-    this.store.dispatch(new SignalActions.FetchSignalTypeDefinitions(hostLocation));
-    this.store.dispatch(new SignalActions.FetchSignalTypes(hostLocation));
+    this.store.dispatch(new EepActions.FetchIntersections(hostLocation));
+    this.store.dispatch(new EepActions.FetchIntersectionDirections(hostLocation));
+    this.store.dispatch(new EepActions.FetchIntersectionSwitchings(hostLocation));
+    this.store.dispatch(new EepActions.FetchSignalTypeDefinitions(hostLocation));
+    this.store.dispatch(new EepActions.FetchSignalTypes(hostLocation));
   }
 
   fetchRuntimeData(hostLocation) {
-    this.store.dispatch(new SignalActions.FetchSignals(hostLocation));
+    this.store.dispatch(new EepActions.FetchSignals(hostLocation));
   }
 
   // private updateTrafficLightModels() {

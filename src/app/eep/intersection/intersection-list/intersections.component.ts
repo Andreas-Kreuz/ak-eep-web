@@ -1,34 +1,22 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Intersection} from '../intersection.model';
-import {IntersectionsService} from '../store/intersections.service';
-import {Subscription} from 'rxjs';
+import {Intersection} from '../models/intersection.model';
+import {Observable, Subscription} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import * as fromRoot from '../../../store/app.reducers';
+import * as fromEep from '../../store/eep.reducers';
 
 @Component({
   selector: 'app-crossings',
   templateUrl: './intersections.component.html',
   styleUrls: ['./intersections.component.css']
 })
-export class IntersectionsComponent implements OnInit, OnDestroy {
-  intersections: Intersection[] = [];
-  private dataSubscription: Subscription;
+export class IntersectionsComponent implements OnInit {
+  setIntersection$: Observable<Intersection[]>;
 
-  constructor(private intersectionsService: IntersectionsService) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.setIntersections(this.intersectionsService.getIntersections());
-    this.dataSubscription = this.intersectionsService.intersectionsUpdated.subscribe(
-      (intersections: Intersection[]) => {
-        this.setIntersections(intersections);
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    this.dataSubscription.unsubscribe();
-  }
-
-  private setIntersections(intersections: Intersection[]) {
-    this.intersections = intersections;
+    this.setIntersection$ = this.store.pipe(select(fromEep.intersections$));
   }
 }

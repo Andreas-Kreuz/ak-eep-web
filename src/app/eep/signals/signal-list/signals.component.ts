@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
-import {Signal} from '../signal.model';
+import {Signal} from '../models/signal.model';
 import * as fromRoot from '../../../store/app.reducers';
 import * as fromEep from '../../store/eep.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
-import {SignalTypeDefinition} from '../signal-type-definition.model';
+import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
 @Component({
   selector: 'app-signals',

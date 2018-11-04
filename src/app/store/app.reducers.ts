@@ -5,7 +5,7 @@ import * as fromCore from '../core/store/core.reducers';
 
 
 export interface State {
-  eep: fromEep.SignalState;
+  eep: fromEep.EepState;
   core: fromCore.CoreState;
 }
 

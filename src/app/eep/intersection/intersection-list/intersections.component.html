@@ -14,7 +14,7 @@
         <th scope="col">Ampeln</th>
       </tr>
       </thead>
-      <tbody *ngFor="let intersection of intersections">
+      <tbody *ngFor="let intersection of (setIntersection$ | async)">
       <tr>
         <th scope="row">
           <a routerLink="/intersections/{{ intersection.id }}">

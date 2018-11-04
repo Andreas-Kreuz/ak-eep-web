@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 
-import {Signal} from '../signal.model';
+import {Signal} from '../models/signal.model';
 import {select, Store} from '@ngrx/store';
 import * as fromEep from '../../store/eep.reducers';
 import {trafficLight, unknown} from '../../../shared/unicode-symbol.model';
@@ -33,7 +33,6 @@ export class SignalDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeParams$.unsubscribe();
-    // this.store.dispatch(new SignalAction.Deselect());
   }
 
   unicodeFor(signal: Signal) {

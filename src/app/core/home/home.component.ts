@@ -11,11 +11,13 @@ import * as fromEep from '../../eep/store/eep.reducers';
 })
 export class HomeComponent implements OnInit {
   private signalCount$: Observable<number>;
+  private intersectionsCount$: Observable<number>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
     this.signalCount$ = this.store.pipe(select(fromEep.signalCount$));
+    this.intersectionsCount$ = this.store.pipe(select(fromEep.intersectionsCount$));
   }
 }
