@@ -116,7 +116,7 @@ export const getSortedSignals$ = createSelector(
 );
 
 export const selectSignalById$ = (signalId) => createSelector(
-  signals$,
+  signalsWithModel$,
   signals => signals.find(s => s.id === signalId)
 );
 
