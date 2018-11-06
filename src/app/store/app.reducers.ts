@@ -1,18 +1,18 @@
-import {ActionReducerMap, createSelector} from '@ngrx/store';
+import {ActionReducerMap} from '@ngrx/store';
 
-import * as fromEep from '../eep/store/eep.reducers';
 import * as fromCore from '../core/store/core.reducers';
+import * as fromIntersection from '../eep/intersection/store/intersection.reducers';
+import * as fromSignal from '../eep/signals/store/signal.reducers';
 
 
 export interface State {
-  eep: fromEep.EepState;
-  core: fromCore.CoreState;
+  core: fromCore.State;
+  intersection: fromIntersection.State;
+  signal: fromSignal.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  eep: fromEep.signalsReducer,
-  core: fromCore.coreReducer,
+  core: fromCore.reducer,
+  intersection: fromIntersection.reducer,
+  signal: fromSignal.reducer,
 };
-
-
-

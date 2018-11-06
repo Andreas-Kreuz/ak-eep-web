@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 
 import {Signal} from '../models/signal.model';
 import * as fromRoot from '../../../store/app.reducers';
-import * as fromEep from '../../store/eep.reducers';
+import * as fromEep from '../store/signal.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
@@ -21,7 +21,6 @@ export class SignalsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signals$ = this.store.pipe(select(fromEep.signalsWithModel$));
-    // this.signals$ = fromEep.filledSignals$(this.store);
   }
 
   ngOnDestroy() {

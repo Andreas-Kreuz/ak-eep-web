@@ -2,7 +2,8 @@ import {Store} from '@ngrx/store';
 import {Injectable, OnInit} from '@angular/core';
 
 import * as fromRoot from '../store/app.reducers';
-import * as EepActions from '../eep/store/eep.actions';
+import * as fromSignal from '../eep/signals/store/signal.actions';
+import * as fromIntersection from '../eep/intersection/store/intersection.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,15 @@ export class DataStorageService implements OnInit {
   }
 
   fetchStaticData(hostLocation) {
-    this.store.dispatch(new EepActions.FetchIntersections(hostLocation));
-    this.store.dispatch(new EepActions.FetchIntersectionDirections(hostLocation));
-    this.store.dispatch(new EepActions.FetchIntersectionSwitchings(hostLocation));
-    this.store.dispatch(new EepActions.FetchSignalTypeDefinitions(hostLocation));
-    this.store.dispatch(new EepActions.FetchSignalTypes(hostLocation));
+    this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
+    this.store.dispatch(new fromIntersection.FetchIntersectionDirections(hostLocation));
+    this.store.dispatch(new fromIntersection.FetchIntersectionSwitching(hostLocation));
+    this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostLocation));
+    this.store.dispatch(new fromSignal.FetchSignalTypes(hostLocation));
   }
 
   fetchRuntimeData(hostLocation) {
-    this.store.dispatch(new EepActions.FetchSignals(hostLocation));
+    this.store.dispatch(new fromSignal.FetchSignals(hostLocation));
   }
 
   // private updateTrafficLightModels() {

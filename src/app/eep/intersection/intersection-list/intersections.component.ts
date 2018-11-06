@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Intersection} from '../models/intersection.model';
-import {Observable, Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
+
+import {Intersection} from '../models/intersection.model';
 import * as fromRoot from '../../../store/app.reducers';
-import * as fromEep from '../../store/eep.reducers';
+import * as fromIntersection from '../../intersection/store/intersection.reducers';
 
 @Component({
   selector: 'app-crossings',
@@ -17,6 +18,6 @@ export class IntersectionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setIntersection$ = this.store.pipe(select(fromEep.intersections$));
+    this.setIntersection$ = this.store.pipe(select(fromIntersection.intersections$));
   }
 }

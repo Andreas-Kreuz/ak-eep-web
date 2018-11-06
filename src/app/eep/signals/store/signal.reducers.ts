@@ -1,74 +1,50 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
-import * as SignalActions from './eep.actions';
-import {Signal} from '../signals/models/signal.model';
-import {SignalTypeDefinition} from '../signals/models/signal-type-definition.model';
-import {SignalType} from '../signals/models/signal-type.model';
-import {Intersection} from '../intersection/models/intersection.model';
-import {IntersectionDirections} from '../intersection/models/intersection-directions.model';
-import {IntersectionSwitchings} from '../intersection/models/intersection-switchings.model';
+import * as fromSignal from './signal.actions';
+import {Signal} from '../models/signal.model';
+import {SignalType} from '../models/signal-type.model';
+import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
-export interface EepState {
+export interface State {
   signals: Signal[];
   signalTypes: SignalType[];
   signalTypeDefinitions: SignalTypeDefinition[];
   selectedSignalIndex: number;
-  intersections: Intersection[];
-  intersectionDirections: IntersectionDirections[];
-  intersectionSwitchings: IntersectionSwitchings[];
 }
 
-const initialState: EepState = {
+const initialState: State = {
   signals: [],
   signalTypes: [],
   signalTypeDefinitions: [],
   selectedSignalIndex: -1,
-  intersections: [],
-  intersectionDirections: [],
-  intersectionSwitchings: [],
 };
 
-export function signalsReducer(state: EepState = initialState, action: SignalActions.SignalActions) {
+export function reducer(state: State = initialState, action: fromSignal.SignalActions) {
   switch (action.type) {
-    case SignalActions.SET_SIGNALS:
+    case fromSignal.SET_SIGNALS:
       return {
         ...state,
         signals: [...action.payload],
       };
-    case SignalActions.SET_SIGNAL_TYPES:
+    case fromSignal.SET_SIGNAL_TYPES:
       return {
         ...state,
         signalTypes: [...action.payload],
       };
-    case SignalActions.SET_SIGNAL_TYPE_DEFINITIONS:
+    case fromSignal.SET_SIGNAL_TYPE_DEFINITIONS:
       return {
         ...state,
         signalTypeDefinitions: [...action.payload],
       };
-    case SignalActions.SELECT_SIGNAL:
+    case fromSignal.SELECT_SIGNAL:
       return {
         ...state,
         selectedSignalIndex: action.payload,
       };
-    case SignalActions.DESELECT_SIGNAL:
+    case fromSignal.DESELECT_SIGNAL:
       return {
         ...state,
         selectedSignalIndex: -1,
-      };
-    case SignalActions.SET_INTERSECTIONS:
-      return {
-        ...state,
-        intersections: [...action.payload],
-      };
-    case SignalActions.SET_INTERSECTION_SWITCHINGS:
-      return {
-        ...state,
-        intersectionSwitchings: [...action.payload],
-      };
-    case SignalActions.SET_INTERSECTION_DIRECTIONS:
-      return {
-        ...state,
-        intersectionDirections: [...action.payload],
       };
     default:
       return state;
@@ -76,27 +52,27 @@ export function signalsReducer(state: EepState = initialState, action: SignalAct
 }
 
 
-export const eepState$ = createFeatureSelector('eep');
+export const signalState$ = createFeatureSelector('signal');
 
 export const signals$ = createSelector(
-  eepState$,
-  (state: EepState) => state.signals
+  signalState$,
+  (state: State) => state.signals
 );
 
 export const signalTypes$ = createSelector(
-  eepState$,
-  (state: EepState) => state.signalTypes
+  signalState$,
+  (state: State) => state.signalTypes
 );
 
 export const signalTypeDefinitions$ = createSelector(
-  eepState$,
-  (state: EepState) => state.signalTypeDefinitions
+  signalState$,
+  (state: State) => state.signalTypeDefinitions
 );
 
 
 export const signalCount$ = createSelector(
-  eepState$,
-  (state: EepState) => state.signals.length
+  signalState$,
+  (state: State) => state.signals.length
 );
 
 const sortedSignal = (signalList: Signal[]) => {
@@ -110,6 +86,7 @@ const sortedSignal = (signalList: Signal[]) => {
   console.log('return sorted signals (' + signalList.length + ')');
   return signalList;
 };
+
 export const getSortedSignals$ = createSelector(
   signals$,
   sortedSignal
@@ -152,14 +129,4 @@ export const signalsWithModel$ = createSelector(
     }
     return signals;
   }
-);
-
-export const intersections$ = createSelector(
-  eepState$,
-  (state: EepState) => state.intersections
-);
-
-export const intersectionsCount$ = createSelector(
-  eepState$,
-  (state: EepState) => state.intersections.length
 );

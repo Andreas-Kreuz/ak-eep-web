@@ -4,7 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 
 import {Signal} from '../models/signal.model';
 import {select, Store} from '@ngrx/store';
-import * as fromEep from '../../store/eep.reducers';
+import * as fromEep from '../store/signal.reducers';
 import {trafficLight, unknown} from '../../../shared/unicode-symbol.model';
 import {State} from '../../../store/app.reducers';
 

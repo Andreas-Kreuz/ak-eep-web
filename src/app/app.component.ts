@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'EEP-Web';
   hostLocation = 'http://localhost:3000';
 
-  constructor(private store: Store<fromCore.CoreState>,
+  constructor(private store: Store<fromCore.State>,
               private dataStorageService: DataStorageService) {
   }
 
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     this.dataStorageService.fetchStaticData(this.hostLocation);
     this.dataStorageService.fetchRuntimeData(this.hostLocation);
     interval(1000).subscribe(() => {
-        this.dataStorageService.fetchRuntimeData(this.hostLocation);
+        //this.dataStorageService.fetchRuntimeData(this.hostLocation);
       });
   }
 }

@@ -1,33 +1,17 @@
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+
 import * as CoreAction from './core.actions';
 import {Alert} from '../error/alert.model';
-import {createSelector} from '@ngrx/store';
-import {State} from '../../store/app.reducers';
 
-export const appState = (state: State) => state.core;
 
-export const getAlerts = createSelector(
-  appState,
-  (globalState: CoreState) => globalState.alerts
-);
-
-export const getPollingUrl = createSelector(
-  appState,
-  (state: CoreState) => state.pollingUrl
-);
-
-export const getLastAlert = createSelector(
-  appState,
-  (state: CoreState) => state.lastAlert
-);
-
-export interface CoreState {
+export interface State {
   lastAlert: Alert;
   alerts: Alert[];
   pollingEnabled: boolean;
   pollingUrl: string;
 }
 
-const initialState: CoreState = {
+const initialState: State = {
   lastAlert: new Alert('info', 'Die Anwendung wurde gestartet'),
   alerts: [
     new Alert('info', 'Die Anwendung wurde gestartet')
@@ -36,10 +20,10 @@ const initialState: CoreState = {
   pollingUrl: 'http://localhost:3000',
 };
 
-export function coreReducer(state: CoreState = initialState, action: CoreAction.CoreActions) {
+export function reducer(state: State = initialState, action: CoreAction.CoreActions) {
   switch (action.type) {
     case CoreAction.SHOW_ERROR:
-      const newState: CoreState = {
+      const newState: State = {
         ...state,
         alerts: [action.payload, ...state.alerts.slice(0, Math.min(state.alerts.length, 20))],
         lastAlert: action.payload,
@@ -66,3 +50,20 @@ export function coreReducer(state: CoreState = initialState, action: CoreAction.
       return state;
   }
 }
+
+export const appState = createFeatureSelector('core');
+
+export const getAlerts = createSelector(
+  appState,
+  (state: State) => state.alerts
+);
+
+export const getPollingUrl = createSelector(
+  appState,
+  (state: State) => state.pollingUrl
+);
+
+export const getLastAlert = createSelector(
+  appState,
+  (state: State) => state.lastAlert
+);

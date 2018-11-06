@@ -4,15 +4,15 @@ import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
-import * as SignalActions from './eep.actions';
-import {FetchAction} from './eep.actions';
-import {Signal} from '../signals/models/signal.model';
-import * as ErrorActions from '../../core/store/core.actions';
-import {Alert} from '../../core/error/alert.model';
+import * as fromSignal from './signal.actions';
+import {FetchAction} from './signal.actions';
+import {Signal} from '../models/signal.model';
+import * as ErrorActions from '../../../core/store/core.actions';
+import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../store/app.reducers';
+import * as fromRoot from '../../../store/app.reducers';
 import {of, throwError} from 'rxjs';
-import {SignalType} from '../signals/models/signal-type.model';
+import {SignalType} from '../models/signal-type.model';
 
 
 const errorHandler = (error) => {
@@ -24,12 +24,12 @@ const errorHandler = (error) => {
 };
 
 @Injectable()
-export class EepEffects {
+export class SignalEffects {
   @Effect({dispatch: false})
   showErrorSignals = this.actions$
     .pipe(
-      ofType(SignalActions.ERROR),
-      tap((error: SignalActions.LogError) => {
+      ofType(fromSignal.ERROR),
+      tap((error: fromSignal.LogError) => {
         console.log(error);
         this.store.dispatch(new Alert(
           'danger',
@@ -41,13 +41,15 @@ export class EepEffects {
   @Effect()
   fetchSignals = this.actions$
     .pipe(
-      ofType(SignalActions.FETCH_SIGNALS),
-      switchMap((action: SignalActions.FetchSignals) => {
+      ofType(fromSignal.FETCH_SIGNALS),
+      switchMap((action: fromSignal.FetchSignals) => {
         const url = action.payload + '/signals';
         console.log(url);
         return this.httpClient.get<Signal[]>(url)
           .pipe(
             map((list: Signal[]) => {
+              list.sort((a, b) => a.id - b.id);
+
               for (const signal of list) {
                 if (!signal.model) {
                   signal.model = null;
@@ -56,7 +58,7 @@ export class EepEffects {
               this.store.dispatch(new ErrorActions.ShowError(
                 new Alert('success', 'Signale geladen von: ' + url)));
               return {
-                type: SignalActions.SET_SIGNALS,
+                type: fromSignal.SET_SIGNALS,
                 payload: list
               };
             })
@@ -74,8 +76,8 @@ export class EepEffects {
   @Effect()
   fetchSignalTypes = this.actions$
     .pipe(
-      ofType(SignalActions.FETCH_SIGNAL_TYPES),
-      switchMap((action: SignalActions.FetchSignalTypes) => {
+      ofType(fromSignal.FETCH_SIGNAL_TYPES),
+      switchMap((action: fromSignal.FetchSignalTypes) => {
         const url = action.payload + '/signal_types';
         console.log(url);
         return this.httpClient.get<SignalType[]>(url)
@@ -84,7 +86,7 @@ export class EepEffects {
               this.store.dispatch(new ErrorActions.ShowError(
                 new Alert('success', 'Signal-Typ-Zuordnung geladen von: ' + url)));
               return {
-                type: SignalActions.SET_SIGNAL_TYPES,
+                type: fromSignal.SET_SIGNAL_TYPES,
                 payload: list
               };
             }),
@@ -102,44 +104,11 @@ export class EepEffects {
   @Effect()
   fetchSignalTypeDefinitions = this.actions$
     .pipe(
-      ofType(SignalActions.FETCH_SIGNAL_TYPE_DEFINITIONS),
+      ofType(fromSignal.FETCH_SIGNAL_TYPE_DEFINITIONS),
       switchMap((action: FetchAction) =>
         this.loadFromAction(action,
           '/signal_type_definitions',
-          SignalActions.SET_SIGNAL_TYPE_DEFINITIONS)),
-      catchError(errorHandler)
-    );
-
-  @Effect()
-  fetchIntersections = this.actions$
-    .pipe(
-      ofType(SignalActions.FETCH_INTERSECTIONS),
-      switchMap((action: SignalActions.FetchIntersections) =>
-        this.loadFromAction(action,
-          '/intersections',
-          SignalActions.SET_INTERSECTIONS)),
-      catchError(errorHandler)
-    );
-
-  @Effect()
-  fetchIntersectionDirections = this.actions$
-    .pipe(
-      ofType(SignalActions.FETCH_INTERSECTION_DIRECTIONS),
-      switchMap((action: SignalActions.FetchIntersectionDirections) =>
-        this.loadFromAction(action,
-          '/intersection_directions',
-          SignalActions.SET_INTERSECTION_DIRECTIONS)),
-      catchError(errorHandler)
-    );
-
-  @Effect()
-  fetchIntersectionSwitchings = this.actions$
-    .pipe(
-      ofType(SignalActions.FETCH_INTERSECTION_SWITCHINGS),
-      switchMap((action: SignalActions.FetchIntersectionSwitchings) =>
-        this.loadFromAction(action,
-          '/intersection_switchings',
-          SignalActions.SET_INTERSECTION_SWITCHINGS)),
+          fromSignal.SET_SIGNAL_TYPE_DEFINITIONS)),
       catchError(errorHandler)
     );
 

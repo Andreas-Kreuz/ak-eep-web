@@ -11,10 +11,13 @@ import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
-import {EepEffects} from './eep/store/eep.effects';
+import {SignalEffects} from './eep/signals/store/signal.effects';
 import {reducers} from './store/app.reducers';
+import {effects} from './store/app.effects';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
+import {CoreEffects} from './core/store/core.effects';
+import {IntersectionEffects} from './eep/intersection/store/intersection.effects';
 
 
 @NgModule({
@@ -30,7 +33,7 @@ import {FormsModule} from '@angular/forms';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([EepEffects]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     environment.production ? [] : StoreDevtoolsModule.instrument(),
   ],

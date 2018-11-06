@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import * as fromRoot from '../../store/app.reducers';
-import * as fromEep from '../../eep/store/eep.reducers';
+import * as fromSignal from '../../eep/signals/store/signal.reducers';
+import * as fromIntersection from '../../eep/intersection/store/intersection.reducers';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signalCount$ = this.store.pipe(select(fromEep.signalCount$));
-    this.intersectionsCount$ = this.store.pipe(select(fromEep.intersectionsCount$));
+    this.signalCount$ = this.store.pipe(select(fromSignal.signalCount$));
+    this.intersectionsCount$ = this.store.pipe(select(fromIntersection.intersectionsCount$));
   }
 }
