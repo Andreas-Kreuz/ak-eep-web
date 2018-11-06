@@ -10,8 +10,8 @@ import {Signal} from '../models/signal.model';
 import * as ErrorActions from '../../../core/store/core.actions';
 import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../../store/app.reducers';
-import {of, throwError} from 'rxjs';
+import * as fromRoot from '../../../app.reducers';
+import {of} from 'rxjs';
 import {SignalType} from '../models/signal-type.model';
 
 

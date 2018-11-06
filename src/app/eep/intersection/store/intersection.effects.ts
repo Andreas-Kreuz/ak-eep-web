@@ -8,7 +8,7 @@ import * as fromCore from '../../../core/store/core.actions';
 import * as fromIntersections from './intersection.actions';
 import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../../store/app.reducers';
+import * as fromRoot from '../../../app.reducers';
 import {of} from 'rxjs';
 
 

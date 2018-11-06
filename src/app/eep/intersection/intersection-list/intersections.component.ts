@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
 import {Intersection} from '../models/intersection.model';
-import * as fromRoot from '../../../store/app.reducers';
+import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../../intersection/store/intersection.reducers';
 
 @Component({

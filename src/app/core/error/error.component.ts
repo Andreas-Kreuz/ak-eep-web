@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {Alert} from './alert.model';
 import * as fromErrors from '../store/core.reducers';
 import * as ErrorActions from '../store/core.actions';
-import * as fromRoot from '../../store/app.reducers';
+import * as fromRoot from '../../app.reducers';
 import {DataStorageService} from '../data-storage.service';
 import {take} from 'rxjs/operators';
 

@@ -1,8 +1,8 @@
 import {ActionReducerMap} from '@ngrx/store';
 
-import * as fromCore from '../core/store/core.reducers';
-import * as fromIntersection from '../eep/intersection/store/intersection.reducers';
-import * as fromSignal from '../eep/signals/store/signal.reducers';
+import * as fromCore from './core/store/core.reducers';
+import * as fromIntersection from './eep/intersection/store/intersection.reducers';
+import * as fromSignal from './eep/signals/store/signal.reducers';
 
 
 export interface State {

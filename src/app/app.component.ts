@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStorageService} from './core/data-storage.service';
 import {interval} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromCore from './core/store/core.reducers';
 import * as CoreActions from './core/store/core.actions';

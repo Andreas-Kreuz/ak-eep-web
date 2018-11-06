@@ -3,7 +3,7 @@ import {Menu} from './menu.enum';
 import {AppComponent} from '../../app.component';
 import {select, Store} from '@ngrx/store';
 import * as fromErrors from '../store/core.reducers';
-import * as fromRoot from '../../store/app.reducers';
+import * as fromRoot from '../../app.reducers';
 import {Observable} from 'rxjs';
 import {Alert} from '../error/alert.model';
 

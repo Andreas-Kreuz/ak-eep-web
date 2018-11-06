@@ -6,7 +6,7 @@ import {Signal} from '../models/signal.model';
 import {select, Store} from '@ngrx/store';
 import * as fromEep from '../store/signal.reducers';
 import {trafficLight, unknown} from '../../../shared/unicode-symbol.model';
-import {State} from '../../../store/app.reducers';
+import {State} from '../../../app.reducers';
 
 @Component({
   selector: 'app-signal-detail-component',

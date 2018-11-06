@@ -11,13 +11,10 @@ import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
-import {SignalEffects} from './eep/signals/store/signal.effects';
-import {reducers} from './store/app.reducers';
-import {effects} from './store/app.effects';
+import {reducers} from './app.reducers';
+import {effects} from './app.effects';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
-import {CoreEffects} from './core/store/core.effects';
-import {IntersectionEffects} from './eep/intersection/store/intersection.effects';
 
 
 @NgModule({

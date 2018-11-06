@@ -1,11 +1,7 @@
 import {Injectable} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 
-import * as fromRoot from '../../../store/app.reducers';
-import {SignalTypeDefinition} from '../../signals/models/signal-type-definition.model';
-import {Signal} from '../../signals/models/signal.model';
-import {debounceTime, map} from 'rxjs/operators';
-import {forkJoin, Observable} from 'rxjs';
+import * as fromRoot from '../../../app.reducers';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
 import {Signal} from '../models/signal.model';
-import * as fromRoot from '../../../store/app.reducers';
+import * as fromRoot from '../../../app.reducers';
 import * as fromEep from '../store/signal.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 import {SignalTypeDefinition} from '../models/signal-type-definition.model';

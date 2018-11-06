@@ -1,7 +1,7 @@
 import {Store} from '@ngrx/store';
 import {Injectable, OnInit} from '@angular/core';
 
-import * as fromRoot from '../store/app.reducers';
+import * as fromRoot from '../app.reducers';
 import * as fromSignal from '../eep/signals/store/signal.actions';
 import * as fromIntersection from '../eep/intersection/store/intersection.actions';
 

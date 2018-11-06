@@ -50,6 +50,7 @@ export const intersectionsCount$ = createSelector(
   intersectionsState$,
   (state: State) => state.intersections.length
 );
+
 export const intersectionDirections$ = createSelector(
   intersectionsState$,
   (state: State) => state.intersectionDirections

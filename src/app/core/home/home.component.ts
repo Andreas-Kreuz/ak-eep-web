@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import * as fromRoot from '../../store/app.reducers';
+import * as fromRoot from '../../app.reducers';
 import * as fromSignal from '../../eep/signals/store/signal.reducers';
 import * as fromIntersection from '../../eep/intersection/store/intersection.reducers';
 
