@@ -2,18 +2,19 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as fromIntersection from './intersection.actions';
 import {Intersection} from '../models/intersection.model';
-import {IntersectionDirections} from '../models/intersection-directions.model';
-import {IntersectionSwitchings} from '../models/intersection-switchings.model';
+import {IntersectionLane} from '../models/intersection-lane.model';
+import {IntersectionSwitching} from '../models/intersection-switching.model';
+import {signalsWithModel$} from '../../signals/store/signal.reducers';
 
 export interface State {
   intersections: Intersection[];
-  intersectionDirections: IntersectionDirections[];
-  intersectionSwitching: IntersectionSwitchings[];
+  intersectionLanes: IntersectionLane[];
+  intersectionSwitching: IntersectionSwitching[];
 }
 
 const initialState: State = {
   intersections: [],
-  intersectionDirections: [],
+  intersectionLanes: [],
   intersectionSwitching: [],
 };
 
@@ -29,10 +30,10 @@ export function reducer(state: State = initialState, action: fromIntersection.In
         ...state,
         intersectionSwitching: [...action.payload],
       };
-    case fromIntersection.SET_INTERSECTION_DIRECTIONS:
+    case fromIntersection.SET_INTERSECTION_LANES:
       return {
         ...state,
-        intersectionDirections: [...action.payload],
+        intersectionLanes: [...action.payload],
       };
     default:
       return state;
@@ -51,13 +52,24 @@ export const intersectionsCount$ = createSelector(
   (state: State) => state.intersections.length
 );
 
-export const intersectionDirections$ = createSelector(
+export const intersectionLanes$ = createSelector(
   intersectionsState$,
-  (state: State) => state.intersectionDirections
+  (state: State) => state.intersectionLanes
 );
+
+export const laneByIntersectionId$ = (intersectionId) => createSelector(
+  intersectionLanes$,
+  intersections => intersections.filter((i: IntersectionLane) => intersectionId === i.intersectionId)
+);
+
 
 export const intersectionSwitching$ = createSelector(
   intersectionsState$,
   (state: State) => state.intersectionSwitching
+);
+
+export const intersectionById$ = (intersectionId) => createSelector(
+  intersections$,
+  intersections => intersections.find((i: Intersection) => intersectionId === i.id)
 );
 

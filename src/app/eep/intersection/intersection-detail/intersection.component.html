@@ -1,5 +1,53 @@
+
+<div *ngIf="(intersection$ | async) as intersection">
+  {{ intersection.name }}
+  <div class="col-sm-12">
+    <div class="card m-1">
+      <div class="card-body pb-0">
+        <h5 class="card-title">Fahrstreifen</h5>
+        <p class="card-text">
+          Alle Fahrstreifen, die die selbe Ampelschaltung verwenden, können zusammengefasst werden. Für Fußgänger können
+          eigene Fahrspuren geschaltet werden.</p>
+        <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>-->
+        <table class="table table-sm w-auto border-light">
+          <thead>
+          <tr>
+            <th scope="col" class="fit">Fahrstreifen</th>
+            <th scope="col" class="fit">Typ</th>
+            <th scope="col" class="fit">Spuren</th>
+            <!--<th scope="col" class="fit">Ampeln</th>-->
+            <!--<th scope="col" class="fit">Schaltungen</th>-->
+            <th scope="col">Warteliste</th>
+            <!--<th scope="col">Bearbeiten</th>-->
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lane of (lanes$ | async)">
+            <th scope="row" class="fit">{{ lane.name }}</th>
+            <th [ngClass]=[phaseColor(lane)] scope="row" class="fit text-center">
+              <img *ngIf="lane.type == 'PEDESTRIAN'" src="../../../../assets/sign-pedestrian.svg" height="24" width="48" style="width: 48px; height: 24px;">
+              <img *ngIf="lane.type == 'TRAM'" src="../../../../assets/sign-tram.svg" height="24" width="48" style="width: 48px; height: 24px;">
+              <img *ngIf="lane.type == 'NORMAL'" src="../../../../assets/sign-cars.svg" height="24" width="48" style="width: 48px; height: 24px;">
+            </th>
+            <td [ngClass]=[phaseColor(lane)] class="fit align-middle">
+              <img *ngFor="let direction of directionIcons(lane)" [src]="[direction]" height="24" width="24" style="width: 24px; height: 24px;">
+            </td>
+            <!--<td class="fit">🚦 3, 4, 5</td>-->
+            <!--<td class="fit">S2</td>-->
+            <td>
+              {{ carsWaiting(lane) }}
+            </td>
+            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
 <h1>
-  Kreuzung Hauptstraße-Bahnhofsstraße
+  Kreuzung
 </h1>
 <div class="row">
   <div class="col col-lg-6 col-md-8 col-sm-12">

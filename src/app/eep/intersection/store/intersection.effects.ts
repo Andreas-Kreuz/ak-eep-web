@@ -49,11 +49,11 @@ export class IntersectionEffects {
   @Effect()
   fetchIntersectionDirections = this.actions$
     .pipe(
-      ofType(fromIntersections.FETCH_INTERSECTION_DIRECTIONS),
-      switchMap((action: fromIntersections.FetchIntersectionDirections) =>
+      ofType(fromIntersections.FETCH_INTERSECTION_LANES),
+      switchMap((action: fromIntersections.FetchIntersectionLanes) =>
         this.loadFromAction(action,
-          '/intersection_directions',
-          fromIntersections.SET_INTERSECTION_DIRECTIONS)),
+          '/intersection_lanes',
+          fromIntersections.SET_INTERSECTION_LANES)),
       catchError(errorHandler)
     );
 

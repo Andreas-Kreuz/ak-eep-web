@@ -17,14 +17,14 @@ export class DataStorageService implements OnInit {
   }
 
   fetchStaticData(hostLocation) {
-    this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersectionDirections(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersectionSwitching(hostLocation));
-    this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostLocation));
-    this.store.dispatch(new fromSignal.FetchSignalTypes(hostLocation));
   }
 
   fetchRuntimeData(hostLocation) {
+    this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
+    this.store.dispatch(new fromIntersection.FetchIntersectionLanes(hostLocation));
+    this.store.dispatch(new fromIntersection.FetchIntersectionSwitching(hostLocation));
+    this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostLocation));
+    // this.store.dispatch(new fromSignal.FetchSignalTypes(hostLocation));
     this.store.dispatch(new fromSignal.FetchSignals(hostLocation));
   }
 

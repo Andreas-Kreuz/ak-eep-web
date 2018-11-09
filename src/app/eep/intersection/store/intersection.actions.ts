@@ -1,16 +1,16 @@
 import {Action} from '@ngrx/store';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Intersection} from '../models/intersection.model';
-import {IntersectionDirections} from '../models/intersection-directions.model';
-import {IntersectionSwitchings} from '../models/intersection-switchings.model';
+import {IntersectionLane} from '../models/intersection-lane.model';
+import {IntersectionSwitching} from '../models/intersection-switching.model';
 
 export const ERROR = '[Intersections] Error on fetching';
 export const FETCH_INTERSECTIONS = '[Intersections] Fetch';
 export const FETCH_INTERSECTION_SWITCHING = '[Intersections] Fetch Switching';
-export const FETCH_INTERSECTION_DIRECTIONS = '[Intersections] Fetch Directions';
+export const FETCH_INTERSECTION_LANES = '[Intersections] Fetch Lanes';
 export const SET_INTERSECTIONS = '[Intersections] Set';
 export const SET_INTERSECTION_SWITCHING = '[Intersections] Set Switching';
-export const SET_INTERSECTION_DIRECTIONS = '[Intersections] Set Directions';
+export const SET_INTERSECTION_LANES = '[Intersections] Set Lanes';
 
 export interface FetchAction extends Action {
   payload: string;
@@ -37,17 +37,17 @@ export class SetIntersections implements Action {
   }
 }
 
-export class FetchIntersectionDirections implements Action, FetchAction {
-  readonly type = FETCH_INTERSECTION_DIRECTIONS;
+export class FetchIntersectionLanes implements Action, FetchAction {
+  readonly type = FETCH_INTERSECTION_LANES;
 
   constructor(public payload: string) {
   }
 }
 
 export class SetIntersectionDirections implements Action {
-  readonly type = SET_INTERSECTION_DIRECTIONS;
+  readonly type = SET_INTERSECTION_LANES;
 
-  constructor(public payload: IntersectionDirections[]) {
+  constructor(public payload: IntersectionLane[]) {
   }
 }
 
@@ -61,14 +61,14 @@ export class FetchIntersectionSwitching implements Action, FetchAction {
 export class SetIntersectionSwitching implements Action {
   readonly type = SET_INTERSECTION_SWITCHING;
 
-  constructor(public payload: IntersectionSwitchings[]) {
+  constructor(public payload: IntersectionSwitching[]) {
   }
 }
 
 export type IntersectionActions =
   FetchIntersections
   | SetIntersections
-  | FetchIntersectionDirections
+  | FetchIntersectionLanes
   | SetIntersectionDirections
   | FetchIntersectionSwitching
   | SetIntersectionSwitching
