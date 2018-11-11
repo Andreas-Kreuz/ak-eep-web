@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "json-server": "json-server --watch --host 0.0.0.0 C:/Spiele/Andreas_Kreuz/ak-privat/out/ak_out_db.json",
+    "json-server": "json-server --watch --host 0.0.0.0 ../ak-lua-bibliothek-fuer-eep/LUA/ak_out_eep-web-server.json",
     "electron": "electron .",
     "electron-build": "ng build --prod && electron ."
   },
