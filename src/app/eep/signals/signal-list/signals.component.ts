@@ -26,6 +26,11 @@ export class SignalsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  trackSignalBy(index: number, signal: Signal) {
+    if (!signal) return null;
+    return signal.id;
+  }
+
   positionTextOf(signal: Signal): string {
     let text: string = '' + signal.position;
     if (signal.model) {

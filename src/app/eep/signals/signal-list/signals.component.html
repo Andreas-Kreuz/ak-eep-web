@@ -14,7 +14,7 @@
             <th scope="col">EEP-Modell</th>
           </tr>
           </thead>
-          <tbody *ngFor="let signal of signals">
+          <tbody *ngFor="let signal of signals; trackBy: trackSignalBy">
           <tr>
             <th scope="row">
               <a [routerLink]="signal.id">

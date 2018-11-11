@@ -22,7 +22,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let lane of (lanes$ | async)">
+          <tr *ngFor="let lane of (lanes$ | async); trackBy: trackLane">
             <th scope="row" class="fit">{{ lane.name }}</th>
             <th [ngClass]=[phaseColor(lane)] scope="row" class="fit text-center">
               <img *ngIf="lane.type == 'PEDESTRIAN'" src="../../../../assets/sign-pedestrian.svg" height="24" width="48" style="width: 48px; height: 24px;">

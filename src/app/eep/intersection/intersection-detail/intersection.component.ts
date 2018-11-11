@@ -11,6 +11,7 @@ import * as icons from '../../../shared/unicode-symbol.model';
 import {Phase} from '../models/phase.enum';
 import {Direction} from '../models/direction.model';
 import {TrafficType} from '../models/traffic-type.enum';
+import {intersections$} from '../store/intersection.reducers';
 
 @Component({
   selector: 'app-crossing',
@@ -51,6 +52,11 @@ export class IntersectionComponent implements OnInit, OnDestroy {
       default:
         return '../../../../assets/sign-cars.svg';
     }
+  }
+
+  trackLane(index, lane: IntersectionLane) {
+    if (!lane) return null;
+    return lane.id;
   }
 
   directionIcons(lane: IntersectionLane) {
