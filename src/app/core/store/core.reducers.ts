@@ -9,6 +9,7 @@ export interface State {
   alerts: Alert[];
   pollingEnabled: boolean;
   pollingUrl: string;
+  connectionEstablished: boolean;
 }
 
 const initialState: State = {
@@ -18,6 +19,7 @@ const initialState: State = {
   ],
   pollingEnabled: false,
   pollingUrl: 'http://localhost:3000',
+  connectionEstablished: false,
 };
 
 export function reducer(state: State = initialState, action: CoreAction.CoreActions) {
@@ -46,6 +48,11 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
         ...state,
         pollingUrl: action.payload
       };
+    case CoreAction.SET_CONNECTED:
+      return {
+        ...state,
+        connectionEstablished: true
+      };
     default:
       return state;
   }
@@ -56,6 +63,11 @@ export const appState = createFeatureSelector('core');
 export const getAlerts = createSelector(
   appState,
   (state: State) => state.alerts
+);
+
+export const getConnectionEstablished = createSelector(
+  appState,
+  (state: State) => state.connectionEstablished
 );
 
 export const getPollingUrl = createSelector(

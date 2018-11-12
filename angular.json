@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ak-angular-eep-app": {
+    "ak-eep-web": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ak-angular-eep-app",
+            "outputPath": "dist/ak-eep-web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -58,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ak-angular-eep-app:build"
+            "browserTarget": "ak-eep-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ak-angular-eep-app:build:production"
+              "browserTarget": "ak-eep-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ak-angular-eep-app:build"
+            "browserTarget": "ak-eep-web:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
         }
       }
     },
-    "ak-angular-eep-app-e2e": {
+    "ak-eep-web-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -112,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ak-angular-eep-app:serve"
+            "devServerTarget": "ak-eep-web:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ak-angular-eep-app:serve:production"
+              "devServerTarget": "ak-eep-web:serve:production"
             }
           }
         },
@@ -132,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "ak-angular-eep-app"
+  "defaultProject": "ak-eep-web"
 }

@@ -1,8 +1,70 @@
-<p>
-  home works!
-</p>
-<ul>
-  <li><a routerLink="/signals">{{ (signalCount$ | async) }} Signale</a></li>
-  <li><a routerLink="/switches">{{ switchesCount }} Weichen</a></li>
-  <li><a routerLink="/intersections">{{ intersectionsCount$ | async }} Kreuzungen</a></li>
-</ul>
+<div *ngIf="!(connectionEstablished$ | async)" class="row p-3">
+
+       <div class="jumbotron jumbotron-fluid col-12">
+    <div class="container">
+      <h1 class="display-4">EEP-Web</h1>
+      <p class="lead">Verbindung wird hergestellt zu
+        <a href="{{ pollingUrl$ | async }}">{{ pollingUrl$ | async }}</a>
+      </p>
+      <!--<hr class="my-4">-->
+      <!--<a class="btn btn-primary" href="#" role="button">Verbinden</a>-->
+    </div>
+  </div>
+</div>
+<div class="row p-3" *ngIf="(connectionEstablished$ | async)">
+  <div class="jumbotron jumbotron-fluid col-12">
+    <div class="container">
+      <h1 class="display-4">EEP-Web</h1>
+      <p class="lead">Deine Anlage. Übersichtlich. Dargestellt.</p>
+      <!--<hr class="my-4">-->
+      <!--<a class="btn btn-primary" href="#" role="button">Kreuzungen verwalten</a>-->
+    </div>
+  </div>
+  <div class="col-12 mb-4">
+    <div class="card h-100">
+      <h5 class="card-header">Daten</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a routerLink="/intersections">
+            Kreuzungen
+            <span class="badge badge-primary float-right">
+              {{ intersectionsCount$ | async }}
+            </span>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a routerLink="/signals">
+            Signale & Ampeln
+            <span class="badge badge-primary float-right">
+              {{ (signalCount$ | async) }}
+            </span>
+          </a>
+        </li>
+        <!--<li class="list-group-item">-->
+        <!--<a routerLink="/switches">-->
+        <!--Weichen-->
+        <!--<span class="badge badge-secondary float-right">-->
+        <!--TODO-->
+        <!--</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+        <!--<a routerLink="#">-->
+        <!--Züge-->
+        <!--<span class="badge badge-secondary float-right">-->
+        <!--TODO-->
+        <!--</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <li class="list-group-item">
+          <a routerLink="#">
+            Speicherplätze
+            <span class="badge badge-secondary float-right">
+              TODO
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

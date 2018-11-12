@@ -12,7 +12,7 @@ function createWindow () {
   })
 
 
-  win.loadURL(`file://${__dirname}/dist/ak-angular-eep-app/index.html`)
+  win.loadURL(`file://${__dirname}/dist/ak-eep-web/index.html`)
 
   //// uncomment below to open the DevTools.
   // win.webContents.openDevTools()

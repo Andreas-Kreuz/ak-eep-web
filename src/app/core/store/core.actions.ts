@@ -5,6 +5,7 @@ export const SHOW_ERROR = '[App] SHOW_ERROR';
 export const HIDE_ERROR = '[App] HIDE_ERROR';
 export const SET_POLLING_URL = '[App] SET_POLLING_URL';
 export const SET_POLLING_ENABLED = '[App] SET_POLLING_ENABLED';
+export const SET_CONNECTED = '[App] CONNECTED';
 
 
 export class ShowError implements Action {
@@ -43,9 +44,13 @@ export class SetPollingEnabled implements Action {
   constructor(public payload: boolean) {
   }
 }
+export class SetConnected implements Action {
+  readonly type = SET_CONNECTED;
+}
 
 export type CoreActions =
   ShowError
   | HideError
   | SetPollingUrl
-  | SetPollingEnabled;
+  | SetPollingEnabled
+  | SetConnected;

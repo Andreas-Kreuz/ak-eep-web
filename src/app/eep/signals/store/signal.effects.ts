@@ -11,6 +11,7 @@ import * as ErrorActions from '../../../core/store/core.actions';
 import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
+import * as fromCore from '../../../../app/core/store/core.actions';
 import {of} from 'rxjs';
 import {SignalType} from '../models/signal-type.model';
 
@@ -57,6 +58,7 @@ export class SignalEffects {
               }
               this.store.dispatch(new ErrorActions.ShowError(
                 new Alert('success', 'Signale geladen von: ' + url)));
+              this.store.dispatch(new fromCore.SetConnected());
               return {
                 type: fromSignal.SET_SIGNALS,
                 payload: list

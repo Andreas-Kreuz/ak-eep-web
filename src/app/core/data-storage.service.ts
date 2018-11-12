@@ -17,6 +17,7 @@ export class DataStorageService implements OnInit {
   }
 
   fetchStaticData(hostLocation) {
+
   }
 
   fetchRuntimeData(hostLocation) {
