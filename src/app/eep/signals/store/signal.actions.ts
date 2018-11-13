@@ -49,7 +49,7 @@ export class SetSignals implements Action {
 export class SetSignalTypes implements Action {
   readonly type = SET_SIGNAL_TYPES;
 
-  constructor(public payload: SignalType[]) {
+  constructor(public payload: Map<number, string>) {
   }
 }
 

@@ -1,14 +1,19 @@
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from '@angular/common';
+import {TooltipComponent} from './tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
+    TooltipComponent,
   ],
   exports: [
     CommonModule,
     NgbModule,
+    NgbTooltipModule,
+    TooltipComponent,
   ]
 
 })
-export class SharedModule {}
+export class SharedModule {
+}

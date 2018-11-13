@@ -23,6 +23,7 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   intersection$: Observable<Intersection>;
   routeParams$: Subscription;
   lanes$: Observable<IntersectionLane[]>;
+  private carIcon = icons.car;
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute) {
@@ -55,7 +56,7 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   }
 
   trackLane(index, lane: IntersectionLane) {
-    if (!lane) return null;
+    if (!lane) { return null; }
     return lane.id;
   }
 
@@ -102,14 +103,15 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   }
 
   carsWaiting(lane: IntersectionLane) {
-    if (lane.waitingVehiclesCount === 0) {
+    if (lane.waitingTrains.length === 0) {
       return '-';
     }
     let cars = '';
 
     const icon = this.iconFor(lane);
-    for (let i = 0; i < lane.waitingVehiclesCount; i++) {
-      cars = cars + icons.car;
+    for (let i = 0; i < lane.waitingTrains.length; i++) {
+      cars = cars +
+        '<span placement="top" ngbTooltip="lane.waitingTrains[i]">' + icons.car + '</span>';
     }
     return cars;
   }

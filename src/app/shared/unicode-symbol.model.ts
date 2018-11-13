@@ -1,9 +1,9 @@
 
 
 
-export const unknown = '❔'
+export const unknown = '❔';
 export const trafficLight = '🚦';
-export const signal = '';
+export const signal = '🚦';
 
 export const car = '🚗';
 export const bus = '🚌';

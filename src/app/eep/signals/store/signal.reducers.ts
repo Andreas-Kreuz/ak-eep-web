@@ -7,14 +7,14 @@ import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
 export interface State {
   signals: Signal[];
-  signalTypes: SignalType[];
+  signalTypes: Map<number, string>;
   signalTypeDefinitions: SignalTypeDefinition[];
   selectedSignalIndex: number;
 }
 
 const initialState: State = {
   signals: [],
-  signalTypes: [],
+  signalTypes: new Map<number, string>(),
   signalTypeDefinitions: [],
   selectedSignalIndex: -1,
 };
@@ -27,9 +27,12 @@ export function reducer(state: State = initialState, action: fromSignal.SignalAc
         signals: [...action.payload],
       };
     case fromSignal.SET_SIGNAL_TYPES:
+      const newSignalTypes = new Map<number, string>();
+      state.signalTypes.forEach((value, key, map) => newSignalTypes.set(key, value));
+      action.payload.forEach((value, key, map) => newSignalTypes.set(key, value));
       return {
         ...state,
-        signalTypes: [...action.payload],
+        signalTypes: newSignalTypes,
       };
     case fromSignal.SET_SIGNAL_TYPE_DEFINITIONS:
       return {
@@ -109,10 +112,10 @@ const signalIdToModels$ = createSelector(
 
     // Fill signal type definition map
     const signalTypeDefinitionMap = new Map<number, SignalTypeDefinition>();
-    for (const signalType of signalTypes) {
-      const model = signalTypeDefMap[signalType.modelId];
-      signalTypeDefinitionMap.set(signalType.signalId, model);
-    }
+    signalTypes.forEach((value, key, map) => {
+      const model = signalTypeDefMap[value];
+      signalTypeDefinitionMap.set(key, model);
+    });
     return signalTypeDefinitionMap;
   }
 );

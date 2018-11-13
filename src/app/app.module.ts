@@ -15,12 +15,13 @@ import {reducers} from './app.reducers';
 import {effects} from './app.effects';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
-
+import { TrainListComponent } from './eep/train/train-list/train-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SwitchesComponent,
+    TrainListComponent,
   ],
   imports: [
     BrowserModule,

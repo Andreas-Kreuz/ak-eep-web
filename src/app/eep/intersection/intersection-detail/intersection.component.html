@@ -9,13 +9,13 @@
           Alle Fahrstreifen, die die selbe Ampelschaltung verwenden, können zusammengefasst werden. Für Fußgänger können
           eigene Fahrspuren geschaltet werden.</p>
         <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>-->
-        <table class="table table-sm w-auto border-light">
+        <table class="table table-sm w-auto border">
           <thead>
           <tr>
             <th scope="col" class="fit">Fahrstreifen</th>
             <th scope="col" class="fit">Typ</th>
             <th scope="col" class="fit">Spuren</th>
-            <!--<th scope="col" class="fit">Ampeln</th>-->
+            <!--<th scope="col" class="fit">Zählen</th>-->
             <!--<th scope="col" class="fit">Schaltungen</th>-->
             <th scope="col">Warteliste</th>
             <!--<th scope="col">Bearbeiten</th>-->
@@ -32,208 +32,12 @@
             <td [ngClass]=[phaseColor(lane)] class="fit align-middle">
               <img *ngFor="let direction of directionIcons(lane)" [src]="[direction]" height="24" width="24" style="width: 24px; height: 24px;">
             </td>
-            <!--<td class="fit">🚦 3, 4, 5</td>-->
+            <!--<td class="fit">{{ lane.countType }}</td>-->
             <!--<td class="fit">S2</td>-->
             <td>
-              {{ carsWaiting(lane) }}
+              <app-tooltip *ngFor="let train of lane.waitingTrains" [text]=[carIcon] [tooltip]=[train]>
+              </app-tooltip>
             </td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-</div>
-<h1>
-  Kreuzung
-</h1>
-<div class="row">
-  <div class="col col-lg-6 col-md-8 col-sm-12">
-    <div class="card m-1">
-      <div class="card-body pb-0">
-        <h5 class="card-title">Fahrstreifen</h5>
-        <p class="card-text">
-          Ein Fahrstreifen kann durch eine Schaltung gesteuert werden. Alle Ampeln eines Fahrstreifens werden
-          gleichzeitig angesteuert.</p>
-        <hr>
-        <dl class="row">
-          <dt class="col-sm-4">Name</dt>
-          <dd class="col-sm-8">
-            Osten
-          </dd>
-          <dt class="col-sm-4 d-flex w-100 justify-content-between">
-            <span>Ampeln (Steuerung)</span>
-            <span></span>
-          </dt>
-          <dd class="col-sm-8">
-            🚦 8
-          </dd>
-          <dt class="col-sm-4 d-flex w-100 justify-content-between">
-            <span>Ampeln (Dekoration)</span>
-            <span></span></dt>
-          <dd class="col-sm-8">
-            🚦 9, 10, 11
-          </dd>
-          <dt class="col-sm-4 d-flex w-100 justify-content-between">
-            <span>Ampeln (Achsen)</span>
-            <span></span></dt>
-          <dd class="col-sm-8">
-            🚦 #Achsenampel_1
-          </dd>
-          <dt class="col-sm-4 d-flex w-100 justify-content-between">
-            <span>Immobilien (Licht)</span>
-            <span></span></dt>
-          <dd class="col-sm-8">
-            <!--<img src="../../../../assets/traffic-light-red.svg" height="24"> -->
-            🚦 #Immobilie A Rot<br>
-            <!--<img src="../../../../assets/traffic-light-yellow.svg" height="24"> -->
-            🚦 #Immobilie A Gelb<br>
-            <!--<img src="../../../../assets/traffic-light-green.svg" height="24"> -->
-            🚦 #Immobilie A Grün
-          </dd>
-          <dt class="col-sm-4">Verkehrstyp</dt>
-          <dd class="col-sm-8">
-            <img src="../../../../assets/sign-cars.svg" width="26">
-            Fahrzeuge
-          </dd>
-          <dt class="col-sm-4">Richtungen</dt>
-          <dd class="col-sm-8">
-            <img src="../../../../assets/sign-left.svg" width="26">
-            links,
-            <!--<img src="../../../../assets/sign-straight.svg" width="24">-->
-            <img src="../../../../assets/sign-right.svg" width="26">
-            rechts
-          </dd>
-          <dt class="col-sm-4">Routen</dt>
-          <dd class="col-sm-8">
-            <img src="../../../../assets/sign-detour.svg" height="26">
-            keine
-            <br>
-            <span class="small text-muted">
-              <strong>Hinweis:</strong>
-              Routen sind für Fahrspuren mit mehreren Signalbildern gedacht. Zum Beispiel können
-              Straßenbahn auf einer Fahrspur links abbiegen oder geradeaus fahren. Erstelle zwei
-              Fahrspuren, die die selbe (unsichtbare) Ampel verwenden, aber unterschiedliche
-              Deko-Ampeln.</span>
-          </dd>
-        </dl>
-
-
-        <!--<form>-->
-        <!--<div class="form-group">-->
-        <!--<label for="nameInput">Name</label>-->
-        <!--<input class="form-control"-->
-        <!--id="nameInput"-->
-        <!--aria-describedby="emailHelp"-->
-        <!--placeholder="z.B.: N1 oder Norden"-->
-        <!--value="Norden 1"-->
-        <!--disabled-->
-        <!--ngModel-->
-        <!--name="name">-->
-        <!--<small id="nameHelp" class="form-text text-muted">Name der Kreuzung</small>-->
-        <!--<button type="submit" class="btn btn-secondary btn-sm mt-3">Umbenennen</button>-->
-        <!--</div>-->
-        <!--</form>-->
-        <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>-->
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12">
-    <div class="card m-1">
-      <div class="card-body pb-0">
-        <h5 class="card-title">Fahrstreifen</h5>
-        <p class="card-text">
-          Alle Fahrstreifen, die die selbe Ampelschaltung verwenden, können zusammengefasst werden. Für Fußgänger können
-          eigene Fahrspuren geschaltet werden.</p>
-        <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>-->
-        <table class="table card-body w-auto">
-          <thead>
-          <tr>
-            <th scope="col" class="fit">Fahrstreifen</th>
-            <th scope="col" class="fit">Typ</th>
-            <th scope="col" class="fit">Spuren</th>
-            <th scope="col" class="fit">Ampeln</th>
-            <th scope="col" class="fit">Schaltungen</th>
-            <th scope="col">Warteliste</th>
-            <!--<th scope="col">Bearbeiten</th>-->
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row" class="fit">Norden 1</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>
-            <td class="table-danger fit align-middle">
-              <img src="../../../../assets/sign-left.svg" width="24">
-              <!--<img src="../../../../assets/sign-straight.svg" width="24">-->
-              <!--<img src="../../../../assets/sign-right.svg" width="24">-->
-            </td>
-            <td class="fit">🚦 3, 4, 5</td>
-            <td class="fit">S2</td>
-            <td>🚗🚗🚗🚗🚗</td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          <tr>
-            <th scope="row" class="fit">Norden 2</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>
-            <td class="table-success fit align-middle">
-              <!--<img src="../../../../assets/sign-left.svg" width="24">-->
-              <img src="../../../../assets/sign-straight.svg" width="24">
-              <!--<img src="../../../../assets/sign-right.svg" width="24">-->
-            </td>
-            <td class="fit">🚦 6, 7</td>
-            <td class="fit">S2, <strong class="text-success">S3</strong></td>
-            <td>-</td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          <tr>
-            <th scope="row" class="fit">Osten</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>
-            <td class="table-danger fit align-middle">
-              <img src="../../../../assets/sign-left.svg" width="24">
-              <!--<img src="../../../../assets/sign-straight.svg" width="24">-->
-              <img src="../../../../assets/sign-right.svg" width="24">
-            </td>
-            <td class="fit">🚦 8, 9, 10, 11</td>
-            <td class="fit">S1</td>
-            <td>🚗🚗🚗🚗</td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          <tr>
-            <th scope="row" class="fit">Süden</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>
-            <td class="table-success fit align-middle">
-              <!--<img src="../../../../assets/sign-left.svg" width="24">-->
-              <img src="../../../../assets/sign-straight.svg" width="24">
-              <img src="../../../../assets/sign-right.svg" width="24">
-            </td>
-            <td class="fit">🚦 33, 34, 35, 36, 37</td>
-            <td class="fit"><strong class="text-success">S3</strong></td>
-            <td>🚗</td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          <tr>
-            <th scope="row" class="fit">FG-Nord-Süd</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-pedestrian.svg" height="24"></th>
-            <td class="table-success fit align-middle">
-              <img src="../../../../assets/sign-pedestrian.svg" width="24">
-            </td>
-            <td class="fit">🚦 8, 9, 10, 11</td>
-            <td class="fit"><strong class="text-success">S3</strong></td>
-            <td>🚗</td>
-            <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
-          </tr>
-          <tr>
-            <th scope="row" class="fit">FG-Ost-West</th>
-            <th scope="row" class="fit"><img src="../../../../assets/sign-pedestrian.svg" height="24"></th>
-            <td class="table-danger fit align-middle">
-              <img src="../../../../assets/sign-pedestrian.svg" width="24">
-            </td>
-            <td class="fit">🚦 33, 34, 35, 36, 37</td>
-            <td class="fit">S1</td>
-            <td>🚗</td>
             <!--<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>-->
           </tr>
           </tbody>
@@ -250,7 +54,7 @@
         </p>
         <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Schaltung</a></p>-->
         <form class="card-text">
-          <table class="table w-auto">
+          <table class="table w-auto border">
             <thead>
             <tr>
               <th scope="col" class="fit">Richtung</th>
@@ -343,6 +147,203 @@
       </div>
     </div>
   </div>
+</div>
+<!--<h1>-->
+  <!--Kreuzung-->
+<!--</h1>-->
+<!--<div class="row">-->
+  <!--<div class="col col-lg-6 col-md-8 col-sm-12">-->
+    <!--<div class="card m-1">-->
+      <!--<div class="card-body pb-0">-->
+        <!--<h5 class="card-title">Fahrstreifen</h5>-->
+        <!--<p class="card-text">-->
+          <!--Ein Fahrstreifen kann durch eine Schaltung gesteuert werden. Alle Ampeln eines Fahrstreifens werden-->
+          <!--gleichzeitig angesteuert.</p>-->
+        <!--<hr>-->
+        <!--<dl class="row">-->
+          <!--<dt class="col-sm-4">Name</dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--Osten-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4 d-flex w-100 justify-content-between">-->
+            <!--<span>Ampeln (Steuerung)</span>-->
+            <!--<span></span>-->
+          <!--</dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--🚦 8-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4 d-flex w-100 justify-content-between">-->
+            <!--<span>Ampeln (Dekoration)</span>-->
+            <!--<span></span></dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--🚦 9, 10, 11-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4 d-flex w-100 justify-content-between">-->
+            <!--<span>Ampeln (Achsen)</span>-->
+            <!--<span></span></dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--🚦 #Achsenampel_1-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4 d-flex w-100 justify-content-between">-->
+            <!--<span>Immobilien (Licht)</span>-->
+            <!--<span></span></dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--&lt;!&ndash;<img src="../../../../assets/traffic-light-red.svg" height="24"> &ndash;&gt;-->
+            <!--🚦 #Immobilie A Rot<br>-->
+            <!--&lt;!&ndash;<img src="../../../../assets/traffic-light-yellow.svg" height="24"> &ndash;&gt;-->
+            <!--🚦 #Immobilie A Gelb<br>-->
+            <!--&lt;!&ndash;<img src="../../../../assets/traffic-light-green.svg" height="24"> &ndash;&gt;-->
+            <!--🚦 #Immobilie A Grün-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4">Verkehrstyp</dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--<img src="../../../../assets/sign-cars.svg" width="26">-->
+            <!--Fahrzeuge-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4">Richtungen</dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--<img src="../../../../assets/sign-left.svg" width="26">-->
+            <!--links,-->
+            <!--&lt;!&ndash;<img src="../../../../assets/sign-straight.svg" width="24">&ndash;&gt;-->
+            <!--<img src="../../../../assets/sign-right.svg" width="26">-->
+            <!--rechts-->
+          <!--</dd>-->
+          <!--<dt class="col-sm-4">Routen</dt>-->
+          <!--<dd class="col-sm-8">-->
+            <!--<img src="../../../../assets/sign-detour.svg" height="26">-->
+            <!--keine-->
+            <!--<br>-->
+            <!--<span class="small text-muted">-->
+              <!--<strong>Hinweis:</strong>-->
+              <!--Routen sind für Fahrspuren mit mehreren Signalbildern gedacht. Zum Beispiel können-->
+              <!--Straßenbahn auf einer Fahrspur links abbiegen oder geradeaus fahren. Erstelle zwei-->
+              <!--Fahrspuren, die die selbe (unsichtbare) Ampel verwenden, aber unterschiedliche-->
+              <!--Deko-Ampeln.</span>-->
+          <!--</dd>-->
+        <!--</dl>-->
+
+
+        <!--<form>-->
+        <!--<div class="form-group">-->
+        <!--<label for="nameInput">Name</label>-->
+        <!--<input class="form-control"-->
+        <!--id="nameInput"-->
+        <!--aria-describedby="emailHelp"-->
+        <!--placeholder="z.B.: N1 oder Norden"-->
+        <!--value="Norden 1"-->
+        <!--disabled-->
+        <!--ngModel-->
+        <!--name="name">-->
+        <!--<small id="nameHelp" class="form-text text-muted">Name der Kreuzung</small>-->
+        <!--<button type="submit" class="btn btn-secondary btn-sm mt-3">Umbenennen</button>-->
+        <!--</div>-->
+        <!--</form>-->
+        <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="col-sm-12">-->
+    <!--<div class="card m-1">-->
+      <!--<div class="card-body pb-0">-->
+        <!--<h5 class="card-title">Fahrstreifen</h5>-->
+        <!--<p class="card-text">-->
+          <!--Alle Fahrstreifen, die die selbe Ampelschaltung verwenden, können zusammengefasst werden. Für Fußgänger können-->
+          <!--eigene Fahrspuren geschaltet werden.</p>-->
+        <!--&lt;!&ndash;<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Fahrspur</a></p>&ndash;&gt;-->
+        <!--<table class="table card-body w-auto">-->
+          <!--<thead>-->
+          <!--<tr>-->
+            <!--<th scope="col" class="fit">Fahrstreifen</th>-->
+            <!--<th scope="col" class="fit">Typ</th>-->
+            <!--<th scope="col" class="fit">Spuren</th>-->
+            <!--<th scope="col" class="fit">Ampeln</th>-->
+            <!--<th scope="col" class="fit">Schaltungen</th>-->
+            <!--<th scope="col">Warteliste</th>-->
+            <!--&lt;!&ndash;<th scope="col">Bearbeiten</th>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">Norden 1</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>-->
+            <!--<td class="table-danger fit align-middle">-->
+              <!--<img src="../../../../assets/sign-left.svg" width="24">-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-straight.svg" width="24">&ndash;&gt;-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-right.svg" width="24">&ndash;&gt;-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 3, 4, 5</td>-->
+            <!--<td class="fit">S2</td>-->
+            <!--<td>🚗🚗🚗🚗🚗</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">Norden 2</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>-->
+            <!--<td class="table-success fit align-middle">-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-left.svg" width="24">&ndash;&gt;-->
+              <!--<img src="../../../../assets/sign-straight.svg" width="24">-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-right.svg" width="24">&ndash;&gt;-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 6, 7</td>-->
+            <!--<td class="fit">S2, <strong class="text-success">S3</strong></td>-->
+            <!--<td>-</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">Osten</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>-->
+            <!--<td class="table-danger fit align-middle">-->
+              <!--<img src="../../../../assets/sign-left.svg" width="24">-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-straight.svg" width="24">&ndash;&gt;-->
+              <!--<img src="../../../../assets/sign-right.svg" width="24">-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 8, 9, 10, 11</td>-->
+            <!--<td class="fit">S1</td>-->
+            <!--<td>🚗🚗🚗🚗</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">Süden</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-cars.svg" height="24"></th>-->
+            <!--<td class="table-success fit align-middle">-->
+              <!--&lt;!&ndash;<img src="../../../../assets/sign-left.svg" width="24">&ndash;&gt;-->
+              <!--<img src="../../../../assets/sign-straight.svg" width="24">-->
+              <!--<img src="../../../../assets/sign-right.svg" width="24">-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 33, 34, 35, 36, 37</td>-->
+            <!--<td class="fit"><strong class="text-success">S3</strong></td>-->
+            <!--<td>🚗</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">FG-Nord-Süd</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-pedestrian.svg" height="24"></th>-->
+            <!--<td class="table-success fit align-middle">-->
+              <!--<img src="../../../../assets/sign-pedestrian.svg" width="24">-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 8, 9, 10, 11</td>-->
+            <!--<td class="fit"><strong class="text-success">S3</strong></td>-->
+            <!--<td>🚗</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row" class="fit">FG-Ost-West</th>-->
+            <!--<th scope="row" class="fit"><img src="../../../../assets/sign-pedestrian.svg" height="24"></th>-->
+            <!--<td class="table-danger fit align-middle">-->
+              <!--<img src="../../../../assets/sign-pedestrian.svg" width="24">-->
+            <!--</td>-->
+            <!--<td class="fit">🚦 33, 34, 35, 36, 37</td>-->
+            <!--<td class="fit">S1</td>-->
+            <!--<td>🚗</td>-->
+            <!--&lt;!&ndash;<td class="fit"><a class="btn btn-primary btn-sm" href="#" role="button">Bearbeiten</a></td>&ndash;&gt;-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</table>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
   <!--<div class="col-sm-6">-->
   <!--<div class="card m-1">-->
   <!--<div class="card-body">-->
@@ -363,7 +364,7 @@
   <!--</div>-->
   <!--</div>-->
   <!--</div>-->
-</div>
+<!--</div>-->
 
 
 <!--<h1>-->

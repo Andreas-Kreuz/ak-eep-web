@@ -1,21 +1,23 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {createFeatureSelector, createSelector, Selector} from '@ngrx/store';
 
 import * as fromIntersection from './intersection.actions';
 import {Intersection} from '../models/intersection.model';
 import {IntersectionLane} from '../models/intersection-lane.model';
 import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {signalsWithModel$} from '../../signals/store/signal.reducers';
+import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
 
 export interface State {
   intersections: Intersection[];
   intersectionLanes: IntersectionLane[];
   intersectionSwitching: IntersectionSwitching[];
+  intersectionTrafficLights: IntersectionTrafficLight[];
 }
 
 const initialState: State = {
   intersections: [],
   intersectionLanes: [],
   intersectionSwitching: [],
+  intersectionTrafficLights: [],
 };
 
 export function reducer(state: State = initialState, action: fromIntersection.IntersectionActions) {
@@ -71,5 +73,21 @@ export const intersectionSwitching$ = createSelector(
 export const intersectionById$ = (intersectionId) => createSelector(
   intersections$,
   intersections => intersections.find((i: Intersection) => intersectionId === i.id)
+);
+
+export const intersectionTrafficLights$ = createSelector(
+  intersectionsState$,
+  (state: State) => state.intersectionTrafficLights
+);
+
+export const signalTypes$ = createSelector(
+  intersectionTrafficLights$,
+  (trafficLights: IntersectionTrafficLight[]) => {
+    const signalTypeMap = new Map<number, string>();
+    for (const trafficLight of trafficLights) {
+      signalTypeMap.set(trafficLight.id, trafficLight.modelId);
+    }
+    return signalTypeMap;
+  }
 );
 
