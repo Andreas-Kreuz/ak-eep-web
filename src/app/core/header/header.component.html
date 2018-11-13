@@ -12,22 +12,27 @@
   <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
     <ul class="navbar-nav mr-auto">
       <!--<li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
-        <!--<a class="nav-link" routerLink="/">Home</a></li>-->
+      <!--<a class="nav-link" routerLink="/">Home</a></li>-->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/intersections">Kreuzungen</a></li>
+        <a class="nav-link" routerLink="/intersections">Kreuzungen</a>
+      </li>
       <!--<li class="nav-item" routerLinkActive="active">-->
-        <!--<a class="nav-link" routerLink="/switches">Zugsteuerung</a></li>-->
+      <!--<a class="nav-link" routerLink="/switches">Zugsteuerung</a></li>-->
       <li class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/signals">Signale</a></li>
+        <a class="nav-link" routerLink="/signals">Signale</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/data">Speicherplätze</a>
+      </li>
       <!--<li class="nav-item" routerLinkActive="active">-->
-        <!--<a class="nav-link" routerLink="/switches">Weichen</a></li>-->
+      <!--<a class="nav-link" routerLink="/switches">Weichen</a></li>-->
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li ngbDropdown>
         <span class="nav-link"
               style="cursor: pointer;"
-           ngbDropdownToggle
-           href="#">EEP-Werte</span>
+              ngbDropdownToggle
+              href="#">EEP-Werte</span>
         <ul ngbDropdownMenu class="bg-dark">
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/signals">Signale</a></li>

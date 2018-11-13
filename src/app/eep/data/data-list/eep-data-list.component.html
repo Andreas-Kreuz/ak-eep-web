@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-12">
+    <h1 class="mt-3">Speicherplätze</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th class="fit">Speicherplatz</th>
+        <th class="fit">Name</th>
+        <th>Inhalt</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of eepData$ | async; trackBy: trackByData">
+        <td class="fit">{{ data.id }}</td>
+        <td class="fit">{{ data.name }}</td>
+        <td>{{ data.data }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

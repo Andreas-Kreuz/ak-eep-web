@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'intersections',
     loadChildren: './eep/intersection/intersection.module#IntersectionModule'
   },
+  {
+    path: 'data',
+    loadChildren: './eep/data/eep-data.module#EepDataModule'
+  },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ErrorComponent},
   // {path: '', redirectTo: '/', pathMatch: 'full'},

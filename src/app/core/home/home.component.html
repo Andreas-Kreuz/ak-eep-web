@@ -57,10 +57,10 @@
         <!--</a>-->
         <!--</li>-->
         <li class="list-group-item">
-          <a routerLink="#">
+          <a routerLink="/data">
             Speicherplätze
-            <span class="badge badge-secondary float-right">
-              TODO
+            <span class="badge badge-primary float-right">
+              {{ (slotCount$ | async) }}
             </span>
           </a>
         </li>
