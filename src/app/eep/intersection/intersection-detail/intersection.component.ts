@@ -11,7 +11,7 @@ import * as icons from '../../../shared/unicode-symbol.model';
 import {Phase} from '../models/phase.enum';
 import {Direction} from '../models/direction.model';
 import {TrafficType} from '../models/traffic-type.enum';
-import {intersections$} from '../store/intersection.reducers';
+import {IntersectionSwitching} from '../models/intersection-switching.model';
 
 @Component({
   selector: 'app-crossing',
@@ -22,6 +22,8 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   intersectionId: number;
   intersection$: Observable<Intersection>;
   routeParams$: Subscription;
+  switching$: Observable<IntersectionSwitching[]>;
+  switchingSub: Subscription;
   lanes$: Observable<IntersectionLane[]>;
   private carIcon = icons.car;
 
@@ -37,11 +39,15 @@ export class IntersectionComponent implements OnInit, OnDestroy {
           select(fromIntersection.intersectionById$(this.intersectionId)));
         this.lanes$ = this.store.pipe(
           select(fromIntersection.laneByIntersectionId$(this.intersectionId)));
+        this.switchingSub = this.intersection$.subscribe((intersection) =>
+          this.switching$ = this.store.pipe(
+            select(fromIntersection.switchingNamesByIntersection$(intersection))));
       });
   }
 
   ngOnDestroy() {
     this.routeParams$.unsubscribe();
+    this.switchingSub.unsubscribe();
   }
 
   typeIcon(type: string) {
@@ -56,8 +62,17 @@ export class IntersectionComponent implements OnInit, OnDestroy {
   }
 
   trackLane(index, lane: IntersectionLane) {
-    if (!lane) { return null; }
+    if (!lane) {
+      return null;
+    }
     return lane.id;
+  }
+
+  trackSwitching(index, intersectionSwitching: IntersectionSwitching) {
+    if (!intersectionSwitching) {
+      return null;
+    }
+    return intersectionSwitching.id;
   }
 
   directionIcons(lane: IntersectionLane) {
@@ -127,7 +142,11 @@ export class IntersectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  phaseColor(lane: IntersectionLane) {
+  phaseColor(lane: IntersectionLane, switching?: IntersectionSwitching, intersection?: Intersection) {
+    if (switching && switching.name !== intersection.currentSwitching) {
+      return '';
+    }
+
     switch (lane.phase) {
       case 'PEDESTRIAN':
       case Phase.PEDESTRIAN:
@@ -141,5 +160,9 @@ export class IntersectionComponent implements OnInit, OnDestroy {
       default:
         return '';
     }
+  }
+
+  laneContained(lane: IntersectionLane, switching: IntersectionSwitching) {
+    return lane.switchings.indexOf(switching.name) >= 0;
   }
 }

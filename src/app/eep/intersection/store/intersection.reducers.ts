@@ -1,4 +1,4 @@
-import {createFeatureSelector, createSelector, Selector} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as fromIntersection from './intersection.actions';
 import {Intersection} from '../models/intersection.model';
@@ -61,7 +61,8 @@ export const intersectionLanes$ = createSelector(
 
 export const laneByIntersectionId$ = (intersectionId) => createSelector(
   intersectionLanes$,
-  intersections => intersections.filter((i: IntersectionLane) => intersectionId === i.intersectionId)
+  intersections => intersections
+    .filter((i: IntersectionLane) => intersectionId === i.intersectionId)
 );
 
 
@@ -70,9 +71,17 @@ export const intersectionSwitching$ = createSelector(
   (state: State) => state.intersectionSwitching
 );
 
+export const switchingNamesByIntersection$ = (intersectionId: Intersection) => createSelector(
+  intersectionSwitching$,
+  switching => switching
+    .filter((is: IntersectionSwitching) => intersectionId.name === is.intersectionId)
+    .sort((a, b) => a.name < b.name ? -1 : 1)
+);
+
 export const intersectionById$ = (intersectionId) => createSelector(
   intersections$,
-  intersections => intersections.find((i: Intersection) => intersectionId === i.id)
+  intersections => intersections
+    .find((i: Intersection) => intersectionId === i.id)
 );
 
 export const intersectionTrafficLights$ = createSelector(

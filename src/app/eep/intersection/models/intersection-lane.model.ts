@@ -14,4 +14,5 @@ export class IntersectionLane {
   name: string;
   phase: Phase;
   directions: Direction[];
+  switchings: string[];
 }
