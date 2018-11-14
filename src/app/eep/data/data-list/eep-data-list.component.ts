@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./eep-data-list.component.css']
 })
 export class EepDataListComponent implements OnInit {
-  private eepData$: Observable<EepData>;
+  private eepData$: Observable<EepData[]>;
 
   constructor(private store: Store<fromRoot.State>) { }
 
@@ -20,7 +20,7 @@ export class EepDataListComponent implements OnInit {
   }
 
   trackByData(index: number, data: EepData) {
-    if (!data) return null;
+    if (!data) { return null; }
     return data.id;
   }
 }
