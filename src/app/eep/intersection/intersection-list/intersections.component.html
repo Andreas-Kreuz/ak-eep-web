@@ -1,37 +1,58 @@
-
-
-<h1>
-  Kreuzungen
-</h1>
-<div class="row">
+<div class="row mt-3">
   <div class="col-sm-12">
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Richtungen</th>
-        <th scope="col">Schaltungen</th>
-        <th scope="col">Ampeln</th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let intersection of (setIntersection$ | async); trackBy: trackById">
-      <tr>
-        <th scope="row">
-          <a routerLink="/intersections/{{ intersection.id }}">
-            {{ intersection.name }}
-          </a>
-        </th>
-        <td>
-          TODO
-        </td>
-        <td>
-          TODO
-        </td>
-        <td class="text-muted">
-          TODO
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <h1 class="mt-3">
+      Kreuzungen
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div *ngIf="(intersections$ | async) as intersections"
+       class="col-md-6 mt-3">
+    <div class="card">
+      <h5 class="card-header">Kreuzungen der Anlage</h5>
+      <div class="card-body">
+        <div *ngIf="(intersections.length > 0); else help">
+          <!--<p>Eine Liste mit allen Kreuzungen der Anlage.</p>-->
+          <table class="table table-sm table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Aktuelle Schaltung</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let intersection of intersections; trackBy: trackById">
+              <th scope="row">
+                <a routerLink="/intersections/{{ intersection.id }}">
+                  {{ intersection.name }}
+                </a>
+              </th>
+              <td>
+                {{ intersection.currentSwitching }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #help>
+          <p class="card-text">
+            Die Anlage enthält noch keine Kreuzungen.<br>
+          </p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mt-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Hilfe</h5>
+        <p class="card-text">
+          Erfahre wie Du Kreuzungen mit der Lua-Bibliothek einrichtest<br>
+        </p>
+        <p class="card-text">
+          <a class="btn btn-success" href="https://andreas-kreuz.github.io/ak-lua-bibliothek-fuer-eep/anleitungen/">Anleitung</a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

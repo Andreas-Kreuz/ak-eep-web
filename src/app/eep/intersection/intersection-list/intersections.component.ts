@@ -13,13 +13,13 @@ import {Signal} from '../../signals/models/signal.model';
   styleUrls: ['./intersections.component.css']
 })
 export class IntersectionsComponent implements OnInit {
-  setIntersection$: Observable<Intersection[]>;
+  intersections$: Observable<Intersection[]>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.setIntersection$ = this.store.pipe(select(fromIntersection.intersections$));
+    this.intersections$ = this.store.pipe(select(fromIntersection.intersections$));
   }
 
   trackById(index: number, intersection: Intersection) {
