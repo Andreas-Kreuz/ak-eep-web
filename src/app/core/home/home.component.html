@@ -67,4 +67,13 @@
       </ul>
     </div>
   </div>
+
+  <p class="small text-muted">
+    Versionen:<br>
+    EEP-Web: {{ eepWebVersion$ | async }}
+    <span *ngIf="(eepVersion$ | async) !== '?'">
+      , EEP-Lua: {{ eepLuaVersion$ | async }}
+      , EEP: {{ eepVersion$ | async }}
+    </span>
+  </p>
 </div>

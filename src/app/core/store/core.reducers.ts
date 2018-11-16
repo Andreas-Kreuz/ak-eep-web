@@ -2,6 +2,7 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as CoreAction from './core.actions';
 import {Alert} from '../error/alert.model';
+import {environment} from '../../../environments/environment';
 
 
 export interface State {
@@ -10,6 +11,9 @@ export interface State {
   pollingEnabled: boolean;
   pollingUrl: string;
   connectionEstablished: boolean;
+  eepVersion: string;
+  eepLuaVersion: string;
+  eepWebVersion: string;
 }
 
 const initialState: State = {
@@ -20,6 +24,9 @@ const initialState: State = {
   pollingEnabled: false,
   pollingUrl: 'http://localhost:3000',
   connectionEstablished: false,
+  eepVersion: '?',
+  eepLuaVersion: '?',
+  eepWebVersion: environment.VERSION,
 };
 
 export function reducer(state: State = initialState, action: CoreAction.CoreActions) {
@@ -53,6 +60,21 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
         ...state,
         connectionEstablished: true
       };
+    case CoreAction.SET_EEP_VERSION:
+      return {
+        ...state,
+        eepVersion: action.payload
+      };
+    case CoreAction.SET_EEP_LUA_VERSION:
+      return {
+        ...state,
+        eepLuaVersion: action.payload
+      };
+    case CoreAction.SET_EEP_WEB_VERSION:
+      return {
+        ...state,
+        eepWebVersion: action.payload
+      };
     default:
       return state;
   }
@@ -78,4 +100,19 @@ export const getPollingUrl = createSelector(
 export const getLastAlert = createSelector(
   appState,
   (state: State) => state.lastAlert
+);
+
+export const selectEepVersion = createSelector(
+  appState,
+  (state: State) => state.eepVersion
+);
+
+export const selectEepWebVersion = createSelector(
+  appState,
+  (state: State) => state.eepWebVersion
+);
+
+export const selectEepLuaVersion = createSelector(
+  appState,
+  (state: State) => state.eepLuaVersion
 );

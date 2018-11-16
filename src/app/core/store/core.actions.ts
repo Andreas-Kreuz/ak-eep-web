@@ -4,8 +4,11 @@ import {Alert} from '../error/alert.model';
 export const SHOW_ERROR = '[App] SHOW_ERROR';
 export const HIDE_ERROR = '[App] HIDE_ERROR';
 export const SET_POLLING_URL = '[App] SET_POLLING_URL';
-export const SET_POLLING_ENABLED = '[App] SET_POLLING_ENABLED';
-export const SET_CONNECTED = '[App] CONNECTED';
+export const SET_POLLING_ENABLED = '[App] Set Polling Enabled';
+export const SET_CONNECTED = '[App] Connected';
+export const SET_EEP_VERSION = '[App] Set EEP version';
+export const SET_EEP_LUA_VERSION = '[App] Set EEP Lua version';
+export const SET_EEP_WEB_VERSION = '[App] Set EEP Web version';
 
 
 export class ShowError implements Action {
@@ -24,7 +27,31 @@ export class HideError implements Action {
   constructor(public payload: Alert) {
   }
 }
+export class SetEepVersion implements Action {
+  readonly type = SET_EEP_VERSION;
 
+  /**
+   * @param payload Version as String
+   */
+  constructor(public payload: string) {
+  }
+}export class SetEepLuaVersion implements Action {
+  readonly type = SET_EEP_LUA_VERSION;
+
+  /**
+   * @param payload Version as String
+   */
+  constructor(public payload: string) {
+  }
+}export class SetEepWebVersion implements Action {
+  readonly type = SET_EEP_WEB_VERSION;
+
+  /**
+   * @param payload Version as String
+   */
+  constructor(public payload: string) {
+  }
+}
 export class SetPollingUrl implements Action {
   readonly type = SET_POLLING_URL;
 
@@ -53,4 +80,7 @@ export type CoreActions =
   | HideError
   | SetPollingUrl
   | SetPollingEnabled
-  | SetConnected;
+  | SetConnected
+  | SetEepVersion
+  | SetEepLuaVersion
+  | SetEepWebVersion;

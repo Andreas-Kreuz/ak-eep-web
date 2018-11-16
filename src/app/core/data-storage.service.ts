@@ -17,11 +17,8 @@ export class DataStorageService implements OnInit {
   ngOnInit() {
   }
 
+
   fetchStaticData(hostLocation) {
-
-  }
-
-  fetchRuntimeData(hostLocation) {
     this.store.dispatch(new fromEepData.FetchSlots(hostLocation));
     this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
     this.store.dispatch(new fromIntersection.FetchIntersectionLanes(hostLocation));
@@ -29,5 +26,9 @@ export class DataStorageService implements OnInit {
     this.store.dispatch(new fromIntersection.FetchIntersectionTrafficLights(hostLocation));
     this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostLocation));
     this.store.dispatch(new fromSignal.FetchSignals(hostLocation));
+  }
+
+  fetchRuntimeData(hostLocation) {
+    this.fetchStaticData(hostLocation);
   }
 }

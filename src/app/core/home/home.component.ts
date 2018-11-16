@@ -13,6 +13,9 @@ import * as fromSignal from '../../eep/signals/store/signal.reducers';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  private eepLuaVersion$: Observable<string>;
+  private eepVersion$: Observable<string>;
+  private eepWebVersion$: Observable<string>;
   private intersectionsCount$: Observable<number>;
   private signalCount$: Observable<number>;
   private slotCount$: Observable<number>;
@@ -24,6 +27,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.pollingUrl$ = this.store.pipe(select(fromCore.getPollingUrl));
+    this.eepLuaVersion$ = this.store.pipe(select(fromCore.selectEepLuaVersion));
+    this.eepVersion$ = this.store.pipe(select(fromCore.selectEepVersion));
+    this.eepWebVersion$ = this.store.pipe(select(fromCore.selectEepWebVersion));
     this.connectionEstablished$ = this.store.pipe(select(fromCore.getConnectionEstablished));
     this.slotCount$ = this.store.pipe(select(fromEepData.eepDataCount$));
     this.signalCount$ = this.store.pipe(select(fromSignal.signalCount$));
