@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap, retry} from 'rxjs/operators';
 
 import * as fromSignal from './signal.actions';
 import {FetchAction} from './signal.actions';
@@ -48,6 +48,7 @@ export class SignalEffects {
         console.log(url);
         return this.httpClient.get<Signal[]>(url)
           .pipe(
+            retry(3),
             map((list: Signal[]) => {
               list.sort((a, b) => a.id - b.id);
 

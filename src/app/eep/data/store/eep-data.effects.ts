@@ -11,6 +11,7 @@ import {SetSlots} from './eep-data.actions';
 import {Store} from '@ngrx/store';
 import {throwError} from 'rxjs';
 import {Alert} from '../../../core/error/alert.model';
+import * as ErrorActions from '../../../core/store/core.actions';
 
 @Injectable()
 export class EepDataEffects {
@@ -31,16 +32,19 @@ export class EepDataEffects {
               }
               return {list: list, url: url};
             }),
-            switchMap((t: { list, url }) => {
-                return [
-                  new Alert('success', 'Daten geladen von: ' + t.url),
-                  new SetSlots(t.list),
-                ];
-              }
-            ),
             catchError(err => throwError(err))
           );
-      })
+      }),
+      switchMap((t: { list, url }) => {
+          this.store.dispatch(new ErrorActions.ShowError(
+            new Alert('success', 'Daten geladen von: ' + t.url)));
+          return [
+            new Alert('success', 'Daten geladen von: ' + t.url),
+            new SetSlots(t.list),
+          ];
+        }
+      ),
+      catchError(err => throwError(err))
     );
 
   constructor(private actions$: Actions,
