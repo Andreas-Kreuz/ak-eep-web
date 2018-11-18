@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, map, switchMap, tap, retry} from 'rxjs/operators';
+import {catchError, map, retry, switchMap, tap} from 'rxjs/operators';
 
 import * as fromSignal from './signal.actions';
 import {FetchAction} from './signal.actions';
@@ -12,7 +12,7 @@ import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromCore from '../../../../app/core/store/core.actions';
-import {of} from 'rxjs';
+import {of, throwError} from 'rxjs';
 import {SignalType} from '../models/signal-type.model';
 
 
@@ -44,7 +44,7 @@ export class SignalEffects {
     .pipe(
       ofType(fromSignal.FETCH_SIGNALS),
       switchMap((action: fromSignal.FetchSignals) => {
-        const url = action.payload + '/signals';
+        const url = action.payload + '/api/v1/signals';
         console.log(url);
         return this.httpClient.get<Signal[]>(url)
           .pipe(
@@ -64,10 +64,16 @@ export class SignalEffects {
                 type: fromSignal.SET_SIGNALS,
                 payload: list
               };
-            })
-          );
+            }),
+            catchError((error) => {
+              this.store.dispatch(new ErrorActions.ShowError(
+                new Alert('danger', 'Signale konnten nicht geladen werden')));
+              return throwError(error);
+            }));
       }),
       catchError((error) => {
+        this.store.dispatch(new ErrorActions.ShowError(
+          new Alert('danger', 'Signale konnten nicht geladen werden')));
         return of(new ErrorActions.ShowError(new Alert(
           'danger',
           'Kann den Server nicht kontaktieren: ' + // url +
@@ -81,7 +87,7 @@ export class SignalEffects {
     .pipe(
       ofType(fromSignal.FETCH_SIGNAL_TYPES),
       switchMap((action: fromSignal.FetchSignalTypes) => {
-        const url = action.payload + '/signal_types';
+        const url = action.payload + '/api/v1/signal-types';
         console.log(url);
         return this.httpClient.get<SignalType[]>(url)
           .pipe(
@@ -94,6 +100,8 @@ export class SignalEffects {
               };
             }),
             catchError((error) => {
+              this.store.dispatch(new ErrorActions.ShowError(
+                new Alert('danger', 'Daten konnten nicht geladen werden' + url)));
               return of(new ErrorActions.ShowError(new Alert(
                 'danger',
                 'Kann den Server nicht kontaktieren: ' + url +
@@ -110,7 +118,7 @@ export class SignalEffects {
       ofType(fromSignal.FETCH_SIGNAL_TYPE_DEFINITIONS),
       switchMap((action: FetchAction) =>
         this.loadFromAction(action,
-          '/signal_type_definitions',
+          '/api/v1/signal-type-definitions',
           fromSignal.SET_SIGNAL_TYPE_DEFINITIONS)),
       catchError(errorHandler)
     );

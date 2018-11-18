@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 import * as fromEep from './eep-data.actions';
+import {SetSlots} from './eep-data.actions';
 import * as fromRoot from '../../../app.reducers';
 import {EepData} from '../models/eep-data.model';
-import {SetSlots} from './eep-data.actions';
 import {Store} from '@ngrx/store';
 import {throwError} from 'rxjs';
 import {Alert} from '../../../core/error/alert.model';
@@ -20,7 +20,7 @@ export class EepDataEffects {
     .pipe(
       ofType(fromEep.FETCH_SLOTS),
       switchMap((action: fromEep.FetchSlots) => {
-        const url = action.payload + '/saveSlots';
+        const url = action.payload + '/api/v1/save-slots';
         console.log(url);
         return this.httpClient.get<EepData[]>(url)
           .pipe(
@@ -32,7 +32,11 @@ export class EepDataEffects {
               }
               return {list: list, url: url};
             }),
-            catchError(err => throwError(err))
+            catchError(err => {
+              this.store.dispatch(new ErrorActions.ShowError(
+                new Alert('danger', 'Daten konnten nicht geladen werden von: ' + url)));
+              return throwError(err);
+            })
           );
       }),
       switchMap((t: { list, url }) => {
@@ -44,7 +48,11 @@ export class EepDataEffects {
           ];
         }
       ),
-      catchError(err => throwError(err))
+      catchError(err => {
+        this.store.dispatch(new ErrorActions.ShowError(
+          new Alert('danger', 'Daten konnten nicht geladen werden')));
+        return throwError(err);
+      })
     );
 
   constructor(private actions$: Actions,

@@ -6,6 +6,7 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
 import * as fromCore from '../../../core/store/core.actions';
 import * as fromIntersections from './intersection.actions';
+import {SetIntersectionTrafficLights} from './intersection.actions';
 import {Alert} from '../../../core/error/alert.model';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
@@ -14,7 +15,6 @@ import {IntersectionLane} from '../models/intersection-lane.model';
 import {CountType} from '../models/count-type.enum';
 import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
 import {SetSignalTypes} from '../../signals/store/signal.actions';
-import {SetIntersectionTrafficLights} from './intersection.actions';
 
 const errorHandler = (error) => {
   return of(new fromCore.ShowError(new Alert(
@@ -45,7 +45,7 @@ export class IntersectionEffects {
       ofType(fromIntersections.FETCH_INTERSECTIONS),
       switchMap((action: fromIntersections.FetchIntersections) =>
         this.loadFromAction(action,
-          '/intersections',
+          '/api/v1/intersections',
           fromIntersections.SET_INTERSECTIONS)),
       catchError(errorHandler)
     );
@@ -56,7 +56,7 @@ export class IntersectionEffects {
       ofType(fromIntersections.FETCH_INTERSECTION_LANES),
       switchMap((action: fromIntersections.FetchIntersectionLanes) =>
         this.loadFromAction(action,
-          '/intersection_lanes',
+          '/api/v1/intersection-lanes',
           fromIntersections.SET_INTERSECTION_LANES,
           (e: IntersectionLane) => {
             if (!e.waitingTrains) {
@@ -75,7 +75,7 @@ export class IntersectionEffects {
       ofType(fromIntersections.FETCH_INTERSECTION_SWITCHING),
       switchMap((action: fromIntersections.FetchIntersectionSwitching) =>
         this.loadFromAction(action,
-          '/intersection_switchings',
+          '/api/v1/intersection-switchings',
           fromIntersections.SET_INTERSECTION_SWITCHING)),
       catchError(errorHandler)
     );
@@ -85,7 +85,7 @@ export class IntersectionEffects {
     .pipe(
       ofType(fromIntersections.FETCH_INTERSECTION_TRAFFIC_LIGHTS),
       switchMap((action: fromIntersections.FetchIntersectionSwitching) => {
-        const url = action.payload + '/intersection_traffic_lights';
+        const url = action.payload + '/api/v1/intersection-traffic-lights';
         console.log(url);
         return this.httpClient.get<IntersectionTrafficLight[]>(url)
           .pipe(
@@ -105,7 +105,7 @@ export class IntersectionEffects {
               }
               return {list: list, url: url, signalModels: signalModels};
             }),
-            switchMap((t: {list, url, signalModels}) => {
+            switchMap((t: { list, url, signalModels }) => {
                 return [
                   new Alert('success', 'Daten geladen von: ' + t.url),
                   new SetIntersectionTrafficLights(t.list),
