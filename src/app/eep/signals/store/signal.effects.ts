@@ -2,53 +2,40 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, map, retry, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 import * as fromSignal from './signal.actions';
 import {FetchAction} from './signal.actions';
 import {Signal} from '../models/signal.model';
-import * as ErrorActions from '../../../core/store/core.actions';
-import {Alert} from '../../../core/error/alert.model';
+import * as CoreActions from '../../../core/store/core.actions';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromCore from '../../../../app/core/store/core.actions';
 import {of, throwError} from 'rxjs';
 import {SignalType} from '../models/signal-type.model';
+import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
+import {Status} from '../../../core/server-status/status.enum';
 
 
-const errorHandler = (error) => {
-  return of(new ErrorActions.ShowError(new Alert(
-    'danger',
-    'Kann den Server nicht kontaktieren: ' + // url +
-    ` - Backend returned code ${error.status}, ` +
-    `body was: ${error.error}`)));
+const errorHandler = (err, path) => {
+  console.log(err);
+  return of(
+    new CoreActions.ShowUrlError(new EepWebUrl(path, Status.ERROR, err.message)));
 };
 
 @Injectable()
 export class SignalEffects {
-  @Effect({dispatch: false})
-  showErrorSignals = this.actions$
-    .pipe(
-      ofType(fromSignal.ERROR),
-      tap((error: fromSignal.LogError) => {
-        console.log(error);
-        this.store.dispatch(new Alert(
-          'danger',
-          'Kann den Server nicht kontaktieren: ' +
-          ` - Backend returned code ${error.payload.status}, ` +
-          `body was: ${error.payload.error}`));
-      }));
 
   @Effect()
   fetchSignals = this.actions$
     .pipe(
       ofType(fromSignal.FETCH_SIGNALS),
       switchMap((action: fromSignal.FetchSignals) => {
-        const url = action.payload + '/api/v1/signals';
+        const url = action.payload + SIGNAL_PATH;
         console.log(url);
         return this.httpClient.get<Signal[]>(url)
           .pipe(
-            retry(3),
+            // retry(3),
             map((list: Signal[]) => {
               list.sort((a, b) => a.id - b.id);
 
@@ -57,28 +44,25 @@ export class SignalEffects {
                   signal.model = null;
                 }
               }
-              this.store.dispatch(new ErrorActions.ShowError(
-                new Alert('success', 'Signale geladen von: ' + url)));
-              this.store.dispatch(new fromCore.SetConnected());
-              return {
-                type: fromSignal.SET_SIGNALS,
-                payload: list
-              };
+              return list;
             }),
             catchError((error) => {
-              this.store.dispatch(new ErrorActions.ShowError(
-                new Alert('danger', 'Signale konnten nicht geladen werden')));
               return throwError(error);
             }));
       }),
-      catchError((error) => {
-        this.store.dispatch(new ErrorActions.ShowError(
-          new Alert('danger', 'Signale konnten nicht geladen werden')));
-        return of(new ErrorActions.ShowError(new Alert(
-          'danger',
-          'Kann den Server nicht kontaktieren: ' + // url +
-          ` - Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`)));
+      switchMap((list: Signal[]) => {
+          return of(
+            new fromCore.SetConnected(),
+            new CoreActions.ShowUrlError(new EepWebUrl(SIGNAL_PATH, Status.SUCCESS, 'Daten geladen')),
+            {
+              type: fromSignal.SET_SIGNALS,
+              payload: list
+            });
+        }
+      ),
+      catchError((err) => {
+        return of(
+          new CoreActions.ShowUrlError(new EepWebUrl(SIGNAL_PATH, Status.ERROR, err.message)));
       })
     );
 
@@ -87,62 +71,54 @@ export class SignalEffects {
     .pipe(
       ofType(fromSignal.FETCH_SIGNAL_TYPES),
       switchMap((action: fromSignal.FetchSignalTypes) => {
-        const url = action.payload + '/api/v1/signal-types';
+        const url = action.payload + SIGNAL_TYPE_PATH;
         console.log(url);
         return this.httpClient.get<SignalType[]>(url)
           .pipe(
             map((list: SignalType[]) => {
-              this.store.dispatch(new ErrorActions.ShowError(
-                new Alert('success', 'Signal-Typ-Zuordnung geladen von: ' + url)));
-              return {
-                type: fromSignal.SET_SIGNAL_TYPES,
-                payload: list
-              };
+              return [
+                new CoreActions.ShowUrlError(new EepWebUrl(SIGNAL_TYPE_PATH, Status.SUCCESS, 'Signal-Typ-Zuordnung geladen.')),
+                {
+                  type: fromSignal.SET_SIGNAL_TYPES,
+                  payload: list
+                }];
             }),
             catchError((error) => {
-              this.store.dispatch(new ErrorActions.ShowError(
-                new Alert('danger', 'Daten konnten nicht geladen werden' + url)));
-              return of(new ErrorActions.ShowError(new Alert(
-                'danger',
-                'Kann den Server nicht kontaktieren: ' + url +
-                ` - Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`)));
+              return of(
+                new CoreActions.ShowUrlError(new EepWebUrl(SIGNAL_TYPE_PATH, Status.ERROR, error.message))
+              );
             })
           );
       }),
     );
-
+  loadFromUrl = <T>(url: string, path: string, setActionType: string) => {
+    return this.httpClient.get<T[]>(url)
+      .pipe(
+        switchMap((list: T[]) => {
+          return [
+            new CoreActions.ShowUrlError(new EepWebUrl(path, Status.SUCCESS, 'Daten geladen.')),
+            {
+              type: setActionType,
+              payload: list
+            }];
+        })
+      );
+  };
+  loadFromAction = (action: FetchAction, path: string, setActionType: string) => {
+    const url = action.payload + path;
+    console.log(url);
+    return this.loadFromUrl(url, path, setActionType);
+  };
   @Effect()
   fetchSignalTypeDefinitions = this.actions$
     .pipe(
       ofType(fromSignal.FETCH_SIGNAL_TYPE_DEFINITIONS),
       switchMap((action: FetchAction) =>
         this.loadFromAction(action,
-          '/api/v1/signal-type-definitions',
+          SIGNAL_TYPE_DEFINITIONS_PATH,
           fromSignal.SET_SIGNAL_TYPE_DEFINITIONS)),
-      catchError(errorHandler)
+      catchError(err => errorHandler(err, SIGNAL_TYPE_DEFINITIONS_PATH))
     );
-
-  loadFromUrl = <T>(url: string, setActionType: string) => {
-
-    return this.httpClient.get<T[]>(url)
-      .pipe(
-        map((list: T[]) => {
-          this.store.dispatch(new ErrorActions.ShowError(
-            new Alert('success', 'Daten geladen von: ' + url)));
-          return {
-            type: setActionType,
-            payload: list
-          };
-        })
-      );
-  };
-
-  loadFromAction = (action: FetchAction, urlPart: string, setActionType: string) => {
-    const url = action.payload + urlPart;
-    console.log(url);
-    return this.loadFromUrl(url, setActionType);
-  };
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,
@@ -150,3 +126,7 @@ export class SignalEffects {
               private store: Store<fromRoot.State>) {
   }
 }
+
+const SIGNAL_PATH = '/api/v1/signals';
+const SIGNAL_TYPE_PATH = '/api/v1/signal-types';
+const SIGNAL_TYPE_DEFINITIONS_PATH = '/api/v1/signal-type-definitions';

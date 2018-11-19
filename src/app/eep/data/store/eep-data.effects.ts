@@ -9,9 +9,10 @@ import {SetSlots} from './eep-data.actions';
 import * as fromRoot from '../../../app.reducers';
 import {EepData} from '../models/eep-data.model';
 import {Store} from '@ngrx/store';
-import {throwError} from 'rxjs';
-import {Alert} from '../../../core/error/alert.model';
+import {of, throwError} from 'rxjs';
 import * as ErrorActions from '../../../core/store/core.actions';
+import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
+import {Status} from '../../../core/server-status/status.enum';
 
 @Injectable()
 export class EepDataEffects {
@@ -20,7 +21,7 @@ export class EepDataEffects {
     .pipe(
       ofType(fromEep.FETCH_SLOTS),
       switchMap((action: fromEep.FetchSlots) => {
-        const url = action.payload + '/api/v1/save-slots';
+        const url = action.payload + SAVE_SLOT_PATH;
         console.log(url);
         return this.httpClient.get<EepData[]>(url)
           .pipe(
@@ -33,25 +34,23 @@ export class EepDataEffects {
               return {list: list, url: url};
             }),
             catchError(err => {
-              this.store.dispatch(new ErrorActions.ShowError(
-                new Alert('danger', 'Daten konnten nicht geladen werden von: ' + url)));
               return throwError(err);
             })
           );
       }),
-      switchMap((t: { list, url }) => {
-          this.store.dispatch(new ErrorActions.ShowError(
-            new Alert('success', 'Daten geladen von: ' + t.url)));
+      switchMap((t: { list: EepData[], url: string }) => {
           return [
-            new Alert('success', 'Daten geladen von: ' + t.url),
+            new ErrorActions.ShowUrlError(
+              new EepWebUrl(SAVE_SLOT_PATH, Status.SUCCESS,
+                'Daten geladen.')),
             new SetSlots(t.list),
           ];
         }
       ),
       catchError(err => {
-        this.store.dispatch(new ErrorActions.ShowError(
-          new Alert('danger', 'Daten konnten nicht geladen werden')));
-        return throwError(err);
+        console.log(err);
+        return of(
+          new ErrorActions.ShowUrlError(new EepWebUrl(SAVE_SLOT_PATH, Status.ERROR, err.message)));
       })
     );
 
@@ -62,3 +61,4 @@ export class EepDataEffects {
   }
 }
 
+const SAVE_SLOT_PATH = '/api/v1/save-slots';

@@ -5,7 +5,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromErrors from '../store/core.reducers';
 import * as fromRoot from '../../app.reducers';
 import {Observable} from 'rxjs';
-import {Alert} from '../error/alert.model';
+import {Status} from '../server-status/status.enum';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +13,7 @@ import {Alert} from '../error/alert.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private bgClass: string;
-  private lastAlert$: Observable<Alert>;
+  private connectionStatus$: Observable<Status>;
   isNavbarCollapsed = true;
 
   @Output() featureSelected = new EventEmitter<string>();
@@ -30,9 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.lastAlert$ = this.store.pipe(select(fromErrors.getLastAlert));
-    this.lastAlert$.subscribe((value: Alert) =>
-      this.bgClass = 'bg-' + value.type);
+    this.connectionStatus$ = this.store.pipe(select(fromErrors.selectConnectionStatus));
   }
 
   menu() {

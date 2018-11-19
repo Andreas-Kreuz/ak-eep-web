@@ -3,6 +3,9 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as CoreAction from './core.actions';
 import {Alert} from '../error/alert.model';
 import {environment} from '../../../environments/environment';
+import {EepWebUrl} from '../server-status/eep-web-url.model';
+import {Status} from '../server-status/status.enum';
+import {StatusUtil} from '../server-status/status-util';
 
 
 export interface State {
@@ -11,9 +14,11 @@ export interface State {
   pollingEnabled: boolean;
   pollingUrl: string;
   connectionEstablished: boolean;
+  connectionStatus: Status;
   eepVersion: string;
   eepLuaVersion: string;
   eepWebVersion: string;
+  urlStatus: EepWebUrl[];
 }
 
 const initialState: State = {
@@ -24,9 +29,11 @@ const initialState: State = {
   pollingEnabled: false,
   pollingUrl: 'http://localhost:3000',
   connectionEstablished: false,
+  connectionStatus: Status.INFO,
   eepVersion: '?',
   eepLuaVersion: '?',
   eepWebVersion: environment.VERSION,
+  urlStatus: [],
 };
 
 export function reducer(state: State = initialState, action: CoreAction.CoreActions) {
@@ -44,6 +51,27 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
       return {
         ...state,
         alerts: oldErrors
+      };
+    case CoreAction.SHOW_URL_ERROR:
+    case CoreAction.SHOW_URL_SUCCESS:
+      const newUrlStatus1: EepWebUrl[] = [];
+      let status = action.payload.status;
+      for (const oldUrl of state.urlStatus) {
+        if (oldUrl.path !== action.payload.path) {
+          newUrlStatus1.push(oldUrl);
+          status = StatusUtil.worstOf(status, oldUrl.status);
+        }
+      }
+      newUrlStatus1.push(action.payload);
+      newUrlStatus1.sort((a: EepWebUrl, b: EepWebUrl) => {
+          return a.path < b.path ? -1 : 1;
+        }
+      );
+
+      return {
+        ...state,
+        urlStatus: newUrlStatus1,
+        connectionStatus: status,
       };
     case CoreAction.SET_POLLING_ENABLED:
       return {
@@ -92,6 +120,11 @@ export const getConnectionEstablished = createSelector(
   (state: State) => state.connectionEstablished
 );
 
+export const selectConnectionStatus = createSelector(
+  appState,
+  (state: State) => state.connectionStatus
+);
+
 export const getPollingUrl = createSelector(
   appState,
   (state: State) => state.pollingUrl
@@ -115,4 +148,14 @@ export const selectEepWebVersion = createSelector(
 export const selectEepLuaVersion = createSelector(
   appState,
   (state: State) => state.eepLuaVersion
+);
+
+export const getApiPaths$ = createSelector(
+  appState,
+  (state: State) => state.urlStatus
+);
+
+export const selectPollingUrl$ = createSelector(
+  appState,
+  (state: State) => state.pollingUrl
 );

@@ -19,6 +19,7 @@ export class DataStorageService implements OnInit {
 
 
   fetchStaticData(hostLocation) {
+    console.log('Kontaktiere Server');
     this.store.dispatch(new fromEepData.FetchSlots(hostLocation));
     this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
     this.store.dispatch(new fromIntersection.FetchIntersectionLanes(hostLocation));
