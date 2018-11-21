@@ -2,16 +2,17 @@ import {Action} from '@ngrx/store';
 import {Alert} from '../error/alert.model';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
 
-export const SHOW_ERROR = '[App] SHOW_ERROR';
-export const HIDE_ERROR = '[App] HIDE_ERROR';
-export const SET_POLLING_URL = '[App] SET_POLLING_URL';
-export const SET_POLLING_ENABLED = '[App] Set Polling Enabled';
-export const SET_CONNECTED = '[App] Connected';
-export const SET_EEP_VERSION = '[App] Set EEP version';
-export const SET_EEP_LUA_VERSION = '[App] Set EEP Lua version';
-export const SET_EEP_WEB_VERSION = '[App] Set EEP Web version';
-export const SHOW_URL_ERROR = '[App] Show URL error';
-export const SHOW_URL_SUCCESS = '[App] Show URL success';
+export const SHOW_ERROR = '[Core] SHOW_ERROR';
+export const HIDE_ERROR = '[Core] HIDE_ERROR';
+export const SET_POLLING_URL = '[Core] SET_POLLING_URL';
+export const SET_POLLING_ENABLED = '[Core] Set Polling Enabled';
+export const SET_CONNECTED = '[Core] Connected';
+export const FETCH_VERSIONS = '[Core] FetchVersions';
+export const SET_EEP_VERSION = '[Core] Set EEP version';
+export const SET_EEP_LUA_VERSION = '[Core] Set EEP Lua version';
+export const SET_EEP_WEB_VERSION = '[Core] Set EEP Web version';
+export const SHOW_URL_ERROR = '[Core] Show URL error';
+export const SHOW_URL_SUCCESS = '[Core] Show URL success';
 
 
 export class ShowError implements Action {
@@ -44,6 +45,13 @@ export class ShowUrlSuccess implements Action {
 
   /** @param payload URL   */
   constructor(public payload: EepWebUrl) {
+  }
+}
+
+export class FetchVersion implements Action {
+  readonly type = FETCH_VERSIONS;
+
+  constructor(public payload: string) {
   }
 }
 
