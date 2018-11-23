@@ -1,6 +1,8 @@
 import {Action} from '@ngrx/store';
+
 import {Alert} from '../error/alert.model';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
+import {DataType} from '../model/data-type';
 
 export const SHOW_ERROR = '[Core] SHOW_ERROR';
 export const HIDE_ERROR = '[Core] HIDE_ERROR';
@@ -13,6 +15,8 @@ export const SET_EEP_LUA_VERSION = '[Core] Set EEP Lua version';
 export const SET_EEP_WEB_VERSION = '[Core] Set EEP Web version';
 export const SHOW_URL_ERROR = '[Core] Show URL error';
 export const SHOW_URL_SUCCESS = '[Core] Show URL success';
+export const FETCH_DATA_TYPES = '[Core] Fetch data types';
+export const SET_DATA_TYPES = '[Core] Set data types';
 
 
 export class ShowError implements Action {
@@ -45,6 +49,23 @@ export class ShowUrlSuccess implements Action {
 
   /** @param payload URL   */
   constructor(public payload: EepWebUrl) {
+  }
+}
+
+export class FetchDataTypes implements Action {
+  readonly type = FETCH_DATA_TYPES;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class SetDataTypes implements Action {
+  readonly type = SET_DATA_TYPES;
+
+  /**
+   * @param payload Version as String
+   */
+  constructor(public payload: DataType[]) {
   }
 }
 
@@ -114,9 +135,12 @@ export type CoreActions =
   | HideError
   | ShowUrlError
   | ShowUrlSuccess
+  | FetchDataTypes
+  | SetDataTypes
   | SetPollingUrl
   | SetPollingEnabled
   | SetConnected
+  | FetchVersion
   | SetEepVersion
   | SetEepLuaVersion
   | SetEepWebVersion;

@@ -1,6 +1,6 @@
 <div *ngIf="!(connectionEstablished$ | async)" class="row p-3">
 
-       <div class="jumbotron jumbotron-fluid col-12">
+  <div class="jumbotron jumbotron-fluid col-12">
     <div class="container">
       <h1 class="display-4">EEP-Web</h1>
       <p class="lead">Verbindung wird hergestellt zu
@@ -20,8 +20,8 @@
       <!--<a class="btn btn-primary" href="#" role="button">Kreuzungen verwalten</a>-->
     </div>
   </div>
-  <div class="col-12 mb-4">
-    <div class="card h-100">
+  <div class="col-12 col-md-12 mb-4">
+    <div class="card">
       <h5 class="card-header">Daten</h5>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -62,6 +62,30 @@
             <span class="badge badge-primary float-right">
               {{ (slotCount$ | async) }}
             </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-12 mb-4">
+    <div class="card">
+      <h5 class="card-header">Rohdaten</h5>
+      <!--<ul *ngFor="let dataType of (dataTypes$ | async); trackBy: trackByDataName"-->
+      <ul *ngFor="let dataType of (dataTypes$ | async); trackBy: trackByDataName"
+          class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a routerLink="/intersections">
+            {{ dataType.name }}
+          </a>
+          <small class="text-muted">
+            <br class="hidden-md visible-sm">
+            {{ dataType.url }}
+          </small>
+          <a routerLink="/intersections">
+          <span class="badge badge-primary float-right">
+              {{ dataType.count }}
+          </span>
           </a>
         </li>
       </ul>
