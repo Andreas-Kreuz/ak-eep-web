@@ -1,12 +1,20 @@
 import {Action} from '@ngrx/store';
+import {DataType} from '../model/data-type';
+import {ShowUrlSuccess} from '../../../core/store/core.actions';
 
+export const FETCH_DATA_TYPES = '[Generic Data] Fetch data types';
+export const SET_DATA_TYPES = '[Generic Data] Set data types';
 export const FETCH_DATA = '[Generic Data] Fetch Data';
 export const SET_DATA = '[Generic Data] Set Data';
 
 export class FetchData implements Action {
   readonly type = FETCH_DATA;
 
-  constructor(public payload: { host: string, path: string }) {
+  constructor(public payload: {
+    name: string,
+    hostName: string,
+    path: string,
+  }) {
   }
 }
 
@@ -20,6 +28,26 @@ export class UpdateData implements Action {
   }
 }
 
+export class FetchDataTypes implements Action {
+  readonly type = FETCH_DATA_TYPES;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class SetDataTypes implements Action {
+  readonly type = SET_DATA_TYPES;
+
+  /**
+   * @param payload Version as String
+   */
+  constructor(public payload: DataType[]) {
+  }
+}
+
+
 export type GenericDataActions =
+  FetchDataTypes |
+  SetDataTypes |
   FetchData |
   UpdateData;

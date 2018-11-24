@@ -16,14 +16,12 @@ import {effects} from './app.effects';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import {TrainListComponent} from './eep/train/train-list/train-list.component';
-import { GenericDataComponent } from './eep/generic-data/generic-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SwitchesComponent,
     TrainListComponent,
-    // GenericDataComponent,
   ],
   imports: [
     BrowserModule,

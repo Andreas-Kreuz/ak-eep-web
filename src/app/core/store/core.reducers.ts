@@ -6,7 +6,6 @@ import {environment} from '../../../environments/environment';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
 import {Status} from '../server-status/status.enum';
 import {StatusUtil} from '../server-status/status-util';
-import {DataType} from '../model/data-type';
 
 
 export interface State {
@@ -20,7 +19,6 @@ export interface State {
   eepLuaVersion: string;
   eepWebVersion: string;
   urlStatus: EepWebUrl[];
-  dataTypes: DataType[];
 }
 
 const initialState: State = {
@@ -36,7 +34,6 @@ const initialState: State = {
   eepLuaVersion: '?',
   eepWebVersion: environment.VERSION,
   urlStatus: [],
-  dataTypes: [],
 };
 
 export function reducer(state: State = initialState, action: CoreAction.CoreActions) {
@@ -106,11 +103,6 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
         ...state,
         eepWebVersion: action.payload
       };
-    case CoreAction.SET_DATA_TYPES:
-      return {
-        ...state,
-        dataTypes: action.payload
-      };
     default:
       return state;
   }
@@ -166,9 +158,4 @@ export const getApiPaths$ = createSelector(
 export const selectPollingUrl$ = createSelector(
   appState,
   (state: State) => state.pollingUrl
-);
-
-export const selectDataTypes$ = createSelector(
-  appState,
-  (state: State) => state.dataTypes
 );
