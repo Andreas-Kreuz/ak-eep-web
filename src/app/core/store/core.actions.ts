@@ -1,4 +1,5 @@
 import {Action} from '@ngrx/store';
+
 import {Alert} from '../error/alert.model';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
 
@@ -117,6 +118,7 @@ export type CoreActions =
   | SetPollingUrl
   | SetPollingEnabled
   | SetConnected
+  | FetchVersion
   | SetEepVersion
   | SetEepLuaVersion
   | SetEepWebVersion;

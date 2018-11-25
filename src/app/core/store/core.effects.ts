@@ -14,7 +14,7 @@ const VERSION_PATH = '/api/v1/eep-version';
 @Injectable()
 export class CoreEffects {
   @Effect()
-  fetchSignals = this.actions$
+  fetchVersions = this.actions$
     .pipe(
       ofType(fromCore.FETCH_VERSIONS),
       switchMap((action: fromCore.FetchVersion) => {

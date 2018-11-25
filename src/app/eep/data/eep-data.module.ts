@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {EepDataListComponent} from './data-list/eep-data-list.component';
-import {EepDataRoutingModule} from './intersection-routing.module';
+import {EepDataRoutingModule} from './data-routing.module';
 
 @NgModule({
   declarations: [

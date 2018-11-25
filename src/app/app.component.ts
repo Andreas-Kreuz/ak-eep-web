@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.store.subscribe(fromCore.getPollingUrl => this.hostLocation);
     this.hostLocation = window.location.protocol + '//' + window.location.hostname + ':3000';
     this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
 

@@ -19,14 +19,14 @@ export class HomeComponent implements OnInit {
   private intersectionsCount$: Observable<number>;
   private signalCount$: Observable<number>;
   private slotCount$: Observable<number>;
-  private pollingUrl$: Observable<string>;
+  private hostName$: Observable<string>;
   private connectionEstablished$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.pollingUrl$ = this.store.pipe(select(fromCore.getPollingUrl));
+    this.hostName$ = this.store.pipe(select(fromCore.getPollingUrl));
     this.eepLuaVersion$ = this.store.pipe(select(fromCore.selectEepLuaVersion));
     this.eepVersion$ = this.store.pipe(select(fromCore.selectEepVersion));
     this.eepWebVersion$ = this.store.pipe(select(fromCore.selectEepWebVersion));

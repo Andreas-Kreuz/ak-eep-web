@@ -3,6 +3,7 @@ import {Injectable, OnInit} from '@angular/core';
 
 import * as fromRoot from '../app.reducers';
 import * as fromCore from '../core/store/core.actions';
+import * as fromGenericData from '../eep/generic-data/store/generic-data.actions';
 import * as fromEepData from '../eep/data/store/eep-data.actions';
 import * as fromIntersection from '../eep/intersection/store/intersection.actions';
 import * as fromSignal from '../eep/signals/store/signal.actions';
@@ -19,19 +20,19 @@ export class DataStorageService implements OnInit {
   }
 
 
-  fetchStaticData(hostLocation) {
-    console.log('Kontaktiere Server');
-    this.store.dispatch(new fromCore.FetchVersion(hostLocation));
-    this.store.dispatch(new fromEepData.FetchSlots(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersections(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersectionLanes(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersectionSwitching(hostLocation));
-    this.store.dispatch(new fromIntersection.FetchIntersectionTrafficLights(hostLocation));
-    this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostLocation));
-    this.store.dispatch(new fromSignal.FetchSignals(hostLocation));
+  fetchStaticData(hostName) {
+    this.store.dispatch(new fromCore.FetchVersion(hostName));
+    this.store.dispatch(new fromGenericData.FetchDataTypes(hostName));
+    this.store.dispatch(new fromEepData.FetchSlots(hostName));
+    this.store.dispatch(new fromIntersection.FetchIntersections(hostName));
+    this.store.dispatch(new fromIntersection.FetchIntersectionLanes(hostName));
+    this.store.dispatch(new fromIntersection.FetchIntersectionSwitching(hostName));
+    this.store.dispatch(new fromIntersection.FetchIntersectionTrafficLights(hostName));
+    this.store.dispatch(new fromSignal.FetchSignalTypeDefinitions(hostName));
+    this.store.dispatch(new fromSignal.FetchSignals(hostName));
   }
 
-  fetchRuntimeData(hostLocation) {
-    this.fetchStaticData(hostLocation);
+  fetchRuntimeData(hostName) {
+    // this.fetchStaticData(hostName);
   }
 }

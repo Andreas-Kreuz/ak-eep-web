@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'data',
     loadChildren: './eep/data/eep-data.module#EepDataModule'
   },
+  {
+    path: 'generic-data',
+    loadChildren: './eep/generic-data/generic-data.module#GenericDataModule'
+  },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ServerStatusComponent},
   // {path: '', redirectTo: '/', pathMatch: 'full'},
