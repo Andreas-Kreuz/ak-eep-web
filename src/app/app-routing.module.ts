@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'generic-data',
     loadChildren: './eep/generic-data/generic-data.module#GenericDataModule'
   },
+  {
+    path: 'log',
+    loadChildren: './eep/log-viewer/log-viewer.module#LogViewerModule'
+  },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ServerStatusComponent},
   // {path: '', redirectTo: '/', pathMatch: 'full'},

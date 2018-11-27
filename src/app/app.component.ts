@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.hostLocation = window.location.protocol + '//' + window.location.hostname + ':3000';
     this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
-
     this.dataStorageService.fetchStaticData(this.hostLocation);
     this.dataStorageService.fetchRuntimeData(this.hostLocation);
     interval(1000).subscribe(() => {

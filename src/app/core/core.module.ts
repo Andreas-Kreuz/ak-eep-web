@@ -15,7 +15,7 @@ import {ServerStatusComponent} from './server-status/server-status.component';
   ],
   imports: [
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   exports: [
     AppRoutingModule,
