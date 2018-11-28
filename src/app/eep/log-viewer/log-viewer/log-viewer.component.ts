@@ -13,21 +13,22 @@ import {WebsocketEvent} from '../../../core/socket/websocket-event';
   styleUrls: ['./log-viewer.component.css']
 })
 export class LogViewerComponent implements OnInit, OnDestroy {
-  maxHeight: string;
+  lines$: Observable<string[]>;
   linesAsString$: Observable<string>;
+  maxHeight: string;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
+    this.lines$ = this.store.pipe(select(fromLogFile.lines$));
+    this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
     this.maxHeight = (window.innerHeight - 300) + 'px';
     fromEvent(window, 'resize').pipe(
       debounceTime(500)
     ).subscribe((event) => {
       this.maxHeight = (window.innerHeight - 300) + 'px';
     });
-
-    this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
   }
 
   ngOnDestroy(): void {
@@ -39,5 +40,9 @@ export class LogViewerComponent implements OnInit, OnDestroy {
 
   sendTestMessage() {
     this.store.dispatch(new logAction.SendCommand('print,Hallo von EEP-Web!'));
+  }
+
+  logEntries(index, item) {
+    return index;
   }
 }
