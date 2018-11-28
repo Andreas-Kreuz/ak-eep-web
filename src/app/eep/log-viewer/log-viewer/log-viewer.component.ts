@@ -4,6 +4,8 @@ import {select, Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromLogFile from '../store/log-file.reducers';
 import {debounceTime} from 'rxjs/operators';
+import * as logAction from '../store/log-file.actions';
+import {WebsocketEvent} from '../../../core/socket/websocket-event';
 
 @Component({
   selector: 'app-log-viewer',
@@ -18,22 +20,24 @@ export class LogViewerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.maxHeight = (window.innerHeight - 200) + 'px';
+    this.maxHeight = (window.innerHeight - 300) + 'px';
     fromEvent(window, 'resize').pipe(
       debounceTime(500)
     ).subscribe((event) => {
-      this.maxHeight = (window.innerHeight - 200) + 'px';
+      this.maxHeight = (window.innerHeight - 300) + 'px';
     });
 
     this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
-    // const wsLocation = 'ws://' + window.location.hostname + ':3000/ws/';
-    // this.websocketService.connect(wsLocation);
-    // this.websocketService.listen('Add Log Messages')
-    //   .subscribe((message: WebsocketAction) => {
-    //     this.allMessages = this.allMessages + message.payload + '\n';
-    //   });
   }
 
   ngOnDestroy(): void {
+  }
+
+  clearLog() {
+    this.store.dispatch(new logAction.SendCommand('clearlog'));
+  }
+
+  sendTestMessage() {
+    this.store.dispatch(new logAction.SendCommand('print,Hallo von EEP-Web!'));
   }
 }

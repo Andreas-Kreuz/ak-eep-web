@@ -29,11 +29,11 @@ export class Cleared implements Action {
   }
 }
 
-export class SendMessage implements Action {
+export class SendCommand implements Action {
   readonly type = SEND_MESSAGE;
 
   /**
-   * @param payload One or multiple log lines.
+   * @param command
    */
   constructor(public payload: string) {
   }
@@ -43,4 +43,4 @@ export type LogFileActions =
   LinesAdded
   | Cleared
   | Clear
-  | SendMessage;
+  | SendCommand;

@@ -1,6 +1,5 @@
 import {Action} from '@ngrx/store';
 import {DataType} from '../model/data-type';
-import {ShowUrlSuccess} from '../../../core/store/core.actions';
 
 export const FETCH_DATA_TYPES = '[Generic Data] Fetch data types';
 export const SET_DATA_TYPES = '[Generic Data] Set data types';

@@ -7,9 +7,12 @@
 </div>
 <div class="row pt-3">
   <div class="col-sm-12">
-    <pre
-      ngx-auto-scroll observe-attributes
-      class="pre-scrollable"
-      [ngStyle]="{'max-height': maxHeight }">{{ linesAsString$ | async }}</pre>
+    <p>
+      <button (click)="clearLog()" class="btn btn-danger btn-sm">Log löschen</button>&nbsp;
+      <button (click)="sendTestMessage()" class="btn btn-primary btn-sm">Testnachricht</button>
+    </p>
+    <pre ngx-auto-scroll observe-attributes
+         class="pre-scrollable"
+         [ngStyle]="{'height': maxHeight, 'max-height': maxHeight }">{{ linesAsString$ | async }}</pre>
   </div>
 </div>

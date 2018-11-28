@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Observer, Subject} from 'rxjs';
-import {WebsocketAction} from './websocket-action';
-import { environment } from '../../../environments/environment';
+import {WebsocketEvent} from './websocket-event';
+import {environment} from '../../../environments/environment';
+import {map, retry} from 'rxjs/operators';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
-  connected$ = new BehaviorSubject<boolean>(false);
-  public ws: WebSocket;
+  public websocketSubject: WebSocketSubject<WebsocketEvent>;
+  // public websocket: WebSocket;
   private readonly url: string;
 
   constructor() {
@@ -20,65 +21,80 @@ export class WebsocketService {
   }
 
   public connect() {
-    if (!this.ws) {
+    if (!this.websocketSubject) {
       console.log('Connecting websocket: ' + this.url);
-      this.ws = new WebSocket(this.url);
-      this.on('connect', () => this.connected$.next(true));
-      this.on('disconnect', () => this.connected$.next(false));
+      // this.websocket = new WebSocket(this.url);
+      this.websocketSubject = webSocket(this.url);
+      this.websocketSubject.subscribe((event: WebsocketEvent) => {
+          console.group();
+          console.log('----- SOCKET INBOUND -----');
+          console.log('Event: ', event);
+          console.log('Action: ', event.type);
+          console.log('Payload: ', event.payload);
+          console.groupEnd();
+        },
+        (err) => console.log(err),
+        () => console.log('Websocket is complete'));
     }
     return this;
   }
 
   public disconnect() {
-    if (this.ws) {
-      this.ws.close();
-      this.connected$.next(false);
+    if (this.websocketSubject) {
+      this.websocketSubject.complete();
     }
   }
 
   join(room: string) {
     // auto rejoin after reconnect mechanism
-    this.connected$.subscribe(connected => {
-      if (connected) {
-        this.emit(new WebsocketAction('join', room));
-      }
-    });
+    // this.connected$.subscribe(connected => {
+    //   if (connected) {
+    //     this.emit(new WebsocketEvent('join', room));
+    //   }
+    // });
   }
 
-  private on(event: string, fn: Function) {
-    this.listen(event).subscribe(fn());
+  public listen() {
+    return this.websocketSubject.pipe(
+      map((action: WebsocketEvent) => {
+        return action;
+      })
+    );
+
+
+    // const observable: Observable<any> = Observable.create(
+    //   (observer: Observer<WebsocketEvent>) => {
+    //     this.websocketSubject.onmessage = (messageEvent: MessageEvent) => {
+    //       const action: WebsocketEvent = JSON.parse(messageEvent.data);
+    //       console.group();
+    //       console.log('----- SOCKET INBOUND -----');
+    //       console.log('Event: ', messageEvent);
+    //       console.log('Action: ', action.type);
+    //       console.log('Payload: ', action.payload);
+    //       console.groupEnd();
+    //
+    //       for (const observer of this.observers) {
+    //         if (action.type === type) {
+    //           observer.next(action);
+    //         }
+    //       }
+    //     };
+    //     this.websocketSubject.onerror = observer.error.bind(observer);
+    //     this.websocketSubject.onclose = observer.complete.bind(observer);
+    //     return this.websocketSubject.close.bind(this.websocketSubject);
+    //   });
+    //
+    // return observable;
   }
 
-  public listen(event: string) {
-    const observable = Observable.create(
-      (observer: Observer<WebsocketAction>) => {
-        this.ws.onmessage = (messageEvent: MessageEvent) => {
-          const action: WebsocketAction = JSON.parse(messageEvent.data);
-            console.group();
-            console.log('----- SOCKET INBOUND -----');
-            console.log('Event: ', messageEvent);
-            console.log('Action: ', action.event);
-            console.log('Payload: ', action.payload);
-            console.groupEnd();
-
-          if (action.event === event) {
-            observer.next(action);
-          }
-        };
-        this.ws.onerror = observer.error.bind(observer);
-        this.ws.onclose = observer.complete.bind(observer);
-        return this.ws.close.bind(this.ws);
-      });
-    return observable;
-  }
-
-  public emit(action: WebsocketAction) {
+  public emit(event: WebsocketEvent) {
     console.group();
     console.log('----- SOCKET OUTGOING -----');
-    console.log('Action: ', action.event);
-    console.log('Payload: ', action.payload);
+    console.log('Action: ', event.type);
+    console.log('Payload: ', event.payload);
     console.groupEnd();
 
-    this.ws.send(JSON.stringify(action));
+    // this.websocket.send(JSON.stringify(event));
+    this.websocketSubject.next(event);
   }
 }
