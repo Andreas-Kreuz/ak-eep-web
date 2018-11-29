@@ -6,6 +6,7 @@ import * as fromLogFile from '../store/log-file.reducers';
 import {debounceTime} from 'rxjs/operators';
 import * as logAction from '../store/log-file.actions';
 import {WebsocketEvent} from '../../../core/socket/websocket-event';
+import {LogFileService} from '../store/log-file.service';
 
 @Component({
   selector: 'app-log-viewer',
@@ -17,10 +18,12 @@ export class LogViewerComponent implements OnInit, OnDestroy {
   linesAsString$: Observable<string>;
   maxHeight: string;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>,
+              private logFileService: LogFileService) {
   }
 
   ngOnInit() {
+    this.logFileService.connect();
     this.lines$ = this.store.pipe(select(fromLogFile.lines$));
     this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
     this.maxHeight = (window.innerHeight - 300) + 'px';
@@ -32,6 +35,7 @@ export class LogViewerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.logFileService.disconnect();
   }
 
   clearLog() {

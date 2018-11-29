@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {WebsocketService} from '../../../core/socket/websocket.service';
 import {WebsocketEvent} from '../../../core/socket/websocket-event';
 import * as fromLogFile from './log-file.actions';
@@ -10,32 +10,32 @@ import * as fromRoot from '../../../app.reducers';
   providedIn: 'root'
 })
 export class LogFileService {
-  logAdded$: Observable<WebsocketEvent>;
-  logCleared$: Observable<WebsocketEvent>;
+  logSubscription: Subscription;
 
   constructor(private socket: WebsocketService,
               private store: Store<fromRoot.State>) {
-    this.socket.join('log');
+  }
+
+  connect() {
     // Every socket "Log" type has it's own observable, will be used by ngrx effects
-    this.logAdded$ = this.socket.listen();
-    this.logCleared$ = this.socket.listen();
-
-    this.logAdded$.subscribe(
-      (event: WebsocketEvent) => {
-        if (event.type === fromLogFile.LINES_ADDED) {
-          store.dispatch(new fromLogFile.LinesAdded(event.payload));
-        }
-      });
-
-    this.logCleared$.subscribe(
+    const mpSocket = this.socket.listen('[Log]', (event: WebsocketEvent) => event.type.startsWith('[Log]'));
+    this.logSubscription = mpSocket.subscribe(
       (event: WebsocketEvent) => {
         if (event.type === fromLogFile.CLEARED) {
-          store.dispatch(new fromLogFile.Cleared());
+          this.store.dispatch(new fromLogFile.Cleared());
+        }
+
+        if (event.type === fromLogFile.LINES_ADDED) {
+          this.store.dispatch(new fromLogFile.LinesAdded(event.payload));
         }
       });
   }
 
+  disconnect() {
+    this.logSubscription.unsubscribe();
+  }
+
   sendCommand(command: string) {
-    this.socket.emit({ type: 'eepCommand', payload: command });
+    this.socket.emit({type: '[EEPCommand]', payload: command});
   }
 }

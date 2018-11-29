@@ -1,8 +1,8 @@
 import {Action} from '@ngrx/store';
 
 export const LINES_ADDED = '[Log] Lines Added';
-export const CLEAR = '[Log] Clear';
 export const CLEARED = '[Log] Lines Cleared';
+export const CLEAR = '[Log] Clear Log';
 export const SEND_MESSAGE = '[Log] Send Test Message';
 
 export class LinesAdded implements Action {

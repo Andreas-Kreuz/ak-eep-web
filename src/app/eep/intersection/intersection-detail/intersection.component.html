@@ -99,11 +99,15 @@
                       <input type="checkbox" disabled [checked]="laneContained(lane,switching)">
                     </td>
                   </tr>
-                  <!--<th scope="row" class="fit">Löschen</th>-->
-                  <!--<td></td>-->
-                  <!--<td class="text-center"><a class="btn btn-danger btn-sm" href="#" role="button">X</a></td>-->
-                  <!--<td class="text-center"><a class="btn btn-danger btn-sm" href="#" role="button">X</a></td>-->
-                  <!--<td class="text-center"><a class="btn btn-danger btn-sm" href="#" role="button">X</a></td>-->
+                  <!--<tr>-->
+                    <!--<th scope="row">Schalten:</th>-->
+                    <!--<th></th>-->
+                    <!--<td></td>-->
+                    <!--<td *ngFor="let switching of switchings; trackBy: trackSwitching"-->
+                        <!--scope="col"-->
+                        <!--class="fit text-center">-->
+                      <!--<a class="btn btn-primary btn-sm" href="#" role="button">Grün</a>-->
+                    <!--</td>-->
                   <!--</tr>-->
                   </tbody>
                 </table>
