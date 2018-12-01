@@ -9,6 +9,7 @@ import {EepWebUrl} from '../server-status/eep-web-url.model';
 import {VersionInfo} from '../model/version-info.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Versions} from '../model/versions.model';
 
 const VERSION_PATH = '/api/v1/eep-version';
 
@@ -25,11 +26,10 @@ export class CoreEffects {
           + ':' + environment.jsonPort
           + VERSION_PATH;
         console.log(url);
-        return this.httpClient.get<VersionInfo>(url)
+        return this.httpClient.get<Versions>(url)
           .pipe(
-            map((versionInfo: VersionInfo) => {
-
-              return versionInfo;
+            map((versions: Versions) => {
+              return versions.versionInfo;
             }),
             catchError((error) => {
               return throwError(error);
