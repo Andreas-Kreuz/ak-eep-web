@@ -4,6 +4,7 @@ import {interval} from 'rxjs';
 import {Store} from '@ngrx/store';
 import * as fromCore from './core/store/core.reducers';
 import * as CoreActions from './core/store/core.actions';
+import {PongService} from './core/socket/pong.service';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,14 @@ export class AppComponent implements OnInit {
   title = 'EEP-Web';
   hostLocation = 'http://localhost:3000';
 
-  constructor(private store: Store<fromCore.State>,
+  constructor(private pongService: PongService,
+              private store: Store<fromCore.State>,
               private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
+    this.pongService.connect();
+
     this.hostLocation = window.location.protocol + '//' + window.location.hostname + ':3000';
     this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
     this.dataStorageService.fetchStaticData(this.hostLocation);

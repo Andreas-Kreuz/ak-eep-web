@@ -15,6 +15,7 @@ import {of, throwError} from 'rxjs';
 import {SignalType} from '../models/signal-type.model';
 import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
 import {Status} from '../../../core/server-status/status.enum';
+import {environment} from '../../../../environments/environment';
 
 
 const errorHandler = (err, path) => {
@@ -31,7 +32,11 @@ export class SignalEffects {
     .pipe(
       ofType(fromSignal.FETCH_SIGNALS),
       switchMap((action: fromSignal.FetchSignals) => {
-        const url = action.payload + SIGNAL_PATH;
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + SIGNAL_PATH;
         console.log(url);
         return this.httpClient.get<Signal[]>(url)
           .pipe(
@@ -71,7 +76,11 @@ export class SignalEffects {
     .pipe(
       ofType(fromSignal.FETCH_SIGNAL_TYPES),
       switchMap((action: fromSignal.FetchSignalTypes) => {
-        const url = action.payload + SIGNAL_TYPE_PATH;
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + SIGNAL_TYPE_PATH;
         console.log(url);
         return this.httpClient.get<SignalType[]>(url)
           .pipe(
@@ -105,7 +114,11 @@ export class SignalEffects {
       );
   };
   loadFromAction = (action: FetchAction, path: string, setActionType: string) => {
-    const url = action.payload + path;
+    const url =
+      location.protocol
+      + '//' + location.hostname
+      + ':' + environment.jsonPort
+      + path;
     console.log(url);
     return this.loadFromUrl(url, path, setActionType);
   };

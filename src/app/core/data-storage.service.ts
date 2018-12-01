@@ -33,6 +33,7 @@ export class DataStorageService implements OnInit {
   }
 
   fetchRuntimeData(hostName) {
-    this.fetchStaticData(hostName);
+    // this.fetchStaticData(hostName);
+    // FETCH ONLY THE NEW STUFF
   }
 }

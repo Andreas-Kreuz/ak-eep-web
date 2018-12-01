@@ -13,6 +13,7 @@ import {of, throwError} from 'rxjs';
 import * as ErrorActions from '../../../core/store/core.actions';
 import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
 import {Status} from '../../../core/server-status/status.enum';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class EepDataEffects {
@@ -21,7 +22,11 @@ export class EepDataEffects {
     .pipe(
       ofType(fromEep.FETCH_SLOTS),
       switchMap((action: fromEep.FetchSlots) => {
-        const url = action.payload + SAVE_SLOT_PATH;
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + SAVE_SLOT_PATH;
         console.log(url);
         return this.httpClient.get<EepData[]>(url)
           .pipe(

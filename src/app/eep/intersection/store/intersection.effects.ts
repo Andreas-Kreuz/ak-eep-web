@@ -17,6 +17,7 @@ import {SetSignalTypes} from '../../signals/store/signal.actions';
 import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
 import {Status} from '../../../core/server-status/status.enum';
 import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
+import {environment} from '../../../../environments/environment';
 
 const errorHandler = (error, path) => {
   console.log(error);
@@ -45,7 +46,11 @@ export class IntersectionEffects {
     .pipe(
       ofType(fromIntersections.FETCH_INTERSECTION_TRAFFIC_LIGHTS),
       switchMap((action: fromIntersections.FetchIntersectionSwitching) => {
-        const url = action.payload + '/api/v1/intersection-traffic-lights';
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + '/api/v1/intersection-traffic-lights';
         console.log(url);
         return this.httpClient.get<IntersectionTrafficLight[]>(url)
           .pipe(
@@ -99,7 +104,11 @@ export class IntersectionEffects {
       );
   };
   loadFromAction = (action: fromIntersections.FetchAction, path: string, setActionType: string, init?) => {
-    const url = action.payload + path;
+    const url =
+      location.protocol
+      + '//' + location.hostname
+      + ':' + environment.jsonPort
+      + path;
     const observable = this.loadFromUrl(url, path, setActionType, init);
     return observable;
   };

@@ -8,6 +8,7 @@ import {Status} from '../server-status/status.enum';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
 import {VersionInfo} from '../model/version-info.model';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 const VERSION_PATH = '/api/v1/eep-version';
 
@@ -18,7 +19,11 @@ export class CoreEffects {
     .pipe(
       ofType(fromCore.FETCH_VERSIONS),
       switchMap((action: fromCore.FetchVersion) => {
-        const url = action.payload + VERSION_PATH;
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + VERSION_PATH;
         console.log(url);
         return this.httpClient.get<VersionInfo>(url)
           .pipe(

@@ -21,7 +21,7 @@ export class UpdateData implements Action {
   readonly type = SET_DATA;
 
   /**
-   * @param payload Version as String
+   * @param payload Data of a certain type as String
    */
   constructor(public payload: { type: string, values: {} }) {
   }
@@ -38,7 +38,7 @@ export class SetDataTypes implements Action {
   readonly type = SET_DATA_TYPES;
 
   /**
-   * @param payload Version as String
+   * @param payload Set all data types from remote
    */
   constructor(public payload: DataType[]) {
   }

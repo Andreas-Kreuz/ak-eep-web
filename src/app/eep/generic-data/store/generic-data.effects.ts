@@ -8,6 +8,7 @@ import {Status} from '../../../core/server-status/status.enum';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {DataType} from '../model/data-type';
+import {environment} from '../../../../environments/environment';
 
 
 const DATA_TYPES_PATH = '/api/v1/api-entries';
@@ -20,7 +21,11 @@ export class GenericDataEffects {
     .pipe(
       ofType(fromGenericData.FETCH_DATA_TYPES),
       switchMap((action: fromCore.FetchVersion) => {
-        const url = action.payload + DATA_TYPES_PATH;
+        const url =
+          location.protocol
+          + '//' + location.hostname
+          + ':' + environment.jsonPort
+          + DATA_TYPES_PATH;
         console.log(url);
         return this.httpClient.get<DataType[]>(url)
           .pipe(

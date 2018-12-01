@@ -33,7 +33,6 @@ export class WebsocketService {
         },
         (err) => console.log(err),
         () => console.log('Websocket is complete'));
-      // this.websocketSubject.retry()
     }
     return this;
   }
