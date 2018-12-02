@@ -2,7 +2,6 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as fromSignal from './signal.actions';
 import {Signal} from '../models/signal.model';
-import {SignalType} from '../models/signal-type.model';
 import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
 export interface State {

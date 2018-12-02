@@ -15,7 +15,6 @@ export const SET_EEP_WEB_VERSION = '[Core] Set EEP Web version';
 export const SHOW_URL_ERROR = '[Core] Show URL error';
 export const SHOW_URL_SUCCESS = '[Core] Show URL success';
 
-
 export class ShowError implements Action {
   readonly type = SHOW_ERROR;
 

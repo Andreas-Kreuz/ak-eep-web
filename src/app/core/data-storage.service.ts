@@ -7,13 +7,16 @@ import * as fromGenericData from '../eep/generic-data/store/generic-data.actions
 import * as fromEepData from '../eep/data/store/eep-data.actions';
 import * as fromIntersection from '../eep/intersection/store/intersection.actions';
 import * as fromSignal from '../eep/signals/store/signal.actions';
+import {DataTypesService} from './datatypes/data-types.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService implements OnInit {
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private dataTypesService: DataTypesService,
+              private store: Store<fromRoot.State>) {
+    dataTypesService.connect();
   }
 
   ngOnInit() {
@@ -33,7 +36,7 @@ export class DataStorageService implements OnInit {
   }
 
   fetchRuntimeData(hostName) {
-    // this.fetchStaticData(hostName);
+    this.fetchStaticData(hostName);
     // FETCH ONLY THE NEW STUFF
   }
 }

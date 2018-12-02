@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {WebsocketService} from '../../../core/socket/websocket.service';
-import {WebsocketEvent} from '../../../core/socket/websocket-event';
-import * as fromLogFile from './log-file.actions';
 import {Store} from '@ngrx/store';
+
+import * as fromLogFile from './log-file.actions';
 import * as fromRoot from '../../../app.reducers';
+import {WsEvent} from '../../../core/socket/ws-event';
+import {WsEventUtil} from '../../../core/socket/ws-event-util';
+import {WsService} from '../../../core/socket/ws.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +14,22 @@ import * as fromRoot from '../../../app.reducers';
 export class LogFileService {
   logSubscription: Subscription;
 
-  constructor(private socket: WebsocketService,
+  constructor(private socket: WsService,
               private store: Store<fromRoot.State>) {
   }
 
   connect() {
     // Every socket "Log" type has it's own observable, will be used by ngrx effects
-    const mpSocket = this.socket.listen('[Log]', (event: WebsocketEvent) => event.type.startsWith('[Log]'));
+    const mpSocket = this.socket.listen('[Log]');
     this.logSubscription = mpSocket.subscribe(
-      (event: WebsocketEvent) => {
-        if (event.type === fromLogFile.CLEARED) {
+      (wsEvent: WsEvent) => {
+        if (WsEventUtil.storeAction(wsEvent) === fromLogFile.CLEARED) {
           this.store.dispatch(new fromLogFile.Cleared());
         }
 
-        if (event.type === fromLogFile.LINES_ADDED) {
-          this.store.dispatch(new fromLogFile.LinesAdded(event.payload));
+        console.log(wsEvent.payload);
+        if (WsEventUtil.storeAction(wsEvent) === fromLogFile.LINES_ADDED) {
+          this.store.dispatch(new fromLogFile.LinesAdded(wsEvent.payload));
         }
       });
   }
@@ -36,6 +39,6 @@ export class LogFileService {
   }
 
   sendCommand(command: string) {
-    this.socket.emit({type: '[EEPCommand]', payload: command});
+    this.socket.emit(new WsEvent('[EEPCommand]', 'Send', command));
   }
 }

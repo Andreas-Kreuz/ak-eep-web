@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {debounceTime} from 'rxjs/operators';
 import {fromEvent, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
+
 import * as fromRoot from '../../../app.reducers';
 import * as fromLogFile from '../store/log-file.reducers';
-import {debounceTime} from 'rxjs/operators';
 import * as logAction from '../store/log-file.actions';
-import {WebsocketEvent} from '../../../core/socket/websocket-event';
 import {LogFileService} from '../store/log-file.service';
 
 @Component({
