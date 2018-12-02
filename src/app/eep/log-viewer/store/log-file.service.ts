@@ -27,7 +27,6 @@ export class LogFileService {
           this.store.dispatch(new fromLogFile.Cleared());
         }
 
-        console.log(wsEvent.payload);
         if (WsEventUtil.storeAction(wsEvent) === fromLogFile.LINES_ADDED) {
           this.store.dispatch(new fromLogFile.LinesAdded(wsEvent.payload));
         }
