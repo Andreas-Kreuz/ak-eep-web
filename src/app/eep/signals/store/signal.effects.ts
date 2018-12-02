@@ -57,7 +57,6 @@ export class SignalEffects {
       }),
       switchMap((list: Signal[]) => {
           return of(
-            new fromCore.SetConnected(),
             new CoreActions.ShowUrlError(new EepWebUrl(SIGNAL_PATH, Status.SUCCESS, 'Daten geladen')),
             {
               type: fromSignal.SET_SIGNALS,

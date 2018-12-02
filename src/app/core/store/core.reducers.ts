@@ -55,11 +55,9 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
     case CoreAction.SHOW_URL_ERROR:
     case CoreAction.SHOW_URL_SUCCESS:
       const newUrlStatus1: EepWebUrl[] = [];
-      let status = action.payload.status;
       for (const oldUrl of state.urlStatus) {
         if (oldUrl.path !== action.payload.path) {
           newUrlStatus1.push(oldUrl);
-          status = StatusUtil.worstOf(status, oldUrl.status);
         }
       }
       newUrlStatus1.push(action.payload);
@@ -71,7 +69,6 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
       return {
         ...state,
         urlStatus: newUrlStatus1,
-        connectionStatus: status,
       };
     case CoreAction.SET_POLLING_ENABLED:
       return {
@@ -82,6 +79,16 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
       return {
         ...state,
         pollingUrl: action.payload
+      };
+    case CoreAction.SET_CONNECTION_STATUS_SUCCESS:
+      return {
+        ...state,
+        connectionStatus: Status.SUCCESS,
+      };
+    case CoreAction.SET_CONNECTION_STATUS_ERROR:
+      return {
+        ...state,
+        connectionStatus: Status.ERROR,
       };
     case CoreAction.SET_CONNECTED:
       return {

@@ -8,6 +8,8 @@ export const HIDE_ERROR = '[Core] HIDE_ERROR';
 export const SET_POLLING_URL = '[Core] SET_POLLING_URL';
 export const SET_POLLING_ENABLED = '[Core] Set Polling Enabled';
 export const SET_CONNECTED = '[Core] Connected';
+export const SET_CONNECTION_STATUS_SUCCESS = '[Core] Connection Status Success';
+export const SET_CONNECTION_STATUS_ERROR = '[Core] Connection Status Danger';
 export const FETCH_VERSIONS = '[Core] FetchVersions';
 export const SET_EEP_VERSION = '[Core] Set EEP version';
 export const SET_EEP_LUA_VERSION = '[Core] Set EEP Lua version';
@@ -109,6 +111,14 @@ export class SetConnected implements Action {
   readonly type = SET_CONNECTED;
 }
 
+export class SetConnectionStatusSuccess implements Action {
+  readonly type = SET_CONNECTION_STATUS_SUCCESS;
+}
+
+export class SetConnectionStatusError implements Action {
+  readonly type = SET_CONNECTION_STATUS_ERROR;
+}
+
 export type CoreActions =
   ShowError
   | HideError
@@ -117,6 +127,8 @@ export type CoreActions =
   | SetPollingUrl
   | SetPollingEnabled
   | SetConnected
+  | SetConnectionStatusSuccess
+  | SetConnectionStatusError
   | FetchVersion
   | SetEepVersion
   | SetEepLuaVersion

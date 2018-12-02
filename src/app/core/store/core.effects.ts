@@ -37,7 +37,6 @@ export class CoreEffects {
       }),
       switchMap((versionInfo: VersionInfo) => {
           return of(
-            new fromCore.SetConnected(),
             new fromCore.ShowUrlError(new EepWebUrl(VERSION_PATH, Status.SUCCESS, 'Daten geladen')),
             new fromCore.SetEepVersion(versionInfo.eepVersion),
             new fromCore.SetEepLuaVersion(versionInfo.luaVersion)

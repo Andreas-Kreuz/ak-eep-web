@@ -25,12 +25,13 @@ export class DataTypesService {
       (wsEvent: WsEvent) => {
         if (WsEventUtil.storeAction(wsEvent) === fromDataTypes.SET_DATA_TYPES) {
           this.store.dispatch(new fromDataTypes.SetDataTypes(wsEvent.payload));
-          //this.store.dispatch(new fromCore.ShowUrlSuccess());
+          this.store.dispatch(new fromCore.SetConnected());
+          this.store.dispatch(new fromCore.SetConnectionStatusSuccess());
         }
       },
       error => {
         console.log(error);
-        //this.store.dispatch(new fromCore.ShowUrlError());
+        this.store.dispatch(new fromCore.SetConnectionStatusError());
       },
       () => console.log('Closed socket: DataTypesService')
     );
