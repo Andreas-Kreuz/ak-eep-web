@@ -6,24 +6,21 @@ import {select, Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromLogFile from '../store/log-file.reducers';
 import * as logAction from '../store/log-file.actions';
-import {LogFileService} from '../store/log-file.service';
 
 @Component({
   selector: 'app-log-viewer',
   templateUrl: './log-viewer.component.html',
   styleUrls: ['./log-viewer.component.css']
 })
-export class LogViewerComponent implements OnInit, OnDestroy {
+export class LogViewerComponent implements OnInit {
   lines$: Observable<string[]>;
   linesAsString$: Observable<string>;
   maxHeight: string;
 
-  constructor(private store: Store<fromRoot.State>,
-              private logFileService: LogFileService) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.logFileService.connect();
     this.lines$ = this.store.pipe(select(fromLogFile.lines$));
     this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
     this.maxHeight = (window.innerHeight - 300) + 'px';
@@ -32,10 +29,6 @@ export class LogViewerComponent implements OnInit, OnDestroy {
     ).subscribe((event) => {
       this.maxHeight = (window.innerHeight - 300) + 'px';
     });
-  }
-
-  ngOnDestroy(): void {
-    this.logFileService.disconnect();
   }
 
   clearLog() {

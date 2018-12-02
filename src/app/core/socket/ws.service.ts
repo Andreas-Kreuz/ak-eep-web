@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class WsService {
     }
   }
 
-  public listen(room: string) {
+  public listen(room: string, action?: string): Observable<WsEvent> {
     return this.websocketSubject.multiplex(
       () => {
         const event = new WsEvent('[Room]', 'Subscribe', room);
@@ -56,11 +57,20 @@ export class WsService {
         this.logSocket('OUTGOING', event, room);
         return event;
       },
-      (wsEvent: WsEvent) => wsEvent.room === room
+      (wsEvent: WsEvent) => {
+        if (action) {
+          return wsEvent.room === room && wsEvent.action === action;
+        }
+        return wsEvent.room === room;
+      }
     );
   }
 
   private logSocket(direction: string, wsEvent: WsEvent, additionalInfo?: string) {
+    if (wsEvent.room === '[Ping]') {
+      return;
+    }
+
     console.groupCollapsed(direction + ' SOCKET: '
       + wsEvent.room + ' ' + wsEvent.action
       + (additionalInfo ? ' ' + additionalInfo : '')

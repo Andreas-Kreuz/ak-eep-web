@@ -10,7 +10,6 @@ export const SET_POLLING_ENABLED = '[Core] Set Polling Enabled';
 export const SET_CONNECTED = '[Core] Connected';
 export const SET_CONNECTION_STATUS_SUCCESS = '[Core] Connection Status Success';
 export const SET_CONNECTION_STATUS_ERROR = '[Core] Connection Status Danger';
-export const FETCH_VERSIONS = '[Core] FetchVersions';
 export const SET_EEP_VERSION = '[Core] Set EEP version';
 export const SET_EEP_LUA_VERSION = '[Core] Set EEP Lua version';
 export const SET_EEP_WEB_VERSION = '[Core] Set EEP Web version';
@@ -47,13 +46,6 @@ export class ShowUrlSuccess implements Action {
 
   /** @param payload URL   */
   constructor(public payload: EepWebUrl) {
-  }
-}
-
-export class FetchVersion implements Action {
-  readonly type = FETCH_VERSIONS;
-
-  constructor(public payload: string) {
   }
 }
 
@@ -129,7 +121,6 @@ export type CoreActions =
   | SetConnected
   | SetConnectionStatusSuccess
   | SetConnectionStatusError
-  | FetchVersion
   | SetEepVersion
   | SetEepLuaVersion
   | SetEepWebVersion;

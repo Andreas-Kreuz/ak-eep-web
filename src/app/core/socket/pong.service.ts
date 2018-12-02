@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {WsService} from './ws.service';
 import {Store} from '@ngrx/store';
+import {Subscription} from 'rxjs';
+
 import * as fromRoot from '../../app.reducers';
 import {WsEvent} from './ws-event';
 import {WsEventUtil} from './ws-event-util';
-import {Subscription} from 'rxjs';
+import {WsService} from './ws.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class PongService {
   }
 
   connect() {
-    // Every socket "Log" type has it's own observable, will be used by ngrx effects
     const mpSocket = this.socket.listen('[Ping]');
     this.wsSubscription = mpSocket.subscribe(
       (wsEvent: WsEvent) => {

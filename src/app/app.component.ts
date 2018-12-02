@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStorageService} from './core/data-storage.service';
-import {interval} from 'rxjs';
 import {Store} from '@ngrx/store';
 import * as fromCore from './core/store/core.reducers';
 import * as CoreActions from './core/store/core.actions';
@@ -16,19 +14,12 @@ export class AppComponent implements OnInit {
   hostLocation = 'http://localhost:3000';
 
   constructor(private pongService: PongService,
-              private store: Store<fromCore.State>,
-              private dataStorageService: DataStorageService) {
+              private store: Store<fromCore.State>) {
   }
 
   ngOnInit() {
     this.pongService.connect();
-
-    this.hostLocation = window.location.protocol + '//' + window.location.hostname + ':3000';
+    this.hostLocation = location.protocol + '//' + location.hostname + ':3000';
     this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
-    this.dataStorageService.fetchStaticData(this.hostLocation);
-    this.dataStorageService.fetchRuntimeData(this.hostLocation);
-    interval(1000).subscribe(() => {
-      this.dataStorageService.fetchRuntimeData(this.hostLocation);
-    });
   }
 }

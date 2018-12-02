@@ -14,7 +14,7 @@
     <ul class="navbar-nav mr-auto">
       <!--<li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
       <!--<a class="nav-link" routerLink="/">Home</a></li>-->
-      <li class="nav-item" routerLinkActive="active">
+      <li *ngIf="(intersectionsAvailable$ | async)" class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/intersections">Kreuzungen</a>
       </li>
       <!--<li class="nav-item" routerLinkActive="active">-->

@@ -16,44 +16,44 @@ const DATA_TYPES_PATH = '/api/v1/api-entries';
 @Injectable()
 export class GenericDataEffects {
 
-  @Effect()
-  fetchDataTypes = this.actions$
-    .pipe(
-      ofType(fromGenericData.FETCH_DATA_TYPES),
-      switchMap((action: fromCore.FetchVersion) => {
-        const url =
-          location.protocol
-          + '//' + location.hostname
-          + ':' + environment.jsonPort
-          + DATA_TYPES_PATH;
-        console.log(url);
-        return this.httpClient.get<DataType[]>(url)
-          .pipe(
-            map((dataTypes: DataType[]) => {
-              dataTypes.sort((a: DataType, b: DataType) => {
-                return a.name < b.name
-                  ? -1
-                  : (a.name > b.name ? 1 : 0);
-              });
-
-              return dataTypes;
-            }),
-            catchError((error) => {
-              return throwError(error);
-            }));
-      }),
-      switchMap((dataTypes: DataType[]) => {
-          return of(
-            new fromCore.ShowUrlError(new EepWebUrl(DATA_TYPES_PATH, Status.SUCCESS, 'Daten geladen')),
-            new fromGenericData.SetDataTypes(dataTypes)
-          );
-        }
-      ),
-      catchError((err) => {
-        return of(
-          new fromCore.ShowUrlError(new EepWebUrl(DATA_TYPES_PATH, Status.ERROR, err.message)));
-      })
-    );
+  // @Effect()
+  // fetchDataTypes = this.actions$
+  //   .pipe(
+  //     ofType(fromGenericData.FETCH_DATA_TYPES),
+  //     switchMap((action) => {
+  //       const url =
+  //         location.protocol
+  //         + '//' + location.hostname
+  //         + ':' + environment.jsonPort
+  //         + DATA_TYPES_PATH;
+  //       console.log(url);
+  //       return this.httpClient.get<DataType[]>(url)
+  //         .pipe(
+  //           map((dataTypes: DataType[]) => {
+  //             dataTypes.sort((a: DataType, b: DataType) => {
+  //               return a.name < b.name
+  //                 ? -1
+  //                 : (a.name > b.name ? 1 : 0);
+  //             });
+  //
+  //             return dataTypes;
+  //           }),
+  //           catchError((error) => {
+  //             return throwError(error);
+  //           }));
+  //     }),
+  //     switchMap((dataTypes: DataType[]) => {
+  //         return of(
+  //           new fromCore.ShowUrlError(new EepWebUrl(DATA_TYPES_PATH, Status.SUCCESS, 'Daten geladen')),
+  //           new fromGenericData.SetDataTypes(dataTypes)
+  //         );
+  //       }
+  //     ),
+  //     catchError((err) => {
+  //       return of(
+  //         new fromCore.ShowUrlError(new EepWebUrl(DATA_TYPES_PATH, Status.ERROR, err.message)));
+  //     })
+  //   );
 
   @Effect()
   fetchData = this.actions$

@@ -1,31 +1,40 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import * as fromDataTypes from './data-types.actions';
-import {DataType} from '../data-type';
+import {DataType} from './data-type';
 
 export interface State {
-  availableDataTypes: DataType[];
+  availableDataTypes: string[];
+  intersectionsAvailable: boolean;
 }
 
 const initialState: State = {
   availableDataTypes: [],
+  intersectionsAvailable: false
 };
 
 export function reducer(state: State = initialState, action: fromDataTypes.DataTypesActions) {
   switch (action.type) {
     case fromDataTypes.SET_DATA_TYPES:
+      const l: string[] = [...action.payload];
       return {
         ...state,
-        availableDataTypes: [...action.payload],
+        availableDataTypes: l,
+        intersectionsAvailable: l.findIndex(dt => dt === 'intersections') !== -1,
       };
     default:
       return state;
   }
 }
 
-export const dataTypesState$ = createFeatureSelector('signal');
+export const dataTypesState$ = createFeatureSelector('dataTypes');
 
-export const availableDataTypes$ = createSelector(
+export const selectDataTypes = createSelector(
   dataTypesState$,
   (state: State) => state.availableDataTypes
 );
+export const selectIntersectionsAvailable = createSelector(
+  dataTypesState$,
+  (state: State) => state.intersectionsAvailable
+);
+

@@ -22,7 +22,8 @@
     <div class="card">
       <h5 class="card-header">Daten</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li *ngIf="(intersectionsAvailable$ | async)"
+          class="list-group-item">
           <a routerLink="/intersections">
             Kreuzungen
             <span class="badge badge-primary float-right">

@@ -6,6 +6,7 @@ import * as fromErrors from '../store/core.reducers';
 import * as fromRoot from '../../app.reducers';
 import {Observable} from 'rxjs';
 import {Status} from '../server-status/status.enum';
+import * as fromDataTypes from '../datatypes/store/data-types.reducers';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() featureSelected = new EventEmitter<string>();
   title: string;
+  private intersectionsAvailable$: Observable<boolean>;
 
   onSelect(feature: string) {
     this.featureSelected.emit(feature);
@@ -26,6 +28,7 @@ export class HeaderComponent implements OnInit {
   constructor(appComponent: AppComponent,
               private store: Store<fromRoot.State>) {
     this.title = appComponent.title;
+    this.intersectionsAvailable$ = this.store.pipe(select(fromDataTypes.selectIntersectionsAvailable));
   }
 
   ngOnInit() {

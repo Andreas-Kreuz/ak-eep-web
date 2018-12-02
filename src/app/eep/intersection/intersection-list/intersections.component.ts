@@ -5,7 +5,6 @@ import {select, Store} from '@ngrx/store';
 import {Intersection} from '../models/intersection.model';
 import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../../intersection/store/intersection.reducers';
-import {Signal} from '../../signals/models/signal.model';
 
 @Component({
   selector: 'app-crossings',
