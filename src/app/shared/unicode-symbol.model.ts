@@ -26,7 +26,7 @@ export const machine = '🏗️';
 
 export const trainHighspeed = '🚄';
 export const trainPassenger = '🚃';
-export const trainGoods = '';
+export const trainGoods = '🚃';
 
 export const ship = '⚓';
 

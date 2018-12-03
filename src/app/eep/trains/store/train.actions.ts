@@ -9,6 +9,8 @@ export enum TrainActionTypes {
   SET_RAIL_ROLLING_STOCK = '[Train] Set Rail Rolling Stock',
   SET_ROAD_TRAINS = '[Train] Set Road Trains',
   SET_ROAD_ROLLING_STOCK = '[Train] Set Road Rolling Stock',
+  SET_TRAM_TRAINS = '[Train] Set Tram Trains',
+  SET_TRAM_ROLLING_STOCK = '[Train] Set Tram Rolling Stock',
 }
 
 
@@ -47,9 +49,25 @@ export class SetRoadRollingStock implements Action {
   }
 }
 
+export class SetTramTrains implements Action {
+  readonly type = TrainActionTypes.SET_TRAM_TRAINS;
+
+  constructor(public payload: Train[]) {
+  }
+}
+
+export class SetTramRollingStock implements Action {
+  readonly type = TrainActionTypes.SET_TRAM_ROLLING_STOCK;
+
+  constructor(public payload: RollingStock[]) {
+  }
+}
+
 export type TrainActions =
   SelectType
   | SetRailTrains
   | SetRailRollingStock
   | SetRoadTrains
-  | SetRoadRollingStock;
+  | SetRoadRollingStock
+  | SetTramTrains
+  | SetTramRollingStock;

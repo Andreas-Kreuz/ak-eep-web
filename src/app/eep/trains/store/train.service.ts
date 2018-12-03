@@ -16,6 +16,8 @@ export class TrainService {
   private railRollingStock$: Observable<WsEvent>;
   private roadTrains$: Observable<WsEvent>;
   private roadRollingStock$: Observable<WsEvent>;
+  private tramTrains$: Observable<WsEvent>;
+  private tramRollingStock$: Observable<WsEvent>;
 
 
   railTrainsActions$(): Observable<WsEvent> {
@@ -31,6 +33,7 @@ export class TrainService {
     }
     return this.railRollingStock$;
   }
+
   roadTrainsActions$(): Observable<WsEvent> {
     if (!this.roadTrains$) {
       this.roadTrains$ = this.wsService.listen('[Data-road-trains]');
@@ -43,6 +46,20 @@ export class TrainService {
       this.roadRollingStock$ = this.wsService.listen('[Data-road-rolling-stocks]');
     }
     return this.roadRollingStock$;
+  }
+
+  tramTrainsActions$(): Observable<WsEvent> {
+    if (!this.tramTrains$) {
+      this.tramTrains$ = this.wsService.listen('[Data-tram-trains]');
+    }
+    return this.tramTrains$;
+  }
+
+  tramRollingStockActions$(): Observable<WsEvent> {
+    if (!this.tramRollingStock$) {
+      this.tramRollingStock$ = this.wsService.listen('[Data-tram-rolling-stocks]');
+    }
+    return this.tramRollingStock$;
   }
 
   emit(wsEvent: WsEvent) {

@@ -2,11 +2,11 @@
   <strong>{{ rollingStock.name }}</strong><br>
   <table class="table table-dark bg-dark text-left">
     <tbody>
-    <tr>
+    <tr *ngIf="typeOf() !== 'UNBEKANNT'">
       <td>Typ</td>
       <td>{{ typeOf() }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="rollingStock.length > 0">
       <td>Länge</td>
       <td>{{ rollingStock.length | number }} m</td>
     </tr>

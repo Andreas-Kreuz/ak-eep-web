@@ -23,8 +23,14 @@
               <tr *ngFor="let train of trains">
                 <td scope="row">
                   <!--<a [routerLink]="train.id">-->
-                  <strong>{{ train.id }}</strong>&nbsp;<small class="text-muted"> <strong>Länge:</strong> {{ train.length | number }} m</small><br>
-                  <app-rolling-stock-tooltip *ngFor="let rollingStock of train.rollingStock"
+                  <strong>{{ train.id }}</strong>&nbsp;
+                  <small *ngIf="train.length > 0" class="text-muted">
+                    <strong>Länge:</strong> {{ train.length | number }} m
+                  </small>
+                  <br>
+                  <app-rolling-stock-tooltip
+                    *ngFor="let rollingStock of train.rollingStock"
+                    [trainType]="trainType$ | async"
                     [rollingStock]="rollingStock"></app-rolling-stock-tooltip>
                   <!--{{ rollingStockOf(train, 'rail') }}<br>-->
                   <br>

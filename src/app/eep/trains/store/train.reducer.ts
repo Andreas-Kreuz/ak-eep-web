@@ -10,6 +10,8 @@ export interface State {
   railRollingStock: RollingStock[];
   roadTrains: Train[];
   roadRollingStock: RollingStock[];
+  tramTrains: Train[];
+  tramRollingStock: RollingStock[];
 }
 
 export const initialState: State = {
@@ -18,6 +20,8 @@ export const initialState: State = {
   railRollingStock: [],
   roadTrains: [],
   roadRollingStock: [],
+  tramTrains: [],
+  tramRollingStock: [],
 };
 
 export function reducer(state = initialState, action: TrainActions): State {
@@ -47,6 +51,16 @@ export function reducer(state = initialState, action: TrainActions): State {
         ...state,
         roadRollingStock: [...action.payload],
       };
+    case TrainActionTypes.SET_TRAM_TRAINS:
+      return {
+        ...state,
+        tramTrains: [...action.payload],
+      };
+    case TrainActionTypes.SET_TRAM_ROLLING_STOCK:
+      return {
+        ...state,
+        tramRollingStock: [...action.payload],
+      };
     default:
       return state;
   }
@@ -64,6 +78,9 @@ export const selectRailTrainCount = createSelector(
 export const selectRoadTrainCount = createSelector(
   trainsState$, (state: State) => state.roadTrains.length
 );
+export const selectTramTrainCount = createSelector(
+  trainsState$, (state: State) => state.tramTrains.length
+);
 
 export const selectRollingStock = createSelector(
   trainsState$,
@@ -78,6 +95,9 @@ export const selectRollingStock = createSelector(
         break;
       case 'road':
         rollingStocks = state.roadRollingStock;
+        break;
+      case 'tram':
+        rollingStocks = state.tramRollingStock;
         break;
     }
 
@@ -120,6 +140,9 @@ export const selectTrains = createSelector(
         break;
       case 'road':
         list = state.roadTrains;
+        break;
+      case 'tram':
+        list = state.tramTrains;
         break;
     }
 

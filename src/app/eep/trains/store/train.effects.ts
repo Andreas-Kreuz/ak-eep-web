@@ -54,6 +54,28 @@ export class TrainEffects {
     )
   );
 
+  @Effect()
+  setTramTrains$ = this.trainService.tramTrainsActions$().pipe(
+    filter(wsEvent => wsEvent.action === 'Set'),
+    switchMap(
+      wsEvent => {
+        const list: Train[] = JSON.parse(wsEvent.payload);
+        return of(new fromTrains.SetTramTrains(list));
+      }
+    )
+  );
+
+  @Effect()
+  setTramRollingStock$ = this.trainService.tramRollingStockActions$().pipe(
+    filter(wsEvent => wsEvent.action === 'Set'),
+    switchMap(
+      wsEvent => {
+        const list: RollingStock[] = JSON.parse(wsEvent.payload);
+        return of(new fromTrains.SetTramRollingStock(list));
+      }
+    )
+  );
+
   constructor(private actions$: Actions,
               private trainService: TrainService) {}
 }

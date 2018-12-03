@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   private intersectionsAvailable$: Observable<boolean>;
   private railTrainCount$: Observable<number>;
   private roadTrainCount$: Observable<number>;
+  private tramTrainCount$: Observable<number>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
@@ -42,5 +43,6 @@ export class HomeComponent implements OnInit {
     this.intersectionsCount$ = this.store.pipe(select(fromIntersection.intersectionsCount$));
     this.railTrainCount$ = this.store.pipe(select(fromTrain.selectRailTrainCount));
     this.roadTrainCount$ = this.store.pipe(select(fromTrain.selectRoadTrainCount));
+    this.tramTrainCount$ = this.store.pipe(select(fromTrain.selectTramTrainCount));
   }
 }

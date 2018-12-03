@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RollingStock} from '../../model/rolling-stock.model';
 import {iconForRollingStockType, textForRollingStockType} from '../../model/rolling-stock-type.enum';
 import {textForCoupling} from '../../model/coupling.enum';
-
+import {TrainType} from '../../model/train-type.enum';
+import * as unicode from '../../../../shared/unicode-symbol.model';
 
 @Component({
   selector: 'app-rolling-stock-tooltip',
@@ -11,6 +12,7 @@ import {textForCoupling} from '../../model/coupling.enum';
 })
 export class RollingStockTooltipComponent implements OnInit {
   @Input() rollingStock: RollingStock;
+  @Input() trainType: TrainType;
 
   constructor() {
   }
@@ -19,7 +21,19 @@ export class RollingStockTooltipComponent implements OnInit {
   }
 
   iconFor() {
-    return iconForRollingStockType(this.rollingStock.modelType);
+    if (this.rollingStock.modelType > 0) {
+      return iconForRollingStockType(this.rollingStock.modelType);
+    } else {
+      switch (this.trainType) {
+        default:
+        case TrainType.Rail:
+          return unicode.tenderLoco;
+        case TrainType.Road:
+          return unicode.car;
+        case TrainType.Tram:
+          return unicode.tram;
+      }
+    }
   }
 
   typeOf() {

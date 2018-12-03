@@ -88,7 +88,7 @@ export function iconForRollingStockType(t: number) {
     case RollingStockType.WaterTransport:
       return unicode.ship;
     default:
-      return 'UNBEKANNT';
+      return unicode.tenderLoco;
   }
 }
 
