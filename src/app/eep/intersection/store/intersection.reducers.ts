@@ -75,7 +75,7 @@ export const switchingNamesByIntersection$ = (intersectionId: Intersection) => c
   intersectionSwitching$,
   switching => switching
     .filter((is: IntersectionSwitching) => intersectionId.name === is.intersectionId)
-    .sort((a, b) => a.name < b.name ? -1 : 1)
+    .sort((a, b) => a.name.localeCompare(b.name))
 );
 
 export const intersectionById$ = (intersectionId) => createSelector(

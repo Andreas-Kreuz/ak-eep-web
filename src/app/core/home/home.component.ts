@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import * as fromRoot from '../../app.reducers';
 import * as fromCore from '../store/core.reducers';
 import * as fromDataTypes from '../datatypes/store/data-types.reducers';
 import * as fromEepData from '../../eep/data/store/eep-data.reducers';
 import * as fromIntersection from '../../eep/intersection/store/intersection.reducers';
+import * as fromRoot from '../../app.reducers';
 import * as fromSignal from '../../eep/signals/store/signal.reducers';
+import * as fromTrain from '../../eep/trains/store/train.reducer';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   private slotCount$: Observable<number>;
   private connectionEstablished$: Observable<boolean>;
   private intersectionsAvailable$: Observable<boolean>;
+  private railTrainCount$: Observable<number>;
+  private roadTrainCount$: Observable<number>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
@@ -37,5 +40,7 @@ export class HomeComponent implements OnInit {
     this.slotCount$ = this.store.pipe(select(fromEepData.eepDataCount$));
     this.signalCount$ = this.store.pipe(select(fromSignal.signalCount$));
     this.intersectionsCount$ = this.store.pipe(select(fromIntersection.intersectionsCount$));
+    this.railTrainCount$ = this.store.pipe(select(fromTrain.selectRailTrainCount));
+    this.roadTrainCount$ = this.store.pipe(select(fromTrain.selectRoadTrainCount));
   }
 }

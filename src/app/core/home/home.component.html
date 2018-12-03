@@ -47,6 +47,22 @@
             </span>
           </a>
         </li>
+        <li class="list-group-item">
+          <a [routerLink]="['trains', 'road']">
+            Straßen-Fahrzeuge
+            <span class="badge badge-primary float-right">
+              {{ (roadTrainCount$ | async) }}
+            </span>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a [routerLink]="['trains', 'rail']">
+            Züge
+            <span class="badge badge-primary float-right">
+              {{ (railTrainCount$ | async) }}
+            </span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

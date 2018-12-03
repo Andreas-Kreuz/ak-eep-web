@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: './eep/signals/signals.module#SignalsModule'
   },
   {
+    path: 'trains',
+    loadChildren: './eep/trains/trains.module#TrainsModule'
+  },
+  {
     path: 'intersections',
     loadChildren: './eep/intersection/intersection.module#IntersectionModule'
   },

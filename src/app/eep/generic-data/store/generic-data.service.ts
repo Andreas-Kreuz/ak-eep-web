@@ -26,9 +26,7 @@ export class GenericDataService {
           if (wsEvent.action === 'Set') {
             const dataTypes: DataType[] = JSON.parse(wsEvent.payload);
             dataTypes.sort((a: DataType, b: DataType) => {
-              return a.name < b.name
-                ? -1
-                : (a.name > b.name ? 1 : 0);
+              return a.name.localeCompare(b.name);
             });
             this.store.dispatch(new fromGenericData.SetDataTypes(dataTypes));
           }

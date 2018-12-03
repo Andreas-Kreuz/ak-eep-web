@@ -12,6 +12,9 @@ import {TooltipComponent} from './tooltip/tooltip.component';
     NgbModule,
     NgbTooltipModule,
     TooltipComponent,
+  ],
+  imports: [
+    NgbTooltipModule,
   ]
 
 })
