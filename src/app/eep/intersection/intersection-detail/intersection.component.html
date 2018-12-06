@@ -7,6 +7,86 @@
   <div *ngIf="(lanes$ | async) as lanes">
     <div class="row">
       <div class="col-sm-12 mt-3">
+        <div *ngIf="(switching$ | async) as switchings">
+          <div class="card m-1">
+            <div class="card-body">
+              <h5 class="card-title">Schaltungen der Fahrstreifen</h5>
+              <p class="card-text">
+                Mehrere Fahrstreifen können in Schaltungen zusammengefasst werden.
+              </p>
+              <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Schaltung</a></p>-->
+              <form class="card-text">
+                <table class="table table-sm table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" class="fit">Richtung</th>
+                    <th scope="col" class="fit">Typ</th>
+                    <th scope="col" class="fit">Spuren</th>
+                    <th *ngFor="let switching of switchings; trackBy: trackSwitching"
+                        scope="col" class="fit text-center">{{ switching.name }}
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Schaltung</th>
+                    <td colspan="2" class="text-center">
+                      <button (click)="enableAutomaticMode(intersection)"
+                              class="btn btn-sm"
+                              [ngClass]="[btnColorForAutomatic(intersection)]"
+                              type="button">Automatisch
+                      </button>
+                    </td>
+                    <td *ngFor="let switching of switchings; trackBy: trackSwitching"
+                        scope="col"
+                        class="fit text-center">
+                      <button (click)="switchTo(intersection, switching)"
+                              class="btn btn-sm"
+                              [ngClass]="[btnColorForSwitching(intersection, switching)]"
+                              type="button">Ein</button>
+                    </td>
+                  </tr>
+                  <tr *ngFor="let lane of lanes; trackBy: trackLane">
+                    <th scope="row">{{ lane.name }}</th>
+                    <th [ngClass]=[phaseColor(lane)] scope="row" class="fit text-center">
+                      <img *ngIf="lane.type == 'PEDESTRIAN'" src="../../../../assets/sign-pedestrian.svg" height="24"
+                           width="48" style="width: 48px; height: 24px;">
+                      <img *ngIf="lane.type == 'TRAM'" src="../../../../assets/sign-tram.svg" height="24" width="48"
+                           style="width: 48px; height: 24px;">
+                      <img *ngIf="lane.type == 'NORMAL'" src="../../../../assets/sign-cars.svg" height="24" width="48"
+                           style="width: 48px; height: 24px;">
+                    </th>
+                    <td [ngClass]=[phaseColor(lane)] class="fit align-middle">
+                      <img *ngFor="let direction of directionIcons(lane)"
+                           [src]="[direction]" height="24" width="24"
+                           style="width: 24px; height: 24px;">
+                    </td>
+                    <td *ngFor="let switching of switchings; trackBy: trackSwitching"
+                        scope="col"
+                        class="fit text-center"
+                        [ngClass]=[phaseColor(lane,switching,intersection)]>
+                      <input type="checkbox" disabled [checked]="laneContained(lane,switching)">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <small class="text-muted">Priorität</small></th>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td *ngFor="let switching of switchings; trackBy: trackSwitching"
+                        scope="col"
+                        class="fit text-center">
+                      <small class="text-muted">{{ switching.prio | number:'1.1-1' }}</small>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 mt-3">
         <div class="card m-1">
           <div class="card-body pb-0">
             <h5 class="card-title">Fahrstreifen</h5>
@@ -52,67 +132,6 @@
               </tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 mt-3">
-        <div *ngIf="(switching$ | async) as switchings">
-          <div class="card m-1">
-            <div class="card-body">
-              <h5 class="card-title">Schaltungen der Fahrstreifen</h5>
-              <p class="card-text">
-                Mehrere Fahrstreifen können in Schaltungen zusammengefasst werden.
-              </p>
-              <!--<p><a class="btn btn-success btn-sm" href="#" role="button">Neue Schaltung</a></p>-->
-              <form class="card-text">
-                <table class="table table-sm table-striped">
-                  <thead>
-                  <tr>
-                    <th scope="col" class="fit">Richtung</th>
-                    <th scope="col" class="fit">Typ</th>
-                    <th scope="col" class="fit">Spuren</th>
-                    <th *ngFor="let switching of switchings; trackBy: trackSwitching"
-                        scope="col" class="fit text-center">{{ switching.name }}
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let lane of lanes; trackBy: trackLane">
-                    <th scope="row">{{ lane.name }}</th>
-                    <th [ngClass]=[phaseColor(lane)] scope="row" class="fit text-center">
-                      <img *ngIf="lane.type == 'PEDESTRIAN'" src="../../../../assets/sign-pedestrian.svg" height="24"
-                           width="48" style="width: 48px; height: 24px;">
-                      <img *ngIf="lane.type == 'TRAM'" src="../../../../assets/sign-tram.svg" height="24" width="48"
-                           style="width: 48px; height: 24px;">
-                      <img *ngIf="lane.type == 'NORMAL'" src="../../../../assets/sign-cars.svg" height="24" width="48"
-                           style="width: 48px; height: 24px;">
-                    </th>
-                    <td [ngClass]=[phaseColor(lane)] class="fit align-middle">
-                      <img *ngFor="let direction of directionIcons(lane)"
-                           [src]="[direction]" height="24" width="24"
-                           style="width: 24px; height: 24px;">
-                    </td>
-                    <td *ngFor="let switching of switchings; trackBy: trackSwitching"
-                        scope="col"
-                        class="fit text-center"
-                        [ngClass]=[phaseColor(lane,switching,intersection)]>
-                      <input type="checkbox" disabled [checked]="laneContained(lane,switching)">
-                    </td>
-                  </tr>
-                  <!--<tr>-->
-                    <!--<th scope="row">Schalten:</th>-->
-                    <!--<th></th>-->
-                    <!--<td></td>-->
-                    <!--<td *ngFor="let switching of switchings; trackBy: trackSwitching"-->
-                        <!--scope="col"-->
-                        <!--class="fit text-center">-->
-                      <!--<a class="btn btn-primary btn-sm" href="#" role="button">Grün</a>-->
-                    <!--</td>-->
-                  <!--</tr>-->
-                  </tbody>
-                </table>
-              </form>
-            </div>
           </div>
         </div>
       </div>

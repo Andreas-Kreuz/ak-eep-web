@@ -1,5 +1,4 @@
 import {Action} from '@ngrx/store';
-import {HttpErrorResponse} from '@angular/common/http';
 import {Intersection} from '../models/intersection.model';
 import {IntersectionLane} from '../models/intersection-lane.model';
 import {IntersectionSwitching} from '../models/intersection-switching.model';
@@ -9,6 +8,8 @@ export const SET_INTERSECTIONS = '[Intersections] Set';
 export const SET_INTERSECTION_SWITCHING = '[Intersections] Set Switching';
 export const SET_INTERSECTION_LANES = '[Intersections] Set Lanes';
 export const SET_INTERSECTION_TRAFFIC_LIGHTS = '[Intersections] Set Traffic Lights';
+export const SWITCH_MANUALLY = '[Intersections] Switch Manually';
+export const SWITCH_AUTOMATICALLY = '[Intersections] Switch Automatically';
 
 export class SetIntersections implements Action {
   readonly type = SET_INTERSECTIONS;
@@ -38,8 +39,24 @@ export class SetIntersectionTrafficLights implements Action {
   }
 }
 
+export class SwitchManually implements Action {
+  readonly type = SWITCH_MANUALLY;
+
+  constructor(public payload: { intersection: Intersection, switching: IntersectionSwitching }) {
+  }
+}
+
+export class SwitchAutomatically implements Action {
+  readonly type = SWITCH_AUTOMATICALLY;
+
+  constructor(public payload: { intersection: Intersection }) {
+  }
+}
+
 export type IntersectionActions =
   SetIntersections
   | SetIntersectionLanes
   | SetIntersectionSwitching
-  | SetIntersectionTrafficLights;
+  | SetIntersectionTrafficLights
+  | SwitchAutomatically
+  | SwitchManually;

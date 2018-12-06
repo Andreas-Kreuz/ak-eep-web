@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {Actions, Effect} from '@ngrx/effects';
-import {switchMap} from 'rxjs/operators';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {map, switchMap} from 'rxjs/operators';
 import * as fromIntersections from './intersection.actions';
 import {of} from 'rxjs';
 import {IntersectionLane} from '../models/intersection-lane.model';
@@ -82,6 +82,29 @@ export class IntersectionEffects {
         }
       )
     );
+
+  @Effect({dispatch: false}) // effect will not dispatch any actions
+  switchManuallyCommand$ = this.actions$.pipe(
+    ofType(fromIntersections.SWITCH_MANUALLY),
+    map((action: fromIntersections.SwitchManually) => {
+      const command = 'AkKreuzungSchalteManuell,'
+        + action.payload.intersection.name + ','
+        + action.payload.switching.name;
+      this.intersectionService.emit(
+        new WsEvent('[EEPCommand]', 'Send', command));
+    })
+  );
+
+  @Effect({dispatch: false}) // effect will not dispatch any actions
+  switchAutomaticallyCommand$ = this.actions$.pipe(
+    ofType(fromIntersections.SWITCH_AUTOMATICALLY),
+    map((action: fromIntersections.SwitchAutomatically) =>{
+      const command = 'AkKreuzungSchalteAutomatisch,'
+        + action.payload.intersection.name;
+      this.intersectionService.emit(
+        new WsEvent('[EEPCommand]', 'Send', command));
+    })
+  );
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,

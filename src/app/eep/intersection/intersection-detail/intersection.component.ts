@@ -4,6 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
 
 import * as fromIntersection from '../store/intersection.reducers';
+import * as IntersectionAction from '../store/intersection.actions';
 import * as fromRoot from '../../../app.reducers';
 import {Intersection} from '../models/intersection.model';
 import {IntersectionLane} from '../models/intersection-lane.model';
@@ -164,5 +165,37 @@ export class IntersectionComponent implements OnInit, OnDestroy {
 
   laneContained(lane: IntersectionLane, switching: IntersectionSwitching) {
     return lane.switchings.indexOf(switching.name) >= 0;
+  }
+
+  switchTo(intersection: Intersection, switching: IntersectionSwitching) {
+    this.store.dispatch(new IntersectionAction.SwitchManually({
+      intersection, switching
+    }));
+  }
+
+  enableAutomaticMode(intersection: Intersection) {
+    this.store.dispatch(new IntersectionAction.SwitchAutomatically({
+      intersection
+    }));
+  }
+
+  btnColorForAutomatic(intersection: Intersection) {
+    if (intersection.manualSwitching) {
+      return 'btn-danger';
+    }
+    return 'btn-success';
+  }
+
+  btnColorForSwitching(intersection: Intersection, switching: IntersectionSwitching) {
+    if (intersection.manualSwitching === switching.name) {
+      return 'btn-success';
+    }
+    // if (intersection.currentSwitching === switching.name) {
+    //   return 'btn-primary';
+    // }
+    if (intersection.nextSwitching === switching.name) {
+      return 'btn-primary';
+    }
+    return 'btn-secondary';
   }
 }

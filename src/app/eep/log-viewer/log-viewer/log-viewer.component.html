@@ -8,8 +8,10 @@
 <div class="row pt-3">
   <div class="col-sm-12">
     <p>
-      <button (click)="clearLog()" class="btn btn-danger btn-sm">Log löschen</button>&nbsp;
-      <button (click)="sendTestMessage()" class="btn btn-primary btn-sm">Testnachricht</button>
+      <button (click)="clearLog()" class="btn btn-danger btn-sm"
+              type="button">Log löschen</button>&nbsp;
+      <button (click)="sendTestMessage()" class="btn btn-primary btn-sm"
+              type="button">Testnachricht</button>
     </p>
     <ul ngx-auto-scroll observe-attributes
         class="list-pre"

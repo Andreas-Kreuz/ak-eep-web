@@ -4,4 +4,6 @@ export class Intersection {
   timeForGreen: number;
   ready: boolean;
   currentSwitching: string;
+  manualSwitching: string;
+  nextSwitching: string;
 }
