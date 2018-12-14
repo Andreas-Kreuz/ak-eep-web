@@ -2,47 +2,37 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import * as fromCore from '../store/core.reducers';
-import * as fromDataTypes from '../datatypes/store/data-types.reducers';
-import * as fromEepData from '../../eep/data/store/eep-data.reducers';
-import * as fromIntersection from '../../eep/intersection/store/intersection.reducers';
 import * as fromRoot from '../../app.reducers';
-import * as fromSignal from '../../eep/signals/store/signal.reducers';
-import * as fromTrain from '../../eep/trains/store/train.reducer';
+import {BreakpointObserver, MediaMatcher} from '@angular/cdk/layout';
+import {MainNavigationService} from '../main/main-navigation.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   private hostName$: Observable<string>;
+  private connectionEstablished$: Observable<boolean>;
   private eepLuaVersion$: Observable<string>;
   private eepVersion$: Observable<string>;
   private eepWebVersion$: Observable<string>;
-  private intersectionsCount$: Observable<number>;
-  private signalCount$: Observable<number>;
-  private slotCount$: Observable<number>;
-  private connectionEstablished$: Observable<boolean>;
-  private intersectionsAvailable$: Observable<boolean>;
-  private railTrainCount$: Observable<number>;
-  private roadTrainCount$: Observable<number>;
-  private tramTrainCount$: Observable<number>;
+  private navigation;
+  private mobileQuery: MediaQueryList;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>,
+              private breakpointObserver: BreakpointObserver,
+              private mainNavigation: MainNavigationService,
+              media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
   }
 
   ngOnInit() {
     this.hostName$ = this.store.pipe(select(fromCore.getPollingUrl));
-    this.intersectionsAvailable$ = this.store.pipe(select(fromDataTypes.selectIntersectionsAvailable));
     this.eepLuaVersion$ = this.store.pipe(select(fromCore.selectEepLuaVersion));
     this.eepVersion$ = this.store.pipe(select(fromCore.selectEepVersion));
     this.eepWebVersion$ = this.store.pipe(select(fromCore.selectEepWebVersion));
     this.connectionEstablished$ = this.store.pipe(select(fromCore.getConnectionEstablished));
-    this.slotCount$ = this.store.pipe(select(fromEepData.eepDataCount$));
-    this.signalCount$ = this.store.pipe(select(fromSignal.signalCount$));
-    this.intersectionsCount$ = this.store.pipe(select(fromIntersection.intersectionsCount$));
-    this.railTrainCount$ = this.store.pipe(select(fromTrain.selectRailTrainCount));
-    this.roadTrainCount$ = this.store.pipe(select(fromTrain.selectRoadTrainCount));
-    this.tramTrainCount$ = this.store.pipe(select(fromTrain.selectTramTrainCount));
+    this.navigation = this.mainNavigation.navigation;
   }
 }

@@ -1,0 +1,76 @@
+@import "../../../custom-theme.scss";
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-entry-name {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.sidenav-container {
+  flex: 1 0 auto;
+}
+
+
+.sidenav-container {
+  min-height: 100vh;
+}
+
+
+//mat-nav-list {
+//  margin: 0;
+//  padding: 0;
+//}
+
+.mat-list-option:hover,
+.mat-list-option:focus,
+.mat-nav-list .mat-list-item:hover,
+.mat-nav-list .mat-list-item:focus,
+.active {
+  background-color: mat-color($ak-eep-web-primary);
+}
+
+.side-toolbar {
+  color: #ffffff;
+  background-color: #808080;
+  border: 0;
+  margin: 0;
+}
+
+.top-toolbar {
+  color: #ffffff;
+  background-color: #3A424A;
+}
+
+mat-sidenav,
+.mat-drawer {
+  background-color: mat-color($ak-eep-web-accent);
+  //border: 0;
+  //margin: 0;
+  //padding: 0;
+}
+
+.side-toolbar-divider {
+  //margin-top: 2em;
+  //margin-bottom: 2em;
+}
+
+.side-toolbar-navlist {
+  margin-bottom: 1.5em;
+}
+
+.main-card {
+  margin: 20px;
+  padding: 0;
+}
+
+.sidenav-container,
+.main-content {
+  background-color: #E5E5E5;
+}

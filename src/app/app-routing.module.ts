@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './core/home/home.component';
 import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {ServerStatusComponent} from './core/server-status/server-status.component';
