@@ -23,6 +23,10 @@
   color: #ffffff;
 }
 
+.muted {
+  color: #dddddd;
+}
+
 .title {
   margin-bottom: 20px !important;
 }
@@ -51,7 +55,7 @@ mat-card-title,
 }
 
 .list-element {
-//padding-left: 1em;
+ padding-left: 1em;
 }
 
 .list-icon {

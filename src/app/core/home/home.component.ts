@@ -13,7 +13,7 @@ import {MainNavigationService} from '../main/main-navigation.service';
 })
 export class HomeComponent implements OnInit {
   private hostName$: Observable<string>;
-  private connectionEstablished$: Observable<boolean>;
+  connectionEstablished$: Observable<boolean>;
   private eepLuaVersion$: Observable<string>;
   private eepVersion$: Observable<string>;
   private eepWebVersion$: Observable<string>;

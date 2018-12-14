@@ -50,10 +50,16 @@
             <a *ngIf="element.available | async"
                mat-list-item
                routerLink="{{ element.link }}">
+              <!--<mat-icon-->
+                <!--[matBadge]="element.badge | async"-->
+                <!--matBadgePosition="above after"-->
+                <!--class="list-icon">-->
+                <!--{{ element.icon }}-->
+              <!--</mat-icon>-->
+              <mat-icon class="list-icon">{{ element.icon }}</mat-icon>
               <span class="list-element">{{ element.name }}</span>
               <span class="spacer"></span>
-              <mat-icon class="list-icon" [matBadge]="element.badge | async"
-                        matBadgePosition="above after">{{ element.icon }}</mat-icon>
+              <mat-icon class="list-icon" class="muted">chevron_right</mat-icon>
               <mat-divider *ngIf="!last || !last_outer"></mat-divider>
             </a>
           </div>
