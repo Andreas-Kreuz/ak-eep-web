@@ -13,7 +13,7 @@ import * as fromRoot from '../../app.reducers';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-  private alerts$: Observable<Alert[]>;
+  alerts$: Observable<Alert[]>;
 
   constructor(private store: Store<fromRoot.State>) {
   }

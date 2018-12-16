@@ -7,7 +7,7 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core'
 })
 export class HeaderToolBarComponent implements OnInit, OnDestroy {
   @Output() toggled = new EventEmitter<boolean>();
-  private title = 'EEP-Web';
+  title = 'EEP-Web';
 
   constructor() {
   }

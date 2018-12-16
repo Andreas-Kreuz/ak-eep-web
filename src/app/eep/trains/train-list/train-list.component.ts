@@ -14,8 +14,8 @@ import {textForTrainType, TrainType} from '../model/train-type.enum';
   styleUrls: ['./train-list.component.css']
 })
 export class TrainListComponent implements OnInit, OnDestroy {
-  private trainType$: Observable<TrainType>;
-  private trains$: Observable<Train[]>;
+  trainType$: Observable<TrainType>;
+  trains$: Observable<Train[]>;
   private routeParams$: Subscription;
 
   constructor(private store: Store<fromRoot.State>,

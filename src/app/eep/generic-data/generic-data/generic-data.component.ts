@@ -13,7 +13,7 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./generic-data.component.css']
 })
 export class GenericDataComponent implements OnInit {
-  private data$: Observable<{ dataName: string, valueColumns: string[], values: any[] }>;
+  data$: Observable<{ dataName: string, valueColumns: string[], values: any[] }>;
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute) {

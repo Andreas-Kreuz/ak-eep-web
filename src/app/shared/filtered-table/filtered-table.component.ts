@@ -13,7 +13,7 @@ export class FilteredTableComponent implements OnInit {
   @Input() public columnNames: string[];
 
   @ViewChild(MatSort) sort: MatSort;
-  private dataSource: TableDataSource<any>;
+  dataSource: TableDataSource<any>;
   private filter = new Subject<string>();
 
   ngOnInit() {

@@ -11,7 +11,7 @@ import {EepWebUrl} from './eep-web-url.model';
   styleUrls: ['./server-status.component.css']
 })
 export class ServerStatusComponent implements OnInit {
-  private apiPaths$: Observable<EepWebUrl[]>;
+  apiPaths$: Observable<EepWebUrl[]>;
   private pollingUrl$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) {

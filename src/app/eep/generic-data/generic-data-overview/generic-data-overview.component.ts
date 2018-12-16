@@ -14,7 +14,7 @@ import {GenericDataService} from '../store/generic-data.service';
 })
 export class GenericDataOverviewComponent implements OnInit, OnDestroy {
   private hostName$: Observable<string>;
-  private dataTypes$: Observable<DataType[]>;
+  dataTypes$: Observable<DataType[]>;
 
   constructor(private genericDataService: GenericDataService,
               private store: Store<fromRoot.State>) {
