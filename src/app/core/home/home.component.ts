@@ -14,9 +14,9 @@ import {MainNavigationService} from './main-navigation.service';
 export class HomeComponent implements OnInit {
   private hostName$: Observable<string>;
   connectionEstablished$: Observable<boolean>;
-  private eepLuaVersion$: Observable<string>;
-  private eepVersion$: Observable<string>;
-  private eepWebVersion$: Observable<string>;
+  eepLuaVersion$: Observable<string>;
+  eepVersion$: Observable<string>;
+  eepWebVersion$: Observable<string>;
   private navigation;
   private mobileQuery: MediaQueryList;
 

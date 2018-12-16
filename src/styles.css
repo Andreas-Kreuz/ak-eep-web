@@ -26,3 +26,22 @@ html, body {
 .app-text-muted {
   color: #707070;
 }
+
+
+table {
+  width: 100%;
+}
+
+/* Vertical alignment fix */
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Vertical alignment fix */
+.material-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}

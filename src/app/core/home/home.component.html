@@ -27,10 +27,13 @@
 
 
 <div class="mat-typography" *ngIf="(connectionEstablished$ | async)">
-  <!--<p class="mat-display-1">-->
-  <!--Deine Anlage. Übersichtlich. Dargestellt.-->
-  <!--</p>-->
-  <h1 class="app-text-muted">Daten Deiner EEP-Anlage</h1>
+  <img src="../../../assets/andreas-kreuz-avatar.svg"
+       width="96" height="96" align="right" alt="Logo">
+  <h1 class="app-text-muted">
+    EEP-Web
+  </h1>
+  <p>Deine Anlagendaten</p>
+  <br clear="all">
 </div>
 
 
@@ -51,7 +54,7 @@
             <mat-icon class="list-icon">{{ element.icon }}</mat-icon>
             <span class="list-element">{{ element.name }}</span>
             <span class="spacer"></span>
-            <mat-icon class="list-icon" class="muted">chevron_right</mat-icon>
+            <mat-icon class="list-icon muted">chevron_right</mat-icon>
             <mat-divider *ngIf="!last || !last_outer"></mat-divider>
           </a>
         </div>
