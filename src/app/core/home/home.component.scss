@@ -30,6 +30,7 @@
 .title {
   margin-bottom: 20px !important;
 }
+
 .subtitle {
   font-weight: lighter;
   margin-bottom: 0px !important;
@@ -37,8 +38,7 @@
 
 
 mat-card-title,
-.title
-{
+.title {
   font-size: xx-large;
 }
 
@@ -50,16 +50,21 @@ mat-card-title,
   margin: 20px;
 }
 
-.mat-display-3 {
-  padding-bottom: 0px;
+.mat-nav-list {
+  padding-top: 0;
+}
+
+.mat-display-3, .mat-display-1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .list-element {
- padding-left: 1em;
+  padding-left: 1em;
 }
 
 .list-icon {
-//margin-right: 1em;
+  //margin-right: 1em;
 }
 
 .my-progress-content {

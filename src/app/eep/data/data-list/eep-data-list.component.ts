@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as fromRoot from '../../../app.reducers';
 import {select, Store} from '@ngrx/store';
 import * as fromEepData from '../../data/store/eep-data.reducers';

@@ -2,11 +2,13 @@ import * as fromLogFile from './log-file.actions';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 export interface State {
+  loading: boolean;
   linesAsString: string;
   lines: string[];
 }
 
 const initialState: State = {
+  loading: true,
   linesAsString: '',
   lines: [],
 };
@@ -24,6 +26,7 @@ export function reducer(state: State = initialState, action: fromLogFile.LogFile
       }
       return {
         ...state,
+        loading: false,
         linesAsString: newLinesAsString,
         lines: newLines,
       };
@@ -47,4 +50,8 @@ export const linesAsString$ = createSelector(
 export const lines$ = createSelector(
   logfileState$,
   (state: State) => state.lines
+);
+export const loading$ = createSelector(
+  logfileState$,
+  (state: State) => state.loading
 );

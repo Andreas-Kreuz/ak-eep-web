@@ -7,8 +7,6 @@ import {EepWebUrl} from '../../../core/server-status/eep-web-url.model';
 import {Status} from '../../../core/server-status/status.enum';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {DataType} from '../model/data-type';
-import {environment} from '../../../../environments/environment';
 
 
 const DATA_TYPES_PATH = '/api/v1/api-entries';

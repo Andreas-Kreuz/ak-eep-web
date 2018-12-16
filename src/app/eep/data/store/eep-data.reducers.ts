@@ -1,6 +1,6 @@
 import * as fromEepData from './eep-data.actions';
 import {EepData} from '../models/eep-data.model';
-import {createSelector, createFeatureSelector} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 export interface State {
   eepData: EepData[];

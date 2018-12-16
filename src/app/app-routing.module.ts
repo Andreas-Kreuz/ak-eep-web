@@ -28,11 +28,12 @@ const routes: Routes = [
   },
   {
     path: 'log',
-    loadChildren: './eep/log-viewer/log-viewer.module#LogViewerModule'
+    loadChildren: './eep/log-viewer/log-viewer.module#LogViewerModule',
+    data: {title: 'Log-Datei'},
   },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ServerStatusComponent},
-  // {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: '', redirectTo: '/', pathMatch: 'full'},
   // {path: '**', redirectTo: '/'} // Must be the last route!
 ];
 

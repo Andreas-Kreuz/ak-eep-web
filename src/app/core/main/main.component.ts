@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {Status} from '../server-status/status.enum';
 import * as fromDataTypes from '../datatypes/store/data-types.reducers';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {MainNavigationService} from './main-navigation.service';
+import {MainNavigationService} from '../home/main-navigation.service';
 
 @Component({
   selector: 'app-main',

@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromCore from '../store/core.reducers';
 import * as fromRoot from '../../app.reducers';
 import {BreakpointObserver, MediaMatcher} from '@angular/cdk/layout';
-import {MainNavigationService} from '../main/main-navigation.service';
+import {MainNavigationService} from './main-navigation.service';
 
 @Component({
   selector: 'app-home',

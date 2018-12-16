@@ -1,8 +1,8 @@
 /*!* You can add global styles to this file, and also import other maxHeight files *!*/
 /*html, body {*/
-  /*!*background: url('assets/landing-page.jpg') no-repeat;*!*/
-  /*!*background-size: 100%;*!*/
-  /*background: #eeeeee;*/
+/*!*background: url('assets/landing-page.jpg') no-repeat;*!*/
+/*!*background-size: 100%;*!*/
+/*background: #eeeeee;*/
 /*}*/
 
 /*html, body { height: 100%; }*/
@@ -13,8 +13,16 @@ app-root {
 }
 
 html, body {
-  background-color: #E5E5E5;
+  background-color: #FFFFFF; /* #E5E5E5; */
   min-height: 100vh;
   height: auto;
   margin: 0;
+}
+
+.app-spacer {
+  flex: 1 1 auto;
+}
+
+.app-text-muted {
+  color: #707070;
 }

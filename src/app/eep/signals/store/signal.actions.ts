@@ -1,7 +1,6 @@
 import {Action} from '@ngrx/store';
 import {Signal} from '../models/signal.model';
 import {HttpErrorResponse} from '@angular/common/http';
-import {SignalType} from '../models/signal-type.model';
 import {SignalTypeDefinition} from '../models/signal-type-definition.model';
 
 export const FETCH_SIGNALS = '[Signals] FETCH_SIGNALS';

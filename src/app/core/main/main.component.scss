@@ -28,11 +28,12 @@
 //  padding: 0;
 //}
 
-.mat-list-option:hover,
-.mat-list-option:focus,
-.mat-nav-list .mat-list-item:hover,
-.mat-nav-list .mat-list-item:focus,
-.active {
+.active
+  //.mat-list-option:hover,
+  //.mat-nav-list .mat-list-item:hover,
+  //.mat-list-option:focus,
+  //.mat-nav-list .mat-list-item:focus
+{
   background-color: mat-color($ak-eep-web-primary);
 }
 
@@ -50,7 +51,7 @@
 
 mat-sidenav,
 .mat-drawer {
-  background-color: mat-color($ak-eep-web-accent);
+  background-color: #cccccc; //mat-color($ak-eep-web-accent);
   //border: 0;
   //margin: 0;
   //padding: 0;
@@ -73,4 +74,5 @@ mat-sidenav,
 .sidenav-container,
 .main-content {
   background-color: #E5E5E5;
+  //background-color: #E5E5E5;
 }

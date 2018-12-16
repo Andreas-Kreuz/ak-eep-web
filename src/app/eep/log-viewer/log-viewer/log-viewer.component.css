@@ -1,21 +1,27 @@
-pre {
-  border: 1px solid darkgray;
-  background-color: white;
+mat-card {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
 }
 
-.list-pre {
-  padding: 5px;
-  max-height: 340px;
-  overflow-y: scroll;
-  list-style: none outside none;
-  border: 1px solid darkgray;
+.grid-container {
+  margin: 20px;
 }
 
-list-item-pre {
-  padding: unset;
-  display: block;
-  font-size: 87.5% !important;
-  color: #212529;
-  font-size: inherit;
-  white-space: pre;
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
 }

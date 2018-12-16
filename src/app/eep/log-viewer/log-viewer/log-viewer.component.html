@@ -1,27 +1,6 @@
-<div class="row mt-3">
-  <div class="col-sm-12">
-    <h1 class="mt-3">
-      EEP-Log-Datei
-    </h1>
-  </div>
-</div>
-<div class="row pt-3">
-  <div class="col-sm-12">
-    <p>
-      <button (click)="clearLog()" class="btn btn-danger btn-sm"
-              type="button">Log löschen</button>&nbsp;
-      <button (click)="sendTestMessage()" class="btn btn-primary btn-sm"
-              type="button">Testnachricht</button>
-    </p>
-    <ul ngx-auto-scroll observe-attributes
-        class="list-pre"
-         [ngStyle]="{'height': maxHeight, 'max-height': maxHeight }">
-      <li *ngFor="let line of (lines$ | async); trackBy: logEntries()"
-          class="list-item-pre text-monospace">
-        {{ line }}</li>
-    </ul>
-    <!--<pre ngx-auto-scroll observe-attributes-->
-         <!--class="pre-scrollable"-->
-         <!--[ngStyle]="{'height': maxHeight, 'max-height': maxHeight }">{{ linesAsString$ | async }}</pre>-->
-  </div>
-</div>
+<mat-card>
+  <app-log-tool-bar></app-log-tool-bar>
+  <mat-card-content>
+    <app-log-text-field></app-log-text-field>
+  </mat-card-content>
+</mat-card>

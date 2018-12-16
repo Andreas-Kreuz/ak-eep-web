@@ -5,7 +5,6 @@ import {Alert} from '../error/alert.model';
 import {environment} from '../../../environments/environment';
 import {EepWebUrl} from '../server-status/eep-web-url.model';
 import {Status} from '../server-status/status.enum';
-import {StatusUtil} from '../server-status/status-util';
 
 
 export interface State {

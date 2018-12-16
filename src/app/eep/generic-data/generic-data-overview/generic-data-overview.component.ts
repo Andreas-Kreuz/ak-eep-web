@@ -17,7 +17,8 @@ export class GenericDataOverviewComponent implements OnInit, OnDestroy {
   private dataTypes$: Observable<DataType[]>;
 
   constructor(private genericDataService: GenericDataService,
-              private store: Store<fromRoot.State>) { }
+              private store: Store<fromRoot.State>) {
+  }
 
   ngOnInit() {
     this.genericDataService.connect();
@@ -30,7 +31,9 @@ export class GenericDataOverviewComponent implements OnInit, OnDestroy {
   }
 
   trackByDataName(index: number, dataType: DataType) {
-    if (!dataType) { return null; }
+    if (!dataType) {
+      return null;
+    }
     return dataType.name;
   }
 }

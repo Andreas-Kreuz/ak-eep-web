@@ -1,5 +1,5 @@
 import {Observable, of} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import {Action, select, Store} from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
 import {Injectable} from '@angular/core';
 import * as fromDataTypes from '../datatypes/store/data-types.reducers';
@@ -8,17 +8,27 @@ import * as fromIntersection from '../../eep/intersection/store/intersection.red
 import * as fromSignal from '../../eep/signals/store/signal.reducers';
 import * as fromTrain from '../../eep/trains/store/train.reducer';
 
+class AppAction {
+  constructor(public iconName: string,
+              public action: Action,
+              public tooltip: string) {
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class MainNavigationService {
-  private intersectionsCount$: Observable<number>;
-  private signalCount$: Observable<number>;
-  private slotCount$: Observable<number>;
-  private intersectionsAvailable$: Observable<boolean>;
-  private railTrainCount$: Observable<number>;
-  private roadTrainCount$: Observable<number>;
-  private tramTrainCount$: Observable<number>;
+  navAction$: Observable<AppAction>;
+  actions$: Observable<AppAction[]>;
+
+  intersectionsCount$: Observable<number>;
+  signalCount$: Observable<number>;
+  slotCount$: Observable<number>;
+  intersectionsAvailable$: Observable<boolean>;
+  railTrainCount$: Observable<number>;
+  roadTrainCount$: Observable<number>;
+  tramTrainCount$: Observable<number>;
   navigation: ({
     name: string, values: {
       badge: null | Observable<number>;

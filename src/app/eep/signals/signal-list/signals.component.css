@@ -3,13 +3,16 @@
   color: #b0c4de;
   color: #eeeeee;
 }
+
 .filled {
   visibility: visible;
   color: #1e90ff;
 }
+
 .bad {
   color: #eeeeee;
 }
+
 .filled.bad {
   color: #1e90ff;
 }

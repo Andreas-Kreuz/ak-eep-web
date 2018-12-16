@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import {Injectable} from '@angular/core';
+import {Actions, Effect} from '@ngrx/effects';
 import {TrainService} from './train.service';
 import {filter, switchMap} from 'rxjs/operators';
 
@@ -77,5 +77,6 @@ export class TrainEffects {
   );
 
   constructor(private actions$: Actions,
-              private trainService: TrainService) {}
+              private trainService: TrainService) {
+  }
 }

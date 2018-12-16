@@ -43,7 +43,8 @@
                       <button (click)="switchTo(intersection, switching)"
                               class="btn btn-sm"
                               [ngClass]="[btnColorForSwitching(intersection, switching)]"
-                              type="button">Ein</button>
+                              type="button">Ein
+                      </button>
                     </td>
                   </tr>
                   <tr *ngFor="let lane of lanes; trackBy: trackLane">
@@ -70,7 +71,8 @@
                   </tr>
                   <tr>
                     <th scope="row">
-                      <small class="text-muted">Priorität</small></th>
+                      <small class="text-muted">Priorität</small>
+                    </th>
                     <td class="text-center"></td>
                     <td class="text-center"></td>
                     <td *ngFor="let switching of switchings; trackBy: trackSwitching"

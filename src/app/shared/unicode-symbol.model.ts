@@ -1,6 +1,3 @@
-
-
-
 export const unknown = '❔';
 export const trafficLight = '🚦';
 export const signal = '🚦';

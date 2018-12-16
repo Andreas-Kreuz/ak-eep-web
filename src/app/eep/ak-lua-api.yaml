@@ -6,19 +6,19 @@ info:
 host: 'localhost:3200'
 basePath: /
 tags:
-- name: eep-raw
-  description: 'Alles, was Lua von EEP kennst.'
-- name: eep-ak
-  description: Die Konfigurationsdaten von Andreas Kreuz
+  - name: eep-raw
+    description: 'Alles, was Lua von EEP kennst.'
+  - name: eep-ak
+    description: Die Konfigurationsdaten von Andreas Kreuz
 schemes:
-- https
-- http
+  - https
+  - http
 # region Server-API
 paths:
   /eep-raw:
     post:
       tags:
-      - pet
+        - pet
       #      summary: Add a new pet to the store
       #      description: ''
       #      operationId: addPet
@@ -574,40 +574,40 @@ definitions:
   AkDirection:
     type: string
     enum:
-    - left
-    - straight
-    - right
+      - left
+      - straight
+      - right
   AkTrackType:
     type: string
     enum:
-    - road
-    - rail
-    - tram
-    - auxiliary
-    - camera
+      - road
+      - rail
+      - tram
+      - auxiliary
+      - camera
   AkTrafficType:
     type: string
     enum:
-    - cars
-    - trams
-    - trains
-    - cyclists
-    - pedestrians
+      - cars
+      - trams
+      - trains
+      - cyclists
+      - pedestrians
   AkRoadSignalPhase:
     type: string
     enum:
-    - red
-    - red-yellow
-    - yellow
-    - green
-    - pedestrians
+      - red
+      - red-yellow
+      - yellow
+      - green
+      - pedestrians
   AkLaneSwitchingType:
     type: string
     enum:
-    - unused
-    - traffic
-    - request
-    - pedestrian
+      - unused
+      - traffic
+      - request
+      - pedestrian
   AkIntersection:
     type: object
     properties:
@@ -907,11 +907,11 @@ definitions:
   AkEepTrackType:
     type: string
     enum:
-    - road
-    - tram
-    - rail
-    - auxiliary
-    - control
+      - road
+      - tram
+      - rail
+      - auxiliary
+      - control
   AkEepTrack:
     type: object
     properties:

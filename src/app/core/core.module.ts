@@ -5,17 +5,9 @@ import {SharedModule} from '../shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {ErrorComponent} from './error/error.component';
 import {ServerStatusComponent} from './server-status/server-status.component';
-import {
-  MatBadgeModule,
-  MatButtonModule,
-  MatCardModule, MatCheckboxModule, MatDividerModule,
-  MatIconModule, MatListModule,
-  MatMenuModule, MatProgressSpinnerModule, MatRippleModule,
-  MatSidenavModule,
-  MatToolbarModule
-} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import {HeaderToolBarComponent} from './header-tool-bar/header-tool-bar.component';
+import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -23,24 +15,13 @@ import {HttpClientModule} from '@angular/common/http';
     MainComponent,
     HomeComponent,
     ServerStatusComponent,
+    HeaderToolBarComponent,
   ],
   imports: [
     SharedModule,
-    BrowserAnimationsModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatRippleModule,
-    MatSidenavModule,
-    MatToolbarModule,
     HttpClientModule,
     AppRoutingModule,
+    LayoutModule,
   ],
   exports: [
     AppRoutingModule,
@@ -49,4 +30,5 @@ import {HttpClientModule} from '@angular/common/http';
     MainComponent,
   ]
 })
-export class CoreModule {}
+export class CoreModule {
+}

@@ -26,53 +26,42 @@
 </mat-card>
 
 
+<div class="mat-typography" *ngIf="(connectionEstablished$ | async)">
+  <!--<p class="mat-display-1">-->
+  <!--Deine Anlage. Übersichtlich. Dargestellt.-->
+  <!--</p>-->
+  <h3 class="app-text-muted">Daten Deiner EEP-Anlage</h3>
+</div>
+
+
 <mat-card class="my-card" *ngIf="(connectionEstablished$ | async)">
-  <mat-card-title-group
-    class="my-card-title-group mat-typography">
-    <img
-      mat-card-md-image
-      src="../../../assets/andreas-kreuz-avatar.svg"
-      alt="avatar">
-    <mat-card-title class="title mat-display-3">
-      EEP-Web
-    </mat-card-title>
-    <mat-card-subtitle
-      *ngIf="!mobileQuery.matches"
-      class="subtitle mat-display-1">
-      Deine Anlage. Übersichtlich. Dargestellt.
-    </mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-content>
-    <mat-nav-list>
-      <div *ngFor="let category of navigation; let last_outer = last">
-        <div *ngIf="category.name !== 'Home'">
-          <div *ngFor="let element of category.values; let last = last">
-            <a *ngIf="element.available | async"
-               mat-list-item
-               routerLink="{{ element.link }}">
-              <!--<mat-icon-->
-                <!--[matBadge]="element.badge | async"-->
-                <!--matBadgePosition="above after"-->
-                <!--class="list-icon">-->
-                <!--{{ element.icon }}-->
-              <!--</mat-icon>-->
-              <mat-icon class="list-icon">{{ element.icon }}</mat-icon>
-              <span class="list-element">{{ element.name }}</span>
-              <span class="spacer"></span>
-              <mat-icon class="list-icon" class="muted">chevron_right</mat-icon>
-              <mat-divider *ngIf="!last || !last_outer"></mat-divider>
-            </a>
-          </div>
+  <mat-nav-list>
+    <div *ngFor="let category of navigation; let last_outer = last">
+      <div *ngIf="category.name !== 'Home'">
+        <div *ngFor="let element of category.values; let last = last">
+          <a *ngIf="element.available | async"
+             mat-list-item
+             routerLink="{{ element.link }}">
+            <!--<mat-icon-->
+            <!--[matBadge]="element.badge | async"-->
+            <!--matBadgePosition="above after"-->
+            <!--class="list-icon">-->
+            <!--{{ element.icon }}-->
+            <!--</mat-icon>-->
+            <mat-icon class="list-icon">{{ element.icon }}</mat-icon>
+            <span class="list-element">{{ element.name }}</span>
+            <span class="spacer"></span>
+            <mat-icon class="list-icon" class="muted">chevron_right</mat-icon>
+            <mat-divider *ngIf="!last || !last_outer"></mat-divider>
+          </a>
         </div>
       </div>
-    </mat-nav-list>
-  </mat-card-content>
+    </div>
+  </mat-nav-list>
 </mat-card>
 
 <div class="mat-typography">
-  <p class="mat-small mat-caption">
-    <br>
-    <br>
+  <p class="mat-small mat-caption app-text-muted">
     Versionen:<br>
     EEP-Web: {{ eepWebVersion$ | async }}
     <span *ngIf="(eepVersion$ | async) !== '?'">
@@ -81,93 +70,3 @@
   </span>
   </p>
 </div>
-
-
-<!--<div *ngIf="!(connectionEstablished$ | async)" class="row p-3">-->
-
-<!--<div class="jumbotron jumbotron-fluid col-12">-->
-<!--<div class="container">-->
-<!--<h1 class="display-4">EEP-Web</h1>-->
-<!--<p class="lead">Verbindung wird hergestellt zu-->
-<!--<a href="{{ hostName$ | async }}">{{ hostName$ | async }}</a>-->
-<!--</p>-->
-<!--&lt;!&ndash;<hr class="my-4">&ndash;&gt;-->
-<!--&lt;!&ndash;<a class="btn btn-primary" href="#" role="button">Verbinden</a>&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="row p-3" *ngIf="(connectionEstablished$ | async)">-->
-<!--<div class="jumbotron jumbotron-fluid col-12">-->
-<!--<div class="container">-->
-<!--<h1 class="display-4">EEP-Web</h1>-->
-<!--<p class="lead">Deine Anlage. Übersichtlich. Dargestellt.</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-12 col-md-12 mb-4">-->
-<!--<div class="card">-->
-<!--<h5 class="card-header">Daten</h5>-->
-<!--<ul class="list-group list-group-flush">-->
-<!--<li *ngIf="(intersectionsAvailable$ | async)"-->
-<!--class="list-group-item">-->
-<!--<a routerLink="/intersections">-->
-<!--Kreuzungen-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ intersectionsCount$ | async }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--<li class="list-group-item">-->
-<!--<a routerLink="/signals">-->
-<!--Signale & Ampeln-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ (signalCount$ | async) }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--<li class="list-group-item">-->
-<!--<a routerLink="/data">-->
-<!--Speicherplätze-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ (slotCount$ | async) }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--<li class="list-group-item">-->
-<!--<a [routerLink]="['trains', 'rail']">-->
-<!--Züge-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ (railTrainCount$ | async) }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--<li class="list-group-item">-->
-<!--<a [routerLink]="['trains', 'road']">-->
-<!--Straßen-Fahrzeuge-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ (roadTrainCount$ | async) }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--<li class="list-group-item">-->
-<!--<a [routerLink]="['trains', 'tram']">-->
-<!--Straßenbahn-->
-<!--<span class="badge badge-primary float-right">-->
-<!--{{ (tramTrainCount$ | async) }}-->
-<!--</span>-->
-<!--</a>-->
-<!--</li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="col-12 col-md-12 mb-4">-->
-<!--<p class="small text-muted">-->
-<!--Versionen:<br>-->
-<!--EEP-Web: {{ eepWebVersion$ | async }}-->
-<!--<span *ngIf="(eepVersion$ | async) !== '?'">-->
-<!--, EEP-Lua: {{ eepLuaVersion$ | async }}-->
-<!--, EEP: {{ eepVersion$ | async }}-->
-<!--</span>-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->

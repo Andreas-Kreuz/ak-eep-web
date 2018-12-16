@@ -1,0 +1,17 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Log-Datei</h1>
+    <span class="spacer"></span>
+    <button (click)="sendTestMessage()"
+            mat-icon-button matTooltip="Testnachricht senden" type="button">
+      <mat-icon>message</mat-icon>
+    </button>
+    <button (click)="clearLog()"
+            mat-icon-button matTooltip="Löschen" type="button">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

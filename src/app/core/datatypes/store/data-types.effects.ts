@@ -2,14 +2,12 @@ import {Injectable} from '@angular/core';
 import {Effect} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {catchError, filter, switchMap} from 'rxjs/operators';
-import {Store} from '@ngrx/store';
 
 import {WsEvent} from '../../socket/ws-event';
 import {Versions} from '../../model/versions.model';
 import {VersionInfo} from '../../model/version-info.model';
 import * as fromCore from '../../store/core.actions';
 import {WsService} from '../../socket/ws.service';
-import * as fromRoot from '../../../app.reducers';
 import {WsEventUtil} from '../../socket/ws-event-util';
 import * as fromDataTypes from './data-types.actions';
 import {DataTypesService} from './data-types.service';

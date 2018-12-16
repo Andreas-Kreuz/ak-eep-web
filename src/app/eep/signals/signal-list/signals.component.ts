@@ -7,7 +7,6 @@ import * as fromRoot from '../../../app.reducers';
 import * as fromEep from '../store/signal.reducers';
 import {car, trafficLight} from '../../../shared/unicode-symbol.model';
 import {SignalTypeDefinition} from '../models/signal-type-definition.model';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-signals',
@@ -28,7 +27,9 @@ export class SignalsComponent implements OnInit, OnDestroy {
   }
 
   trackSignalBy(index: number, signal: Signal) {
-    if (!signal) { return null; }
+    if (!signal) {
+      return null;
+    }
     return signal.id;
   }
 

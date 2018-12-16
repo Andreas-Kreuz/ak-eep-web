@@ -98,7 +98,7 @@ export class IntersectionEffects {
   @Effect({dispatch: false}) // effect will not dispatch any actions
   switchAutomaticallyCommand$ = this.actions$.pipe(
     ofType(fromIntersections.SWITCH_AUTOMATICALLY),
-    map((action: fromIntersections.SwitchAutomatically) =>{
+    map((action: fromIntersections.SwitchAutomatically) => {
       const command = 'AkKreuzungSchalteAutomatisch,'
         + action.payload.intersection.name;
       this.intersectionService.emit(
