@@ -7,6 +7,9 @@ import * as TrainAction from '../store/train.actions';
 import * as fromTrain from '../store/train.reducer';
 import {ActivatedRoute, Params} from '@angular/router';
 import {textForTrainType, TrainType} from '../model/train-type.enum';
+import {Coupling} from '../model/coupling.enum';
+import {TrainDetailsComponent} from '../train-details/train-details.component';
+import {DetailsItem} from '../../../shared/details/details-item';
 
 @Component({
   selector: 'app-train-list',
@@ -15,8 +18,44 @@ import {textForTrainType, TrainType} from '../model/train-type.enum';
 })
 export class TrainListComponent implements OnInit, OnDestroy {
   trainType$: Observable<TrainType>;
-  trains$: Observable<Train[]>;
+  columnsToDisplay: string[] = [
+    'id',
+    'route',
+    'rollingStock',
+    'coupling',
+    'length',
+  ];
+  columnNames = {
+    id: 'Name',
+    route: 'Route',
+    rollingStock: 'Wagen',
+    coupling: 'Kupplung',
+    length: 'Länge',
+  };
+  columnTextFunctions = {
+    rollingStock: (train: Train) => train && train.rollingStock ? train.rollingStock.length : 0,
+    coupling: (train: Train) => {
+      let value = '?';
+      if (train && train.rollingStock) {
+        value = train.rollingStock[0].couplingFront === Coupling.Ready
+        || train.rollingStock[0].couplingRear === Coupling.Ready
+        || train.rollingStock[train.rollingStock.length - 1].couplingFront === Coupling.Ready
+        || train.rollingStock[train.rollingStock.length - 1].couplingRear === Coupling.Ready
+          ? 'Bereit' : 'Abstoßen';
+      }
+      return value;
+    },
+    length: (train: Train) =>
+      train && train.length
+        ? train.length.toFixed(1)
+        : 0,
+  };
+  columnAlignment = {
+    length: 'right',
+  };
+  tableData$: Observable<Train[]>;
   private routeParams$: Subscription;
+  trainDetailsComponent = TrainDetailsComponent;
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute) {
@@ -25,9 +64,8 @@ export class TrainListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeParams$ = this.route.params
       .subscribe((params: Params) => {
-        console.log(this.route.snapshot.params['trainType']);
         this.store.dispatch(new TrainAction.SelectType(this.route.snapshot.params['trainType']));
-        this.trains$ = this.store.pipe(select(fromTrain.selectTrains));
+        this.tableData$ = this.store.pipe(select(fromTrain.selectTrains));
         this.trainType$ = this.store.pipe(select(fromTrain.selectTrainType));
       });
   }

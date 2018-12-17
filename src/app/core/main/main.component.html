@@ -1,3 +1,23 @@
+<div class="fixed-top mat-elevation-z20">
+  <mat-toolbar
+    color="primary"
+    class="fixed-header">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="leftNavigation.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h6>{{ title }}</h6>
+      <span class="app-spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--<nav mat-tab-nav-bar backgroundColor="primary"-->
+       <!--class="fixed-header">-->
+    <!--<a mat-tab-link *ngFor="let link of links"-->
+       <!--(click)="activeLink = link"-->
+       <!--[active]="activeLink == link"> {{link}} </a>-->
+  <!--</nav>-->
+</div>
+
 <mat-sidenav-container
   class="sidenav-container"
   [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
@@ -31,15 +51,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="main-content">
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <button mat-icon-button (click)="leftNavigation.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <h1>{{ title }}</h1>
-        <span class="app-spacer"></span>
-      </mat-toolbar-row>
-    </mat-toolbar>
     <div class="main-card">
       <router-outlet></router-outlet>
     </div>

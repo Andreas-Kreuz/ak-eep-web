@@ -43,4 +43,11 @@ export class RollingStockTooltipComponent implements OnInit {
   textForCoupling(coupling) {
     return textForCoupling(coupling);
   }
+
+  getTooltip() {
+    return this.rollingStock.name
+    + (this.typeOf() === 'UNBEKANNT'
+        ? ''
+        : ' (' + this.typeOf() + ', ' + this.rollingStock.length.toFixed(1) + 'm' + ')');
+  }
 }

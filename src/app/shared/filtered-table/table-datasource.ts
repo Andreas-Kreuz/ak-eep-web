@@ -1,7 +1,7 @@
 import {DataSource} from '@angular/cdk/collections';
 import {MatSort} from '@angular/material';
 import {map} from 'rxjs/operators';
-import {merge, Observable, Subject, Subscription} from 'rxjs';
+import {merge, Observable, Subscription} from 'rxjs';
 
 /**
  * Data source for the Table view. This class should
@@ -14,37 +14,30 @@ export class TableDataSource<T> extends DataSource<T> {
   private filterSubscription: Subscription;
   filterPredicate: (data, filterText) => boolean;
   private filterText: string;
-  private readonly _hasData = new Subject<boolean>();
-  private readonly _hasData$: Observable<boolean>;
-  private readonly _hasDataAfterFilter = new Subject<boolean>();
-  private readonly _hasDataAfterFilter$: Observable<boolean>;
 
   constructor(private data$: Observable<T[]>,
               private filter: Observable<string>,
-              private sort: MatSort) {
+              private sort: MatSort,
+              private columnsToDisplay: string[],
+              private columnTextFunctions?: (T) => string) {
     super();
 
     this.data = [];
     this.filterText = null;
-    this._hasData$ = this._hasData.asObservable();
-    this._hasDataAfterFilter$ = this._hasDataAfterFilter.asObservable();
-    this._hasData.next(false);
-    this._hasDataAfterFilter.next(false);
 
     this.filterPredicate = function (data, filterText) {
       // Transform the data into a lowercase string of all property values.
-      /** @type {?} */
-      const dataStr = Object.keys(data).reduce(function (currentTerm, key) {
+      const dataStr = columnsToDisplay.reduce(function (currentTerm, key) {
         // Use an obscure Unicode character to delimit the words in the concatenated string.
         // This avoids matches where the values of two columns combined will match the user's query
         // (e.g. `Flute` and `Stop` will match `Test`). The character is intended to be something
         // that has a very low chance of being typed in by somebody in a text field. This one in
         // particular is "White up-pointing triangle with dot" from
         // https://en.wikipedia.org/wiki/List_of_Unicode_characters
-        return currentTerm + ((/** @type {?} */ (data)))[key] + '◬';
+        const val = textFor(columnTextFunctions, data, key);
+        return currentTerm + val + '◬';
       }, '').toLowerCase();
       // Transform the filter by converting it to lowercase and removing whitespace.
-      /** @type {?} */
       const transformedFilter = filterText.trim().toLowerCase();
       return dataStr.indexOf(transformedFilter) !== -1;
     };
@@ -60,7 +53,6 @@ export class TableDataSource<T> extends DataSource<T> {
     // stream for the data-filtered-table to consume.
     this.dataSubscription = this.data$.subscribe((changedData) => {
         this.data = changedData;
-        this._hasData.next(changedData.length > 0);
       }
     );
     this.filterSubscription = this.filter.subscribe((filterText) => {
@@ -111,8 +103,14 @@ export class TableDataSource<T> extends DataSource<T> {
 
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
-      if (this.sort.active && a[this.sort.active] && b[this.sort.active]) {
-        return compare(a[this.sort.active], b[this.sort.active], isAsc);
+
+      if (this.sort.active) {
+        const valA = textFor(this.columnTextFunctions, a, this.sort.active);
+        const valB = textFor(this.columnTextFunctions, b, this.sort.active);
+
+        if (valA && valB) {
+          return compare(valA, valB, isAsc);
+        }
       }
 
       return 0;
@@ -120,18 +118,20 @@ export class TableDataSource<T> extends DataSource<T> {
   }
 
   private getFilteredData(allData: T[]) {
-    const filteredData = this.filterText
+    return this.filterText
       ? allData.filter((data) => this.filterPredicate(data, this.filterText))
       : allData;
-
-    return filteredData;
   }
 
-  public hasData() {
-    return this._hasData$;
-  }
 }
 
+function textFor(columnTextFunctions: (T) => any, element: any, column: string) {
+  const value = columnTextFunctions && columnTextFunctions[column]
+    ? columnTextFunctions[column](element)
+    : element[column];
+
+  return value;
+}
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);

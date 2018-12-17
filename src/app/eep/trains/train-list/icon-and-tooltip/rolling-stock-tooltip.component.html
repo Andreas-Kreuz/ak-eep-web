@@ -25,7 +25,8 @@
     </tbody>
   </table>
 </ng-template>
-<span [ngbTooltip]="htmlContent"
+<!--<span [ngbTooltip]="htmlContent"-->
+<span [matTooltip]="getTooltip()"
       [ngClass]="{'table-success': rollingStock.modelType === 10, 'table-warning': rollingStock.modelType === 9}"
       style="text-decoration: underline;">
   {{ iconFor() }}

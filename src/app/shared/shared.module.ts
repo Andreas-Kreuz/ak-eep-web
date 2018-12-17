@@ -7,22 +7,31 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatDividerModule, MatFormFieldModule,
+  MatDividerModule,
+  MatFormFieldModule,
   MatGridListModule,
-  MatIconModule, MatInputModule,
+  MatIconModule,
+  MatInputModule,
   MatListModule,
-  MatMenuModule, MatPaginatorModule,
+  MatMenuModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSidenavModule, MatSortModule, MatTableModule,
+  MatSidenavModule,
+  MatSortModule,
+  MatTableModule, MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
 import {FilteredTableComponent} from './filtered-table/filtered-table.component';
+import {DetailsDirective} from './details/details.directive';
+import {OldDetailsDirective} from './details/old-details.directive';
 
 @NgModule({
   declarations: [
     TooltipComponent,
     FilteredTableComponent,
+    DetailsDirective,
+    OldDetailsDirective,
   ],
   exports: [
     MatBadgeModule,
@@ -41,6 +50,7 @@ import {FilteredTableComponent} from './filtered-table/filtered-table.component'
     MatSidenavModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
     CommonModule,

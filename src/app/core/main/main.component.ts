@@ -15,6 +15,9 @@ import {MainNavigationService} from '../home/main-navigation.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit, OnDestroy {
+  // links = ['Autos', 'Züge', 'Trams', 'Sonstige', 'Steuerung'];
+  // activeLink = this.links[0];
+
   @Output() featureSelected = new EventEmitter<string>();
   title: string;
   private intersectionsAvailable$: Observable<boolean>;

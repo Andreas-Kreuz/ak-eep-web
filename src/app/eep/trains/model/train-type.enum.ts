@@ -7,11 +7,11 @@ export enum TrainType {
 export function textForTrainType(t: TrainType) {
   switch (t) {
     case TrainType.Road:
-      return 'Straßenfahrzeuge';
+      return 'Autos';
     case TrainType.Rail:
       return 'Züge';
     case TrainType.Tram:
-      return 'Straßenbahnen';
+      return 'Trams';
     default:
       return 'UNBEKANNT';
   }
