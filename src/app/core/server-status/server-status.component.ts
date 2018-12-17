@@ -12,14 +12,13 @@ import {EepWebUrl} from './eep-web-url.model';
 })
 export class ServerStatusComponent implements OnInit {
   apiPaths$: Observable<EepWebUrl[]>;
-  private pollingUrl$: Observable<string>;
+  private jsonServerUrl$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
     this.apiPaths$ = this.store.pipe(select(fromCore.getApiPaths$));
-    this.pollingUrl$ = this.store.pipe(select(fromCore.selectPollingUrl$));
+    this.jsonServerUrl$ = this.store.pipe(select(fromCore.getJsonServerUrl));
   }
-
 }

@@ -17,7 +17,6 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-nav-list class="side-toolbar-navlist" *ngFor="let nav_category of navigation">
-      <!--<mat-divider class="side-log-tool-bar-divider"></mat-divider>-->
       <div *ngFor="let element of nav_category.values">
         <a *ngIf="element.available | async"
            mat-list-item

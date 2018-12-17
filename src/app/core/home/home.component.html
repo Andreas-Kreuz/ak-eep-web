@@ -21,7 +21,7 @@
       color="warn"
       mode="indeterminate">
     </mat-progress-spinner>
-    <p>Verbinde mit Server ...<br><br></p>
+    <p>Verbinde mit Server ... {{ hostName$ | async }}<br><br></p>
   </mat-card-content>
 </mat-card>
 

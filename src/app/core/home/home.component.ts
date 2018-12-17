@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hostName$ = this.store.pipe(select(fromCore.getPollingUrl));
+    this.hostName$ = this.store.pipe(select(fromCore.getJsonServerUrl));
     this.eepLuaVersion$ = this.store.pipe(select(fromCore.selectEepLuaVersion));
     this.eepVersion$ = this.store.pipe(select(fromCore.selectEepVersion));
     this.eepWebVersion$ = this.store.pipe(select(fromCore.selectEepWebVersion));

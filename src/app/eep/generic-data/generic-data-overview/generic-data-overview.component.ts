@@ -22,7 +22,7 @@ export class GenericDataOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.genericDataService.connect();
-    this.hostName$ = this.store.pipe(select(fromCore.getPollingUrl));
+    this.hostName$ = this.store.pipe(select(fromCore.getJsonServerUrl));
     this.dataTypes$ = this.store.pipe(select(fromGenericData.selectDataTypes$));
   }
 

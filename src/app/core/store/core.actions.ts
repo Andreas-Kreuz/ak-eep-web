@@ -5,8 +5,7 @@ import {EepWebUrl} from '../server-status/eep-web-url.model';
 
 export const SHOW_ERROR = '[Core] SHOW_ERROR';
 export const HIDE_ERROR = '[Core] HIDE_ERROR';
-export const SET_POLLING_URL = '[Core] SET_POLLING_URL';
-export const SET_POLLING_ENABLED = '[Core] Set Polling Enabled';
+export const SET_JSON_SERVER_URL = '[Core] Set JSON Server URL';
 export const SET_CONNECTED = '[Core] Connected';
 export const SET_CONNECTION_STATUS_SUCCESS = '[Core] Connection Status Success';
 export const SET_CONNECTION_STATUS_ERROR = '[Core] Connection Status Danger';
@@ -79,23 +78,13 @@ export class SetEepWebVersion implements Action {
   }
 }
 
-export class SetPollingUrl implements Action {
-  readonly type = SET_POLLING_URL;
+export class SetJsonServerUrl implements Action {
+  readonly type = SET_JSON_SERVER_URL;
 
   /**
    * @param payload Index of the error message
    */
   constructor(public payload: string) {
-  }
-}
-
-export class SetPollingEnabled implements Action {
-  readonly type = SET_POLLING_ENABLED;
-
-  /**
-   * @param payload Index of the error message
-   */
-  constructor(public payload: boolean) {
   }
 }
 
@@ -116,8 +105,7 @@ export type CoreActions =
   | HideError
   | ShowUrlError
   | ShowUrlSuccess
-  | SetPollingUrl
-  | SetPollingEnabled
+  | SetJsonServerUrl
   | SetConnected
   | SetConnectionStatusSuccess
   | SetConnectionStatusError

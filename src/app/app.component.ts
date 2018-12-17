@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.pongService.connect();
     this.hostLocation = location.protocol + '//' + location.hostname + ':3000';
-    this.store.dispatch(new CoreActions.SetPollingUrl(this.hostLocation));
+    this.store.dispatch(new CoreActions.SetJsonServerUrl(this.hostLocation));
   }
 }

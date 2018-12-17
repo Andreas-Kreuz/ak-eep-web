@@ -10,8 +10,7 @@ import {Status} from '../server-status/status.enum';
 export interface State {
   lastAlert: Alert;
   alerts: Alert[];
-  pollingEnabled: boolean;
-  pollingUrl: string;
+  jsonServerUrl: string;
   connectionEstablished: boolean;
   connectionStatus: Status;
   eepVersion: string;
@@ -25,8 +24,7 @@ const initialState: State = {
   alerts: [
     new Alert('info', 'Die Anwendung wurde gestartet')
   ],
-  pollingEnabled: false,
-  pollingUrl: 'http://localhost:3000',
+  jsonServerUrl: 'http://localhost:3000',
   connectionEstablished: false,
   connectionStatus: Status.INFO,
   eepVersion: '?',
@@ -69,15 +67,10 @@ export function reducer(state: State = initialState, action: CoreAction.CoreActi
         ...state,
         urlStatus: newUrlStatus1,
       };
-    case CoreAction.SET_POLLING_ENABLED:
+    case CoreAction.SET_JSON_SERVER_URL:
       return {
         ...state,
-        pollingEnabled: action.payload
-      };
-    case CoreAction.SET_POLLING_URL:
-      return {
-        ...state,
-        pollingUrl: action.payload
+        jsonServerUrl: action.payload
       };
     case CoreAction.SET_CONNECTION_STATUS_SUCCESS:
       return {
@@ -131,9 +124,9 @@ export const selectConnectionStatus = createSelector(
   (state: State) => state.connectionStatus
 );
 
-export const getPollingUrl = createSelector(
+export const getJsonServerUrl = createSelector(
   appState,
-  (state: State) => state.pollingUrl
+  (state: State) => state.jsonServerUrl
 );
 
 export const getLastAlert = createSelector(
@@ -159,9 +152,4 @@ export const selectEepLuaVersion = createSelector(
 export const getApiPaths$ = createSelector(
   appState,
   (state: State) => state.urlStatus
-);
-
-export const selectPollingUrl$ = createSelector(
-  appState,
-  (state: State) => state.pollingUrl
 );
