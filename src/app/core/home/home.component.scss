@@ -23,10 +23,6 @@
   color: #ffffff;
 }
 
-.muted {
-  color: #dddddd;
-}
-
 .title {
   margin-bottom: 20px !important;
 }
@@ -42,10 +38,6 @@ mat-card-title,
   font-size: xx-large;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
 .grid-container {
   margin: 20px;
 }
@@ -54,17 +46,8 @@ mat-card-title,
   padding-top: 0;
 }
 
-.mat-display-3, .mat-display-1 {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
 .list-element {
   padding-left: 1em;
-}
-
-.list-icon {
-  //margin-right: 1em;
 }
 
 .my-progress-content {

@@ -60,7 +60,7 @@ export class TableDataSource<T> extends DataSource<T> {
     // stream for the data-filtered-table to consume.
     this.dataSubscription = this.data$.subscribe((changedData) => {
         this.data = changedData;
-        // this.paginator.length = changedData.length;
+        this._hasData.next(changedData.length > 0);
       }
     );
     this.filterSubscription = this.filter.subscribe((filterText) => {
@@ -124,17 +124,11 @@ export class TableDataSource<T> extends DataSource<T> {
       ? allData.filter((data) => this.filterPredicate(data, this.filterText))
       : allData;
 
-    this._hasData.next(allData.length > 0);
-    this._hasDataAfterFilter.next(filteredData.length > 0);
     return filteredData;
   }
 
   public hasData() {
     return this._hasData$;
-  }
-
-  public hasDataAfterFilter() {
-    return this._hasDataAfterFilter$;
   }
 }
 

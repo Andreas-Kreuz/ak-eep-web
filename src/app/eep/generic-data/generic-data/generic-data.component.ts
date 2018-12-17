@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromGenericActions from '../store/generic-data.actions';
 import * as fromGenericData from '../store/generic-data.reducers';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 
@@ -14,6 +14,8 @@ import {switchMap} from 'rxjs/operators';
 })
 export class GenericDataComponent implements OnInit {
   data$: Observable<{ dataName: string, valueColumns: string[], values: any[] }>;
+  tableData = new Subject<any[]>();
+  tableData$ = this.tableData.asObservable();
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute) {
@@ -36,5 +38,6 @@ export class GenericDataComponent implements OnInit {
         return this.store.pipe(select(fromGenericData.selectedDataStructure(name)));
       })
     );
+    this.data$.subscribe(data => this.tableData.next(data.values));
   }
 }

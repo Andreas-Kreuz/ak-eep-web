@@ -27,9 +27,9 @@
 
 
 <div class="mat-typography" *ngIf="(connectionEstablished$ | async)">
-  <img src="../../../assets/andreas-kreuz-avatar.svg"
-       width="96" height="96" align="right" alt="Logo">
-  <h1 class="app-text-muted">
+  <!--<img src="../../../assets/andreas-kreuz-avatar.svg"-->
+       <!--width="96" height="96" align="right" alt="Logo">-->
+  <h1 class="app-mute-dark-bg">
     EEP-Web
   </h1>
   <p>Deine Anlagendaten</p>
@@ -48,13 +48,13 @@
             <!--<mat-icon-->
             <!--[matBadge]="element.badge | async"-->
             <!--matBadgePosition="above after"-->
-            <!--class="list-icon">-->
+            <!--class="app-list-icon"-->
             <!--{{ element.icon }}-->
             <!--</mat-icon>-->
-            <mat-icon class="list-icon">{{ element.icon }}</mat-icon>
+            <mat-icon class="list-icon" color="primary">{{ element.icon }}</mat-icon>
             <span class="list-element">{{ element.name }}</span>
-            <span class="spacer"></span>
-            <mat-icon class="list-icon muted">chevron_right</mat-icon>
+            <span class="app-spacer"></span>
+            <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
             <mat-divider *ngIf="!last || !last_outer"></mat-divider>
           </a>
         </div>
@@ -63,8 +63,8 @@
   </mat-nav-list>
 </mat-card>
 
-<div class="mat-typography">
-  <p class="mat-small mat-caption app-text-muted">
+<div class="mat-typography" style="margin-top: 1.5em;">
+  <p class="mat-small mat-caption app-mute-dark-bg">
     Versionen:<br>
     EEP-Web: {{ eepWebVersion$ | async }}
     <span *ngIf="(eepVersion$ | async) !== '?'">

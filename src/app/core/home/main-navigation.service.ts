@@ -125,7 +125,7 @@ export class MainNavigationService {
         name: 'Roh-Daten', values: [
           {
             available: of(true),
-            icon: 'more',
+            icon: 'list_alt',
             name: 'Roh-Daten',
             link: '/generic-data',
             badge: null,

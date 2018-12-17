@@ -13,7 +13,7 @@ import {GenericDataService} from '../store/generic-data.service';
   styleUrls: ['./generic-data-overview.component.css']
 })
 export class GenericDataOverviewComponent implements OnInit, OnDestroy {
-  private hostName$: Observable<string>;
+  hostName$: Observable<string>;
   dataTypes$: Observable<DataType[]>;
 
   constructor(private genericDataService: GenericDataService,
