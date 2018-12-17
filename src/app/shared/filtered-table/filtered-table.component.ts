@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {TableDataSource} from './table-datasource';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-filtered-table',
@@ -11,6 +11,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 export class FilteredTableComponent implements OnInit, OnDestroy {
   @Input() public columnsToDisplay: string[];
   @Input() public columnNames: string[];
+  @Input() public columnTextFunctions?: (any) => string;
 
   @ViewChild(MatSort) sort: MatSort;
   dataSource: TableDataSource<any>;
@@ -34,5 +35,11 @@ export class FilteredTableComponent implements OnInit, OnDestroy {
 
   applyFilter(filterValue: string) {
     this.filter.next(filterValue.trim().toLowerCase());
+  }
+
+  textFor(element: any, column: string) {
+    return this.columnTextFunctions[column]
+      ? this.columnTextFunctions[column](element)
+      : element[column];
   }
 }
