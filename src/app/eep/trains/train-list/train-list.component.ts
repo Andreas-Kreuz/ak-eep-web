@@ -9,7 +9,6 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {textForTrainType, TrainType} from '../model/train-type.enum';
 import {Coupling} from '../model/coupling.enum';
 import {TrainDetailsComponent} from '../train-details/train-details.component';
-import {DetailsItem} from '../../../shared/details/details-item';
 
 @Component({
   selector: 'app-train-list',
@@ -34,17 +33,7 @@ export class TrainListComponent implements OnInit, OnDestroy {
   };
   columnTextFunctions = {
     rollingStock: (train: Train) => train && train.rollingStock ? train.rollingStock.length : 0,
-    coupling: (train: Train) => {
-      let value = '?';
-      if (train && train.rollingStock) {
-        value = train.rollingStock[0].couplingFront === Coupling.Ready
-        || train.rollingStock[0].couplingRear === Coupling.Ready
-        || train.rollingStock[train.rollingStock.length - 1].couplingFront === Coupling.Ready
-        || train.rollingStock[train.rollingStock.length - 1].couplingRear === Coupling.Ready
-          ? 'Bereit' : 'Abstoßen';
-      }
-      return value;
-    },
+    coupling: this.getCouplingText,
     length: (train: Train) =>
       train && train.length
         ? train.length.toFixed(1)
@@ -76,5 +65,27 @@ export class TrainListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeParams$.unsubscribe();
+  }
+
+  private getCouplingText(train: Train): string {
+    let value = '?';
+    if (train && train.rollingStock) {
+      const frontReady =
+        train.rollingStock[0].couplingFront === Coupling.Ready
+        || train.rollingStock[0].couplingRear === Coupling.Ready;
+
+      const rearReady =
+        train.rollingStock[train.rollingStock.length - 1].couplingFront === Coupling.Ready
+        || train.rollingStock[train.rollingStock.length - 1].couplingRear === Coupling.Ready;
+
+      if (frontReady) {
+        return rearReady ? 'Bereit (v+h)' : 'Bereit (v)';
+      } else if (rearReady) {
+        return 'Bereit (h)';
+      } else {
+        return 'Abstoßen';
+      }
+    }
+    return value;
   }
 }
