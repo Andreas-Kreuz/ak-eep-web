@@ -87,8 +87,8 @@ export class IntersectionEffects {
   switchManuallyCommand$ = this.actions$.pipe(
     ofType(fromIntersections.SWITCH_MANUALLY),
     map((action: fromIntersections.SwitchManually) => {
-      const command = 'AkKreuzungSchalteManuell,'
-        + action.payload.intersection.name + ','
+      const command = 'AkKreuzungSchalteManuell|'
+        + action.payload.intersection.name + '|'
         + action.payload.switching.name;
       this.intersectionService.emit(
         new WsEvent('[EEPCommand]', 'Send', command));
@@ -99,7 +99,7 @@ export class IntersectionEffects {
   switchAutomaticallyCommand$ = this.actions$.pipe(
     ofType(fromIntersections.SWITCH_AUTOMATICALLY),
     map((action: fromIntersections.SwitchAutomatically) => {
-      const command = 'AkKreuzungSchalteAutomatisch,'
+      const command = 'AkKreuzungSchalteAutomatisch|'
         + action.payload.intersection.name;
       this.intersectionService.emit(
         new WsEvent('[EEPCommand]', 'Send', command));
@@ -110,9 +110,7 @@ export class IntersectionEffects {
   switchToCamCommand$ = this.actions$.pipe(
     ofType(fromIntersections.SWITCH_TO_CAM),
     map((action: fromIntersections.SwitchToCam) => {
-      const command = 'EEPSetCamera,'
-        + '0,'
-        + action.payload.staticCam;
+      const command = 'EEPSetCamera|0|' + action.payload.staticCam;
       this.intersectionService.emit(
         new WsEvent('[EEPCommand]', 'Send', command));
     })
