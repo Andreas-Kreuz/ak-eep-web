@@ -27,17 +27,17 @@
 
 
 <div class="mat-typography" *ngIf="(connectionEstablished$ | async)">
-  <!--<img src="../../../assets/andreas-kreuz-avatar.svg"-->
-       <!--width="96" height="96" align="right" alt="Logo">-->
-  <h1 class="app-mute-dark-bg">
+  <h1 class="title">
     EEP-Web
   </h1>
-  <p>Deine Anlagendaten</p>
-  <br clear="all">
+  <!--<img src="../../../assets/andreas-kreuz-avatar.svg"-->
+  <!--width="96" height="96" align="center" alt="Logo">-->
+  <p>Die Daten werden aktualisiert, wenn EEP im 3D-Modus läuft.</p>
 </div>
 
 
-<mat-card class="my-card" *ngIf="(connectionEstablished$ | async)">
+<mat-card class="my-card mat-elevation-z2"
+          *ngIf="(connectionEstablished$ | async)">
   <mat-nav-list>
     <div *ngFor="let category of navigation; let last_outer = last">
       <div *ngIf="category.name !== 'Home'">
@@ -63,13 +63,11 @@
   </mat-nav-list>
 </mat-card>
 
+
 <div class="mat-typography" style="margin-top: 1.5em;">
   <p class="mat-small mat-caption app-mute-dark-bg">
     Versionen:<br>
-    EEP-Web: {{ eepWebVersion$ | async }}
-    <span *ngIf="(eepVersion$ | async) !== '?'">
-    , EEP-Lua: {{ eepLuaVersion$ | async }}
-      , EEP: {{ eepVersion$ | async }}
+    EEP-Web: {{ eepWebVersion$ | async }}<span *ngIf="(eepVersion$ | async) !== '?'">, EEP-Lua: {{ eepLuaVersion$ | async }}, EEP: {{ eepVersion$ | async }}
   </span>
   </p>
 </div>

@@ -1,13 +1,5 @@
 @import "../../../custom-theme.scss";
 
-//.fixed-header {
-//  position: fixed;
-//  top: 0;
-//  left: 0;
-//  z-index: 2;
-//  width: 100%  !important;
-//}
-
 .spacer {
   flex: 1 1 auto;
 }
@@ -19,50 +11,14 @@
 
 .sidenav-container {
   flex: 1 0 auto;
-  background-color: #E5E5E5;
   padding-top: 70px;
   min-height: 100vh;
 }
 
-
-//mat-nav-list {
-//  margin: 0;
-//  padding: 0;
-//}
-
-.active
-  //.mat-list-option:hover,
-  //.mat-nav-list .mat-list-item:hover,
-  //.mat-list-option:focus,
-  //.mat-nav-list .mat-list-item:focus
-{
-  background-color: mat-color($ak-eep-web-primary);
-}
-
 .side-toolbar {
   padding-top: 64px;
-  color: #ffffff;
-  background-color: #808080;
   border: 0;
   margin: 0;
-}
-
-.top-toolbar {
-  color: #ffffff;
-  background-color: #3A424A;
-}
-
-mat-sidenav,
-.mat-drawer {
-  background-color: #cccccc; //mat-color($ak-eep-web-accent);
-  //border: 0;
-  //margin: 0;
-  //padding: 0;
-}
-
-.side-toolbar-divider {
-  //margin-top: 2em;
-  //margin-bottom: 2em;
 }
 
 .side-toolbar-navlist {
@@ -72,9 +28,4 @@ mat-sidenav,
 .main-card {
   margin: 20px;
   padding: 0;
-}
-
-.main-content {
-  background-color: #E5E5E5;
-  //background-color: #E5E5E5;
 }
