@@ -6,4 +6,5 @@ export class Intersection {
   currentSwitching: string;
   manualSwitching: string;
   nextSwitching: string;
+  staticCams: string[];
 }

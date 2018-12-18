@@ -106,6 +106,18 @@ export class IntersectionEffects {
     })
   );
 
+  @Effect({dispatch: false}) // effect will not dispatch any actions
+  switchToCamCommand$ = this.actions$.pipe(
+    ofType(fromIntersections.SWITCH_TO_CAM),
+    map((action: fromIntersections.SwitchToCam) => {
+      const command = 'EEPSetCamera,'
+        + '0,'
+        + action.payload.staticCam;
+      this.intersectionService.emit(
+        new WsEvent('[EEPCommand]', 'Send', command));
+    })
+  );
+
   constructor(private actions$: Actions,
               private httpClient: HttpClient,
               private router: Router,

@@ -10,6 +10,7 @@ export const SET_INTERSECTION_LANES = '[Intersections] Set Lanes';
 export const SET_INTERSECTION_TRAFFIC_LIGHTS = '[Intersections] Set Traffic Lights';
 export const SWITCH_MANUALLY = '[Intersections] Switch Manually';
 export const SWITCH_AUTOMATICALLY = '[Intersections] Switch Automatically';
+export const SWITCH_TO_CAM = '[Intersections] Switch To Cam';
 
 export class SetIntersections implements Action {
   readonly type = SET_INTERSECTIONS;
@@ -53,10 +54,18 @@ export class SwitchAutomatically implements Action {
   }
 }
 
+export class SwitchToCam implements Action {
+  readonly type = SWITCH_TO_CAM;
+
+  constructor(public payload: { staticCam: string }) {
+  }
+}
+
 export type IntersectionActions =
   SetIntersections
   | SetIntersectionLanes
   | SetIntersectionSwitching
   | SetIntersectionTrafficLights
   | SwitchAutomatically
-  | SwitchManually;
+  | SwitchManually
+  | SwitchToCam;

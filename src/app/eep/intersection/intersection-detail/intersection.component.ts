@@ -20,13 +20,13 @@ import {IntersectionSwitching} from '../models/intersection-switching.model';
   styleUrls: ['./intersection.component.css']
 })
 export class IntersectionComponent implements OnInit, OnDestroy {
-  intersectionId: number;
   intersection$: Observable<Intersection>;
   routeParams$: Subscription;
   switching$: Observable<IntersectionSwitching[]>;
   switchingSub: Subscription;
   lanes$: Observable<IntersectionLane[]>;
   private carIcon = icons.car;
+  intersectionId: number;
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute) {

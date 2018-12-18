@@ -2,17 +2,35 @@
 Theme
 http://materialtheme.arcsine.org/?c=eyJwYWxldHRlIjp7InByaW1hcnkiOnsibWFpbiI6IiMyMWFiMTgiLCJsaWdodGVyIjoiI2JjZTZiYSIsImRhcmtlciI6IiMxNDkxMGUifSwiYWNjZW50Ijp7Im1haW4iOiIjMzQ3MDMxIiwibGlnaHRlciI6IiNjMmQ0YzEiLCJkYXJrZXIiOiIjMjE1MzFmIn0sIndhcm4iOnsibWFpbiI6IiNmZjAwMDAiLCJsaWdodGVyIjoiI2ZmYjNiMyIsImRhcmtlciI6IiNmZjAwMDAifSwibGlnaHRUZXh0IjoiIzAwMDAwMCIsImxpZ2h0QmFja2dyb3VuZCI6IiNmZmZmZmYiLCJkYXJrVGV4dCI6IiNmZmZmZmYiLCJkYXJrQmFja2dyb3VuZCI6IiMyYzJjMmMifSwiZm9udHMiOlt7InRhcmdldCI6ImRpc3BsYXktNCIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiZGlzcGxheS0zIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJkaXNwbGF5LTIiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6ImRpc3BsYXktMSIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiaGVhZGxpbmUiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6InRpdGxlIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJzdWJoZWFkaW5nLTIiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6InN1YmhlYWRpbmctMSIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiYm9keS0yIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJib2R5LTEiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6ImJ1dHRvbiIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiY2FwdGlvbiIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiaW5wdXQiLCJmYW1pbHkiOiJPeHlnZW4iLCJzaXplIjpudWxsfV0sImljb25zIjoiRmlsbGVkIiwibGlnaHRuZXNzIjp0cnVlfQ==
  */
-
 /*!* You can add global styles to this file, and also import other maxHeight files *!*/
+/*app-root {*/
+/*min-height: 100vh;*/
+/*}*/
 
-app-root {
-  min-height: 100vh;
-}
+@import 'styles-angular-theme';
+@import 'styles-variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import 'styles-bootstrap-reset';
 
 html, body {
   min-height: 100vh;
   height: auto;
   margin: 0;
+}
+
+.app-nav-card {
+  padding: 0 !important;
+  margin: 0;
+}
+
+mat-card > .app-nav-list-card {
+  padding-top: 0 !important;
+}
+
+.app-space-after-icon {
+  padding-left: 1em;
 }
 
 .app-spacer {
@@ -31,15 +49,6 @@ html, body {
   /*margin-right: 0.3em;*/
 }
 
-mat-card {
-  overflow: auto;
-}
-
-table {
-  width: 100%;
-}
-
-/* Vertical alignment fix */
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -51,4 +60,14 @@ table {
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+}
+
+.app-card-more-button {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+}
+
+mat-card {
+  border: 1px solid #d8d8d8;
 }

@@ -1,4 +1,4 @@
-<mat-card class="my-card" *ngIf="!(connectionEstablished$ | async)">
+<mat-card class="app-nav-card" *ngIf="!(connectionEstablished$ | async)">
   <mat-card-title-group
     class="my-card-title-group mat-typography">
     <img
@@ -35,39 +35,45 @@
   <p>Die Daten werden aktualisiert, wenn EEP im 3D-Modus läuft.</p>
 </div>
 
-
-<mat-card class="my-card mat-elevation-z2"
+<mat-card class="app-nav-card mat-elevation-z0"
           *ngIf="(connectionEstablished$ | async)">
-  <mat-nav-list>
-    <div *ngFor="let category of navigation; let last_outer = last">
-      <div *ngIf="category.name !== 'Home'">
-        <div *ngFor="let element of category.values; let last = last">
-          <a *ngIf="element.available | async"
-             mat-list-item
-             routerLink="{{ element.link }}">
-            <!--<mat-icon-->
-            <!--[matBadge]="element.badge | async"-->
-            <!--matBadgePosition="above after"-->
-            <!--class="app-list-icon"-->
-            <!--{{ element.icon }}-->
-            <!--</mat-icon>-->
-            <mat-icon class="list-icon" color="primary">{{ element.icon }}</mat-icon>
-            <span class="list-element">{{ element.name }}</span>
-            <span class="app-spacer"></span>
-            <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
-            <mat-divider *ngIf="!last || !last_outer"></mat-divider>
-          </a>
+  <!--<mat-card-title-group>-->
+    <!--<mat-card-title> Daten der Anlage</mat-card-title>-->
+    <!--<mat-card-subtitle>Steuern und Informieren</mat-card-subtitle>-->
+  <!--</mat-card-title-group>-->
+  <!--<mat-card-content>-->
+    <mat-nav-list class="app-nav-list-card">
+      <div *ngFor="let category of navigation; let last_outer = last">
+        <div *ngIf="category.name !== 'Home'">
+          <div *ngFor="let element of category.values; let last = last">
+            <a *ngIf="element.available | async"
+               mat-list-item
+               routerLink="{{ element.link }}">
+              <!--<mat-icon-->
+              <!--[matBadge]="element.badge | async"-->
+              <!--matBadgePosition="above after"-->
+              <!--class="app-list-icon"-->
+              <!--{{ element.icon }}-->
+              <!--</mat-icon>-->
+              <mat-icon class="app-list-icon" color="primary">{{ element.icon }}</mat-icon>
+              <span class="app-space-after-icon">{{ element.name }}</span>
+              <span class="app-spacer"></span>
+              <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
+              <mat-divider *ngIf="!last || !last_outer"></mat-divider>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-nav-list>
+    </mat-nav-list>
+  <!--</mat-card-content>-->
 </mat-card>
 
 
 <div class="mat-typography" style="margin-top: 1.5em;">
   <p class="mat-small mat-caption app-mute-dark-bg">
     Versionen:<br>
-    EEP-Web: {{ eepWebVersion$ | async }}<span *ngIf="(eepVersion$ | async) !== '?'">, EEP-Lua: {{ eepLuaVersion$ | async }}, EEP: {{ eepVersion$ | async }}
+    EEP-Web: {{ eepWebVersion$ | async }}<span
+    *ngIf="(eepVersion$ | async) !== '?'">, EEP-Lua: {{ eepLuaVersion$ | async }}, EEP: {{ eepVersion$ | async }}
   </span>
   </p>
 </div>

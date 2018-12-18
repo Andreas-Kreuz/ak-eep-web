@@ -8,12 +8,17 @@ import {IntersectionSwitchingComponent} from './intersection-switching/intersect
 import {IntersectionsComponent} from './intersection-list/intersections.component';
 import {IntersectionRoutingModule} from './intersection-routing.module';
 import {IntersectionEffects} from './store/intersection.effects';
+import {CamHelpDialogComponent} from '../cam/cam-help-dialog/cam-help-dialog.component';
 
 @NgModule({
   declarations: [
     IntersectionComponent,
     IntersectionSwitchingComponent,
     IntersectionsComponent,
+    CamHelpDialogComponent,
+  ],
+  entryComponents: [
+    CamHelpDialogComponent,
   ],
   imports: [
     CommonModule,
