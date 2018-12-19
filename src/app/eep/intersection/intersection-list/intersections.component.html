@@ -9,11 +9,16 @@
 
 <div class="row">
   <div *ngIf="(intersections$ | async) as intersections" class="col-md-6 mt-3">
-    <mat-card class="app-nav-card mat-elevation-z0">
+    <mat-card class="app-card">
+      <mat-card-title-group class="app-bg-primary app-fg-on-primary">
+        <mat-card-title>Kreuzungen</mat-card-title>
+        <mat-card-subtitle>Kreuzungen</mat-card-subtitle>
+      </mat-card-title-group>
       <mat-nav-list
         class="app-nav-list-card"
         *ngIf="(intersections.length > 0); else help">
         <div *ngFor="let intersection of intersections; trackBy: trackById; let last = last">
+          <mat-divider></mat-divider>
           <a mat-list-item
              routerLink="/intersections/{{ intersection.id }}">
             <mat-icon class="list-icon" color="primary">gamepad</mat-icon>
@@ -21,8 +26,8 @@
             <span class="app-spacer"></span>
             ({{ intersection.currentSwitching }})
             <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
-            <mat-divider></mat-divider>
           </a>
+          <mat-divider *ngIf="last"></mat-divider>
         </div>
       </mat-nav-list>
       <ng-template #help>
@@ -31,31 +36,13 @@
         </p>
       </ng-template>
     </mat-card>
-    <!--<p>Eine Liste mit allen Kreuzungen der Anlage.</p>-->
-    <!--<table class="table table-sm table-striped">-->
-    <!--<thead>-->
-    <!--<tr>-->
-    <!--<th scope="col">#</th>-->
-    <!--<th scope="col">Aktuelle Schaltung</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr *ngFor="let intersection of intersections; trackBy: trackById">-->
-    <!--<th scope="row">-->
-    <!--<a routerLink="/intersections/{{ intersection.id }}">-->
-    <!--{{ intersection.name }}-->
-    <!--</a>-->
-    <!--</th>-->
-    <!--<td>-->
-    <!--{{ intersection.currentSwitching }}-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
   </div>
   <div class="col-md-6 mt-3">
-    <mat-card class="mat-elevation-z0">
-      <mat-card-title>Hilfe</mat-card-title>
+    <mat-card class="app-card app-card-header-light">
+      <mat-card-title-group>
+        <mat-card-title>Hilfe</mat-card-title>
+        <mat-card-subtitle>Kreuzungen</mat-card-subtitle>
+      </mat-card-title-group>
       <mat-card-content>
         <p>
           Erfahre wie Du Kreuzungen mit der Lua-Bibliothek einrichtest

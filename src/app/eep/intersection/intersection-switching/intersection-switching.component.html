@@ -1,35 +1,61 @@
 <div class="row mt-3">
   <div class="col-sm-12">
-    <mat-card class="mat-elevation-z0" *ngIf="(intersection$ | async) as intersection">
-      <mat-card-title-group>
-        <mat-card-title>Schalten</mat-card-title>
-        <mat-card-subtitle>Manuell oder Automatisch</mat-card-subtitle>
-        <button mat-icon-button mat-raised-button
-                *ngIf="!intersection.staticCams || intersection.staticCams.length <= 1"
-                color="accent"
-                class="app-card-more-button"
-                (click)="activateCam(intersection.staticCams[0])"
-                aria-label="Go to Cam">
-          <mat-icon>videocam</mat-icon>
-        </button>
-        <button mat-icon-button mat-raised-button
-                *ngIf="intersection.staticCams && intersection.staticCams.length > 1"
-                color="accent"
-                class="app-card-more-button"
-                [matMenuTriggerFor]="menu"
-                aria-label="Toggle menu">
-          <mat-icon>videocam</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item
-                  *ngFor="let cam of intersection.staticCams"
-                  (click)="activateCam(cam)"><mat-icon>videocam</mat-icon> {{ cam }}</button>
-        </mat-menu>
-      </mat-card-title-group>
-      <mat-card-content class="mat-typography">
-        <!--<h4 class="mat-subheading-1">Automatik</h4>-->
-        <p class="my-vertical-list-heading">
-          <span class="mat-small mat-caption">Automatik</span>
+    <mat-card *ngIf="(intersection$ | async) as intersection"
+              class="app-card app-card-header-accent">
+      <mat-toolbar color="accent">
+        <mat-toolbar-row>
+          <h1>Schalten</h1>
+          <span class="app-spacer"></span>
+          <button mat-icon-button
+                  *ngIf="!intersection.staticCams || intersection.staticCams.length <= 1"
+                  (click)="activateCam(intersection.staticCams[0])"
+                  aria-label="Go to Cam">
+            <mat-icon>videocam</mat-icon>
+          </button>
+          <button mat-icon-button
+                  *ngIf="intersection.staticCams && intersection.staticCams.length > 1"
+                  [matMenuTriggerFor]="menu"
+                  aria-label="Toggle menu">
+            <mat-icon>videocam</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item
+                    *ngFor="let cam of intersection.staticCams"
+                    (click)="activateCam(cam)">
+              <mat-icon>videocam</mat-icon>
+              {{ cam }}</button>
+          </mat-menu>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <!--<mat-card-title-group>-->
+        <!--<mat-card-title>Schalten</mat-card-title>-->
+        <!--<mat-card-subtitle>Manuell oder Automatisch</mat-card-subtitle>-->
+        <!--<button mat-icon-button mat-raised-button-->
+                <!--*ngIf="!intersection.staticCams || intersection.staticCams.length <= 1"-->
+                <!--class="app-card-button-tr"-->
+                <!--(click)="activateCam(intersection.staticCams[0])"-->
+                <!--aria-label="Go to Cam">-->
+          <!--<mat-icon color="accent">videocam</mat-icon>-->
+        <!--</button>-->
+        <!--<button mat-icon-button mat-raised-button-->
+                <!--*ngIf="intersection.staticCams && intersection.staticCams.length > 1"-->
+                <!--class="app-card-button-tr"-->
+                <!--[matMenuTriggerFor]="menu"-->
+                <!--aria-label="Toggle menu">-->
+          <!--<mat-icon color="accent">videocam</mat-icon>-->
+        <!--</button>-->
+        <!--<mat-menu #menu="matMenu" xPosition="before">-->
+          <!--<button mat-menu-item-->
+                  <!--*ngFor="let cam of intersection.staticCams"-->
+                  <!--(click)="activateCam(cam)">-->
+            <!--<mat-icon>videocam</mat-icon>-->
+            <!--{{ cam }}</button>-->
+        <!--</mat-menu>-->
+      <!--</mat-card-title-group>-->
+      <mat-card-content>
+        <p class="mat-small mat-caption mb-5">Automatik</p>
+        <p>
+          <!--<span class="mat-small mat-caption">Automatik</span>-->
           <mat-slide-toggle
             class="my-vertical-list"
             [checked]="!intersection.manualSwitching"
@@ -37,9 +63,12 @@
             Automatisch Schalten
           </mat-slide-toggle>
         </p>
-        <!--<h4 class="mat-subheading-1">Nächste Schaltung</h4>-->
-        <p class="my-vertical-list-heading">
-          <span class="mat-small mat-caption">Nächste Schaltung</span>
+      </mat-card-content>
+      <mat-divider class="mt-5" [inset]="true"></mat-divider>
+      <mat-card-content class="mat-typography">
+        <p class="mat-small mat-caption mb-5">Nächste Schaltung</p>
+        <p>
+          <!--<span class="mat-small mat-caption">Nächste Schaltung</span>-->
           <mat-radio-group *ngIf="(switching$ | async) as switchings"
                            name="next_switching"
                            [value]="intersection.nextSwitching">

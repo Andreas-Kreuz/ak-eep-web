@@ -1,18 +1,20 @@
-<div class="fixed-top mat-elevation-z20">
+<div class="app-fixed-top mat-elevation-z20">
   <mat-toolbar
-    color="primary"
-    class="fixed-header">
+    color="primary">
     <mat-toolbar-row>
+      <router-outlet name="main-toolbar-backnav" >
       <button mat-icon-button (click)="leftNavigation.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+      </router-outlet>
       <h6>{{ title }}</h6>
       <span class="app-spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
+  <router-outlet name="main-toolbar-tabs"></router-outlet>
   <!--<nav mat-tab-nav-bar backgroundColor="primary"-->
        <!--class="fixed-header">-->
-    <!--<a mat-tab-link *ngFor="let link of links"-->
+    <!--<a mat-tab-link *ngFor="let link of [ 'Autos', 'Bahn', 'Tram' ]"-->
        <!--(click)="activeLink = link"-->
        <!--[active]="activeLink == link"> {{link}} </a>-->
   <!--</nav>-->

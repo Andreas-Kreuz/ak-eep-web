@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './core/home/home.component';
 import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
 import {ServerStatusComponent} from './core/server-status/server-status.component';
+import {SampleDashboardComponent} from './core/sample-dashboard/sample-dashboard.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -30,6 +31,11 @@ const routes: Routes = [
     path: 'log',
     loadChildren: './eep/log-viewer/log-viewer.module#LogViewerModule',
     data: {title: 'Log-Datei'},
+  },
+  {
+    path: 'sample-dashboard',
+    component: SampleDashboardComponent,
+    data: {title: 'Dashboard'},
   },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ServerStatusComponent},

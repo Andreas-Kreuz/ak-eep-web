@@ -1,20 +1,16 @@
-<mat-card class="app-nav-card" *ngIf="!(connectionEstablished$ | async)">
-  <mat-card-title-group
-    class="my-card-title-group mat-typography">
-    <img
-      mat-card-md-image
-      src="../../../assets/andreas-kreuz-avatar.svg"
-      alt="avatar">
-    <mat-card-title class="title mat-display-3">
+<mat-card class="app-card app-card-header-light">
+  <mat-card-title-group>
+    <mat-card-title>
       EEP-Web
     </mat-card-title>
-    <mat-card-subtitle
-      *ngIf="!mobileQuery.matches"
-      class="subtitle mat-display-1">
+    <mat-card-subtitle>
       Deine Anlage. Übersichtlich. Dargestellt.
     </mat-card-subtitle>
   </mat-card-title-group>
-  <mat-card-content class="my-progress-content mat-typography">
+  <img mat-card-image src="../../../assets/titel-image-simulator.jpg">
+  <mat-card-content
+    *ngIf="!(connectionEstablished$ | async)"
+    class="my-progress-content mat-typography">
     <p>&nbsp;</p>
     <mat-progress-spinner
       class="my-progress"
@@ -23,49 +19,32 @@
     </mat-progress-spinner>
     <p>Verbinde mit Server ... {{ hostName$ | async }}<br><br></p>
   </mat-card-content>
-</mat-card>
 
-
-<div class="mat-typography" *ngIf="(connectionEstablished$ | async)">
-  <h1 class="title">
-    EEP-Web
-  </h1>
-  <!--<img src="../../../assets/andreas-kreuz-avatar.svg"-->
-  <!--width="96" height="96" align="center" alt="Logo">-->
-  <p>Die Daten werden aktualisiert, wenn EEP im 3D-Modus läuft.</p>
-</div>
-
-<mat-card class="app-nav-card mat-elevation-z0"
-          *ngIf="(connectionEstablished$ | async)">
-  <!--<mat-card-title-group>-->
-    <!--<mat-card-title> Daten der Anlage</mat-card-title>-->
-    <!--<mat-card-subtitle>Steuern und Informieren</mat-card-subtitle>-->
-  <!--</mat-card-title-group>-->
-  <!--<mat-card-content>-->
-    <mat-nav-list class="app-nav-list-card">
-      <div *ngFor="let category of navigation; let last_outer = last">
-        <div *ngIf="category.name !== 'Home'">
-          <div *ngFor="let element of category.values; let last = last">
-            <a *ngIf="element.available | async"
-               mat-list-item
-               routerLink="{{ element.link }}">
-              <!--<mat-icon-->
-              <!--[matBadge]="element.badge | async"-->
-              <!--matBadgePosition="above after"-->
-              <!--class="app-list-icon"-->
-              <!--{{ element.icon }}-->
-              <!--</mat-icon>-->
-              <mat-icon class="app-list-icon" color="primary">{{ element.icon }}</mat-icon>
-              <span class="app-space-after-icon">{{ element.name }}</span>
-              <span class="app-spacer"></span>
-              <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
-              <mat-divider *ngIf="!last || !last_outer"></mat-divider>
-            </a>
-          </div>
-        </div>
-      </div>
-    </mat-nav-list>
-  <!--</mat-card-content>-->
+  <mat-nav-list>
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let category of navigation; let last_outer = last; let first_outer=first">
+      <ng-container *ngIf="category.name !== 'Home'">
+        <ng-container *ngFor="let element of category.values; let last = last">
+          <a *ngIf="element.available | async"
+             mat-list-item
+             routerLink="{{ element.link }}">
+            <!--<mat-icon-->
+            <!--[matBadge]="element.badge | async"-->
+            <!--matBadgePosition="above after"-->
+            <!--class="app-list-icon"-->
+            <!--{{ element.icon }}-->
+            <!--</mat-icon>-->
+            <mat-icon class="app-list-icon" color="primary">{{ element.icon }}</mat-icon>
+            <span class="app-space-after-icon">{{ element.name }}</span>
+            <span class="app-spacer"></span>
+            <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
+          </a>
+          <mat-divider *ngIf="!last || !last_outer"></mat-divider>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <mat-divider></mat-divider>
+  </mat-nav-list>
 </mat-card>
 
 

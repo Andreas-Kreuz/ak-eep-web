@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $ak-eep-web-primary: mat-palette($mat-green, 600);
-$ak-eep-web-accent: mat-palette($mat-orange, A200, A100, A400);
+$ak-eep-web-accent: mat-palette($mat-yellow, 600);
 
 // The warn palette is optional (defaults to red).
 $ak-eep-web-warn: mat-palette($mat-red);
@@ -24,4 +24,5 @@ $ak-eep-web-theme: mat-light-theme($ak-eep-web-primary, $ak-eep-web-accent, $ak-
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($ak-eep-web-theme);
+
 
