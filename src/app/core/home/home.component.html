@@ -1,56 +1,96 @@
-<mat-card class="app-card app-card-header-light">
-  <mat-card-title-group>
-    <mat-card-title>
-      EEP-Web
-    </mat-card-title>
-    <mat-card-subtitle>
-      Deine Anlage. Übersichtlich. Dargestellt.
-    </mat-card-subtitle>
-  </mat-card-title-group>
-  <img mat-card-image src="../../../assets/titel-image-simulator.jpg">
-  <mat-card-content
-    *ngIf="!(connectionEstablished$ | async)"
-    class="my-progress-content mat-typography">
-    <p>&nbsp;</p>
-    <mat-progress-spinner
-      class="my-progress"
-      color="warn"
-      mode="indeterminate">
-    </mat-progress-spinner>
-    <p>Verbinde mit Server ... {{ hostName$ | async }}<br><br></p>
-  </mat-card-content>
+<div *ngIf="!(connectionEstablished$ | async)"
+     class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <p class="mat-display-2"
+         style="margin-bottom: 24px; margin-top: 64px;">
+        EEP-Web
+      </p>
+      <p class="mat-display-1 app-mute-dark-bg">
+        Deine Anlage. Übersichtlich. Dargestellt.
+      </p>
+      <p>Verbinde mit Server ... {{ hostName$ | async }}<br><br></p>
+      <mat-progress-spinner
+        class="my-progress"
+        color="warn"
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</div>
 
-  <mat-nav-list *ngIf="(connectionEstablished$ | async)">
-    <mat-divider></mat-divider>
-    <ng-container *ngFor="let category of navigation; let last_outer = last; let first_outer=first">
-      <ng-container *ngIf="category.name !== 'Home'">
-        <ng-container *ngFor="let element of category.values; let last = last">
-          <a *ngIf="element.available | async"
-             mat-list-item
-             routerLink="{{ element.link }}">
-            <!--<mat-icon-->
-            <!--[matBadge]="element.badge | async"-->
-            <!--matBadgePosition="above after"-->
-            <!--class="app-list-icon"-->
-            <!--{{ element.icon }}-->
-            <!--</mat-icon>-->
-            <mat-icon class="app-list-icon" color="primary">{{ element.icon }}</mat-icon>
-            <span class="app-space-after-icon">{{ element.name }}</span>
-            <span class="app-spacer"></span>
-            <mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>
-          </a>
-          <mat-divider *ngIf="!last || !last_outer"></mat-divider>
+<div *ngIf="(connectionEstablished$ | async)"
+     class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <p class="mat-display-2"
+         style="margin-bottom: 24px; margin-top: 64px;">
+        EEP-Web
+      </p>
+      <p class="mat-display-1 app-mute-dark-bg">
+        Deine Anlage. Übersichtlich. Dargestellt.
+      </p>
+    </div>
+  </div>
+
+
+  <h1 class="mt-5 mb-4">Schnellzugriff</h1>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngFor="let category of navigation; let last_outer = last; let first_outer=first">
+        <ng-container *ngIf="category.name !== 'Home'">
+          <ng-container *ngFor="let element of category.values; let last = last">
+            <button class="mr-3"
+                    mat-icon-button
+                    type="button"
+                    [matTooltip]="element.linkDescription"
+                    routerLink="{{ element.link }}">
+              <mat-icon
+                [matBadge]="element.badge | async"
+                matBadgePosition="above after"
+                class="app-list-icon">{{ element.icon }}</mat-icon>
+            </button>
+          </ng-container>
         </ng-container>
       </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let category of navigation; let last_outer = last; let first_outer=first">
+    <ng-container *ngIf="category.name !== 'Home'">
+      <h1 class="mt-5 mb-4">{{ category.name }}</h1>
+
+      <div class="row">
+        <ng-container *ngFor="let element of category.values; let last = last">
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <mat-card class="d-flex flex-column flex-grow-1 mb-5">
+              <img *ngIf="element.image" mat-card-image src="../../../../assets/{{ element.image }}">
+              <mat-card-title-group>
+                <mat-card-title>{{ element.title }}</mat-card-title>
+                <mat-card-subtitle *ngIf="element.subtitle">{{ element.subtitle }}</mat-card-subtitle>
+              </mat-card-title-group>
+              <mat-card-content *ngIf="element.description">
+                {{ element.description }}
+              </mat-card-content>
+              <span class="flex-grow-1"></span>
+              <mat-card-actions>
+                <a mat-button
+                   color="primary"
+                   routerLink="{{ element.link }}">
+                  {{ element.linkDescription }}
+                </a>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+
     </ng-container>
-    <mat-divider></mat-divider>
-  </mat-nav-list>
-</mat-card>
+  </ng-container>
 
 
-<div class="mat-typography" style="margin-top: 1.5em;">
+  <h5 class="mt-5 mb-4 app-mute-dark-bg">Versionen</h5>
   <p class="mat-small mat-caption app-mute-dark-bg">
-    Versionen:<br>
     EEP-Web: {{ eepWebVersion$ | async }}<span
     *ngIf="(eepVersion$ | async) !== '?'">, EEP-Lua: {{ eepLuaVersion$ | async }}, EEP: {{ eepVersion$ | async }}
   </span>

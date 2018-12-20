@@ -99,6 +99,7 @@ import {DashboardCardComponent} from './ui/dashboard-card/dashboard-card.compone
     MatSidenavModule,
     MatSortModule,
     MatTableModule,
+    MatTooltipModule,
     MatToolbarModule,
   ]
 

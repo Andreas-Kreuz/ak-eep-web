@@ -5,8 +5,7 @@ import {CardSampleComponent} from './ui/card-sample/card-sample.component';
 import {TitledCardComponent} from './ui/titled-card/titled-card.component';
 import {DashboardSampleComponent} from './ui/dashboard-sample/dashboard-sample.component';
 
-const routes: Routes = [
-  {path: '', component: TextSampleComponent, pathMatch: 'full'},
+const sharedRoutes: Routes = [
   {path: 'text', component: TextSampleComponent},
   {path: 'cards', component: CardSampleComponent},
   {path: 'card-titled', component: TitledCardComponent},
@@ -15,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(sharedRoutes)],
   exports: [RouterModule]
 })
 export class SharedRoutingModule {

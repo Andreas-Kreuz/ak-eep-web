@@ -35,7 +35,10 @@ export class MainNavigationService {
       available: Observable<boolean>;
       icon: string;
       image: string;
-      name: string | null;
+      title: string;
+      subtitle: string | null;
+      description: string | null;
+      linkDescription: string | null;
       link: string
     }[];
   })[];
@@ -54,22 +57,28 @@ export class MainNavigationService {
           {
             available: of(true),
             icon: 'home',
-            name: 'Home',
+            title: 'Home',
+            subtitle: null,
             link: '/',
             image: null,
             badge: null,
+            description: null,
+            linkDescription: null,
           },
         ]
       },
       {
-        name: 'Kreuzungen', values: [
+        name: 'Steuern', values: [
           {
             available: this.intersectionsAvailable$,
             icon: 'gamepad',
-            name: 'Kreuzungen',
+            title: 'Kreuzungen',
+            subtitle: 'Lua-Bibliothek',
             link: '/intersections',
             image: 'card-img-intersection.jpg',
-            badge: this.intersectionsCount$
+            badge: this.intersectionsCount$,
+            description: 'Schalte Deine Kreuzungen oder setze die passende Kamera.',
+            linkDescription: 'Kreuzungen zeigen',
           },
         ]
       },
@@ -78,55 +87,73 @@ export class MainNavigationService {
           {
             available: of(true),
             icon: 'directions_car',
-            name: 'Autos',
+            title: 'Autos',
+            subtitle: 'Straßen',
             link: '/trains/road',
             image: 'card-img-trains-road.jpg',
-            badge: this.roadTrainCount$
+            badge: this.roadTrainCount$,
+            description: 'Hier findest Du auch Trams, die auf der Straße fahren.',
+            linkDescription: 'Autos zeigen',
           },
           {
             available: of(true),
             icon: 'tram',
-            name: 'Trams',
+            title: 'Trams',
+            subtitle: 'Straßenbahngleise',
             link: '/trains/tram',
             image: 'card-img-trains-tram.jpg',
-            badge: this.tramTrainCount$
+            badge: this.tramTrainCount$,
+            description: 'Trams, die auf der Straße fahren, findest Du unter Autos.',
+            linkDescription: 'Trams zeigen',
           },
           {
             available: of(true),
             icon: 'train',
-            name: 'Züge',
+            title: 'Züge',
+            subtitle: 'Bahngleise',
             link: '/trains/rail',
             image: 'card-img-trains-rail.jpg',
-            badge: this.railTrainCount$
+            badge: this.railTrainCount$,
+            description: '',
+            linkDescription: 'Züge zeigen',
           },
         ]
       },
       {
-        name: 'Andere', values: [
+        name: 'Daten', values: [
           {
             available: of(true),
             icon: 'traffic',
-            name: 'Signale',
+            title: 'Signale',
+            subtitle: 'Ampeln, Signale, Schranken',
             link: '/signals',
             image: null,
-            badge: this.signalCount$
+            badge: this.signalCount$,
+            description: null,
+            linkDescription: 'Zu den Signalen',
           },
           // {icon: 'directions', name: 'Weichen', link: '/switches'},
           {
             available: of(true),
             icon: 'memory',
-            name: 'Speicher',
+            title: 'Speicher',
+            subtitle: 'EEPDataSlot',
             link: '/data',
             image: null,
-            badge: this.slotCount$
+            badge: this.slotCount$,
+            description: null,
+            linkDescription: 'Zu den Daten',
           },
           {
             available: of(true),
             icon: 'message',
-            name: 'Log',
+            title: 'Log',
+            subtitle: 'EEP-Log-Datei',
             link: '/log',
             image: null,
             badge: null,
+            description: null,
+            linkDescription: 'Log-Datei ansehen',
           },
         ]
       },
@@ -135,10 +162,13 @@ export class MainNavigationService {
           {
             available: of(true),
             icon: 'list_alt',
-            name: 'Roh-Daten',
+            title: 'Roh-Daten',
+            subtitle: 'JSON-Daten vom Server',
             link: '/generic-data',
             image: null,
             badge: null,
+            description: null,
+            linkDescription: 'Zu den Daten',
           },
         ]
       },

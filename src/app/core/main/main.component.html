@@ -47,12 +47,12 @@
            [routerLinkActiveOptions]="{exact: true}"
            routerLink="{{ element.link }}">
           <mat-icon class="nav-entry-icon">{{ element.icon }}</mat-icon>
-          <span class="nav-entry-name">{{ element.name }}</span>
+          <span class="nav-entry-name">{{ element.title }}</span>
         </a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="main-content">
+  <mat-sidenav-content class="p-sm-5">
       <router-outlet></router-outlet>
   </mat-sidenav-content>
   <mat-sidenav position="end" mode="side" opened="false">
