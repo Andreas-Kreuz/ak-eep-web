@@ -1,18 +1,7 @@
-/*
-Theme
-http://materialtheme.arcsine.org/?c=eyJwYWxldHRlIjp7InByaW1hcnkiOnsibWFpbiI6IiMyMWFiMTgiLCJsaWdodGVyIjoiI2JjZTZiYSIsImRhcmtlciI6IiMxNDkxMGUifSwiYWNjZW50Ijp7Im1haW4iOiIjMzQ3MDMxIiwibGlnaHRlciI6IiNjMmQ0YzEiLCJkYXJrZXIiOiIjMjE1MzFmIn0sIndhcm4iOnsibWFpbiI6IiNmZjAwMDAiLCJsaWdodGVyIjoiI2ZmYjNiMyIsImRhcmtlciI6IiNmZjAwMDAifSwibGlnaHRUZXh0IjoiIzAwMDAwMCIsImxpZ2h0QmFja2dyb3VuZCI6IiNmZmZmZmYiLCJkYXJrVGV4dCI6IiNmZmZmZmYiLCJkYXJrQmFja2dyb3VuZCI6IiMyYzJjMmMifSwiZm9udHMiOlt7InRhcmdldCI6ImRpc3BsYXktNCIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiZGlzcGxheS0zIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJkaXNwbGF5LTIiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6ImRpc3BsYXktMSIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiaGVhZGxpbmUiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6InRpdGxlIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJzdWJoZWFkaW5nLTIiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6InN1YmhlYWRpbmctMSIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiYm9keS0yIiwiZmFtaWx5IjoiT3h5Z2VuIn0seyJ0YXJnZXQiOiJib2R5LTEiLCJmYW1pbHkiOiJPeHlnZW4ifSx7InRhcmdldCI6ImJ1dHRvbiIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiY2FwdGlvbiIsImZhbWlseSI6Ik94eWdlbiJ9LHsidGFyZ2V0IjoiaW5wdXQiLCJmYW1pbHkiOiJPeHlnZW4iLCJzaXplIjpudWxsfV0sImljb25zIjoiRmlsbGVkIiwibGlnaHRuZXNzIjp0cnVlfQ==
- */
-/*!* You can add global styles to this file, and also import other maxHeight files *!*/
-/*app-root {*/
-/*min-height: 100vh;*/
-/*}*/
-@import 'styles-angular-theme';
-@import 'styles-angular-typography';
-@import 'styles-variables';
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap/scss/bootstrap-grid';
-@import '~bootstrap/scss/bootstrap-reboot';
-@import 'styles-bootstrap-reset';
+
+//app-root {
+//  min-height: 100vh;
+//}
 
 html, body {
   min-height: 100vh;
@@ -20,20 +9,28 @@ html, body {
   margin: 0;
 }
 
+// Theme from
+// http://materialtheme.arcsine.org/?c=eyJwYWxldHRlIjp7InByaW1hcnkiOnsibWFpbiI6IiM0M2EwNDciLCJsaWdodGVyIjoiI2M3ZTNjOCIsImRhcmtlciI6IiMyYzg0MmYifSwiYWNjZW50Ijp7Im1haW4iOiIjMWU4OGU1IiwibGlnaHRlciI6IiNiY2RiZjciLCJkYXJrZXIiOiIjMTI2YmRhIn0sIndhcm4iOnsibWFpbiI6IiNmZjAwMDAiLCJsaWdodGVyIjoiI2ZmYjNiMyIsImRhcmtlciI6IiNmZjAwMDAifSwibGlnaHRUZXh0IjoiIzAwMDAwMCIsImxpZ2h0QmFja2dyb3VuZCI6IiNmZmZmZmYiLCJkYXJrVGV4dCI6IiNmZmZmZmYiLCJkYXJrQmFja2dyb3VuZCI6IiMyYzJjMmMifSwiZm9udHMiOlt7InRhcmdldCI6ImRpc3BsYXktNCIsImxpbmVIZWlnaHQiOjk2LCJzaXplIjo5Nn0seyJ0YXJnZXQiOiJkaXNwbGF5LTMiLCJ2YXJpYW50IjoibGlnaHQiLCJsaW5lSGVpZ2h0Ijo2MCwic2l6ZSI6NjB9LHsidGFyZ2V0IjoiZGlzcGxheS0yIiwibGluZUhlaWdodCI6NTIsInNpemUiOjQ4fSx7InRhcmdldCI6ImRpc3BsYXktMSJ9LHsidGFyZ2V0IjoiaGVhZGxpbmUifSx7InRhcmdldCI6InRpdGxlIiwibGluZUhlaWdodCI6MjAsInNwYWNpbmciOjAuMjV9LHsidGFyZ2V0Ijoic3ViaGVhZGluZy0yIn0seyJ0YXJnZXQiOiJzdWJoZWFkaW5nLTEifSx7InRhcmdldCI6ImJvZHktMiIsInZhcmlhbnQiOiJyZWd1bGFyIn0seyJ0YXJnZXQiOiJib2R5LTEiLCJzaXplIjoxNiwic3BhY2luZyI6MC4xNX0seyJ0YXJnZXQiOiJidXR0b24ifSx7InRhcmdldCI6ImNhcHRpb24ifSx7InRhcmdldCI6ImlucHV0Iiwic2l6ZSI6bnVsbH1dLCJpY29ucyI6IkZpbGxlZCIsImxpZ2h0bmVzcyI6dHJ1ZX0=
+
+@import 'styles-angular-theme';
+@import 'styles-variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import 'styles-bootstrap-reset';
+
 
 // CARDS SECTION
 
 // Set cornered border
 .mat-card,
 .app-card > .mat-card-header,
-.app-card > .mat-card-title-group
-{
+.app-card > .mat-card-title-group {
   border-radius: 0px !important;
 }
 
 .app-card > .mat-card-header,
-.app-card > .mat-card-title-group
-{
+.app-card > .mat-card-title-group {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
@@ -47,8 +44,7 @@ html, body {
 // Vertical fixes
 .app-card > .mat-card-header,
 .app-card > .mat-card-title-group,
-.app-card > .mat-toolbar
-{
+.app-card > .mat-toolbar {
   margin-top: -16px !important;
 }
 
@@ -143,10 +139,14 @@ html, body {
   color: white !important;
 }
 
-.app-fg-on-accent {
-  color: black;
+.app-fg-on-accent,
+.app-fg-on-accent > .mat-card-subtitle {
+  color: rgb(255, 255, 255);
 }
 
+.app-fg-on-accent .mat-card-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
 
 .app-space-after-icon {
   padding-left: 1em;
@@ -169,7 +169,7 @@ html, body {
 }
 
 .mat-form-field {
-  font-size: 14px;
+  //font-size: 14px;
   width: 100%;
 }
 

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   eepLuaVersion$: Observable<string>;
   eepVersion$: Observable<string>;
   eepWebVersion$: Observable<string>;
-  private navigation;
+  navigation;
   private mobileQuery: MediaQueryList;
 
   constructor(private store: Store<fromRoot.State>,

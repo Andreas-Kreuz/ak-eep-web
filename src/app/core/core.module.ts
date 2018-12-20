@@ -8,8 +8,7 @@ import {ServerStatusComponent} from './server-status/server-status.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeaderToolBarComponent} from './header-tool-bar/header-tool-bar.component';
 import {LayoutModule} from '@angular/cdk/layout';
-import { SampleDashboardComponent } from './sample-dashboard/sample-dashboard.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import {MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButt
     HomeComponent,
     ServerStatusComponent,
     HeaderToolBarComponent,
-    SampleDashboardComponent,
   ],
   imports: [
     SharedModule,

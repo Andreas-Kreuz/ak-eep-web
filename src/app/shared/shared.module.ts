@@ -6,7 +6,8 @@ import {
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule, MatDialogModule,
+  MatCheckboxModule,
+  MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
   MatGridListModule,
@@ -18,7 +19,8 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatRadioModule,
-  MatSidenavModule, MatSlideToggleModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
   MatSortModule,
   MatTableModule,
   MatTabsModule,
@@ -28,6 +30,12 @@ import {
 import {FilteredTableComponent} from './filtered-table/filtered-table.component';
 import {DetailsDirective} from './details/details.directive';
 import {OldDetailsDirective} from './details/old-details.directive';
+import {TitledCardComponent} from './ui/titled-card/titled-card.component';
+import {CardSampleComponent} from './ui/card-sample/card-sample.component';
+import {TextSampleComponent} from './ui/text-sample/text-sample.component';
+import {SharedRoutingModule} from './shared-routing.module';
+import {DashboardSampleComponent} from './ui/dashboard-sample/dashboard-sample.component';
+import {DashboardCardComponent} from './ui/dashboard-card/dashboard-card.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +43,15 @@ import {OldDetailsDirective} from './details/old-details.directive';
     FilteredTableComponent,
     DetailsDirective,
     OldDetailsDirective,
+    CardSampleComponent,
+    TextSampleComponent,
+    TitledCardComponent,
+    DashboardCardComponent,
+    DashboardSampleComponent,
   ],
   exports: [
+    CommonModule,
+    FilteredTableComponent,
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
@@ -60,13 +75,12 @@ import {OldDetailsDirective} from './details/old-details.directive';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    CommonModule,
     NgbModule,
     NgbTooltipModule,
-    FilteredTableComponent,
     TooltipComponent,
   ],
   imports: [
+    SharedRoutingModule,
     CommonModule,
     NgbTooltipModule,
     MatBadgeModule,

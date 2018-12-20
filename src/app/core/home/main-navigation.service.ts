@@ -34,7 +34,8 @@ export class MainNavigationService {
       badge: null | Observable<number>;
       available: Observable<boolean>;
       icon: string;
-      name: string;
+      image: string;
+      name: string | null;
       link: string
     }[];
   })[];
@@ -55,6 +56,7 @@ export class MainNavigationService {
             icon: 'home',
             name: 'Home',
             link: '/',
+            image: null,
             badge: null,
           },
         ]
@@ -66,6 +68,7 @@ export class MainNavigationService {
             icon: 'gamepad',
             name: 'Kreuzungen',
             link: '/intersections',
+            image: 'card-img-intersection.jpg',
             badge: this.intersectionsCount$
           },
         ]
@@ -77,6 +80,7 @@ export class MainNavigationService {
             icon: 'directions_car',
             name: 'Autos',
             link: '/trains/road',
+            image: 'card-img-trains-road.jpg',
             badge: this.roadTrainCount$
           },
           {
@@ -84,6 +88,7 @@ export class MainNavigationService {
             icon: 'tram',
             name: 'Trams',
             link: '/trains/tram',
+            image: 'card-img-trains-tram.jpg',
             badge: this.tramTrainCount$
           },
           {
@@ -91,6 +96,7 @@ export class MainNavigationService {
             icon: 'train',
             name: 'Züge',
             link: '/trains/rail',
+            image: 'card-img-trains-rail.jpg',
             badge: this.railTrainCount$
           },
         ]
@@ -102,6 +108,7 @@ export class MainNavigationService {
             icon: 'traffic',
             name: 'Signale',
             link: '/signals',
+            image: null,
             badge: this.signalCount$
           },
           // {icon: 'directions', name: 'Weichen', link: '/switches'},
@@ -110,6 +117,7 @@ export class MainNavigationService {
             icon: 'memory',
             name: 'Speicher',
             link: '/data',
+            image: null,
             badge: this.slotCount$
           },
           {
@@ -117,6 +125,7 @@ export class MainNavigationService {
             icon: 'message',
             name: 'Log',
             link: '/log',
+            image: null,
             badge: null,
           },
         ]
@@ -128,6 +137,7 @@ export class MainNavigationService {
             icon: 'list_alt',
             name: 'Roh-Daten',
             link: '/generic-data',
+            image: null,
             badge: null,
           },
         ]

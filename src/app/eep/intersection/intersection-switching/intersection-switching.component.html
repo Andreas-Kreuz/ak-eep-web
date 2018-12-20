@@ -53,7 +53,7 @@
         <!--</mat-menu>-->
       <!--</mat-card-title-group>-->
       <mat-card-content>
-        <p class="mat-small mat-caption mb-5">Automatik</p>
+        <p class="mat-small mat-caption mb-4">Automatik</p>
         <p>
           <!--<span class="mat-small mat-caption">Automatik</span>-->
           <mat-slide-toggle
@@ -64,15 +64,15 @@
           </mat-slide-toggle>
         </p>
       </mat-card-content>
-      <mat-divider class="mt-5" [inset]="true"></mat-divider>
-      <mat-card-content class="mat-typography">
-        <p class="mat-small mat-caption mb-5">Nächste Schaltung</p>
+      <mat-divider class="mt-4" [inset]="true"></mat-divider>
+      <mat-card-content class="mat-typography mb-4">
+        <p class="mat-small mat-caption mb-4">Nächste Schaltung</p>
         <p>
           <!--<span class="mat-small mat-caption">Nächste Schaltung</span>-->
           <mat-radio-group *ngIf="(switching$ | async) as switchings"
                            name="next_switching"
                            [value]="intersection.nextSwitching">
-            <div *ngFor="let switching of switchings; trackBy: trackSwitching">
+            <div *ngFor="let switching of switchings">
               <mat-radio-button
                 class="my-vertical-list"
                 (change)="switchTo(intersection, switching)"
