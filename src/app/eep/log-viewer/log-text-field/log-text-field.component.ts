@@ -21,7 +21,7 @@ export class LogTextFieldComponent implements OnInit {
   }
 
   ngOnInit() {
-    const offset = 180;
+    const offset = 230;
     this.lines$ = this.store.pipe(select(fromLogFile.lines$));
     this.linesAsString$ = this.store.pipe(select(fromLogFile.linesAsString$));
     this.loading$ = this.store.pipe(select(fromLogFile.loading$));
