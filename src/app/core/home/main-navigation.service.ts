@@ -68,7 +68,7 @@ export class MainNavigationService {
         ]
       },
       {
-        name: 'Steuern', values: [
+        name: 'Verkehr', values: [
           {
             available: this.intersectionsAvailable$,
             icon: 'gamepad',
@@ -80,10 +80,10 @@ export class MainNavigationService {
             description: 'Schalte Deine Kreuzungen oder setze die passende Kamera.',
             linkDescription: 'Kreuzungen zeigen',
           },
-        ]
-      },
-      {
-        name: 'Fahrzeuge', values: [
+      //   ]
+      // },
+      // {
+      //   name: 'Fahrzeuge', values: [
           {
             available: of(true),
             icon: 'directions_car',
@@ -155,10 +155,10 @@ export class MainNavigationService {
             description: null,
             linkDescription: 'Log-Datei ansehen',
           },
-        ]
-      },
-      {
-        name: 'Roh-Daten', values: [
+      //   ]
+      // },
+      // {
+      //   name: 'Roh-Daten', values: [
           {
             available: of(true),
             icon: 'list_alt',

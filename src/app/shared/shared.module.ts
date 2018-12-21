@@ -36,6 +36,7 @@ import {TextSampleComponent} from './ui/text-sample/text-sample.component';
 import {SharedRoutingModule} from './shared-routing.module';
 import {DashboardSampleComponent} from './ui/dashboard-sample/dashboard-sample.component';
 import {DashboardCardComponent} from './ui/dashboard-card/dashboard-card.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import {DashboardCardComponent} from './ui/dashboard-card/dashboard-card.compone
     MatTableModule,
     MatTooltipModule,
     MatToolbarModule,
+    LayoutModule,
   ]
 
 })
