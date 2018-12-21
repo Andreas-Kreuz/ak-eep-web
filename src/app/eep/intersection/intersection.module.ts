@@ -9,6 +9,8 @@ import {IntersectionsComponent} from './intersection-list/intersections.componen
 import {IntersectionRoutingModule} from './intersection-routing.module';
 import {IntersectionEffects} from './store/intersection.effects';
 import {CamHelpDialogComponent} from '../cam/cam-help-dialog/cam-help-dialog.component';
+import {LaneOverviewComponent} from './lane-overview/lane-overview.component';
+import { LaneQueueComponent } from './lane-queue/lane-queue.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {CamHelpDialogComponent} from '../cam/cam-help-dialog/cam-help-dialog.com
     IntersectionSwitchingComponent,
     IntersectionsComponent,
     CamHelpDialogComponent,
+    LaneOverviewComponent,
+    LaneQueueComponent,
   ],
   entryComponents: [
     CamHelpDialogComponent,

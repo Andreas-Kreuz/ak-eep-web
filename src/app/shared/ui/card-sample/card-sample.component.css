@@ -19,23 +19,24 @@
   text-align: center;
 }
 
-.mat-card-title-group,
-.mat-card-header {
-  background-color: lightgreen;
-}
-.mat-card-title {
-  background-color: lightgoldenrodyellow;
-}
-.mat-card-subtitle {
-  background-color: lightgoldenrodyellow;
-}
+/*.mat-card-title-group,*/
+/*.mat-card-header {*/
+  /*background-color: rgba(0, 255, 0, 0.2);*/
+/*}*/
+/*.mat-card-title {*/
+  /*background-color: rgba(0, 128, 0, 0.2);*/
+/*}*/
 
-.mat-card-content {
-  background-color: bisque;
-}
-.mat-card-actions {
-  background-color: dodgerblue;
-}
-.mat-nav-list {
-  background-color: darkgoldenrod;
-}
+/*.mat-card-subtitle {*/
+  /*background-color: rgba(0, 128, 0, 0.2);*/
+/*}*/
+
+/*.mat-card-content {*/
+  /*background-color: bisque;*/
+/*}*/
+/*.mat-card-actions {*/
+  /*background-color: dodgerblue;*/
+/*}*/
+/*.mat-nav-list {*/
+  /*background-color: darkgoldenrod;*/
+/*}*/

@@ -1,55 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {select, Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
+import {IntersectionLane} from './models/intersection-lane.model';
+import {IntersectionSwitching} from './models/intersection-switching.model';
+import {TrafficType} from './models/traffic-type.enum';
+import {Direction} from './models/direction.model';
+import * as icons from '../../shared/unicode-symbol.model';
+import {Intersection} from './models/intersection.model';
+import {Phase} from './models/phase.enum';
+import * as IntersectionAction from './store/intersection.actions';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../app.reducers';
+import {CamHelpDialogComponent} from '../cam/cam-help-dialog/cam-help-dialog.component';
+import {MatDialog} from '@angular/material';
+import {Injectable} from '@angular/core';
 
-import * as fromIntersection from '../store/intersection.reducers';
-import * as IntersectionAction from '../store/intersection.actions';
-import * as fromRoot from '../../../app.reducers';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionLane} from '../models/intersection-lane.model';
-import * as icons from '../../../shared/unicode-symbol.model';
-import {Phase} from '../models/phase.enum';
-import {Direction} from '../models/direction.model';
-import {TrafficType} from '../models/traffic-type.enum';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {IntersectionHelper} from '../intersection-helper';
-
-@Component({
-  selector: 'app-crossing',
-  templateUrl: './intersection.component.html',
-  styleUrls: ['./intersection.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class IntersectionComponent implements OnInit, OnDestroy {
-  intersection$: Observable<Intersection>;
-  routeParams$: Subscription;
-  switching$: Observable<IntersectionSwitching[]>;
-  switchingSub: Subscription;
-  lanes$: Observable<IntersectionLane[]>;
-  intersectionId: number;
+export class IntersectionHelper {
 
   constructor(private store: Store<fromRoot.State>,
-              private route: ActivatedRoute,
-              private intersectionHelper: IntersectionHelper) {
-  }
-
-  ngOnInit() {
-    this.routeParams$ = this.route.params
-      .subscribe((params: Params) => {
-        this.intersectionId = +this.route.snapshot.params['id'];
-        this.intersection$ = this.store.pipe(
-          select(fromIntersection.intersectionById$(this.intersectionId)));
-        this.lanes$ = this.store.pipe(
-          select(fromIntersection.laneByIntersectionId$(this.intersectionId)));
-        this.switchingSub = this.intersection$.subscribe((intersection) =>
-          this.switching$ = this.store.pipe(
-            select(fromIntersection.switchingNamesByIntersection$(intersection))));
-      });
-  }
-
-  ngOnDestroy() {
-    this.routeParams$.unsubscribe();
-    this.switchingSub.unsubscribe();
+              public dialog: MatDialog) {
   }
 
   typeIcon(type: string) {
@@ -168,35 +137,23 @@ export class IntersectionComponent implements OnInit, OnDestroy {
     return lane.switchings.indexOf(switching.name) >= 0;
   }
 
-  switchTo(intersection: Intersection, switching: IntersectionSwitching) {
-    this.store.dispatch(new IntersectionAction.SwitchManually({
-      intersection, switching
-    }));
+  activateCam(staticCam: string) {
+    if (staticCam) {
+      this.store.dispatch(new IntersectionAction.SwitchToCam({
+        staticCam: staticCam
+      }));
+    } else {
+      this.openDialog();
+    }
   }
 
-  enableAutomaticMode(intersection: Intersection) {
-    this.store.dispatch(new IntersectionAction.SwitchAutomatically({
-      intersection
-    }));
-  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CamHelpDialogComponent, {
+      width: '90%'
+    });
 
-  btnColorForAutomatic(intersection: Intersection) {
-    if (intersection.manualSwitching) {
-      return 'btn-danger';
-    }
-    return 'btn-success';
-  }
-
-  btnColorForSwitching(intersection: Intersection, switching: IntersectionSwitching) {
-    if (intersection.manualSwitching === switching.name) {
-      return 'btn-success';
-    }
-    // if (intersection.currentSwitching === switching.name) {
-    //   return 'btn-primary';
-    // }
-    if (intersection.nextSwitching === switching.name) {
-      return 'btn-primary';
-    }
-    return 'btn-secondary';
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

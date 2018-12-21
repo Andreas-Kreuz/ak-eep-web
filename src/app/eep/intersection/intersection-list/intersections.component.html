@@ -9,11 +9,11 @@
 <div class="row" *ngIf="(intersections$ | async) as intersections">
   <ng-container *ngFor="let intersection of intersections; trackBy: trackById; let last = last">
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex">
-      <mat-card class="d-flex flex-column flex-grow-1 mb-5">
+      <mat-card class="d-flex flex-column flex-grow-1 mb-5 app-card">
         <img mat-card-image
              class="d-none d-xl-flex"
              src="../../../../assets/card-img-intersection.jpg">
-        <mat-card-title-group class="w-100">
+        <mat-card-title-group class="w-100 app-bg-primary app-fg-on-primary">
           <img mat-card-avatar
                align="left"
                class="d-xl-none"
@@ -22,8 +22,7 @@
           <mat-card-subtitle>{{ intersection.currentSwitching ? intersection.currentSwitching : 'Schaltung' }}</mat-card-subtitle>
         </mat-card-title-group>
         <mat-card-content class="d-none d-xl-block">
-          <mat-divider></mat-divider>
-          <p class="mat-caption pt-3">Modus</p>
+          <p class="mat-caption">Modus</p>
           <p *ngIf="intersection.manualSwitching">
             Modus: Automatisch.</p>
           <p *ngIf="!intersection.manualSwitching">
@@ -36,7 +35,7 @@
           <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item
                     *ngFor="let cam of intersection.staticCams"
-                    (click)="activateCam(cam)">
+                    (click)="intersectionHelper.activateCam(cam)">
               <mat-icon>videocam</mat-icon>
               {{ cam }}</button>
           </mat-menu>
@@ -45,7 +44,7 @@
                   class="cam-button"
                   matTooltip="Kamera wählen"
                   *ngIf="!intersection.staticCams || intersection.staticCams.length <= 1"
-                  (click)="activateCam(intersection.staticCams[0])"
+                  (click)="intersectionHelper.activateCam(intersection.staticCams[0])"
                   aria-label="Go to Cam">
             <mat-icon>videocam</mat-icon>
           </button>
@@ -69,38 +68,6 @@
   </ng-container>
 </div>
 
-<!--<div class="row" *ngIf="(intersections$ | async) as intersections">-->
-<!--<div class="col-md-6 mt-3">-->
-<!--<mat-card class="app-card">-->
-<!--<mat-card-title-group class="app-bg-primary app-fg-on-primary">-->
-<!--<mat-card-title>Kreuzungen</mat-card-title>-->
-<!--</mat-card-title-group>-->
-<!--<mat-nav-list-->
-<!--class="app-nav-list-card"-->
-<!--*ngIf="(intersections.length > 0); else help">-->
-<!--<div *ngFor="let intersection of intersections; trackBy: trackById; let last = last">-->
-<!--<mat-divider></mat-divider>-->
-<!--<a mat-list-item-->
-<!--routerLink="/intersections/{{ intersection.id }}">-->
-<!--<mat-icon class="list-icon" color="primary">gamepad</mat-icon>-->
-<!--<span class="app-space-after-icon">{{ intersection.name }}</span>-->
-<!--<span class="app-spacer"></span>-->
-<!--({{ intersection.currentSwitching }})-->
-<!--<mat-icon class="app-list-icon app-mute-light-bg">chevron_right</mat-icon>-->
-<!--</a>-->
-<!--<mat-divider *ngIf="last"></mat-divider>-->
-<!--</div>-->
-<!--</mat-nav-list>-->
-<!--<ng-template #help>-->
-<!--<p class="card-text">-->
-<!--Die Anlage enthält noch keine Kreuzungen.<br>-->
-<!--</p>-->
-<!--</ng-template>-->
-<!--</mat-card>-->
-<!--</div>-->
-<!--</div>-->
-
-
 <h1 class="mt-5 mb-4">Weitere Informationen</h1>
 <div class="row">
   <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex">
@@ -123,16 +90,5 @@
         </a>
       </mat-card-actions>
     </mat-card>
-    <!--<div class="card">-->
-    <!--<div class="card-body">-->
-    <!--<h5 class="card-title">Hilfe</h5>-->
-    <!--<p class="card-text">-->
-    <!--Erfahre wie Du Kreuzungen mit der Lua-Bibliothek einrichtest<br>-->
-    <!--</p>-->
-    <!--<p class="card-text">-->
-    <!--<a class="btn btn-success" href="https://andreas-kreuz.github.io/ak-lua-bibliothek-fuer-eep/anleitungen/">Anleitung</a>-->
-    <!--</p>-->
-    <!--</div>-->
-    <!--</div>-->
   </div>
 </div>

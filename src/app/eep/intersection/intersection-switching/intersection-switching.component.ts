@@ -45,13 +45,6 @@ export class IntersectionSwitchingComponent implements OnInit, OnDestroy {
     this.switchingSub.unsubscribe();
   }
 
-  trackSwitching(index, intersectionSwitching: IntersectionSwitching) {
-    if (!intersectionSwitching) {
-      return null;
-    }
-    return intersectionSwitching.id;
-  }
-
   onChangeManualSwitching(intersection: Intersection, switchingName: string) {
     if (intersection.manualSwitching) {
       this.store.dispatch(new IntersectionAction.SwitchAutomatically({
@@ -77,25 +70,5 @@ export class IntersectionSwitchingComponent implements OnInit, OnDestroy {
     }
 
     return null;
-  }
-
-  activateCam(staticCam: string) {
-    if (staticCam) {
-      this.store.dispatch(new IntersectionAction.SwitchToCam({
-        staticCam: staticCam
-      }));
-    } else {
-      this.openDialog();
-    }
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(CamHelpDialogComponent, {
-      width: '90%'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 }
