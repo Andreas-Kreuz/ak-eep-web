@@ -23,9 +23,9 @@
         </mat-card-title-group>
         <mat-card-content class="d-none d-xl-block">
           <p class="mat-caption">Modus</p>
-          <p *ngIf="intersection.manualSwitching">
-            Modus: Automatisch.</p>
           <p *ngIf="!intersection.manualSwitching">
+            Modus: Automatisch.</p>
+          <p *ngIf="intersection.manualSwitching">
             Modus: Manuell.</p>
           <p class="mat-caption pt-3">Aktuelle Schaltung</p>
           <p>{{ intersection.currentSwitching }}</p>
