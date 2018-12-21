@@ -1,22 +1,26 @@
-<div class="app-fixed-top mat-elevation-z20">
+<div class="app-fixed-top mat-elevation-z4">
   <mat-toolbar
     color="primary">
     <mat-toolbar-row>
-      <router-outlet name="main-toolbar-backnav" >
-      <button mat-icon-button (click)="leftNavigation.toggle()">
+      <button *ngIf="!atHome"
+              mat-icon-button (click)="navigateUp()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button *ngIf="atHome"
+              mat-icon-button (click)="leftNavigation.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      </router-outlet>
       <h6>{{ title }}</h6>
       <span class="app-spacer"></span>
+      <router-outlet name="main-toolbar-icons"></router-outlet>
     </mat-toolbar-row>
   </mat-toolbar>
   <router-outlet name="main-toolbar-tabs"></router-outlet>
   <!--<nav mat-tab-nav-bar backgroundColor="primary"-->
-       <!--class="fixed-header">-->
-    <!--<a mat-tab-link *ngFor="let link of [ 'Autos', 'Bahn', 'Tram' ]"-->
-       <!--(click)="activeLink = link"-->
-       <!--[active]="activeLink == link"> {{link}} </a>-->
+  <!--class="fixed-header">-->
+  <!--<a mat-tab-link *ngFor="let link of [ 'Autos', 'Bahn', 'Tram' ]"-->
+  <!--(click)="activeLink = link"-->
+  <!--[active]="activeLink == link"> {{link}} </a>-->
   <!--</nav>-->
 </div>
 
@@ -38,22 +42,29 @@
         <h1>Navigation</h1>
       </mat-toolbar-row>
     </mat-toolbar>
-    <mat-nav-list class="side-toolbar-navlist" *ngFor="let nav_category of navigation">
-      <div *ngFor="let element of nav_category.values">
+    <mat-divider></mat-divider>
+    <mat-nav-list class="side-toolbar-navlist"
+                  *ngFor="let category of navigation">
+      <p *ngIf="category.name !== 'Home'"
+        class="d-none d-sm-block mt-2 ml-3 mat-caption">{{ category.name }}</p>
+      <ng-container *ngFor="let element of category.values">
         <a *ngIf="element.available | async"
            mat-list-item
+           class="app-nav-link"
            (click)="mobileQuery.matches && leftNavigation.toggle()"
-           routerLinkActive="active"
+           routerLinkActive="app-nav-link-active"
            [routerLinkActiveOptions]="{exact: true}"
            routerLink="{{ element.link }}">
           <mat-icon class="nav-entry-icon">{{ element.icon }}</mat-icon>
           <span class="nav-entry-name">{{ element.title }}</span>
         </a>
-      </div>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="p-sm-5">
+  <mat-sidenav-content class="p-sm-3 mh-100">
+    <div class="container-fluid">
       <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
   <mat-sidenav position="end" mode="side" opened="false">
     Second

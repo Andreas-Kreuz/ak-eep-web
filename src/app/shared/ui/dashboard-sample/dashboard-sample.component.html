@@ -1,4 +1,4 @@
-<div *ngIf="!(connectionEstablished$ | async)"
+<ng-container *ngIf="!(connectionEstablished$ | async)"
      class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -6,7 +6,7 @@
          style="margin-bottom: 24px; margin-top: 64px;">
         EEP-Web
       </p>
-      <p class="mat-display-1 app-mute-dark-bg">
+      <p class="mat-display-1 app-mute-on-light-bg">
         Deine Anlage. Übersichtlich. Dargestellt.
       </p>
       <p>Verbinde mit Server ... {{ hostName$ | async }}<br><br></p>
@@ -17,9 +17,9 @@
       </mat-progress-spinner>
     </div>
   </div>
-</div>
+</ng-container>
 
-<div *ngIf="(connectionEstablished$ | async)"
+<ng-container *ngIf="(connectionEstablished$ | async)"
      class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -27,7 +27,7 @@
          style="margin-bottom: 24px; margin-top: 64px;">
         EEP-Web
       </p>
-      <p class="mat-display-1 app-mute-dark-bg">
+      <p class="mat-display-1 app-mute-on-light-bg">
         Deine Anlage. Übersichtlich. Dargestellt.
       </p>
     </div>
@@ -89,10 +89,10 @@
   </ng-container>
 
 
-  <h5 class="mt-5 mb-4 app-mute-dark-bg">Versionen</h5>
-  <p class="mat-small mat-caption app-mute-dark-bg">
+  <h5 class="mt-5 mb-4 app-mute-on-light-bg">Versionen</h5>
+  <p class="mat-small mat-caption app-mute-on-light-bg">
     EEP-Web: {{ eepWebVersion$ | async }}<span
     *ngIf="(eepVersion$ | async) !== '?'">, EEP-Lua: {{ eepLuaVersion$ | async }}, EEP: {{ eepVersion$ | async }}
   </span>
   </p>
-</div>
+</ng-container>

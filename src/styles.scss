@@ -156,7 +156,7 @@ html, body {
   flex: 1 1 auto;
 }
 
-.app-mute-dark-bg {
+.app-mute-on-light-bg {
   color: #707070;
 }
 
@@ -190,3 +190,11 @@ html, body {
   z-index: 1030;
 }
 
+// Navigation stuff
+.app-nav-link-active {
+  background-color: mat-color($ak-eep-web-primary, 0.4);
+}
+
+.app-nav-link {
+  border-radius: 4px;
+}

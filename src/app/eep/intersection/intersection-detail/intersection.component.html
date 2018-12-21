@@ -1,10 +1,7 @@
 <div class="row mt-3">
   <div class="col-sm-12">
     <div class="mat-typography">
-      <h1 class="app-mute-dark-bg material-icons">
-        <button mat-icon-button routerLink="/intersections">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
+      <h1 class="app-mute-on-light-bg material-icons">
         {{ (intersection$ | async)?.name }}
       </h1>
     </div>

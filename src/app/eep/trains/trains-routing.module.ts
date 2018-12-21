@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {TrainListComponent} from './train-list/train-list.component';
 
 const trainRoutes: Routes = [
-  {path: '', component: TrainListComponent, pathMatch: 'full'},
+  {path: '', redirectTo: '/', pathMatch: 'full' },
   {path: ':trainType', component: TrainListComponent}
 ];
 
