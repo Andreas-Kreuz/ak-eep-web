@@ -7,6 +7,7 @@ import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../../intersection/store/intersection.reducers';
 import {Router} from '@angular/router';
 import {IntersectionHelper} from '../intersection-helper';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-crossings',
@@ -18,7 +19,8 @@ export class IntersectionsComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.State>,
               private router: Router,
-              private intersectionHelper: IntersectionHelper) {
+              private intersectionHelper: IntersectionHelper,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {

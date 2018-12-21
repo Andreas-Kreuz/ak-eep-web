@@ -14,6 +14,7 @@ import {Direction} from '../models/direction.model';
 import {TrafficType} from '../models/traffic-type.enum';
 import {IntersectionSwitching} from '../models/intersection-switching.model';
 import {IntersectionHelper} from '../intersection-helper';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-crossing',
@@ -30,7 +31,8 @@ export class IntersectionComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute,
-              private intersectionHelper: IntersectionHelper) {
+              private intersectionHelper: IntersectionHelper,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {

@@ -17,8 +17,7 @@ import {Injectable} from '@angular/core';
 })
 export class IntersectionHelper {
 
-  constructor(private store: Store<fromRoot.State>,
-              public dialog: MatDialog) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
   typeIcon(type: string) {
@@ -137,18 +136,18 @@ export class IntersectionHelper {
     return lane.switchings.indexOf(switching.name) >= 0;
   }
 
-  activateCam(staticCam: string) {
+  activateCam(staticCam: string, dialog: MatDialog) {
     if (staticCam) {
       this.store.dispatch(new IntersectionAction.SwitchToCam({
         staticCam: staticCam
       }));
     } else {
-      this.openDialog();
+      this.openDialog(dialog);
     }
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(CamHelpDialogComponent, {
+  openDialog(dialog: MatDialog): void {
+    const dialogRef = dialog.open(CamHelpDialogComponent, {
       width: '90%'
     });
 

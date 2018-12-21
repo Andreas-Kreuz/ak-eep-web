@@ -18,7 +18,7 @@
           <span class="app-spacer"></span>
           <button mat-icon-button
                   *ngIf="!intersection.staticCams || intersection.staticCams.length <= 1"
-                  (click)="intersectionHelper.activateCam(intersection.staticCams[0])"
+                  (click)="intersectionHelper.activateCam(intersection.staticCams[0], dialog)"
                   aria-label="Go to Cam">
             <mat-icon>videocam</mat-icon>
           </button>
@@ -31,7 +31,7 @@
           <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item
                     *ngFor="let cam of intersection.staticCams"
-                    (click)="intersectionHelper.activateCam(cam)">
+                    (click)="intersectionHelper.activateCam(cam, dialog)">
               <mat-icon color="accent">videocam</mat-icon>
               {{ cam }}</button>
           </mat-menu>
@@ -80,7 +80,7 @@
             <mat-list *ngIf="intersection.staticCams.length > 0; else noCams">
               <button mat-menu-item
                       *ngFor="let cam of intersection.staticCams"
-                      (click)="intersectionHelper.activateCam(cam)">
+                      (click)="intersectionHelper.activateCam(cam, dialog)">
                 <mat-icon color="accent">videocam</mat-icon>
                 {{ cam }}</button>
             </mat-list>
