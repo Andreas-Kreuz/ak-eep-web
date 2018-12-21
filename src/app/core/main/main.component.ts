@@ -47,7 +47,7 @@ export class MainComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(
       (event: NavigationEnd) => {
-        this.parentUrl = '/' + event.urlAfterRedirects.substr(1, event.urlAfterRedirects.lastIndexOf('/') -1 );
+        this.parentUrl = '/' + event.urlAfterRedirects.substr(1, event.urlAfterRedirects.lastIndexOf('/') - 1);
         this.atHome = event.urlAfterRedirects === '/';
         console.log(this.parentUrl);
       }
