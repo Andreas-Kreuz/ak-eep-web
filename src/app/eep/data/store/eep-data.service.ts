@@ -10,16 +10,24 @@ import {WsService} from '../../../core/socket/ws.service';
   providedIn: 'root'
 })
 export class EepDataService {
-  private actions$: Observable<WsEvent>;
+  private dataActions$: Observable<WsEvent>;
+  private freeDataActions$: Observable<WsEvent>;
 
   constructor(private socket: WsService,
               private store: Store<fromRoot.State>) {
   }
 
-  getActions() {
-    if (!this.actions$) {
-      this.actions$ = this.socket.listen('[Data-save-slots]');
+  getDataActions() {
+    if (!this.dataActions$) {
+      this.dataActions$ = this.socket.listen('[Data-save-slots]');
     }
-    return this.actions$;
+    return this.dataActions$;
+  }
+
+  getFreeDataActions() {
+    if (!this.freeDataActions$) {
+      this.freeDataActions$ = this.socket.listen('[Data-free-slots]');
+    }
+    return this.freeDataActions$;
   }
 }

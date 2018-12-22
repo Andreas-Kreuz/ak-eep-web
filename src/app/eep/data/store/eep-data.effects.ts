@@ -2,15 +2,16 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {filter, switchMap} from 'rxjs/operators';
 
-import {SetSlots} from './eep-data.actions';
+import {SetFreeSlots, SetSlots} from './eep-data.actions';
 import {EepData} from '../models/eep-data.model';
 import {of} from 'rxjs';
 import {EepDataService} from './eep-data.service';
+import {EepFreeData} from '../models/eep-free-data.model';
 
 @Injectable()
 export class EepDataEffects {
   @Effect()
-  fetchEepData = this.eepDataService.getActions().pipe(
+  fetchEepData = this.eepDataService.getDataActions().pipe(
     filter(wsEvent => wsEvent.action === 'Set'),
     switchMap(wsEvent => {
         const list: EepData[] = JSON.parse(wsEvent.payload);
@@ -20,6 +21,16 @@ export class EepDataEffects {
           }
         }
         return of(new SetSlots(list));
+      }
+    )
+  );
+
+  @Effect()
+  fetchEepFreeData = this.eepDataService.getFreeDataActions().pipe(
+    filter(wsEvent => wsEvent.action === 'Set'),
+    switchMap(wsEvent => {
+        const list: EepFreeData[] = JSON.parse(wsEvent.payload);
+        return of(new SetFreeSlots(list));
       }
     )
   );

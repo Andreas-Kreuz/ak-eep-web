@@ -5,6 +5,7 @@ import * as fromEepData from '../../data/store/eep-data.reducers';
 import {EepData} from '../models/eep-data.model';
 import {EepDataService} from '../store/eep-data.service';
 import {Observable} from 'rxjs';
+import {EepFreeData} from '../models/eep-free-data.model';
 
 @Component({
   selector: 'app-eep-data-list',
@@ -15,6 +16,7 @@ export class EepDataListComponent implements OnInit {
   columnsToDisplay: string[] = ['id', 'name', 'data'];
   columnNames = {id: '#', name: 'Name', data: 'Inhalt'};
   tableData$: Observable<EepData[]>;
+  firstFreeSlots$: Observable<EepFreeData[]>;
 
   constructor(private eepDataService: EepDataService,
               private store: Store<fromRoot.State>) {
@@ -22,5 +24,6 @@ export class EepDataListComponent implements OnInit {
 
   ngOnInit() {
     this.tableData$ = this.store.pipe(select(fromEepData.eepData$));
+    this.firstFreeSlots$ = this.store.pipe(select(fromEepData.firstEepFreeData$));
   }
 }

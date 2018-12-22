@@ -4,9 +4,31 @@
   </h1>
 </div>
 
-<mat-card>
-  <app-filtered-table [columnNames]="columnNames"
-                      [columnsToDisplay]="columnsToDisplay"
-                      [tableData]="tableData$">
-  </app-filtered-table>
+<mat-card class="app-card">
+  <mat-card-header class="app-fg-primary">
+    <mat-card-title>Freie Speicherplätze</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <p class="mat-caption">Freie Plätze (die ersten 20)</p>
+    <p>
+      <ng-container *ngFor="let slot of (firstFreeSlots$ | async); let last = last">
+        {{ slot.id }}<ng-container *ngIf="!last">,</ng-container>
+      </ng-container>
+    </p>
+  </mat-card-content>
 </mat-card>
+
+<mat-card class="mt-5 app-card">
+  <mat-card-header class="app-fg-primary">
+    <mat-card-title>Belegter Speicher</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <app-filtered-table [columnNames]="columnNames"
+                        [columnsToDisplay]="columnsToDisplay"
+                        [tableData]="tableData$">
+    </app-filtered-table>
+  </mat-card-content>
+</mat-card>
+
