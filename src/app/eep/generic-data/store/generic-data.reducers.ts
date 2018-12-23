@@ -1,6 +1,6 @@
 import * as fromGenericData from './generic-data.actions';
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {DataType} from '../model/data-type';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { DataType } from '../model/data-type';
 
 
 export interface State {

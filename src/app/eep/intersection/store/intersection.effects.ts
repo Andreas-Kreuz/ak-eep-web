@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {Actions, Effect, ofType} from '@ngrx/effects';
-import {map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { map, switchMap } from 'rxjs/operators';
 import * as fromIntersections from './intersection.actions';
-import {of} from 'rxjs';
-import {IntersectionLane} from '../models/intersection-lane.model';
+import { of } from 'rxjs';
+import { IntersectionLane } from '../models/intersection-lane.model';
 import * as fromSignals from '../../signals/store/signal.actions';
-import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
-import {IntersectionService} from './intersection.service';
-import {WsEvent} from '../../../core/socket/ws-event';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
+import { IntersectionTrafficLight } from '../models/intersection-traffic-light.model';
+import { IntersectionService } from './intersection.service';
+import { WsEvent } from '../../../core/socket/ws-event';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
 
 @Injectable()
 export class IntersectionEffects {

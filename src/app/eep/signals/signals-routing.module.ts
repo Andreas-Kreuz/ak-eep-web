@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {SignalsComponent} from './signal-list/signals.component';
-import {SignalDetailComponent} from './signal-detail/signal-detail.component';
+import { SignalsComponent } from './signal-list/signals.component';
+import { SignalDetailComponent } from './signal-detail/signal-detail.component';
 
 const signalRoutes: Routes = [
   {path: '', component: SignalsComponent, pathMatch: 'full'},

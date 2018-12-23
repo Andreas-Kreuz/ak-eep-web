@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromGenericActions from '../store/generic-data.actions';
 import * as fromGenericData from '../store/generic-data.reducers';
-import {Observable, Subject} from 'rxjs';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-generic-data',

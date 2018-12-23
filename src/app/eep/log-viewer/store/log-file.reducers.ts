@@ -1,5 +1,5 @@
 import * as fromLogFile from './log-file.actions';
-import {createFeatureSelector, createSelector} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface State {
   loading: boolean;

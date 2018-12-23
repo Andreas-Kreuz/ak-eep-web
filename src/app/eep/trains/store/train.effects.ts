@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Actions, Effect} from '@ngrx/effects';
-import {TrainService} from './train.service';
-import {filter, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { TrainService } from './train.service';
+import { filter, switchMap } from 'rxjs/operators';
 
-import {Train} from '../model/train.model';
+import { Train } from '../model/train.model';
 import * as fromTrains from './train.actions';
-import {of} from 'rxjs';
-import {RollingStock} from '../model/rolling-stock.model';
+import { of } from 'rxjs';
+import { RollingStock } from '../model/rolling-stock.model';
 
 @Injectable()
 export class TrainEffects {

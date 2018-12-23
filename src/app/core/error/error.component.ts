@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import {Alert} from './alert.model';
+import { Alert } from './alert.model';
 import * as fromErrors from '../store/core.reducers';
 import * as ErrorActions from '../store/core.actions';
 import * as fromRoot from '../../app.reducers';

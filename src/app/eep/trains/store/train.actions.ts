@@ -1,7 +1,7 @@
-import {Action} from '@ngrx/store';
-import {Train} from '../model/train.model';
-import {RollingStock} from '../model/rolling-stock.model';
-import {TrainType} from '../model/train-type.enum';
+import { Action } from '@ngrx/store';
+import { Train } from '../model/train.model';
+import { RollingStock } from '../model/rolling-stock.model';
+import { TrainType } from '../model/train-type.enum';
 
 export enum TrainActionTypes {
   SELECT_TYPE = '[Train] Select Type',

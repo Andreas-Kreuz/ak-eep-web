@@ -1,10 +1,10 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromIntersection from './intersection.actions';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionLane} from '../models/intersection-lane.model';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionLane } from '../models/intersection-lane.model';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
+import { IntersectionTrafficLight } from '../models/intersection-traffic-light.model';
 
 export interface State {
   intersections: Intersection[];

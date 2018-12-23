@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {TrainListComponent} from './train-list/train-list.component';
+import { TrainListComponent } from './train-list/train-list.component';
 
 const trainRoutes: Routes = [
-  {path: '', redirectTo: '/', pathMatch: 'full' },
+  {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: ':trainType', component: TrainListComponent}
 ];
 

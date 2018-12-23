@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {WsService} from '../socket/ws.service';
-import {Effect} from '@ngrx/effects';
-import {WsEvent} from '../socket/ws-event';
-import {Versions} from '../model/versions.model';
-import {VersionInfo} from '../model/version-info.model';
+import { Injectable } from '@angular/core';
+import { WsService } from '../socket/ws.service';
+import { Effect } from '@ngrx/effects';
+import { WsEvent } from '../socket/ws-event';
+import { Versions } from '../model/versions.model';
+import { VersionInfo } from '../model/version-info.model';
 import * as fromCore from './core.actions';
-import {filter, switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class CoreEffects {

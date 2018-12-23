@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
-import {CommonModule} from '@angular/common';
-import {TooltipComponent} from './tooltip/tooltip.component';
+import { NgModule } from '@angular/core';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { TooltipComponent } from './tooltip/tooltip.component';
 import {
   MatBadgeModule,
   MatButtonModule,
@@ -27,15 +27,15 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-import {FilteredTableComponent} from './filtered-table/filtered-table.component';
-import {DetailsDirective} from './details/details.directive';
-import {OldDetailsDirective} from './details/old-details.directive';
-import {TitledCardComponent} from './ui/titled-card/titled-card.component';
-import {CardSampleComponent} from './ui/card-sample/card-sample.component';
-import {TextSampleComponent} from './ui/text-sample/text-sample.component';
-import {SharedRoutingModule} from './shared-routing.module';
-import {DashboardSampleComponent} from './ui/dashboard-sample/dashboard-sample.component';
-import {DashboardCardComponent} from './ui/dashboard-card/dashboard-card.component';
+import { FilteredTableComponent } from './filtered-table/filtered-table.component';
+import { DetailsDirective } from './details/details.directive';
+import { OldDetailsDirective } from './details/old-details.directive';
+import { TitledCardComponent } from './ui/titled-card/titled-card.component';
+import { CardSampleComponent } from './ui/card-sample/card-sample.component';
+import { TextSampleComponent } from './ui/text-sample/text-sample.component';
+import { SharedRoutingModule } from './shared-routing.module';
+import { DashboardSampleComponent } from './ui/dashboard-sample/dashboard-sample.component';
+import { DashboardCardComponent } from './ui/dashboard-card/dashboard-card.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({

@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './core/home/home.component';
-import {SwitchesComponent} from './eep/switches/switch-list/switches.component';
-import {ServerStatusComponent} from './core/server-status/server-status.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './core/home/home.component';
+import { SwitchesComponent } from './eep/switches/switch-list/switches.component';
+import { ServerStatusComponent } from './core/server-status/server-status.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},

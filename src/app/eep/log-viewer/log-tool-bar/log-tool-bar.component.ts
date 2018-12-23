@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as logAction from '../store/log-file.actions';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 
 @Component({

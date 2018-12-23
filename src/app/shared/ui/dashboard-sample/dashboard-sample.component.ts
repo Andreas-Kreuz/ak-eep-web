@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {MainNavigationService} from '../../../core/home/main-navigation.service';
-import {of} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { MainNavigationService } from '../../../core/home/main-navigation.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-sample',

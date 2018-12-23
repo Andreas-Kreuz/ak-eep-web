@@ -1,7 +1,7 @@
-import {Observable, of} from 'rxjs';
-import {Action, select, Store} from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { Action, select, Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as fromDataTypes from '../datatypes/store/data-types.reducers';
 import * as fromEepData from '../../eep/data/store/eep-data.reducers';
 import * as fromIntersection from '../../eep/intersection/store/intersection.reducers';
@@ -80,10 +80,10 @@ export class MainNavigationService {
             description: 'Schalte Deine Kreuzungen oder setze die passende Kamera.',
             linkDescription: 'Kreuzungen zeigen',
           },
-      //   ]
-      // },
-      // {
-      //   name: 'Fahrzeuge', values: [
+          //   ]
+          // },
+          // {
+          //   name: 'Fahrzeuge', values: [
           {
             available: of(true),
             icon: 'directions_car',
@@ -155,10 +155,10 @@ export class MainNavigationService {
             description: 'Enthält Signale, Ampeln und Schranken',
             linkDescription: 'Zu den Signalen',
           },
-      //   ]
-      // },
-      // {
-      //   name: 'Roh-Daten', values: [
+          //   ]
+          // },
+          // {
+          //   name: 'Roh-Daten', values: [
           {
             available: of(true),
             icon: 'list_alt',

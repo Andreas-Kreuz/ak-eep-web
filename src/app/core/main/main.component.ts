@@ -1,15 +1,15 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {AppComponent} from '../../app.component';
-import {select, Store} from '@ngrx/store';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { AppComponent } from '../../app.component';
+import { select, Store } from '@ngrx/store';
 import * as fromErrors from '../store/core.reducers';
 import * as fromRoot from '../../app.reducers';
-import {Observable} from 'rxjs';
-import {Status} from '../server-status/status.enum';
+import { Observable } from 'rxjs';
+import { Status } from '../server-status/status.enum';
 import * as fromDataTypes from '../datatypes/store/data-types.reducers';
-import {MediaMatcher} from '@angular/cdk/layout';
-import {MainNavigationService} from '../home/main-navigation.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { MainNavigationService } from '../home/main-navigation.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',

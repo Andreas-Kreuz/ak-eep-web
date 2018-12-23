@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Subscription} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import * as fromRoot from '../../app.reducers';
-import {WsEvent} from './ws-event';
-import {WsEventUtil} from './ws-event-util';
-import {WsService} from './ws.service';
+import { WsEvent } from './ws-event';
+import { WsEventUtil } from './ws-event-util';
+import { WsService } from './ws.service';
 
 @Injectable({
   providedIn: 'root'

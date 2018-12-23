@@ -1,10 +1,10 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as CoreAction from './core.actions';
-import {Alert} from '../error/alert.model';
-import {environment} from '../../../environments/environment';
-import {EepWebUrl} from '../server-status/eep-web-url.model';
-import {Status} from '../server-status/status.enum';
+import { Alert } from '../error/alert.model';
+import { environment } from '../../../environments/environment';
+import { EepWebUrl } from '../server-status/eep-web-url.model';
+import { Status } from '../server-status/status.enum';
 
 
 export interface State {

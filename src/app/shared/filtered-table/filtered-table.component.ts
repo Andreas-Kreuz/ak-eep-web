@@ -1,12 +1,12 @@
-import {Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, Type, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material';
-import {TableDataSource} from './table-datasource';
-import {Observable, Subject} from 'rxjs';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DetailsComponent} from '../details/details.component';
-import {DetailsDirective} from '../details/details.directive';
-import {OldDetailsDirective} from '../details/old-details.directive';
-import {DetailsItem} from '../details/details-item';
+import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, Type, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material';
+import { TableDataSource } from './table-datasource';
+import { Observable, Subject } from 'rxjs';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { DetailsComponent } from '../details/details.component';
+import { DetailsDirective } from '../details/details.directive';
+import { OldDetailsDirective } from '../details/old-details.directive';
+import { DetailsItem } from '../details/details-item';
 
 @Component({
   selector: 'app-filtered-table',

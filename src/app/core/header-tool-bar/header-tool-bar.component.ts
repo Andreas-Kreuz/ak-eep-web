@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header-tool-bar',

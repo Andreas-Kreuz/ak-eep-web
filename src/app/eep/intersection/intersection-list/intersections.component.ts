@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
-import {Intersection} from '../models/intersection.model';
+import { Intersection } from '../models/intersection.model';
 import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../../intersection/store/intersection.reducers';
-import {Router} from '@angular/router';
-import {IntersectionHelper} from '../intersection-helper';
-import {MatDialog} from '@angular/material';
+import { Router } from '@angular/router';
+import { IntersectionHelper } from '../intersection-helper';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-crossings',

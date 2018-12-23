@@ -1,8 +1,8 @@
-import {Train} from '../model/train.model';
-import {TrainActions, TrainActionTypes} from './train.actions';
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {RollingStock} from '../model/rolling-stock.model';
-import {TrainType} from '../model/train-type.enum';
+import { Train } from '../model/train.model';
+import { TrainActions, TrainActionTypes } from './train.actions';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { RollingStock } from '../model/rolling-stock.model';
+import { TrainType } from '../model/train-type.enum';
 
 export interface State {
   trainType: TrainType;

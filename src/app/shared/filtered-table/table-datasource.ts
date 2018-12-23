@@ -1,7 +1,7 @@
-import {DataSource} from '@angular/cdk/collections';
-import {MatSort} from '@angular/material';
-import {map} from 'rxjs/operators';
-import {merge, Observable, Subscription} from 'rxjs';
+import { DataSource } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material';
+import { map } from 'rxjs/operators';
+import { merge, Observable, Subscription } from 'rxjs';
 
 /**
  * Data source for the Table view. This class should
@@ -132,6 +132,7 @@ function textFor(columnTextFunctions: (T) => any, element: any, column: string) 
 
   return value;
 }
+
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);

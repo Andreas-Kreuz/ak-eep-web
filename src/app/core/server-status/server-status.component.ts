@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
 import * as fromCore from '../store/core.reducers';
-import {Observable} from 'rxjs';
-import {EepWebUrl} from './eep-web-url.model';
+import { Observable } from 'rxjs';
+import { EepWebUrl } from './eep-web-url.model';
 
 @Component({
   selector: 'app-server-status',

@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DetailsComponent} from '../../../shared/details/details.component';
-import {Train} from '../model/train.model';
-import {RollingStock} from '../model/rolling-stock.model';
-import {Coupling} from '../model/coupling.enum';
+import { Component, Input, OnInit } from '@angular/core';
+import { DetailsComponent } from '../../../shared/details/details.component';
+import { Train } from '../model/train.model';
+import { RollingStock } from '../model/rolling-stock.model';
+import { Coupling } from '../model/coupling.enum';
 
 @Component({
   selector: 'app-train-details',

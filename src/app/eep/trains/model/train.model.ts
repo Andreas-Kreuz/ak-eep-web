@@ -1,4 +1,4 @@
-import {RollingStock} from './rolling-stock.model';
+import { RollingStock } from './rolling-stock.model';
 
 export class Train {
 

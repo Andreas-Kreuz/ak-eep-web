@@ -1,20 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {select, Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 
 import * as fromIntersection from '../store/intersection.reducers';
 import * as IntersectionAction from '../store/intersection.actions';
 import * as fromRoot from '../../../app.reducers';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionLane} from '../models/intersection-lane.model';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionLane } from '../models/intersection-lane.model';
 import * as icons from '../../../shared/unicode-symbol.model';
-import {Phase} from '../models/phase.enum';
-import {Direction} from '../models/direction.model';
-import {TrafficType} from '../models/traffic-type.enum';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {IntersectionHelper} from '../intersection-helper';
-import {MatDialog} from '@angular/material';
+import { Phase } from '../models/phase.enum';
+import { Direction } from '../models/direction.model';
+import { TrafficType } from '../models/traffic-type.enum';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
+import { IntersectionHelper } from '../intersection-helper';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-crossing',

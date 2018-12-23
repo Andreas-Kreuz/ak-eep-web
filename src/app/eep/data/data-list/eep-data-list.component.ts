@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as fromRoot from '../../../app.reducers';
-import {select, Store} from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import * as fromEepData from '../../data/store/eep-data.reducers';
-import {EepData} from '../models/eep-data.model';
-import {EepDataService} from '../store/eep-data.service';
-import {Observable} from 'rxjs';
-import {EepFreeData} from '../models/eep-free-data.model';
+import { EepData } from '../models/eep-data.model';
+import { EepDataService } from '../store/eep-data.service';
+import { Observable } from 'rxjs';
+import { EepFreeData } from '../models/eep-free-data.model';
 
 @Component({
   selector: 'app-eep-data-list',

@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Actions, Effect, ofType} from '@ngrx/effects';
-import {of} from 'rxjs';
-import {filter, map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import * as fromLogFile from './log-file.actions';
-import {WsEvent} from '../../../core/socket/ws-event';
-import {WsEventUtil} from '../../../core/socket/ws-event-util';
-import {LogFileService} from './log-file.service';
+import { WsEvent } from '../../../core/socket/ws-event';
+import { WsEventUtil } from '../../../core/socket/ws-event-util';
+import { LogFileService } from './log-file.service';
 
 @Injectable()
 export class LogFileEffects {

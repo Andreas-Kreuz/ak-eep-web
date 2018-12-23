@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import * as fromCore from './core/store/core.reducers';
 import * as CoreActions from './core/store/core.actions';
-import {PongService} from './core/socket/pong.service';
+import { PongService } from './core/socket/pong.service';
 
 @Component({
   selector: 'app-root',

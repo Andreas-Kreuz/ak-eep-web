@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Actions, Effect} from '@ngrx/effects';
-import {switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { switchMap } from 'rxjs/operators';
 
 import * as fromSignal from './signal.actions';
-import {Signal} from '../models/signal.model';
-import {of} from 'rxjs';
-import {SignalsService} from './signals.service';
-import {WsEvent} from '../../../core/socket/ws-event';
-import {SignalTypeDefinition} from '../models/signal-type-definition.model';
+import { Signal } from '../models/signal.model';
+import { of } from 'rxjs';
+import { SignalsService } from './signals.service';
+import { WsEvent } from '../../../core/socket/ws-event';
+import { SignalTypeDefinition } from '../models/signal-type-definition.model';
 
 @Injectable()
 export class SignalEffects {

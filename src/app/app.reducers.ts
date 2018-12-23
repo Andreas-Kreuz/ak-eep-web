@@ -1,4 +1,4 @@
-import {ActionReducerMap} from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromCore from './core/store/core.reducers';
 import * as fromDataTypes from './core/datatypes/store/data-types.reducers';

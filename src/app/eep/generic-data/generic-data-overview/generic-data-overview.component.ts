@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import * as fromGenericData from '../store/generic-data.reducers';
 import * as fromCore from '../../../core/store/core.reducers';
 import * as fromRoot from '../../../app.reducers';
-import {Observable} from 'rxjs';
-import {DataType} from '../model/data-type';
-import {GenericDataService} from '../store/generic-data.service';
+import { Observable } from 'rxjs';
+import { DataType } from '../model/data-type';
+import { GenericDataService } from '../store/generic-data.service';
 
 @Component({
   selector: 'app-generic-data-overview',

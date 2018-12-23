@@ -46,7 +46,7 @@
     <mat-nav-list class="side-toolbar-navlist"
                   *ngFor="let category of navigation">
       <p *ngIf="category.name !== 'Home'"
-        class="d-none d-sm-block mt-2 ml-3 mat-caption">{{ category.name }}</p>
+         class="d-none d-sm-block mt-2 ml-3 mat-caption">{{ category.name }}</p>
       <ng-container *ngFor="let element of category.values">
         <a *ngIf="element.available | async"
            mat-list-item

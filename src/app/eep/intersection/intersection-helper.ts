@@ -1,16 +1,16 @@
-import {IntersectionLane} from './models/intersection-lane.model';
-import {IntersectionSwitching} from './models/intersection-switching.model';
-import {TrafficType} from './models/traffic-type.enum';
-import {Direction} from './models/direction.model';
+import { IntersectionLane } from './models/intersection-lane.model';
+import { IntersectionSwitching } from './models/intersection-switching.model';
+import { TrafficType } from './models/traffic-type.enum';
+import { Direction } from './models/direction.model';
 import * as icons from '../../shared/unicode-symbol.model';
-import {Intersection} from './models/intersection.model';
-import {Phase} from './models/phase.enum';
+import { Intersection } from './models/intersection.model';
+import { Phase } from './models/phase.enum';
 import * as IntersectionAction from './store/intersection.actions';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
-import {CamHelpDialogComponent} from '../cam/cam-help-dialog/cam-help-dialog.component';
-import {MatDialog} from '@angular/material';
-import {Injectable} from '@angular/core';
+import { CamHelpDialogComponent } from '../cam/cam-help-dialog/cam-help-dialog.component';
+import { MatDialog } from '@angular/material';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

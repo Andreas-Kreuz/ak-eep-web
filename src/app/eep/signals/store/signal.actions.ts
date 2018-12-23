@@ -1,7 +1,7 @@
-import {Action} from '@ngrx/store';
-import {Signal} from '../models/signal.model';
-import {HttpErrorResponse} from '@angular/common/http';
-import {SignalTypeDefinition} from '../models/signal-type-definition.model';
+import { Action } from '@ngrx/store';
+import { Signal } from '../models/signal.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SignalTypeDefinition } from '../models/signal-type-definition.model';
 
 export const FETCH_SIGNALS = '[Signals] FETCH_SIGNALS';
 export const FETCH_SIGNAL_TYPE_DEFINITIONS = '[Signals] FETCH_SIGNAL_TYPE_DEFINITIONS';

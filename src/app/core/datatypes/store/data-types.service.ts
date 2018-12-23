@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import * as fromDataTypes from './data-types.actions';
-import {WsEvent} from '../../socket/ws-event';
-import {WsService} from '../../socket/ws.service';
+import { WsEvent } from '../../socket/ws-event';
+import { WsService } from '../../socket/ws.service';
 
 @Injectable({
   providedIn: 'root'

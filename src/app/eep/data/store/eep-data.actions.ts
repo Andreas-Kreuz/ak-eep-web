@@ -1,6 +1,6 @@
-import {EepData} from '../models/eep-data.model';
-import {Action} from '@ngrx/store';
-import {EepFreeData} from '../models/eep-free-data.model';
+import { EepData } from '../models/eep-data.model';
+import { Action } from '@ngrx/store';
+import { EepFreeData } from '../models/eep-free-data.model';
 
 export const FETCH_SLOTS = '[EEP-Data] Fetch slots';
 export const SET_SLOTS = '[EEP-Data] Set slots';

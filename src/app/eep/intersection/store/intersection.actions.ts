@@ -1,8 +1,8 @@
-import {Action} from '@ngrx/store';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionLane} from '../models/intersection-lane.model';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {IntersectionTrafficLight} from '../models/intersection-traffic-light.model';
+import { Action } from '@ngrx/store';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionLane } from '../models/intersection-lane.model';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
+import { IntersectionTrafficLight } from '../models/intersection-traffic-light.model';
 
 export const SET_INTERSECTIONS = '[Intersections] Set';
 export const SET_INTERSECTION_SWITCHING = '[Intersections] Set Switching';

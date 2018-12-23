@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Subscription} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import * as fromRoot from '../../../app.reducers';
-import {WsEvent} from '../../../core/socket/ws-event';
-import {WsService} from '../../../core/socket/ws.service';
-import {DataType} from '../model/data-type';
+import { WsEvent } from '../../../core/socket/ws-event';
+import { WsService } from '../../../core/socket/ws.service';
+import { DataType } from '../model/data-type';
 import * as fromGenericData from './generic-data.actions';
 
 @Injectable({

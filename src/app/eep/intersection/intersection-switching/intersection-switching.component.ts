@@ -1,14 +1,13 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {select, Store} from '@ngrx/store';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
+import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as IntersectionAction from '../store/intersection.actions';
 import * as fromIntersection from '../store/intersection.reducers';
-import {map} from 'rxjs/operators';
-import {MatDialog} from '@angular/material';
-import {CamHelpDialogComponent} from '../../cam/cam-help-dialog/cam-help-dialog.component';
+import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-intersection-switching',

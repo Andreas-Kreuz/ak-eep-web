@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {WsEvent} from './ws-event';
-import {environment} from '../../../environments/environment';
-import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
-import {Store} from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { WsEvent } from './ws-event';
+import { environment } from '../../../environments/environment';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Train} from '../model/train.model';
-import {select, Store} from '@ngrx/store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Train } from '../model/train.model';
+import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as TrainAction from '../store/train.actions';
 import * as fromTrain from '../store/train.reducer';
-import {ActivatedRoute, Params} from '@angular/router';
-import {textForTrainType, TrainType} from '../model/train-type.enum';
-import {Coupling} from '../model/coupling.enum';
-import {TrainDetailsComponent} from '../train-details/train-details.component';
+import { ActivatedRoute, Params } from '@angular/router';
+import { textForTrainType, TrainType } from '../model/train-type.enum';
+import { Coupling } from '../model/coupling.enum';
+import { TrainDetailsComponent } from '../train-details/train-details.component';
 
 @Component({
   selector: 'app-train-list',

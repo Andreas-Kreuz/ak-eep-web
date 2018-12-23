@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {WsEvent} from '../../../core/socket/ws-event';
-import {WsService} from '../../../core/socket/ws.service';
+import { WsEvent } from '../../../core/socket/ws-event';
+import { WsService } from '../../../core/socket/ws.service';
 
 @Injectable({
   providedIn: 'root'

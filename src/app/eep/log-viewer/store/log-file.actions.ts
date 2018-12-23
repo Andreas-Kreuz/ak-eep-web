@@ -1,4 +1,4 @@
-import {Action} from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
 export const LINES_ADDED = '[Log] Lines Added';
 export const CLEARED = '[Log] Lines Cleared';

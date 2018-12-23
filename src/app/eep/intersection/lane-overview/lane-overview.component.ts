@@ -1,13 +1,13 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Intersection} from '../models/intersection.model';
-import {IntersectionSwitching} from '../models/intersection-switching.model';
-import {select, Store} from '@ngrx/store';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Intersection } from '../models/intersection.model';
+import { IntersectionSwitching } from '../models/intersection-switching.model';
+import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../store/intersection.reducers';
-import {map} from 'rxjs/operators';
-import {IntersectionLane} from '../models/intersection-lane.model';
-import {IntersectionHelper} from '../intersection-helper';
+import { map } from 'rxjs/operators';
+import { IntersectionLane } from '../models/intersection-lane.model';
+import { IntersectionHelper } from '../intersection-helper';
 
 @Component({
   selector: 'app-lane-overview',

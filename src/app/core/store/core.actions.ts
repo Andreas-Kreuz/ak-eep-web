@@ -1,7 +1,7 @@
-import {Action} from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
-import {Alert} from '../error/alert.model';
-import {EepWebUrl} from '../server-status/eep-web-url.model';
+import { Alert } from '../error/alert.model';
+import { EepWebUrl } from '../server-status/eep-web-url.model';
 
 export const SHOW_ERROR = '[Core] SHOW_ERROR';
 export const HIDE_ERROR = '[Core] HIDE_ERROR';

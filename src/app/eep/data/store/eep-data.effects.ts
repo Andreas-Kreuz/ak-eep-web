@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Actions, Effect} from '@ngrx/effects';
-import {filter, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { filter, switchMap } from 'rxjs/operators';
 
-import {SetFreeSlots, SetSlots} from './eep-data.actions';
-import {EepData} from '../models/eep-data.model';
-import {of} from 'rxjs';
-import {EepDataService} from './eep-data.service';
-import {EepFreeData} from '../models/eep-free-data.model';
+import { SetFreeSlots, SetSlots } from './eep-data.actions';
+import { EepData } from '../models/eep-data.model';
+import { of } from 'rxjs';
+import { EepDataService } from './eep-data.service';
+import { EepFreeData } from '../models/eep-free-data.model';
 
 @Injectable()
 export class EepDataEffects {

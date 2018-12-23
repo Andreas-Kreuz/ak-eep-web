@@ -1,4 +1,4 @@
-import {SignalTypeDefinition} from './signal-type-definition.model';
+import { SignalTypeDefinition } from './signal-type-definition.model';
 
 export class Signal {
   id: number;

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {debounceTime} from 'rxjs/operators';
-import {fromEvent, Observable} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
 import * as fromRoot from '../../../app.reducers';
 import * as fromLogFile from '../store/log-file.reducers';

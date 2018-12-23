@@ -1,4 +1,4 @@
-import {Action} from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
 export const ROOM = '[AvailableDataTypes]';
 export const SET_DATA_TYPES = '[AvailableDataTypes] Set';

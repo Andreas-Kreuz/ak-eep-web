@@ -1,7 +1,7 @@
-import {Phase} from './phase.enum';
-import {Direction} from './direction.model';
-import {TrafficType} from './traffic-type.enum';
-import {CountType} from './count-type.enum';
+import { Phase } from './phase.enum';
+import { Direction } from './direction.model';
+import { TrafficType } from './traffic-type.enum';
+import { CountType } from './count-type.enum';
 
 export class IntersectionLane {
   vehicleMultiplier: number;

@@ -1,4 +1,4 @@
-import {TrafficType} from './traffic-type.enum';
+import { TrafficType } from './traffic-type.enum';
 
 export class IntersectionTrafficLight {
   axisStructures: [];
