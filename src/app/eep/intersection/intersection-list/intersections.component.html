@@ -6,7 +6,8 @@
   </div>
 </div>
 
-<div class="row" *ngIf="(intersections$ | async) as intersections">
+<div class="row"
+     *ngIf="(intersections$ | async) as intersections">
   <ng-container *ngFor="let intersection of intersections; trackBy: trackById; let last = last">
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex">
       <mat-card class="d-flex flex-column flex-grow-1 mb-5 app-card">
@@ -32,7 +33,8 @@
         </mat-card-content>
         <span class="flex-grow-1"></span>
         <mat-card-actions>
-          <mat-menu #menu="matMenu" xPosition="before">
+          <mat-menu #menu="matMenu"
+                    xPosition="before">
             <button mat-menu-item
                     *ngFor="let cam of intersection.staticCams"
                     (click)="intersectionHelper.activateCam(cam, dialog)">

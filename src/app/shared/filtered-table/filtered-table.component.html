@@ -2,7 +2,9 @@
   <p class="mat-typography">Es sind keine Daten vorhanden.</p>
 </ng-template>
 <mat-form-field *ngIf="(data$ | async)?.length > 0; else noData">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <input matInput
+         (keyup)="applyFilter($event.target.value)"
+         placeholder="Filter">
 </mat-form-field>
 
 <table
@@ -20,7 +22,8 @@
     <th mat-header-cell
         mat-sort-header
         *matHeaderCellDef> {{ columnNames[column] ? columnNames[column] : column }} </th>
-    <td mat-cell *matCellDef="let element"
+    <td mat-cell
+        *matCellDef="let element"
         [style.text-align]="getAlignment(column)">
       <!-- Display icon if a second column is to be shown for the selection -->
       <mat-icon *ngIf="first && detailsItem"
@@ -32,7 +35,9 @@
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+    <td mat-cell
+        *matCellDef="let element"
+        [attr.colspan]="columnsToDisplay.length">
       <div class="example-element-detail"
            [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
            (@detailExpand.start)="setExpandedElement()">
@@ -46,13 +51,17 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+  <tr mat-header-row
+      *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row
+      *matRowDef="let element; columns: columnsToDisplay;"
       class="example-element-row"
       [class.example-expanded-row]="expandedElement === element"
       (click)="onExpandedElement(element)">
   </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"></tr>
 </table>
 
 <p *ngIf="(data$ | async)?.length > 0 && (filteredRows$ | async)?.length === 0"

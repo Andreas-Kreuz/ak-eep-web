@@ -31,7 +31,7 @@ export class IntersectionComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<fromRoot.State>,
               private route: ActivatedRoute,
-              private intersectionHelper: IntersectionHelper,
+              public intersectionHelper: IntersectionHelper,
               public dialog: MatDialog) {
   }
 

@@ -3,11 +3,13 @@
     color="primary">
     <mat-toolbar-row>
       <button *ngIf="!atHome"
-              mat-icon-button (click)="navigateUp()">
+              mat-icon-button
+              (click)="navigateUp()">
         <mat-icon>arrow_back</mat-icon>
       </button>
       <button *ngIf="atHome"
-              mat-icon-button (click)="leftNavigation.toggle()">
+              mat-icon-button
+              (click)="leftNavigation.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <h6>{{ title }}</h6>
@@ -66,7 +68,9 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-  <mat-sidenav position="end" mode="side" opened="false">
+  <mat-sidenav position="end"
+               mode="side"
+               opened="false">
     Second
   </mat-sidenav>
 </mat-sidenav-container>

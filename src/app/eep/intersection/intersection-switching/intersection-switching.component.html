@@ -8,7 +8,8 @@
       Automatisch Schalten
     </mat-slide-toggle>
   </p>
-  <mat-divider class="mt-4" [inset]="true"></mat-divider>
+  <mat-divider class="mt-4"
+               [inset]="true"></mat-divider>
   <p class="mat-small mat-caption mt-3 mb-4">Nächste Schaltung</p>
   <p>
     <mat-radio-group *ngIf="(switching$ | async) as switchings"

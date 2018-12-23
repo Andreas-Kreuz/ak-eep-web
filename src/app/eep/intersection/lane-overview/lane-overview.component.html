@@ -4,38 +4,61 @@
       <table class="table table-sm table-striped">
         <thead>
         <tr>
-          <th scope="col" class="fit">Richtung</th>
-          <th scope="col" class="fit">Typ</th>
-          <th scope="col" class="fit">Spuren</th>
+          <th scope="col"
+              class="fit">Richtung
+          </th>
+          <th scope="col"
+              class="fit">Typ
+          </th>
+          <th scope="col"
+              class="fit">Spuren
+          </th>
           <th *ngFor="let switching of switchings; trackBy: intersectionHelper.trackSwitching"
-              scope="col" class="fit text-center">{{ switching.name }}
+              scope="col"
+              class="fit text-center">{{ switching.name }}
           </th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let lane of lanes; trackBy: intersectionHelper.trackLane">
           <th scope="row">{{ lane.name }}</th>
-          <th [ngClass]=[intersectionHelper.phaseColor(lane)] scope="row" class="fit text-center">
-            <img *ngIf="lane.type == 'PEDESTRIAN'" src="../../../../assets/sign-pedestrian.svg" height="24"
-                 width="48" style="width: 48px; height: 24px;"
+          <th [ngClass]=[intersectionHelper.phaseColor(lane)]
+              scope="row"
+              class="fit text-center">
+            <img *ngIf="lane.type == 'PEDESTRIAN'"
+                 src="../../../../assets/sign-pedestrian.svg"
+                 height="24"
+                 width="48"
+                 style="width: 48px; height: 24px;"
                  alt="pedestrian">
-            <img *ngIf="lane.type == 'TRAM'" src="../../../../assets/sign-tram.svg" height="24" width="48"
+            <img *ngIf="lane.type == 'TRAM'"
+                 src="../../../../assets/sign-tram.svg"
+                 height="24"
+                 width="48"
                  style="width: 48px; height: 24px;"
                  alt="tram">
-            <img *ngIf="lane.type == 'NORMAL'" src="../../../../assets/sign-cars.svg" height="24" width="48"
+            <img *ngIf="lane.type == 'NORMAL'"
+                 src="../../../../assets/sign-cars.svg"
+                 height="24"
+                 width="48"
                  style="width: 48px; height: 24px;"
                  alt="normal">
           </th>
-          <td [ngClass]="intersectionHelper.phaseColor(lane)" class="fit align-middle">
+          <td [ngClass]="intersectionHelper.phaseColor(lane)"
+              class="fit align-middle">
             <img *ngFor="let direction of intersectionHelper.directionIcons(lane)"
-                 [src]="[direction]" height="24" width="24"
+                 [src]="[direction]"
+                 height="24"
+                 width="24"
                  style="width: 24px; height: 24px;">
           </td>
           <td *ngFor="let switching of switchings; trackBy: intersectionHelper.trackSwitching"
               scope="col"
               class="fit text-center"
               [ngClass]="intersectionHelper.phaseColor(lane, switching, intersection)">
-            <input type="checkbox" disabled [checked]="intersectionHelper.laneContained(lane,switching)">
+            <input type="checkbox"
+                   disabled
+                   [checked]="intersectionHelper.laneContained(lane,switching)">
           </td>
         </tr>
         <tr>

@@ -9,7 +9,8 @@
 </div>
 
 <div *ngIf="(hostName$ | async) as hostName">
-  <mat-card class="app-card" *ngIf="(dataTypes$ | async) as dataTypes">
+  <mat-card class="app-card"
+            *ngIf="(dataTypes$ | async) as dataTypes">
     <mat-nav-list>
       <a mat-list-item
          *ngFor="let dataType of dataTypes; let last = last; trackBy: trackByDataName"

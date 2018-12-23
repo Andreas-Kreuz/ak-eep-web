@@ -64,7 +64,9 @@
         <ng-container *ngFor="let element of category.values; let last = last">
           <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
             <mat-card class="d-flex flex-column flex-grow-1 mb-5">
-              <img *ngIf="element.image" mat-card-image src="../../../../assets/{{ element.image }}">
+              <img *ngIf="element.image"
+                   mat-card-image
+                   src="../../../../assets/{{ element.image }}">
               <mat-card-title-group>
                 <mat-card-title>{{ element.title }}</mat-card-title>
                 <mat-card-subtitle *ngIf="element.subtitle">{{ element.subtitle }}</mat-card-subtitle>

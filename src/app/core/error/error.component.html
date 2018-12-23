@@ -6,6 +6,7 @@
   <!--<button class="btn btn-primary" (click)="onFetchData()">Daten neu laden</button>-->
   <!--</p>-->
   <p *ngFor="let alert of (alerts$ | async)">
-    <ngb-alert [type]="[alert.type]" (close)="(close(alert))">{{ alert.message }}</ngb-alert>
+    <ngb-alert [type]="[alert.type]"
+               (close)="(close(alert))">{{ alert.message }}</ngb-alert>
   </p>
 </div>

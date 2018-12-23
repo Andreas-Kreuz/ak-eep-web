@@ -28,18 +28,19 @@
                   aria-label="Toggle menu">
             <mat-icon>videocam</mat-icon>
           </button>
-          <mat-menu #menu="matMenu" xPosition="before">
+          <mat-menu #menu="matMenu"
+                    xPosition="before">
             <button mat-menu-item
                     *ngFor="let cam of intersection.staticCams"
                     (click)="intersectionHelper.activateCam(cam, dialog)">
               <mat-icon color="accent">videocam</mat-icon>
-              {{ cam }}</button>
+              {{ cam }}
+            </button>
           </mat-menu>
         </mat-toolbar-row>
       </mat-toolbar>
-      <mat-tab-group
-        backgroundColor="accent"
-        color="accent">
+      <mat-tab-group backgroundColor="accent"
+                     color="accent">
         <mat-tab label="Schalten">
           <ng-template matTabContent>
             <mat-card-content>
@@ -67,15 +68,25 @@
         <mat-tab label="Kameras">
           <mat-card-content>
             <ng-template #noCams>
-              <h4>Es gibt noch keine Kameras.</h4>
-              <p class="mat-body-2">So hast Du Deine Kreuzung in Lua angelegt:</p>
+              <h4>Es gibt noch keine
+                Kameras.</h4>
+              <p class="mat-body-2">So
+                hast Du Deine Kreuzung
+                in Lua angelegt:</p>
               <pre>
     kreuzung = AkKreuzung:neu(...)</pre>
-              <p class="mat-body-2">Füge danach eine statische Kamera hinzu:</p>
+              <p class="mat-body-2">Füge
+                danach eine statische
+                Kamera hinzu:</p>
               <pre>
     kreuzung:fuegeStatischeKameraHinzu('Name der Kamera hier')</pre>
-              <p class="mat-body-2">Danach erscheinen hier die Kameras für diese Kreuzung.</p>
-              <p class="mat-body-2">Alternativ kannst Du auch den Button
+              <p class="mat-body-2">Danach
+                erscheinen hier die
+                Kameras für
+                diese Kreuzung.</p>
+              <p class="mat-body-2">Alternativ
+                kannst Du auch den
+                Button
                 <mat-icon>videocam</mat-icon>
                 mit der Kamera nutzen.
               </p>
@@ -85,7 +96,8 @@
                       *ngFor="let cam of intersection.staticCams"
                       (click)="intersectionHelper.activateCam(cam, dialog)">
                 <mat-icon color="accent">videocam</mat-icon>
-                {{ cam }}</button>
+                {{ cam }}
+              </button>
             </mat-list>
           </mat-card-content>
         </mat-tab>
