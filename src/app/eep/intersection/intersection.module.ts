@@ -11,6 +11,7 @@ import { IntersectionEffects } from './store/intersection.effects';
 import { CamHelpDialogComponent } from '../cam/cam-help-dialog/cam-help-dialog.component';
 import { LaneOverviewComponent } from './lane-overview/lane-overview.component';
 import { LaneQueueComponent } from './lane-queue/lane-queue.component';
+import { IntersectionNewComponent } from './intersection-new/intersection-new.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LaneQueueComponent } from './lane-queue/lane-queue.component';
     CamHelpDialogComponent,
     LaneOverviewComponent,
     LaneQueueComponent,
+    IntersectionNewComponent,
   ],
   entryComponents: [
     CamHelpDialogComponent,

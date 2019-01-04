@@ -19,13 +19,15 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatRadioModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatSortModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatStepperModule
 } from '@angular/material';
 import { FilteredTableComponent } from './filtered-table/filtered-table.component';
 import { DetailsDirective } from './details/details.directive';
@@ -69,9 +71,11 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatSelectModule,
     MatSlideToggleModule,
     MatSidenavModule,
     MatSortModule,
+    MatStepperModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,

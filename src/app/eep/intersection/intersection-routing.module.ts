@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { IntersectionsComponent } from './intersection-list/intersections.component';
 import { IntersectionComponent } from './intersection-detail/intersection.component';
+import { IntersectionNewComponent } from './intersection-new/intersection-new.component';
 
 const intersectionRoutes: Routes = [
   {path: '', component: IntersectionsComponent, pathMatch: 'full'},
-  {path: ':id', component: IntersectionComponent, pathMatch: 'full'},
+  {path: 'create', component: IntersectionNewComponent },
+  {path: ':id', component: IntersectionComponent },
 ];
 
 @NgModule({

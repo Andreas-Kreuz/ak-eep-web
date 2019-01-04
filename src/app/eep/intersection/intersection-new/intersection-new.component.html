@@ -1,0 +1,256 @@
+<div class="row">
+  <div class="col-12 mat-typography">
+    <h1 class="app-mute-on-light-bg">
+      Neue Fahrspur anlegen
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 mb-5">
+    <mat-horizontal-stepper linear>
+      <mat-step [stepControl]="formGroup1">
+        <ng-template matStepLabel>Allgemeines</ng-template>
+        <p class="mat-body-2">
+          Wähle die Art der neuen Fahrspur.
+        </p>
+        <form>
+          <mat-form-field appearance="fill"
+                          class="mb-4">
+            <mat-label>Name der Fahrspur</mat-label>
+            <input matInput
+                   placeholder="Kreuzung1 - Fahrspur2">
+            <mat-hint>Muss eindeutig sein</mat-hint>
+          </mat-form-field>
+
+          <div class="row">
+            <div class="col-6">
+              <mat-divider class="mb-4"></mat-divider>
+              <p class="mat-caption">Richtungen</p>
+              <img src="/assets/sign-left.svg"
+                   alt="left"
+                   width="48"
+                   height="48">
+              <img src="/assets/sign-straight.svg"
+                   alt="straight"
+                   width="48"
+                   height="48">
+              <img src="/assets/sign-right.svg"
+                   alt="right"
+                   width="48"
+                   height="48">
+              <mat-list>
+                <mat-list-item>
+                  <mat-checkbox checked="true">Links</mat-checkbox>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-checkbox checked="true">Geradeaus</mat-checkbox>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-checkbox checked="true">Rechts</mat-checkbox>
+                </mat-list-item>
+              </mat-list>
+
+            </div>
+            <div class="col-6 mb-5">
+              <mat-divider class="mb-4"></mat-divider>
+              <p class="mat-caption">Verkehrsart</p>
+              <img src="/assets/sign-cars.svg"
+                   alt="left"
+                   width="48"
+                   height="48">
+              <img src="/assets/sign-tram.svg"
+                   alt="straight"
+                   width="48"
+                   height="48">
+              <img src="/assets/sign-pedestrian.svg"
+                   alt="right"
+                   width="48"
+                   height="48">
+
+              <mat-radio-group name="next_switching">
+                <mat-list>
+                  <mat-list-item>
+                    <mat-radio-button class="my-vertical-list"
+                                      checked="true"
+                                      value="Normal">Normal
+                    </mat-radio-button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-radio-button class="my-vertical-list"
+                                      checked="false"
+                                      value="Tram">Tram
+                    </mat-radio-button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-radio-button class="my-vertical-list"
+                                      checked="false"
+                                      value="Fußgänger">Fußgänger
+                    </mat-radio-button>
+                  </mat-list-item>
+                </mat-list>
+              </mat-radio-group>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formGroup1">
+        <ng-template matStepLabel>Ampeln</ng-template>
+        <p class="mat-body-2">
+          Alle Ampeln der Fahrspur werden verwendet um die Fahrspur zu schalten.<br>
+          Damit die Ampeln korrekt rot, gelb und grün anzeigen, muss Du das korrekte Modell wählen.
+        </p>
+        <form>
+          <mat-divider class="mb-4"></mat-divider>
+          <p class="mat-caption">Ampeln (normale)</p>
+          <mat-list>
+            <mat-list-item>ID: 27 (Modell: JS2_3er_mit_FG)</mat-list-item>
+            <mat-list-item>ID: 113 (Modell: JS2_3er_mit_FG)</mat-list-item>
+          </mat-list>
+          <button mat-fab
+                  color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <p class="mat-caption mt-5">Neue Ampel (normal)</p>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Ampel-ID</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ampel-ID">
+                <mat-hint>Signal-ID aus EEP.</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Ampelmodell</mat-label>
+                <mat-select placeholder="Ampelmodell">
+                  <mat-option *ngFor="let model of [ 'Unsichtbar', 'JS2_3er_mit-FG', 'JS2_3er_ohne-FG' ]"
+                              [value]="model">
+                    {{model}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint>Das Modell bestimmt die Schaltungen.</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formGroup1">
+        <ng-template matStepLabel>Achsen</ng-template>
+        <form>
+          <p class="mat-body-2">
+            Manche Ampeln verwenden Achsen, um die Ampelphasen anzuzeigen.<br>
+            Wenn Du solche Ampeln benutzt, dann wähle die Immobilie und das Modell der Ampel.
+          </p>
+            <mat-divider class="mb-4"></mat-divider>
+          <p class="mat-caption">Ampeln (Achsen)</p>
+          <mat-list>
+            <mat-list-item>ID: 1234#AchsenAmpel 1 (Modell: Achsenampel 4)</mat-list-item>
+            <mat-list-item>ID: 1134#AchsenAmpel 1 (Modell: Achsenampel 4)</mat-list-item>
+          </mat-list>
+          <button mat-fab
+                  color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <p class="mat-caption mt-5">Neue Ampel (Achsen)</p>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Immo-ID</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ampel-ID">
+                <mat-hint>ID der Immobilie aus EEP.</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Ampelmodell</mat-label>
+                <mat-select placeholder="Ampelmodell (Achsen)">
+                  <mat-option *ngFor="let model of [ 'Achsenampel 1', 'Achsenampel 2', 'Achsenampel 3' ]"
+                              [value]="model">
+                    {{model}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint>Das Modell bestimmt die Schaltungen.</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formGroup1">
+        <ng-template matStepLabel>Immobilien</ng-template>
+        <form>
+          <p class="mat-body-2">
+            Manche Ampeln verwenden Immobilien mit Licht, um die Ampelphasen anzuzeigen.<br>
+            Wenn Du solche Ampeln benutzt, dann wähle die Immobilien deren Licht für rot, gelb und grün eingeschaltet werden soll.
+          </p>
+          <mat-divider class="mb-4"></mat-divider>
+          <p class="mat-caption">Ampeln (Immobilien)</p>
+          <mat-list>
+            <mat-list-item>
+              Rot: 1234#Rotlicht,
+              Grün: 1235#Grünlicht,
+              Gelb: 1236#Gelblicht
+            </mat-list-item>
+            <mat-list-item>
+              Rot: 734#Rotlicht,
+              Grün: 735#Grünlicht,
+              Gelb: 736#Gelblicht
+            </mat-list-item>
+          </mat-list>
+          <button mat-fab
+                  color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <p class="mat-caption mt-5">Neue Ampel (Immobilien)</p>
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Immobilien-ID für Rot</mat-label>
+                <input matInput
+                       placeholder="123#Rot">
+                <mat-hint>Immobilie leuchtet bei Rot.</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Immobilien-ID für Gelb</mat-label>
+                <input matInput
+                       placeholder="123#Gelb">
+                <mat-hint>Immobilie leuchtet bei Gelb.</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill"
+                              class="mb-4">
+                <mat-label>Immobilien-ID für Grün</mat-label>
+                <input matInput
+                       placeholder="125#Grün">
+                <mat-hint>Immobilie leuchtet bei Grün.</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formGroup1">
+        <ng-template matStepLabel>Lua-Code</ng-template>
+        <p class="mat-body-2">
+          Hier siehts Du den Lua-Code für Deine Richtung.
+        </p>
+        <pre style="border: 1px lightgreen solid; padding: 6px;">
+-- Lua Code für die ausgewählten Ampeln:
+        </pre>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
