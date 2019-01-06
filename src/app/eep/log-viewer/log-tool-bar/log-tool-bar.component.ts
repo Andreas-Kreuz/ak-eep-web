@@ -21,7 +21,7 @@ export class LogToolBarComponent implements OnInit {
   }
 
   sendTestMessage() {
-    this.store.dispatch(new logAction.SendCommand('print|Hallo von EEP-Web!'));
+    this.store.dispatch(new logAction.SendCommand('print|Hallo von EEP-Web! Umlaute: äöüÄÖÜß'));
   }
 
 }
