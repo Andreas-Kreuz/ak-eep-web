@@ -9,7 +9,7 @@ import * as IntersectionAction from './store/intersection.actions';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducers';
 import { CamHelpDialogComponent } from '../cam/cam-help-dialog/cam-help-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 
 @Injectable({

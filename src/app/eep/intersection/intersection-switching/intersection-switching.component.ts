@@ -7,7 +7,7 @@ import * as fromRoot from '../../../app.reducers';
 import * as IntersectionAction from '../store/intersection.actions';
 import * as fromIntersection from '../store/intersection.reducers';
 import { map } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-intersection-switching',

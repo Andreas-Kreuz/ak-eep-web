@@ -8,7 +8,11 @@ import { ServerStatusComponent } from './server-status/server-status.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderToolBarComponent } from './header-tool-bar/header-tool-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [

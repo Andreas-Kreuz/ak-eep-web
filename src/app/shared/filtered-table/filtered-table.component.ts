@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, Type, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 import { TableDataSource } from './table-datasource';
 import { Observable, Subject } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -24,7 +24,7 @@ import { DetailsItem } from '../details/details-item';
 export class FilteredTableComponent<T> implements OnInit, OnDestroy {
   @ViewChild(DetailsDirective) detailHost: DetailsDirective;
   @ViewChild(OldDetailsDirective) oldDetailHost: OldDetailsDirective;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() public columnsToDisplay: string[];
   @Input() public columnNames: string[];
   @Input() public columnAlignment?: string[];

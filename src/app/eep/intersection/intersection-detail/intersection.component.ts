@@ -14,7 +14,7 @@ import { Direction } from '../models/direction.model';
 import { TrafficType } from '../models/traffic-type.enum';
 import { IntersectionSwitching } from '../models/intersection-switching.model';
 import { IntersectionHelper } from '../intersection-helper';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-crossing',

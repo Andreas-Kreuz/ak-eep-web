@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { merge, Observable, Subscription } from 'rxjs';
 

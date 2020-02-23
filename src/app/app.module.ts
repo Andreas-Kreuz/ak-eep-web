@@ -33,7 +33,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     CoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(effects),
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot(),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     LayoutModule,
   ],

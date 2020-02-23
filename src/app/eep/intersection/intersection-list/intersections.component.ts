@@ -7,7 +7,7 @@ import * as fromRoot from '../../../app.reducers';
 import * as fromIntersection from '../../intersection/store/intersection.reducers';
 import { Router } from '@angular/router';
 import { IntersectionHelper } from '../intersection-helper';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-crossings',

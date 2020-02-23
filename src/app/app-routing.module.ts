@@ -8,32 +8,32 @@ const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {
     path: 'signals',
-    loadChildren: './eep/signals/signals.module#SignalsModule'
+    loadChildren: () => import('./eep/signals/signals.module').then(m => m.SignalsModule)
   },
   {
     path: 'trains',
-    loadChildren: './eep/trains/trains.module#TrainsModule'
+    loadChildren: () => import('./eep/trains/trains.module').then(m => m.TrainsModule)
   },
   {
     path: 'intersections',
-    loadChildren: './eep/intersection/intersection.module#IntersectionModule'
+    loadChildren: () => import('./eep/intersection/intersection.module').then(m => m.IntersectionModule)
   },
   {
     path: 'data',
-    loadChildren: './eep/data/eep-data.module#EepDataModule'
+    loadChildren: () => import('./eep/data/eep-data.module').then(m => m.EepDataModule)
   },
   {
     path: 'generic-data',
-    loadChildren: './eep/generic-data/generic-data.module#GenericDataModule'
+    loadChildren: () => import('./eep/generic-data/generic-data.module').then(m => m.GenericDataModule)
   },
   {
     path: 'log',
-    loadChildren: './eep/log-viewer/log-viewer.module#LogViewerModule',
+    loadChildren: () => import('./eep/log-viewer/log-viewer.module').then(m => m.LogViewerModule),
     data: {title: 'Log-Datei'},
   },
   {
     path: 'ui',
-    loadChildren: './shared/shared.module#SharedModule',
+    loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule),
   },
   {path: 'switches', component: SwitchesComponent},
   {path: 'errors', component: ServerStatusComponent},
