@@ -35,6 +35,7 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { DashboardSampleComponent } from './ui/dashboard-sample/dashboard-sample.component';
 import { DashboardCardComponent } from './ui/dashboard-card/dashboard-card.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatTooltipModule,
     MatToolbarModule,
     LayoutModule,
+    MatProgressBarModule,
   ]
 
 })

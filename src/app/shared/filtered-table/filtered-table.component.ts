@@ -116,7 +116,7 @@ export class FilteredTableComponent<T> implements OnInit, OnDestroy {
         return element.name;
       }
 
-      throw new Error('No element data to identify this element!');
+      throw new Error('No element data to identify element! ' + element);
     }
   }
 }
